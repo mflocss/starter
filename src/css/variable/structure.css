@@ -1,4 +1,4 @@
-// @property は @layer の外に配置（CSS at-rule のため）
+/* @property は @layer の外に配置（CSS at-rule のため） */
 @property --viewport-min {
   syntax: '<number>';
   inherits: true;
@@ -17,5 +17,10 @@
     --viewport-max: 1440;
     --content-width: 1200;
     --content-padding-inline: 20;
+
+    /* clamp-linear() 代替用ヘルパー */
+    --px: calc(1rem / 16);
+    --vp-range: calc(var(--viewport-max) - var(--viewport-min));
+    --vp-offset: calc(100vi - var(--viewport-min) * var(--px));
   }
 }

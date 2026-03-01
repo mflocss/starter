@@ -1,5 +1,4 @@
-import '../sass/vendor.css';
-import '../sass/style.scss';
+import '../css/style.css';
 
 const observeAnimations = () => {
   const targets = document.querySelectorAll('[class*="a-fade-in"]');

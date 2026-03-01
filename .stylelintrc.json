@@ -1,21 +1,9 @@
 {
-  "extends": ["stylelint-config-standard-scss"],
-  "plugins": ["stylelint-selector-bem-pattern"],
+  "extends": ["stylelint-config-standard"],
   "rules": {
-    "plugin/selector-bem-pattern": {
-      "preset": "bem",
-      "componentName": "[a-z]+(-[a-z]+)*",
-      "componentSelectors": {
-        "initial": "^\\.{componentName}(?:__[a-z]+(?:-[a-z]+)*)?(?:\\.-[a-z]+(?:-[a-z]+)*)?$"
-      },
-      "utilitySelectors": "^\\.u-[a-z]+(?:-[a-z]+)*$"
-    },
     "selector-class-pattern": null,
-    "scss/at-rule-no-unknown": [
-      true,
-      {
-        "ignoreAtRules": ["layer"]
-      }
-    ]
+    "custom-property-pattern": "^([a-z][a-z0-9]*(-[a-z0-9]+)*|_[a-z0-9]+(-[a-z0-9]+)*)$",
+    "at-rule-no-unknown": [true, { "ignoreAtRules": ["layer"] }],
+    "import-notation": "string"
   }
 }

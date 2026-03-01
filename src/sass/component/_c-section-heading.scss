@@ -1,9 +1,0 @@
-@use '../global' as global;
-
-@layer component {
-  .c-section-heading {
-    font-size: global.clamp-linear(24, 36);
-    line-height: var(--line-height-heading);
-    text-align: center;
-  }
-}
