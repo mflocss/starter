@@ -1,4 +1,3 @@
-import '../css/vendor.css';
 import '../css/style.css';
 
 const observeAnimations = () => {
