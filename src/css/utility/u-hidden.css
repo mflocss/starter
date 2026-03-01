@@ -6,7 +6,7 @@
   }
 
   .u-hidden-sp {
-    @media (width <= 767px) {
+    @media (width < 768px) {
       display: none !important;
     }
   }

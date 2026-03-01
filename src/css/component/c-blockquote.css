@@ -1,6 +1,7 @@
 @layer component {
   .c-blockquote {
-    padding: 1.25rem 1.5rem;
+    padding-block: 1.25rem;
+    padding-inline: 1.5rem;
     margin: 0;
     font-size: 1.0625rem;
     font-style: normal;

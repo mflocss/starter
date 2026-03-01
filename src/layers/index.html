@@ -11,7 +11,7 @@
     <header class="p-header">
       <div class="p-header__inner">
         <a href="/" class="p-header__logo">mFLOCSS</a>
-        <nav>
+        <nav aria-label="メインナビゲーション">
           <ul class="p-header__nav-list">
             <li><a href="/" class="p-header__nav-link">Top</a></li>
             <li>
@@ -282,13 +282,15 @@
                     <div class="c-code-block__header">utility/u-hidden.css</div>
                     <pre class="c-code-block__body"><code>@layer utility {
   .u-hidden-pc {
-    @media (min-width: 768px) {
+    @media (width >= 768px) {
       display: none !important;
     }
   }
   .u-visually-hidden {
     position: absolute !important;
-    clip: rect(0 0 0 0) !important;
+    inline-size: 1px !important;
+    block-size: 1px !important;
+    clip-path: inset(50%) !important;
     /* スクリーンリーダーには読み上げられる */
   }
 }</code></pre>

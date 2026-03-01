@@ -1,7 +1,8 @@
 @layer component {
   .c-badge {
     display: inline-block;
-    padding: 0.125em 0.625em;
+    padding-block: 0.125em;
+    padding-inline: 0.625em;
     font-size: 0.75rem;
     font-weight: var(--font-weight-bold);
     line-height: 1.5;
