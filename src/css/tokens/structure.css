@@ -1,4 +1,4 @@
-/* @property は @layer の外に配置（CSS at-rule のため） */
+/* @property は @layer の外に配置（CSS 仕様の制約） */
 @property --viewport-min {
   syntax: '<number>';
   inherits: true;
@@ -11,12 +11,12 @@
   initial-value: 1440;
 }
 
-@layer variable {
+@layer tokens {
   :root {
     --viewport-min: 390;
     --viewport-max: 1440;
-    --content-width: 1200;
-    --content-padding-inline: 20;
+    --content-max: 1200;
+    --gutter: 20;
 
     /* clamp-linear() 代替用ヘルパー */
     --px: calc(1rem / 16);

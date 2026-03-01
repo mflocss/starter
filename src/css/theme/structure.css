@@ -1,0 +1,6 @@
+@layer theme {
+  :root {
+    --content-width: var(--content-max);
+    --content-padding-inline: var(--gutter);
+  }
+}

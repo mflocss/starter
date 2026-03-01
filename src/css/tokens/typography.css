@@ -1,0 +1,10 @@
+@layer tokens {
+  :root {
+    --font-ja: 'Noto Sans JP', 'Hiragino Sans',
+      'Hiragino Kaku Gothic ProN', meiryo, sans-serif;
+    --weight-regular: 400;
+    --weight-bold: 700;
+    --leading-relaxed: 1.8;
+    --leading-tight: 1.4;
+  }
+}

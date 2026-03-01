@@ -1,0 +1,17 @@
+@layer tokens {
+  :root {
+    /* Blue */
+    --blue-600: oklch(45% 0.2 265deg);
+
+    /* Orange */
+    --orange-500: oklch(65% 0.25 30deg);
+
+    /* Neutrals */
+    --gray-50: oklch(98% 0 0deg);
+    --gray-100: oklch(95% 0 0deg);
+    --gray-300: oklch(85% 0 0deg);
+    --gray-600: oklch(45% 0 0deg);
+    --gray-900: oklch(20% 0 0deg);
+    --white: oklch(100% 0 0deg);
+  }
+}

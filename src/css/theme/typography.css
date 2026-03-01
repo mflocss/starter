@@ -1,0 +1,9 @@
+@layer theme {
+  :root {
+    --font-family-ja: var(--font-ja);
+    --font-weight-regular: var(--weight-regular);
+    --font-weight-bold: var(--weight-bold);
+    --line-height-base: var(--leading-relaxed);
+    --line-height-heading: var(--leading-tight);
+  }
+}

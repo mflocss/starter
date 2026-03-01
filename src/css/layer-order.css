@@ -1,5 +1,5 @@
 /*
  * mFLOCSS レイヤー順序宣言
- * 7 層の優先順位を @layer で明示（Global 層は CSS 出力なしのため含めない）
+ * 8 層の優先順位を @layer で明示的に固定
  */
-@layer variable, foundation, layout, component, project, animation, utility;
+@layer tokens, theme, foundation, layout, component, project, animation, utility;

@@ -1,4 +1,4 @@
-@layer variable {
+@layer tokens {
   :root {
     --z-header: 100;
     --z-drawer: 200;

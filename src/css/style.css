@@ -2,12 +2,17 @@
 @import './layer-order.css';
 @import './vendor.css';
 
-/* Variable */
-@import './variable/color.css';
-@import './variable/typography.css';
-@import './variable/structure.css';
-@import './variable/ease.css';
-@import './variable/z.css';
+/* Tokens */
+@import './tokens/color.css';
+@import './tokens/typography.css';
+@import './tokens/structure.css';
+@import './tokens/ease.css';
+@import './tokens/z.css';
+
+/* Theme */
+@import './theme/color.css';
+@import './theme/typography.css';
+@import './theme/structure.css';
 
 /* Foundation */
 @import './foundation/base.css';
