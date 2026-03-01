@@ -1,0 +1,2 @@
+/* ベンダー CSS を @layer にマッピングして読み込む */
+@import 'kiso.css/kiso.css' layer(foundation);

@@ -1,0 +1,10 @@
+@layer variable {
+  :root {
+    --font-family-ja: 'Noto Sans JP', 'Hiragino Sans',
+      'Hiragino Kaku Gothic ProN', meiryo, sans-serif;
+    --font-weight-regular: 400;
+    --font-weight-bold: 700;
+    --line-height-base: 1.8;
+    --line-height-heading: 1.4;
+  }
+}

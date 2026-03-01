@@ -1,0 +1,23 @@
+@layer animation {
+  .a-fade-in-activate {
+    opacity: 0;
+    transition: opacity 0.6s var(--ease-out-cubic);
+
+    &.is-active {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .a-fade-in-activate {
+      opacity: 1;
+      transition: none;
+    }
+  }
+
+  @media (scripting: none) {
+    .a-fade-in-activate {
+      opacity: 1;
+    }
+  }
+}

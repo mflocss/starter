@@ -1,0 +1,29 @@
+@layer animation {
+  .a-fade-in-slide-up {
+    opacity: 0;
+    translate: 0 20px;
+    transition:
+      opacity 0.6s var(--ease-out-cubic),
+      translate 0.6s var(--ease-out-cubic);
+
+    &.is-active {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .a-fade-in-slide-up {
+      opacity: 1;
+      translate: 0 0;
+      transition: none;
+    }
+  }
+
+  @media (scripting: none) {
+    .a-fade-in-slide-up {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+}

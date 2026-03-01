@@ -1,0 +1,28 @@
+@layer component {
+  .c-button-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: 0.75em;
+    padding-inline: 2em;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-white);
+    background-color: var(--color-main);
+    border-radius: 0.5em;
+    transition: opacity 0.3s var(--ease-out-cubic);
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &.-large {
+      padding-block: 1em;
+      padding-inline: 3em;
+      font-size: 1.125rem;
+    }
+
+    &.-accent {
+      background-color: var(--color-accent);
+    }
+  }
+}

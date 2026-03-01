@@ -1,0 +1,12 @@
+@layer project {
+  .p-footer {
+    padding-block: 2rem;
+    background-color: var(--color-bg-secondary);
+    text-align: center;
+  }
+
+  .p-footer__copyright {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+  }
+}

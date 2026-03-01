@@ -1,0 +1,26 @@
+@layer foundation {
+  body {
+    font-family: var(--font-family-ja);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-base);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :where(h1, h2, h3, h4, h5, h6) {
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-heading);
+  }
+
+  :where(a) {
+    color: var(--color-main);
+    text-decoration: none;
+  }
+
+  :where(img) {
+    max-inline-size: 100%;
+    block-size: auto;
+    vertical-align: middle;
+  }
+}

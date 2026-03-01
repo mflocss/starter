@@ -1,0 +1,25 @@
+@layer utility {
+  .u-hidden-pc {
+    @media (width >= 768px) {
+      display: none !important;
+    }
+  }
+
+  .u-hidden-sp {
+    @media (width <= 767px) {
+      display: none !important;
+    }
+  }
+
+  .u-visually-hidden {
+    position: absolute !important;
+    inline-size: 1px !important;
+    block-size: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+}

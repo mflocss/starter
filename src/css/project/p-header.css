@@ -1,0 +1,32 @@
+@layer project {
+  .p-header {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: var(--z-header);
+    padding-block: 1rem;
+    background-color: var(--color-bg);
+  }
+
+  .p-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-inline-size: calc(var(--content-width) / 16 * 1rem);
+    margin-inline: auto;
+    padding-inline: calc(var(--content-padding-inline) / 16 * 1rem);
+  }
+
+  .p-header__logo {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+  }
+
+  .p-header__nav-list {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+}
