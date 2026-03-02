@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>mFLOCSS — 8層CSSアーキテクチャ</title>
+    <meta name="description" content="mFLOCSS は CSS の設計判断を8つの層で整理する思考フレームワーク。@layer によるカスケード制御と、Tokens・Theme の分離設計を学べます。" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <script type="module" src="/scripts/main.js"></script>
   </head>
   <body>
+    <a href="#main" class="u-visually-hidden">コンテンツへスキップ</a>
     <header class="p-header">
       <div class="p-header__inner">
         <a href="/" class="p-header__logo">mFLOCSS</a>
@@ -37,7 +39,7 @@
       </div>
     </header>
 
-    <main>
+    <main id="main">
       <!-- Project: Hero — サイト固有のデザインに依存するため Project 層 -->
       <section class="p-hero">
         <div class="p-hero__inner">

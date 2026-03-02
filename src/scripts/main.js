@@ -48,14 +48,28 @@ const initMobileNav = () => {
 
   if (!button || !nav) return;
 
+  const closeNav = () => {
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-label', 'メニューを開く');
+    nav.classList.remove('is-open');
+  };
+
   button.addEventListener('click', () => {
     const isOpen = button.getAttribute('aria-expanded') === 'true';
-    button.setAttribute('aria-expanded', String(!isOpen));
-    button.setAttribute(
-      'aria-label',
-      isOpen ? 'メニューを開く' : 'メニューを閉じる',
-    );
-    nav.classList.toggle('is-open');
+    if (isOpen) {
+      closeNav();
+    } else {
+      button.setAttribute('aria-expanded', 'true');
+      button.setAttribute('aria-label', 'メニューを閉じる');
+      nav.classList.add('is-open');
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+      closeNav();
+      button.focus();
+    }
   });
 };
 
