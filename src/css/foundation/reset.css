@@ -21,6 +21,7 @@
     text-size-adjust: 100%;
     scrollbar-gutter: stable;
     -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
 
   :where(body) {
@@ -99,8 +100,8 @@
   :where(button, input, select, textarea) {
     border: 1px solid;
     border-radius: unset;
-    color: unset;
-    font: unset;
+    color: inherit;
+    font: inherit;
     letter-spacing: unset;
   }
 
@@ -132,6 +133,7 @@
   }
 
   :where(:focus-visible) {
+    outline: 2px solid var(--color-main);
     outline-offset: 3px;
   }
 
