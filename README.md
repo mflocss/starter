@@ -67,7 +67,7 @@ src/css/
 | 層 | プレフィックス | @layer | 役割 |
 |----|-------------|--------|------|
 | Variable | — | variable | CSS 変数でデザイントークンを一元管理 |
-| Foundation | — | foundation | kiso.css リセット + ベーススタイル |
+| Foundation | — | foundation | カスタムリセット + ベーススタイル |
 | Layout | `l-` | layout | セクション・サイトレイアウト |
 | Component | `c-` | component | 複数ページで使い回す汎用パーツ |
 | Project | `p-` | project | 特定のページ・機能に使うパーツ |
@@ -89,10 +89,6 @@ src/css/
 
 1. `src/pages/新ページ名/index.html` を作成
 2. `vite.config.ts` の `build.rollupOptions.input` に追加
-
-## クレジット
-
-- **kiso.css**: TAK ([@tak-dcxi](https://github.com/tak-dcxi)) 作の日本語最適化 CSS リセット（MIT ライセンス）
 
 ## この本について
 

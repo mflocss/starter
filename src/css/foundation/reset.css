@@ -1,0 +1,145 @@
+/*
+ * mFLOCSS Reset
+ * ブラウザデフォルトの差異を吸収し、日本語組版に最適化するリセット CSS。
+ */
+@layer foundation {
+  /* Universal */
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+  }
+
+  /* Document — 日本語組版 + レイアウト安定化 */
+  :where(:root) {
+    line-height: 1.5;
+    text-spacing-trim: trim-start;
+    text-autospace: normal;
+    line-break: strict;
+    overflow-wrap: anywhere;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scrollbar-gutter: stable;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :where(body) {
+    min-block-size: 100dvb;
+    margin: unset;
+  }
+
+  /* Sections */
+  :where(h1) {
+    margin-block: 0.67em;
+    font-size: 2em;
+  }
+
+  :where(h2, h3, h4, h5, h6) {
+    margin-block: unset;
+  }
+
+  /* Grouping content */
+  :where(p, blockquote, figure, pre, ul, ol, dl) {
+    margin-block: unset;
+  }
+
+  :where(blockquote, figure) {
+    margin-inline: unset;
+  }
+
+  :where(ul, ol, menu) {
+    padding-inline-start: unset;
+    list-style-type: "";
+  }
+
+  :where(dd) {
+    margin-inline-start: unset;
+  }
+
+  :where(pre) {
+    text-spacing-trim: space-all;
+    text-autospace: no-autospace;
+  }
+
+  /* Text-level semantics — 日本語対応 */
+  :where(em:lang(ja)) {
+    font-weight: bolder;
+  }
+
+  :where(:is(i, cite, em, dfn, address):lang(ja)) {
+    font-style: unset;
+  }
+
+  /* Links */
+  :where(a) {
+    color: unset;
+  }
+
+  :where(a:any-link) {
+    text-decoration-line: unset;
+  }
+
+  /* Embedded content */
+  :where(img, svg, video, canvas, iframe) {
+    max-inline-size: 100%;
+    block-size: auto;
+    vertical-align: bottom;
+  }
+
+  /* Tabular data */
+  :where(table) {
+    border-collapse: collapse;
+  }
+
+  :where(caption, th) {
+    text-align: unset;
+  }
+
+  /* Forms */
+  :where(button, input, select, textarea) {
+    border: 1px solid;
+    border-radius: unset;
+    color: unset;
+    font: unset;
+    letter-spacing: unset;
+  }
+
+  :where(fieldset) {
+    min-inline-size: 0;
+    margin: unset;
+    padding: unset;
+    border: unset;
+  }
+
+  :where(textarea) {
+    margin-block: unset;
+    resize: block;
+  }
+
+  ::placeholder {
+    opacity: unset;
+  }
+
+  /* Interactive */
+  :where(summary) {
+    list-style-type: "";
+    cursor: pointer;
+  }
+
+  :where(dialog, [popover]) {
+    padding: unset;
+    border: unset;
+  }
+
+  :where(:focus-visible) {
+    outline-offset: 3px;
+  }
+
+  :where(:disabled, [aria-disabled="true" i]) {
+    cursor: default;
+  }
+
+  [hidden]:not([hidden="until-found" i]) {
+    display: none !important;
+  }
+}
