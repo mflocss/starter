@@ -1,6 +1,5 @@
 /* mFLOCSS Entry Point */
 @import './layer-order.css';
-@import './vendor.css';
 
 /* Tokens */
 @import './tokens/color.css';
@@ -16,6 +15,7 @@
 @import './theme/dark.css';
 
 /* Foundation */
+@import './foundation/reset.css';
 @import './foundation/base.css';
 @import './foundation/form.css';
 

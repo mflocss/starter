@@ -26,8 +26,5 @@
       "@parcel/watcher",
       "esbuild"
     ]
-  },
-  "dependencies": {
-    "kiso.css": "^1.2.4"
   }
 }
