@@ -19,11 +19,11 @@
     }
 
     &.-foundation {
-      background-color: oklch(55% 0.18 210deg);
+      background-color: oklch(50% 0.18 210deg);
     }
 
     &.-layout {
-      background-color: oklch(55% 0.16 170deg);
+      background-color: oklch(50% 0.16 170deg);
     }
 
     &.-component {
