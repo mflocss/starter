@@ -1,4 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="4" fill="#3B5998"/>
-  <text x="16" y="22" font-family="system-ui" font-size="16" font-weight="bold" fill="white" text-anchor="middle">m</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="mFLOCSS">
+  <style>
+    .icon-bg { fill: #475569; }
+    .icon-m { fill: #ffffff; font-family: system-ui, -apple-system, 'Noto Sans JP', sans-serif; font-weight: 700; font-size: 18px; }
+    .icon-accent { fill: #c2410c; }
+    @media (prefers-color-scheme: dark) {
+      .icon-bg { fill: #94a3b8; }
+      .icon-m { fill: #1e293b; }
+      .icon-accent { fill: #ea580c; }
+    }
+  </style>
+  <defs>
+    <clipPath id="icon-clip">
+      <rect width="32" height="32" rx="6" />
+    </clipPath>
+  </defs>
+  <g clip-path="url(#icon-clip)">
+    <rect width="32" height="32" class="icon-bg" />
+    <rect x="0" y="28" width="32" height="4" class="icon-accent" />
+  </g>
+  <text x="16" y="22" text-anchor="middle" class="icon-m">m</text>
 </svg>
