@@ -1,6 +1,14 @@
 @layer theme {
   :root {
     --content-width: var(--content-max);
-    --content-padding-inline: var(--gutter);
+    --content-padding-inline: clamp(
+      calc(var(--gutter-min) * var(--px)),
+      calc(
+        (var(--gutter-max) - var(--gutter-min))
+        / var(--vp-range) * var(--vp-offset)
+        + var(--gutter-min) * var(--px)
+      ),
+      calc(var(--gutter-max) * var(--px))
+    );
   }
 }

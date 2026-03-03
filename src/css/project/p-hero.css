@@ -12,12 +12,6 @@
     background: radial-gradient(ellipse at 50% 0%, oklch(from var(--color-main) l c h / 6%) 0%, transparent 70%);
   }
 
-  .p-hero__inner {
-    max-inline-size: calc(var(--content-width) / 16 * 1rem);
-    margin-inline: auto;
-    padding-inline: calc(var(--content-padding-inline) / 16 * 1rem);
-  }
-
   .p-hero__title {
     --_min: 28;
     --_max: 48;

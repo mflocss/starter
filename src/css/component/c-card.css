@@ -10,7 +10,14 @@
       box-shadow 0.3s var(--ease-out-cubic),
       translate 0.3s var(--ease-out-cubic);
 
-    &:hover {
+    &:focus-visible {
+      outline: 2px solid var(--color-focus-ring);
+      outline-offset: 2px;
+    }
+  }
+
+  @media (any-hover: hover) {
+    .c-card:hover {
       box-shadow: 0 8px 24px var(--color-shadow);
       translate: 0 -2px;
     }

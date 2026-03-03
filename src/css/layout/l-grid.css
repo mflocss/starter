@@ -1,18 +1,18 @@
 @layer layout {
   .l-grid {
-    --_columns: 3;
-    --_gap: 1.5rem;
+    --_columns: 1;
+    --_gap: calc(24 * var(--px));
 
     display: grid;
     grid-template-columns: repeat(var(--_columns), 1fr);
     gap: var(--_gap);
 
-    @media (width < 768px) {
-      --_columns: 1;
+    @media (width >= 768px) {
+      --_columns: 2;
     }
 
-    @media (768px <= width < 1024px) {
-      --_columns: 2;
+    @media (width >= 1024px) {
+      --_columns: 3;
     }
   }
 }

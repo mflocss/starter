@@ -11,7 +11,7 @@
   <body>
     <a href="#main" class="u-visually-hidden">コンテンツへスキップ</a>
     <header class="p-header">
-      <div class="p-header__inner">
+      <div class="l-inner p-header__inner">
         <a href="/" class="p-header__logo">mFLOCSS</a>
         <button
           type="button"
@@ -41,11 +41,11 @@
 
     <main id="main">
       <section class="l-section">
-        <div class="l-section__inner">
+        <div class="l-inner">
           <h1 class="c-section-heading a-fade-in-activate">
             8層を理解する
           </h1>
-          <p class="u-text-center a-fade-in-slide-up" style="margin-block-start: 1rem">
+          <p class="a-fade-in-slide-up" style="text-align: center; margin-block-start: 1rem">
             各層の「なぜ」を知ることで、「どこに書くか」の判断基準が身につきます。<br />
             このサイト自身の実装コードを例に解説します。
           </p>
@@ -54,7 +54,7 @@
 
       <!-- Tokens + Theme -->
       <section class="l-section" style="padding-block-start: 0">
-        <div class="l-section__inner">
+        <div class="l-inner">
           <div class="p-layer-showcase a-fade-in-slide-up">
             <div class="p-layer-showcase__item">
               <div class="p-layer-showcase__header">
@@ -78,7 +78,7 @@
   }
 }</code></pre>
                   </div>
-                  <p class="u-text-small">
+                  <p style="font-size: 0.875rem">
                     <strong>判断基準:</strong> 値に意味を持たせない。<code>--slate-600</code> は「スレートの 600 番」であり、「メインカラー」ではない。
                   </p>
                 </div>
@@ -148,7 +148,7 @@
   }
 }</code></pre>
                   </div>
-                  <p class="u-text-small">
+                  <p style="font-size: 0.875rem">
                     <strong>判断基準:</strong> 「クラスなしの HTML 要素に適用すべきスタイルか？」 → Yes なら Foundation。
                   </p>
                 </div>
@@ -170,15 +170,15 @@
                     <div class="c-code-block__header">layout/l-grid.css — このサイトの実装</div>
                     <pre class="c-code-block__body"><code>@layer layout {
   .l-grid {
-    --_columns: 3;
-    --_gap: 1.5rem;
+    --_columns: 1;
+    --_gap: calc(24 * var(--px));
     display: grid;
     grid-template-columns: repeat(var(--_columns), 1fr);
     gap: var(--_gap);
   }
 }</code></pre>
                   </div>
-                  <p class="u-text-small">
+                  <p style="font-size: 0.875rem">
                     <strong>判断基準:</strong> 「色やフォントに触れているか？」 → 触れているなら Layout ではない。
                   </p>
                 </div>
@@ -207,7 +207,7 @@
   }
 }</code></pre>
                   </div>
-                  <p class="u-text-small">
+                  <p style="font-size: 0.875rem">
                     <strong>Modifier</strong> は <code>.-large</code> のようにハイフン始まりの短縮記法。
                     BEM の <code>--modifier</code> より簡潔で、HTML の可読性が向上します。
                   </p>
@@ -236,7 +236,7 @@
                     中に <code>c-button-cta</code>（Component）を含んでいます。
                     Project は Component を組み合わせて、サイト固有の文脈を作ります。
                   </p>
-                  <p class="u-text-small">
+                  <p style="font-size: 0.875rem">
                     <strong>State クラス:</strong> <code>.is-current</code> のような動的な状態変化は State クラスで管理。
                     Modifier（静的なバリエーション）とは区別します。
                   </p>
@@ -270,7 +270,7 @@
   }
 }</code></pre>
                   </div>
-                  <p class="u-text-small">
+                  <p style="font-size: 0.875rem">
                     <strong>判断基準:</strong> アニメーションのロジックは Animation 層に集約。Component や Project には書かない。
                   </p>
                 </div>
@@ -306,7 +306,7 @@
   }
 }</code></pre>
                   </div>
-                  <p class="u-text-small">
+                  <p style="font-size: 0.875rem">
                     <strong>判断基準:</strong> 「Utility でないと解決できないか？」 → Component や Project で対応できるなら、そちらに書く。
                   </p>
                 </div>
@@ -318,7 +318,7 @@
 
       <!-- まとめ CTA -->
       <section class="l-section">
-        <div class="l-section__inner u-text-center">
+        <div class="l-inner" style="text-align: center">
           <h2 class="c-section-heading a-fade-in-activate">
             判断基準を身につけたら
           </h2>
@@ -331,7 +331,7 @@
     </main>
 
     <footer class="p-footer">
-      <div class="p-footer__inner">
+      <div class="l-inner p-footer__inner">
         <nav class="p-footer__nav" aria-label="フッターナビゲーション">
           <div class="p-footer__nav-group">
             <p class="p-footer__nav-heading">Learn</p>

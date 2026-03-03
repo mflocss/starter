@@ -1,6 +1,6 @@
 @layer layout {
   .l-stack {
-    --_gap: 1.5rem;
+    --_gap: calc(24 * var(--px));
 
     display: flex;
     flex-direction: column;

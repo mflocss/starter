@@ -5,9 +5,7 @@
   }
 
   .p-footer__inner {
-    max-inline-size: calc(var(--content-width) / 16 * 1rem);
-    margin-inline: auto;
-    padding-inline: calc(var(--content-padding-inline) / 16 * 1rem);
+    display: contents;
   }
 
   .p-footer__nav {
@@ -36,7 +34,14 @@
     color: var(--color-text-light);
     transition: color 0.2s var(--ease-out-cubic);
 
-    &:hover {
+    &:focus-visible {
+      outline: 2px solid var(--color-focus-ring);
+      outline-offset: 2px;
+    }
+  }
+
+  @media (any-hover: hover) {
+    .p-footer__nav-link:hover {
       color: var(--color-text);
     }
   }

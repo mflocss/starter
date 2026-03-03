@@ -9,10 +9,4 @@
       calc(var(--_max) * var(--px))
     );
   }
-
-  .l-section__inner {
-    max-inline-size: calc(var(--content-width) / 16 * 1rem);
-    margin-inline: auto;
-    padding-inline: calc(var(--content-padding-inline) / 16 * 1rem);
-  }
 }

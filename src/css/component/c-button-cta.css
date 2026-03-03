@@ -13,13 +13,13 @@
       background-color 0.3s var(--ease-out-cubic),
       translate 0.3s var(--ease-out-cubic);
 
-    &:hover {
-      background-color: oklch(from var(--color-main) calc(l - 0.05) c h);
-      translate: 0 -1px;
-    }
-
     &:active {
       translate: 0 0;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-focus-ring);
+      outline-offset: 2px;
     }
 
     &.-large {
@@ -30,10 +30,17 @@
 
     &.-accent {
       background-color: var(--color-accent);
+    }
+  }
 
-      &:hover {
-        background-color: oklch(from var(--color-accent) calc(l - 0.05) c h);
-      }
+  @media (any-hover: hover) {
+    .c-button-cta:hover:not(:disabled) {
+      background-color: oklch(from var(--color-main) calc(l - 0.05) c h);
+      translate: 0 -1px;
+    }
+
+    .c-button-cta.-accent:hover:not(:disabled) {
+      background-color: oklch(from var(--color-accent) calc(l - 0.05) c h);
     }
   }
 

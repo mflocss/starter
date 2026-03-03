@@ -21,6 +21,7 @@
 
 /* Layout */
 @import './layout/l-section.css';
+@import './layout/l-inner.css';
 @import './layout/l-grid.css';
 @import './layout/l-stack.css';
 
@@ -49,4 +50,3 @@
 
 /* Utility */
 @import './utility/u-hidden.css';
-@import './utility/u-text.css';

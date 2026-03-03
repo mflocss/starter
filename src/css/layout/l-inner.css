@@ -1,0 +1,8 @@
+@layer layout {
+  .l-inner {
+    box-sizing: content-box;
+    max-inline-size: calc(var(--content-width) * var(--px));
+    padding-inline: var(--content-padding-inline);
+    margin-inline: auto;
+  }
+}

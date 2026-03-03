@@ -2,7 +2,7 @@
 @property --viewport-min {
   syntax: '<number>';
   inherits: true;
-  initial-value: 390;
+  initial-value: 400;
 }
 
 @property --viewport-max {
@@ -13,10 +13,11 @@
 
 @layer tokens {
   :root {
-    --viewport-min: 390;
+    --viewport-min: 400;
     --viewport-max: 1440;
-    --content-max: 1200;
-    --gutter: 20;
+    --content-max: 1280;
+    --gutter-min: 16;
+    --gutter-max: 80;
 
     /* clamp() 用ヘルパー */
     --px: calc(1rem / 16);

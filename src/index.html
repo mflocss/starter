@@ -11,7 +11,7 @@
   <body>
     <a href="#main" class="u-visually-hidden">コンテンツへスキップ</a>
     <header class="p-header">
-      <div class="p-header__inner">
+      <div class="l-inner p-header__inner">
         <a href="/" class="p-header__logo">mFLOCSS</a>
         <button
           type="button"
@@ -42,7 +42,7 @@
     <main id="main">
       <!-- Project: Hero — サイト固有のデザインに依存するため Project 層 -->
       <section class="p-hero">
-        <div class="p-hero__inner">
+        <div class="l-inner">
           <h1 class="p-hero__title a-fade-in-activate">
             その FLOCSS、<br />なぜそこに書いた？
           </h1>
@@ -64,11 +64,11 @@
 
       <!-- 8層カード — Layout(l-grid) + Component(c-card, c-badge) の組み合わせ -->
       <section class="l-section">
-        <div class="l-section__inner">
+        <div class="l-inner">
           <h2 class="c-section-heading a-fade-in-activate">
             8層アーキテクチャ
           </h2>
-          <p class="u-text-center a-fade-in-slide-up">
+          <p class="a-fade-in-slide-up" style="text-align: center">
             mFLOCSS は CSS を 8 つのフラットな層に分類します。<br />
             各層は <code>@layer</code> で優先順位が固定され、詳細度の衝突が起きません。
           </p>
@@ -159,7 +159,7 @@
 
       <!-- @layer コード例 -->
       <section class="l-section">
-        <div class="l-section__inner">
+        <div class="l-inner">
           <h2 class="c-section-heading a-fade-in-activate">
             @layer で詳細度を制御する
           </h2>
@@ -204,7 +204,7 @@
 
       <!-- CTA -->
       <section class="l-section">
-        <div class="l-section__inner u-text-center">
+        <div class="l-inner" style="text-align: center">
           <h2 class="c-section-heading a-fade-in-activate">
             設計思想を身につけよう
           </h2>
@@ -222,7 +222,7 @@
     </main>
 
     <footer class="p-footer">
-      <div class="p-footer__inner">
+      <div class="l-inner p-footer__inner">
         <nav class="p-footer__nav" aria-label="フッターナビゲーション">
           <div class="p-footer__nav-group">
             <p class="p-footer__nav-heading">Learn</p>
