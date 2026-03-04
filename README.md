@@ -93,8 +93,9 @@ src/css/
 
 ## この本について
 
-<!-- TODO: 公開後に URL を追加 -->
-「そのFLOCSS、なぜそこに書いた？ —— mFLOCSS で迷わない CSS 設計の判断基準」
+[そのFLOCSS、なぜそこに書いた？ —— mFLOCSS で迷わない CSS 設計の判断基準](https://zenn.dev/shunei/books/mflocss-design)
+
+公式サイト: [mflocss.dev](https://mflocss.dev)
 
 ## ライセンス
 
