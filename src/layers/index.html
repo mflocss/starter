@@ -97,25 +97,15 @@
                     ダークモードは、この層だけを切り替えることで実現します。
                   </p>
                   <div class="c-code-block">
-                    <div class="c-code-block__header">theme/color.css — このサイトの実装</div>
+                    <div class="c-code-block__header">theme/color.css — light-dark() でダークモード統合</div>
                     <pre class="c-code-block__body"><code>@layer theme {
   :root {
-    --color-main: var(--slate-600);
-    --color-accent: var(--vermilion-500);
-    --color-bg: var(--neutral-50);
-    --color-text: var(--neutral-900);
-  }
-}</code></pre>
-                  </div>
-                  <div class="c-code-block">
-                    <div class="c-code-block__header">theme/dark.css — Theme だけでダークモード</div>
-                    <pre class="c-code-block__body"><code>@layer theme {
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --color-bg: var(--neutral-900);
-      --color-text: var(--neutral-50);
-      /* Tokens は一切変更しない */
-    }
+    color-scheme: light dark;
+
+    --color-main: light-dark(var(--slate-600), var(--slate-400));
+    --color-accent: light-dark(var(--vermilion-500), var(--vermilion-400));
+    --color-bg: light-dark(var(--neutral-50), var(--neutral-900));
+    --color-text: light-dark(var(--neutral-900), var(--neutral-50));
   }
 }</code></pre>
                   </div>

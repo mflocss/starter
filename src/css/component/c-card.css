@@ -1,7 +1,6 @@
 @layer component {
   @scope (.c-card) to (.c-card .c-card) {
     :scope {
-      container-type: inline-size;
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -38,7 +37,7 @@
     }
   }
 
-  @container (min-width: 480px) {
+  @container (width >= 480px) {
     .c-card {
       flex-direction: row;
     }

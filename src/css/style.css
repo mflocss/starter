@@ -12,7 +12,6 @@
 @import './theme/color.css';
 @import './theme/typography.css';
 @import './theme/structure.css';
-@import './theme/dark.css';
 
 /* Foundation */
 @import './foundation/reset.css';
@@ -22,6 +21,7 @@
 /* Layout */
 @import './layout/l-section.css';
 @import './layout/l-inner.css';
+@import './layout/l-container.css';
 @import './layout/l-grid.css';
 @import './layout/l-stack.css';
 
