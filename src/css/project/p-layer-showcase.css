@@ -34,6 +34,7 @@
 
   .p-layer-showcase__description {
     grid-column: 1 / -1;
+    min-inline-size: 0;
     color: var(--color-text-light);
     line-height: var(--line-height-base);
 
