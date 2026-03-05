@@ -2,13 +2,13 @@
   .a-fade-in-slide-right {
     opacity: 0;
     translate: -20px 0;
-    transition:
-      opacity 0.6s var(--ease-out-cubic),
-      translate 0.6s var(--ease-out-cubic);
 
     &.is-active {
       opacity: 1;
       translate: 0 0;
+      transition:
+        opacity 0.6s var(--ease-out-cubic),
+        translate 0.6s var(--ease-out-cubic);
     }
   }
 

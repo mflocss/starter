@@ -2,13 +2,13 @@
   .a-scale-in {
     opacity: 0;
     scale: 0.95;
-    transition:
-      opacity 0.6s var(--ease-out-cubic),
-      scale 0.6s var(--ease-out-cubic);
 
     &.is-active {
       opacity: 1;
       scale: 1;
+      transition:
+        opacity 0.6s var(--ease-out-cubic),
+        scale 0.6s var(--ease-out-cubic);
     }
   }
 

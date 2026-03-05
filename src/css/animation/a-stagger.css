@@ -2,15 +2,15 @@
   .a-stagger > * {
     opacity: 0;
     translate: 0 20px;
-    transition:
-      opacity 0.6s var(--ease-out-cubic),
-      translate 0.6s var(--ease-out-cubic);
-    transition-delay: var(--_delay, 0s);
   }
 
   .a-stagger.is-active > * {
     opacity: 1;
     translate: 0 0;
+    transition:
+      opacity 0.6s var(--ease-out-cubic),
+      translate 0.6s var(--ease-out-cubic);
+    transition-delay: var(--_delay, 0s);
   }
 
   @media (prefers-reduced-motion: reduce) {
