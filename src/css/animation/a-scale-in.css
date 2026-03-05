@@ -1,29 +1,21 @@
 @layer animation {
-  .a-scale-in {
-    opacity: 0;
-    scale: 0.95;
-    transition:
-      opacity 0.6s var(--ease-out-cubic),
-      scale 0.6s var(--ease-out-cubic);
-
-    &.is-active {
-      opacity: 1;
-      scale: 1;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
+  @media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
     .a-scale-in {
-      opacity: 1;
-      scale: 1;
-      transition: none;
-    }
-  }
+      opacity: 0;
+      scale: 0.95;
 
-  @media (scripting: none) {
-    .a-scale-in {
-      opacity: 1;
-      scale: 1;
+      &.is-active {
+        opacity: 1;
+        scale: 1;
+        animation: scale-in 0.6s var(--ease-out-cubic);
+      }
+    }
+
+    @keyframes scale-in {
+      from {
+        opacity: 0;
+        scale: 0.95;
+      }
     }
   }
 }

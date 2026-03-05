@@ -43,13 +43,13 @@
       <section class="l-section">
         <div class="l-inner">
           <h1 class="c-section-heading a-fade-in-activate">Contact</h1>
-          <p class="a-fade-in-slide-up" style="text-align: center; margin-block-start: 1rem">
+          <p class="p-contact__lead a-fade-in-slide-up">
             お問い合わせフォームのサンプルです。<br />
             Foundation 層のフォームリセットと Project 層の <code>p-contact-form</code> の組み合わせを確認できます。
           </p>
 
-          <form class="p-contact-form a-fade-in-slide-up" style="margin-block-start: 2.5rem">
-            <div class="p-contact-form__field">
+          <form class="p-contact-form p-contact__form">
+            <div class="p-contact-form__field a-fade-in-slide-up">
               <label class="p-contact-form__label" for="name">お名前</label>
               <input
                 class="p-contact-form__input"
@@ -59,7 +59,7 @@
                 required
               />
             </div>
-            <div class="p-contact-form__field">
+            <div class="p-contact-form__field a-fade-in-slide-up">
               <label class="p-contact-form__label" for="email"
                 >メールアドレス</label
               >
@@ -71,7 +71,7 @@
                 required
               />
             </div>
-            <div class="p-contact-form__field">
+            <div class="p-contact-form__field a-fade-in-slide-up">
               <label class="p-contact-form__label" for="subject">件名</label>
               <input
                 class="p-contact-form__input"
@@ -80,7 +80,7 @@
                 placeholder="お問い合わせの件名"
               />
             </div>
-            <div class="p-contact-form__field">
+            <div class="p-contact-form__field a-fade-in-slide-up">
               <label class="p-contact-form__label" for="message"
                 >メッセージ</label
               >
@@ -94,7 +94,7 @@
             </div>
             <button
               type="submit"
-              class="c-button-cta -large p-contact-form__submit"
+              class="c-button-cta -large p-contact-form__submit a-fade-in-slide-up"
             >
               送信する
             </button>
@@ -104,26 +104,24 @@
     </main>
 
     <footer class="p-footer">
-      <div class="l-inner p-footer__inner">
-        <nav class="p-footer__nav" aria-label="フッターナビゲーション">
-          <div class="p-footer__nav-group">
-            <p class="p-footer__nav-heading">Learn</p>
-            <ul class="p-footer__nav-list">
-              <li><a href="/philosophy/" class="p-footer__nav-link">Philosophy</a></li>
-              <li><a href="/layers/" class="p-footer__nav-link">Layers</a></li>
-            </ul>
-          </div>
-          <div class="p-footer__nav-group">
-            <p class="p-footer__nav-heading">Resource</p>
-            <ul class="p-footer__nav-list">
-              <li><a href="https://github.com/mflocss/starter" class="p-footer__nav-link">GitHub</a></li>
-              <li><a href="/contact/" class="p-footer__nav-link">Contact</a></li>
-            </ul>
-          </div>
-        </nav>
-        <div class="p-footer__bottom">
-          <p class="p-footer__copyright">&copy; 2026 mFLOCSS. MIT License.</p>
+      <nav class="p-footer__nav a-stagger" aria-label="フッターナビゲーション">
+        <div class="p-footer__nav-group">
+          <p class="p-footer__nav-heading">Learn</p>
+          <ul class="p-footer__nav-list">
+            <li><a href="/philosophy/" class="p-footer__nav-link">Philosophy</a></li>
+            <li><a href="/layers/" class="p-footer__nav-link">Layers</a></li>
+          </ul>
         </div>
+        <div class="p-footer__nav-group">
+          <p class="p-footer__nav-heading">Resource</p>
+          <ul class="p-footer__nav-list">
+            <li><a href="https://github.com/mflocss/starter" class="p-footer__nav-link">GitHub</a></li>
+            <li><a href="/contact/" class="p-footer__nav-link">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="p-footer__bottom">
+        <p class="p-footer__copyright">&copy; 2026 mFLOCSS. MIT License.</p>
       </div>
     </footer>
   </body>

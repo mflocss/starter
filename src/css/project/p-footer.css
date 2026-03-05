@@ -4,14 +4,12 @@
     background-color: var(--color-bg-secondary);
   }
 
-  .p-footer__inner {
-    display: contents;
-  }
-
   .p-footer__nav {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    grid-template-columns: repeat(2, auto);
+    justify-content: center;
+    gap: 2rem 4rem;
+    padding-inline: var(--content-padding-inline);
   }
 
   .p-footer__nav-heading {
@@ -49,6 +47,7 @@
   .p-footer__bottom {
     margin-block-start: 2rem;
     padding-block-start: 1.5rem;
+    padding-inline: var(--content-padding-inline);
     border-block-start: 1px solid var(--color-border);
     text-align: center;
   }

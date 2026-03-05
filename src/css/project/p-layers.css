@@ -1,0 +1,10 @@
+@layer project {
+  .p-layers__lead {
+    text-align: center;
+    margin-block-start: 1rem;
+  }
+
+  .p-layers__cta {
+    text-align: center;
+  }
+}

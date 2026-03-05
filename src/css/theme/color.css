@@ -1,20 +1,23 @@
 @layer theme {
   :root {
+    color-scheme: light dark;
+
     /* 役割（グローバルセマンティック） */
-    --color-main: var(--slate-600);
-    --color-accent: var(--vermilion-500);
-    --color-bg: var(--neutral-50);
-    --color-bg-secondary: var(--neutral-100);
-    --color-surface: var(--white);
-    --color-text: var(--neutral-900);
-    --color-text-light: var(--neutral-600);
-    --color-border: var(--neutral-300);
+    --color-main: light-dark(var(--slate-600), var(--slate-400));
+    --color-accent: light-dark(var(--vermilion-500), var(--vermilion-400));
+    --color-bg: light-dark(var(--neutral-50), var(--neutral-900));
+    --color-bg-secondary: light-dark(var(--neutral-100), var(--neutral-800));
+    --color-surface: light-dark(var(--white), var(--neutral-800));
+    --color-text: light-dark(var(--neutral-900), var(--neutral-50));
+    --color-text-light: light-dark(var(--neutral-600), var(--neutral-400));
+    --color-border: light-dark(var(--neutral-300), var(--neutral-600));
     --color-white: var(--white);
-    --color-shadow: oklch(from var(--black) l c h / 10%);
+    --color-shadow: light-dark(oklch(from var(--black) l c h / 10%), oklch(from var(--white) l c h / 8%));
 
     /* 用途（コンテキストセマンティック） */
     --color-link: var(--color-main);
     --color-heading: var(--color-text);
-    --color-focus-ring: oklch(from var(--color-main) l c h / 25%);
+    --color-focus-ring: light-dark(oklch(from var(--color-main) l c h / 25%), oklch(from var(--color-main) l c h / 30%));
   }
+
 }

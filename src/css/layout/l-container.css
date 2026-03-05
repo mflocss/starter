@@ -1,0 +1,5 @@
+@layer layout {
+  .l-container {
+    container-type: inline-size;
+  }
+}

@@ -1,9 +1,0 @@
-@layer layout {
-  .l-stack {
-    --_gap: calc(24 * var(--px));
-
-    display: flex;
-    flex-direction: column;
-    gap: var(--_gap);
-  }
-}

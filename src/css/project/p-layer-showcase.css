@@ -34,11 +34,23 @@
 
   .p-layer-showcase__description {
     grid-column: 1 / -1;
+    min-inline-size: 0;
     color: var(--color-text-light);
     line-height: var(--line-height-base);
 
     @media (width >= 768px) {
       grid-column: 2 / -1;
     }
+
+  }
+
+  .p-layer-showcase__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .p-layer-showcase__criteria {
+    font-size: 0.875rem;
   }
 }

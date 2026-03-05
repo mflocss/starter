@@ -1,4 +1,9 @@
 @layer foundation {
+  :where(html) {
+    container-type: inline-size;
+    container-name: viewport;
+  }
+
   :where(body) {
     font-family: var(--font-family-ja);
     font-weight: var(--font-weight-regular);
@@ -18,9 +23,7 @@
     text-decoration: none;
   }
 
-  :where(img) {
-    max-inline-size: 100%;
-    block-size: auto;
-    vertical-align: middle;
+  :where(:focus-visible) {
+    outline-color: var(--color-main);
   }
 }

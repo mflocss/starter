@@ -1,0 +1,18 @@
+@layer project {
+  .p-philosophy__body {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-block-start: 2.5rem;
+  }
+
+  .p-philosophy__section-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .p-philosophy__table-wrap {
+    overflow-x: auto;
+  }
+}

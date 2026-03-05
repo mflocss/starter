@@ -46,18 +46,18 @@
             なぜ「設計思想」が先なのか
           </h1>
 
-          <div class="l-stack a-fade-in-slide-up" style="--_gap: 2rem; margin-block-start: 2.5rem">
+          <div class="p-philosophy__body">
 
             <!-- テンプレートを使っても崩れる理由 -->
-            <section>
+            <section class="a-fade-in-slide-up">
               <h2>テンプレートを使っても崩れる理由</h2>
 
-              <div class="l-stack" style="--_gap: 1rem">
+              <div class="p-philosophy__section-content">
                 <p>
                   「FLOCSS のテンプレートを使っているのに、気づけば CSS がぐちゃぐちゃになっている」——メンタリングをしていると、この相談をよく受けます。
                 </p>
 
-                <blockquote class="c-blockquote">
+                <blockquote class="c-blockquote a-fade-in-slide-right">
                   テンプレートは「結果」であって「判断の過程」ではない。
                 </blockquote>
 
@@ -78,10 +78,10 @@
             </section>
 
             <!-- 「動けばいい」が生む技術的負債 -->
-            <section>
+            <section class="a-fade-in-slide-up">
               <h2>「動けばいい」が生む技術的負債</h2>
 
-              <div class="l-stack" style="--_gap: 1rem">
+              <div class="p-philosophy__section-content">
                 <p>最初は問題なく動いていた CSS が、修正を重ねるうちに崩壊していく。この過程を見てみましょう。</p>
 
                 <div class="c-code-block">
@@ -115,15 +115,15 @@
             </section>
 
             <!-- CSS設計は今、どこにいるのか -->
-            <section>
+            <section class="a-fade-in-slide-up">
               <h2>CSS 設計は今、どこにいるのか</h2>
 
-              <div class="l-stack" style="--_gap: 1rem">
+              <div class="p-philosophy__section-content">
                 <p>
                   2025 年現在、CSS 自体が大きく進化しています。<code>@layer</code> でスタイルの優先順位を制御でき、<code>@scope</code> でスタイルの適用範囲を構造的に制限でき、CSS Nesting でネスト記法がネイティブに書ける。かつて Sass や命名規則で「回避」していた問題を、ブラウザが「解決」してくれる時代になりました。
                 </p>
 
-                <div style="overflow-x: auto">
+                <div class="p-philosophy__table-wrap">
                   <table class="c-table">
                     <caption class="u-visually-hidden">CSS 設計アプローチの比較</caption>
                     <thead>
@@ -163,7 +163,7 @@
                   </table>
                 </div>
 
-                <blockquote class="c-blockquote">
+                <blockquote class="c-blockquote a-fade-in-slide-right">
                   技術としては不要になりつつある。でも思考フレームワークとしては必要。
                 </blockquote>
 
@@ -174,15 +174,15 @@
             </section>
 
             <!-- mFLOCSS の進化 -->
-            <section>
+            <section class="a-fade-in-slide-up">
               <h2>FLOCSS から mFLOCSS へ</h2>
 
-              <div class="l-stack" style="--_gap: 1rem">
+              <div class="p-philosophy__section-content">
                 <p>
                   <strong>mFLOCSS（エムフロックス）</strong>は、日本発の CSS 設計手法 FLOCSS の設計思想を継承しつつ、モダン CSS の力で再構築した設計手法です。
                 </p>
 
-                <div style="overflow-x: auto">
+                <div class="p-philosophy__table-wrap">
                   <table class="c-table">
                     <caption class="u-visually-hidden">FLOCSS と mFLOCSS の層比較</caption>
                     <thead>
@@ -262,26 +262,24 @@
     </main>
 
     <footer class="p-footer">
-      <div class="l-inner p-footer__inner">
-        <nav class="p-footer__nav" aria-label="フッターナビゲーション">
-          <div class="p-footer__nav-group">
-            <p class="p-footer__nav-heading">Learn</p>
-            <ul class="p-footer__nav-list">
-              <li><a href="/philosophy/" class="p-footer__nav-link">Philosophy</a></li>
-              <li><a href="/layers/" class="p-footer__nav-link">Layers</a></li>
-            </ul>
-          </div>
-          <div class="p-footer__nav-group">
-            <p class="p-footer__nav-heading">Resource</p>
-            <ul class="p-footer__nav-list">
-              <li><a href="https://github.com/mflocss/starter" class="p-footer__nav-link">GitHub</a></li>
-              <li><a href="/contact/" class="p-footer__nav-link">Contact</a></li>
-            </ul>
-          </div>
-        </nav>
-        <div class="p-footer__bottom">
-          <p class="p-footer__copyright">&copy; 2026 mFLOCSS. MIT License.</p>
+      <nav class="p-footer__nav a-stagger" aria-label="フッターナビゲーション">
+        <div class="p-footer__nav-group">
+          <p class="p-footer__nav-heading">Learn</p>
+          <ul class="p-footer__nav-list">
+            <li><a href="/philosophy/" class="p-footer__nav-link">Philosophy</a></li>
+            <li><a href="/layers/" class="p-footer__nav-link">Layers</a></li>
+          </ul>
         </div>
+        <div class="p-footer__nav-group">
+          <p class="p-footer__nav-heading">Resource</p>
+          <ul class="p-footer__nav-list">
+            <li><a href="https://github.com/mflocss/starter" class="p-footer__nav-link">GitHub</a></li>
+            <li><a href="/contact/" class="p-footer__nav-link">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="p-footer__bottom">
+        <p class="p-footer__copyright">&copy; 2026 mFLOCSS. MIT License.</p>
       </div>
     </footer>
   </body>

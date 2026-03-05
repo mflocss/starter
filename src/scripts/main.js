@@ -1,6 +1,7 @@
 import '../css/style.css';
 
 const observeAnimations = () => {
+
   const targets = document.querySelectorAll('[class*="a-fade-in"], .a-scale-in, .a-stagger');
 
   if (targets.length === 0) return;
@@ -21,6 +22,7 @@ const observeAnimations = () => {
 };
 
 const initStaggerDelays = () => {
+
   const containers = document.querySelectorAll('.a-stagger');
 
   containers.forEach((container) => {
