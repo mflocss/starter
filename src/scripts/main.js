@@ -79,5 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
   markCurrentNav();
   initMobileNav();
   initStaggerDelays();
-  observeAnimations();
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      observeAnimations();
+    });
+  });
 });
