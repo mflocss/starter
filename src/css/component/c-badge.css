@@ -11,35 +11,35 @@
     border-radius: 100vmax;
 
     &.-tokens {
-      background-color: var(--layer-tokens);
+      background-color: var(--color-layer-tokens);
     }
 
     &.-theme {
-      background-color: var(--layer-theme);
+      background-color: var(--color-layer-theme);
     }
 
     &.-foundation {
-      background-color: var(--layer-foundation);
+      background-color: var(--color-layer-foundation);
     }
 
     &.-layout {
-      background-color: var(--layer-layout);
+      background-color: var(--color-layer-layout);
     }
 
     &.-component {
-      background-color: var(--layer-component);
+      background-color: var(--color-layer-component);
     }
 
     &.-project {
-      background-color: var(--layer-project);
+      background-color: var(--color-layer-project);
     }
 
     &.-animation {
-      background-color: var(--layer-animation);
+      background-color: var(--color-layer-animation);
     }
 
     &.-utility {
-      background-color: var(--layer-utility);
+      background-color: var(--color-layer-utility);
     }
   }
 }

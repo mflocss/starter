@@ -18,6 +18,16 @@
     --color-link: var(--color-main);
     --color-heading: var(--color-text);
     --color-focus-ring: light-dark(oklch(from var(--color-main) l c h / 25%), oklch(from var(--color-main) l c h / 30%));
+
+    /* 層バッジ */
+    --color-layer-tokens: var(--violet-500);
+    --color-layer-theme: var(--indigo-500);
+    --color-layer-foundation: var(--blue-500);
+    --color-layer-layout: var(--teal-500);
+    --color-layer-component: var(--green-500);
+    --color-layer-project: var(--amber-500);
+    --color-layer-animation: var(--orange-500);
+    --color-layer-utility: var(--rose-500);
   }
 
 }

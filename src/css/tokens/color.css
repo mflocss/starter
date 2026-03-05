@@ -52,16 +52,15 @@
     --black: oklch(0% 0 0deg);
 
     /* ============================================
-       Layer Identity — 層バッジ用カラー
-       各層のアイデンティティを示す装飾色。
+       Accent Hues — 装飾用の単色トークン
        ============================================ */
-    --layer-tokens: oklch(55% 0.18 290deg);
-    --layer-theme: oklch(55% 0.20 250deg);
-    --layer-foundation: oklch(50% 0.18 210deg);
-    --layer-layout: oklch(50% 0.16 170deg);
-    --layer-component: oklch(55% 0.18 130deg);
-    --layer-project: oklch(55% 0.20 65deg);
-    --layer-animation: oklch(55% 0.22 30deg);
-    --layer-utility: oklch(55% 0.22 10deg);
+    --violet-500:  oklch(55% 0.18 290deg);
+    --indigo-500:  oklch(55% 0.20 250deg);
+    --blue-500:    oklch(50% 0.18 210deg);
+    --teal-500:    oklch(50% 0.16 170deg);
+    --green-500:   oklch(55% 0.18 130deg);
+    --amber-500:   oklch(55% 0.20 65deg);
+    --orange-500:  oklch(55% 0.22 30deg);
+    --rose-500:    oklch(55% 0.22 10deg);
   }
 }
