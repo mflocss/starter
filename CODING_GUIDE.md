@@ -121,7 +121,7 @@ transform を含む transition は `@media (prefers-reduced-motion: no-preferenc
 
 ## 流体タイポグラフィ
 
-`typography.css` の `clamp()` 値は viewport-min〜viewport-max 間のリニア補間で算出しています。
+`typography.css` の `clamp()` 値は viewport-min〜viewport-max 間の直線的な補間で算出しています。
 
 ```
 preferred = (max - min) / (viewport-max - viewport-min) × 100vi + 切片rem

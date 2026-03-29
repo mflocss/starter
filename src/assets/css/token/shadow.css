@@ -1,4 +1,4 @@
-/* CUSTOMIZE: シャドウ（ジオメトリ px + 色は color.css の --color-shadow を参照） */
+/* CUSTOMIZE: シャドウ（形状 px + 色は color.css の --color-shadow を参照） */
 
 /* 使用例: box-shadow: var(--shadow-md) var(--color-shadow); */
 :root {

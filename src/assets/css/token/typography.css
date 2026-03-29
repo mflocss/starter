@@ -2,7 +2,7 @@
   /* CUSTOMIZE: フォントファミリー */
   --font-family: 'Noto Sans JP', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', meiryo, sans-serif;
 
-  /* CUSTOMIZE: 流体タイポグラフィ（viewport-min → viewport-max のリニア補間） */
+  /* CUSTOMIZE: 流体タイポグラフィ（viewport-min → viewport-max の直線的な補間） */
   --font-size-h1: clamp(calc(32 * var(--px)), 2.308vi + 1.4231rem, calc(56 * var(--px)));
   --font-size-h2: clamp(calc(24 * var(--px)), 1.154vi + 1.2115rem, calc(36 * var(--px)));
   --font-size-h3: clamp(calc(18 * var(--px)), 0.288vi + 1.0529rem, calc(21 * var(--px)));
