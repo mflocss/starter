@@ -3,9 +3,6 @@
 .p-header {
   --_blur: 8px;
 
-  position: sticky;
-  inset-block-start: 0;
-  z-index: var(--z-header);
   background-color: oklch(from var(--color-bg) l c h / 92%);
   border-block-end: var(--border-width) solid var(--color-border);
   backdrop-filter: blur(var(--_blur));
