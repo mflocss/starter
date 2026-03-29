@@ -88,6 +88,15 @@ JavaScript で切り替える状態は `.is-*` を使用:
 
 Animation 層は `opacity: 0` 等で初期状態を隠すため、JS が動かないと要素が見えなくなる。Component / Project の transition は状態変化の滑らかさのみで、ガードの有無にかかわらず要素は表示される。
 
+### 1 ガードの対象判断
+
+| transition プロパティ | ガード | 理由 |
+|---------------------|--------|------|
+| transform（translate / rotate / scale）を含む | 必要 | 前庭障害のトリガーになりうる |
+| 色変化（color / border-color / background-color）・opacity のみ | 不要 | 前庭障害のトリガーにならない |
+
+transform を含む transition は `@media (prefers-reduced-motion: no-preference)` で囲み、`reduce` 設定時にモーションを無効化する。色変化のみの transition はガードなしで宣言してよい。
+
 ## カスタムプロパティ
 
 ### プライベート変数（`--_`）
