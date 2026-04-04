@@ -128,7 +128,7 @@ function initStagger() {
     const children = Array.from(container.children);
     children.forEach((child, index) => {
       child.dataset.animate = animateName;
-      child.style.setProperty('--stagger-delay', `${index * 0.1}s`);
+      child.style.setProperty('--stagger-delay', `${(index * 0.1).toFixed(1)}s`);
     });
   });
 }
