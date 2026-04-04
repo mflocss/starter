@@ -21,24 +21,24 @@
   }
 }
 
-.c-hamburger__line,
-.c-hamburger__line::before,
-.c-hamburger__line::after {
-  display: block;
-  inline-size: var(--_line-width);
-  block-size: var(--_line-height);
-  background-color: currentcolor;
-  border-radius: var(--_line-radius);
-
-  @media (prefers-reduced-motion: no-preference) {
-    transition:
-      transform var(--duration-normal) var(--ease-out-cubic),
-      opacity var(--duration-normal) var(--ease-out-cubic);
-  }
-}
-
 .c-hamburger__line {
   position: relative;
+
+  &,
+  &::before,
+  &::after {
+    display: block;
+    inline-size: var(--_line-width);
+    block-size: var(--_line-height);
+    background-color: currentcolor;
+    border-radius: var(--_line-radius);
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition:
+        transform var(--duration-normal) var(--ease-out-cubic),
+        opacity var(--duration-normal) var(--ease-out-cubic);
+    }
+  }
 
   &::before,
   &::after {
