@@ -64,11 +64,7 @@ ARIA 属性（`aria-label`・`aria-expanded`・`aria-controls` 等）と `transl
 
 ## 流体タイポグラフィ
 
-`typography.css` の `clamp()` 値は viewport-min（400px）〜viewport-max（1440px）間の直線的な補間で算出しています。各変数の min/max は `typography.css` のコメントを参照してください。
-
-```
-preferred = (max - min) / (viewport-max - viewport-min) × 100vi + 切片rem
-```
+`typography.css` の `clamp()` 値は viewport 400px〜1440px 間の線形補間で算出しています。値を変更する場合は各変数のコメントにある min/max を調整し、clamp の中間値を再計算してください。
 
 ## data-immediate
 
