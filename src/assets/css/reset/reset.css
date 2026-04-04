@@ -45,7 +45,6 @@
 :where(ul, ol, menu) {
   padding-inline-start: unset;
 
-  /* 空文字列を使うことで Safari VoiceOver でリストとして認識される（list-style: none は認識されない） */
   list-style-type: '';
 }
 
