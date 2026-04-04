@@ -20,4 +20,9 @@
       animation-play-state: running;
     }
   }
+
+  /* LCP 要素用: JS の data-visible を待たず即時再生（FOIC 防止） */
+  [data-animate][data-immediate] {
+    animation-play-state: running;
+  }
 }

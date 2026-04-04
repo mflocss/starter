@@ -152,17 +152,15 @@ preferred = (max - min) / (viewport-max - viewport-min) × 100vi + 切片rem
 → clamp(calc(32 * var(--px)), 2.308vi + 1.4231rem, calc(56 * var(--px)))
 ```
 
-## spec 逸脱記録
+## data-immediate
 
-spec の SHOULD 要件を意図的に逸脱している箇所を記録する。
+LCP 要素用フラグ。Animation 層の `animation-play-state: paused` をオーバーライドし、JS を待たず即時再生する。Hero 等のファーストビュー要素に使用。
 
-### Hero セクションのアニメーション（p-hero.css）
+```html
+<section data-animate="scale-in" data-immediate>...</section>
+```
 
-**逸脱**: spec §5.7 SHOULD「装飾的アニメーションは Animation 層で定義する」
-
-**対象**: `p-hero.css` 内のアニメーション定義（Animation 層ではなく Project 層で直接定義）
-
-**理由**: Hero は LCP 要素を内包するため、Animation 層の標準パターン（`animation-play-state: paused` → JS が `data-visible` を付与して `running`）を使うと、CSS 適用〜JS 実行の間に `opacity: 0` の状態が発生する（FOIC: Flash Of Invisible Content）。即時再生にすることで FOIC を防止している。
+`data-immediate` を付与した要素は JS の `data-visible` を待たずにアニメーションを開始するため、CSS 適用〜JS 実行の間に `opacity: 0` が発生する FOIC（Flash Of Invisible Content）を防止できる。IntersectionObserver の observe 対象からも除外される。
 
 ## ファイル追加手順
 

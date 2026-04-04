@@ -1,14 +1,5 @@
 /* --_ = ブロック内部変数（CODING_GUIDE 参照） */
 
-/* LCP 要素を内包するため data-animate（animation-play-state: paused）に依存しない。
-   ページロード直後から即時再生し、JS 実行前に opacity: 0 になる FOIC を防止する。
-   2ガード（prefers-reduced-motion + scripting）は維持する。 */
-@media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
-  .p-hero {
-    animation: scale-in 0.8s var(--ease-out-quart) both;
-  }
-}
-
 .p-hero {
   /* Hero はセクション余白を広めに取る */
   --section-padding-min: var(--section-wide-min);
