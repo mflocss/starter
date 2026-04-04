@@ -3,5 +3,3 @@ dist/
 *.local
 .env
 .DS_Store
-.claude/
-.worker-context.md
