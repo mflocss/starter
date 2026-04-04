@@ -32,7 +32,7 @@ Component / Project の機能的トランジションにガードを適用する
 
 | transition プロパティ | ガード | 理由 |
 |---------------------|--------|------|
-| transform（translate / rotate / scale）を含む | 必要 | 前庭障害のトリガーになりうる |
+| transform（translate / rotate / scale 等）を含む | 必要 | 前庭障害のトリガーになりうる |
 | 色変化（color / border-color / background-color）・opacity のみ | 不要 | 前庭障害のトリガーにならない |
 
 ```css
