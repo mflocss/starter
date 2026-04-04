@@ -13,7 +13,7 @@
 |------|-----------|--------|
 | 基準 | 親コンテナの幅 | ビューポートの幅 |
 | 用途 | コンポーネント単位のレスポンシブ | ページ全体のレイアウト切替 |
-| サイズ単位 | `cqi`（container query inline） | `px` / `em` |
+| サイズ単位 | `cqi`（container query inline） | `px` / `em` / `rem` |
 | この LP での例 | Features カード内のレイアウト切替 | ヘッダーのナビ表示/非表示 |
 
 `l-container.css` で `container-type: inline-size` を宣言し、Project/Component 層でクエリを記述します。
