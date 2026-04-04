@@ -62,7 +62,7 @@
     font-size: var(--font-size-button-lg);
   }
 
-  &.is-loading {
+  &[data-loading] {
     pointer-events: none;
     opacity: 0.7;
   }

@@ -100,7 +100,7 @@ function initScrollAnimation() {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
+          entry.target.dataset.visible = '';
           observer.unobserve(entry.target);
         }
       });
@@ -142,9 +142,9 @@ function initBackToTop() {
 
   function toggleVisibility() {
     if (window.scrollY > threshold) {
-      backToTop.classList.add('is-visible');
+      backToTop.dataset.visible = '';
     } else {
-      backToTop.classList.remove('is-visible');
+      delete backToTop.dataset.visible;
     }
   }
 

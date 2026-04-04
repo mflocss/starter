@@ -9,7 +9,7 @@
     opacity var(--duration-normal) var(--ease-out-cubic),
     visibility var(--duration-normal) var(--ease-out-cubic);
 
-  &.is-visible {
+  &[data-visible] {
     visibility: visible;
     opacity: 1;
   }

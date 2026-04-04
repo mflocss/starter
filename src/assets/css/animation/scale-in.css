@@ -8,7 +8,7 @@
     }
   }
 
-  /* paused で待機し、JS が .is-visible を付与した時点で再生開始 */
+  /* paused で待機し、JS が [data-visible] を付与した時点で再生開始 */
   [data-animate='scale-in'] {
     --_duration: 0.8s;
 
@@ -16,7 +16,7 @@
     animation-delay: var(--stagger-delay, 0s);
     animation-play-state: paused;
 
-    &.is-visible {
+    &[data-visible] {
       animation-play-state: running;
     }
   }
