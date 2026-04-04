@@ -1,42 +1,11 @@
 # コーディングガイド
 
-このプロジェクトで使用する CSS 設計（mFLOCSS）のルールです。
+このプロジェクトで使用する CSS 設計（mFLOCSS）の starter 固有の運用ルールです。
+層の定義・命名規則・カスタムプロパティ参照ルール等の仕様は mFLOCSS spec（§3〜§8）を参照してください。
 
-## レイヤー構成
+## レイヤー運用
 
-```
-token → reset → foundation → layout → component → project → animation → utility
-```
-
-| レイヤー | 責任 |
-|---------|------|
-| Token | デザイン値の定義（色・フォント・余白等） |
-| Reset | ブラウザ環境の初期化 |
-| Foundation | 要素の基本スタイル（base + form） |
-| Layout | 位置と空間の配置 |
-| Component | 配置先に左右されない再利用可能なパーツ |
-| Project | サイト固有のパーツとデザイン要件 |
-| Animation | 装飾的アニメーション |
-| Utility | 単一目的のスタイル上書き |
-
-### レイヤー判断フロー
-
-1. デザイントークン（色・フォント・余白の変数）→ **Token**
-2. ブラウザリセット → **Reset**
-3. 要素セレクタのデフォルト → **Foundation**
-4. ページの骨格（セクション幅・コンテナ）→ **Layout**
-5. 複数ページで使い回すパーツ → **Component**
-6. 特定のページ・機能でしか使わないパーツ → **Project**
-7. 装飾的アニメーション（なくても機能する演出）→ **Animation**
-8. 上記で対処できない局所的な調整 → **Utility**
-
-### Component の条件
-
-- Portability Test に合格すること（別のページ・プロジェクトに持っていっても壊れない）
-- Token 層のセマンティック変数（`--color-*`, `--space-*` 等）のみ参照
-- `--_` プレフィックスの内部変数は直接参照しない
-- position: fixed/sticky は使わない（Project 層が担当）
-- 外部レイアウト（margin, width, position）を自身で持たない
+層の構成・責任・判断フローは spec §3、各層の詳細は spec §5 を参照。
 
 ### @container vs @media
 
@@ -51,51 +20,20 @@ token → reset → foundation → layout → component → project → animatio
 
 ## 命名規則
 
-### プレフィックス
-
-| プレフィックス | レイヤー | 例 |
-|-------------|---------|-----|
-| `l-` | Layout | `l-section`, `l-inner` |
-| `c-` | Component | `c-button`, `c-section-heading` |
-| `p-` | Project | `p-header`, `p-footer` |
-| `u-` | Utility | `u-hidden-sp`, `u-visually-hidden` |
-
-Token, Reset, Foundation, Animation はプレフィックスなし。
-
-### BEM + .-modifier
-
-```
-.c-button              → Block
-.c-button__icon        → Element
-.c-button.-primary     → Modifier（BEM の -- ではなく .- を使用）
-```
-
-### 状態クラス
-
-JavaScript で切り替える状態は `.is-*` を使用:
-
-```
-.is-visible
-.is-loading
-```
+プレフィックス・クラス名の形式・Modifier（`.-xxx`）・State（`data-*` / ARIA 属性）は spec §6 を参照。
 
 ## モーションガード
 
-| 層 | ガード | 理由 |
-|----|--------|------|
-| Animation | `(prefers-reduced-motion: no-preference) and (scripting: enabled)` | JS 無効時に要素が不可視になるのを防止 |
-| Component / Project | `(prefers-reduced-motion: no-preference)` | 要素は常に可視。滑らかさだけを制御 |
-
-Animation 層は `opacity: 0` 等で初期状態を隠すため、JS が動かないと要素が見えなくなる。Component / Project の transition は状態変化の滑らかさのみで、ガードの有無にかかわらず要素は表示される。
+モーションガードの仕様（2 ガード原則・Animation 層と機能的トランジションの区別）は spec §5.7 を参照。
 
 ### 1 ガードの対象判断
+
+Component / Project の機能的トランジションにガードを適用するかどうかの基準（spec §5.7 SHOULD）:
 
 | transition プロパティ | ガード | 理由 |
 |---------------------|--------|------|
 | transform（translate / rotate / scale）を含む | 必要 | 前庭障害のトリガーになりうる |
 | 色変化（color / border-color / background-color）・opacity のみ | 不要 | 前庭障害のトリガーにならない |
-
-transform を含む transition は `@media (prefers-reduced-motion: no-preference)` で囲み、`reduce` 設定時にモーションを無効化する。色変化のみの transition はガードなしで宣言してよい。
 
 ```css
 /* ✅ 色変化のみ → ガード不要。前庭障害のトリガーにならないため */
@@ -115,18 +53,7 @@ transform を含む transition は `@media (prefers-reduced-motion: no-preferenc
 
 ## カスタムプロパティ
 
-### プライベート変数（`--_`）
-
-`--_` プレフィックスの変数はそのブロック内でのみ使用する内部変数です。外部から参照しません。
-
-```css
-.c-hamburger {
-  --_line-width: 20px;   /* このコンポーネント内でのみ使用 */
-  --_line-height: 2px;
-}
-```
-
-例外: `color.css` 内の `--_` パレット変数は同ファイルのセマンティック変数から参照されます（primitive → semantic 変換）。
+カスタムプロパティの命名規則・参照ルール（セマンティック変数経由・プリミティブ変数の直接参照禁止等）は spec §6〜§7 を参照。
 
 ### 単位の使い分け
 
