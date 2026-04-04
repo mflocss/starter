@@ -31,3 +31,24 @@
 .p-cta__button {
   margin-block-start: var(--space-sm);
 }
+
+/* ------------------------------------------------
+   デモサイト用: mFLOCSS リソースへの導線
+   Phase E-2 でコピーを差し替え
+   ------------------------------------------------ */
+
+/* 直前の .p-cta（サロン CTA）と背景を変えて視覚的に区切る */
+.p-cta.-demo-links {
+  background-color: var(--color-bg);
+}
+
+/* 書籍・GitHub リポへのリンクリスト */
+.p-cta__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+  padding-inline-start: 0;
+  list-style: none;
+  margin-block-start: var(--space-sm);
+}
