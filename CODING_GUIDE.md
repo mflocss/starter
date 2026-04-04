@@ -154,13 +154,15 @@ preferred = (max - min) / (viewport-max - viewport-min) × 100vi + 切片rem
 
 ## data-immediate
 
-LCP 要素用フラグ。Animation 層の `animation-play-state: paused` をオーバーライドし、JS を待たず即時再生する。Hero 等のファーストビュー要素に使用。
+CSS 完結のアニメーション。JS を待たず即時再生。LCP 要素（Hero 等）に使用。
 
 ```html
-<section data-animate="scale-in" data-immediate>...</section>
+<section data-immediate="scale-in">...</section>
 ```
 
-`data-immediate` を付与した要素は JS の `data-visible` を待たずにアニメーションを開始するため、CSS 適用〜JS 実行の間に `opacity: 0` が発生する FOIC（Flash Of Invisible Content）を防止できる。IntersectionObserver の observe 対象からも除外される。
+`data-immediate="アニメーション名"` を付与した要素は JS の `data-visible` を待たずにアニメーションを開始するため、CSS 適用〜JS 実行の間に `opacity: 0` が発生する FOIC（Flash Of Invisible Content）を防止できる。`data-animate` と併用しない（属性名自体が挙動を表す）。
+
+`data-animate="アニメーション名"` は JS 待ちアニメーション。IntersectionObserver が `data-visible` を付与した時点で再生を開始する。スクロールで視界に入った要素に使用。
 
 ## ファイル追加手順
 

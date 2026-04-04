@@ -1,28 +1,25 @@
-/* --_ = ブロック内部変数（CODING_GUIDE 参照） */
-
-@media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
-  @keyframes scale-in {
-    from {
-      opacity: 0;
-      scale: 0.95;
+@layer animation {
+  @media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
+    @keyframes scale-in {
+      from {
+        opacity: 0;
+        scale: 0.95;
+      }
     }
-  }
 
-  /* paused で待機し、JS が [data-visible] を付与した時点で再生開始 */
-  [data-animate='scale-in'] {
-    --_duration: 0.8s;
-
-    animation: scale-in var(--_duration) var(--ease-out-quart) both;
-    animation-delay: var(--stagger-delay, 0s);
-    animation-play-state: paused;
-
-    &[data-visible] {
-      animation-play-state: running;
+    /* CSS 完結: LCP 要素用。即時再生 */
+    [data-immediate='scale-in'] {
+      animation: scale-in 0.8s var(--ease-out-quart) both;
     }
-  }
 
-  /* LCP 要素用: JS の data-visible を待たず即時再生（FOIC 防止） */
-  [data-animate][data-immediate] {
-    animation-play-state: running;
+    /* JS 待ち: IntersectionObserver が data-visible を付与して再生 */
+    [data-animate='scale-in'] {
+      animation: scale-in 0.8s var(--ease-out-quart) both;
+      animation-play-state: paused;
+
+      &[data-visible] {
+        animation-play-state: running;
+      }
+    }
   }
 }

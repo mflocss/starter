@@ -112,10 +112,7 @@ function initScrollAnimation() {
   );
 
   targets.forEach((target) => {
-    // data-immediate 付き要素は即時再生済みのため observe 不要
-    if (!('immediate' in target.dataset)) {
-      observer.observe(target);
-    }
+    observer.observe(target);
   });
 }
 
