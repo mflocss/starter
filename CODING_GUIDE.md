@@ -125,3 +125,10 @@ HTML のクラスと CSS のルールセットは 1:1 で対応させます。�
 - prefix は英語、タイトルは日本語
 - 「何を変えたか」ではなく「何が変わるか」を書く
 - 1行目は 72 文字以内を目安に
+
+## 関連リンク
+
+- [デモサイト](https://starter.mflocss.dev) — starter のライブプレビュー
+- [そのFLOCSS、なぜそこに書いた？ —— mFLOCSS で迷わない CSS 設計の判断基準](https://zenn.dev/shunei/books/mflocss-design)
+- [mflocss.dev](https://mflocss.dev)
+- [mFLOCSS Specification](https://github.com/mflocss/spec)
