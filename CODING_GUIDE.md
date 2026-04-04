@@ -97,6 +97,22 @@ Animation 層は `opacity: 0` 等で初期状態を隠すため、JS が動か�
 
 transform を含む transition は `@media (prefers-reduced-motion: no-preference)` で囲み、`reduce` 設定時にモーションを無効化する。色変化のみの transition はガードなしで宣言してよい。
 
+```css
+/* ✅ 色変化のみ → ガード不要。前庭障害のトリガーにならないため */
+.c-back-to-top {
+  transition: background-color var(--duration-fast) var(--ease-out-cubic);
+}
+
+/* ✅ translate を含む → ガードが必要 */
+.c-button {
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      background-color var(--duration-normal) var(--ease-out-cubic),
+      translate var(--duration-normal) var(--ease-out-cubic);
+  }
+}
+```
+
 ## カスタムプロパティ
 
 ### プライベート変数（`--_`）

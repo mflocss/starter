@@ -78,6 +78,7 @@
   padding: 0;
   margin: 0;
   overflow-y: auto;
+  overscroll-behavior-y: contain; /* Safari フォールバック（論理プロパティ非対応） */
   overscroll-behavior-block: contain;
   background-color: var(--color-bg);
   border: none;

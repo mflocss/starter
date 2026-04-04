@@ -56,16 +56,19 @@
   }
 }
 
-.c-hamburger[aria-expanded='true'] .c-hamburger__line {
-  background-color: transparent;
+/* aria-expanded が true の時 × アイコンに変形 */
+.c-hamburger {
+  &[aria-expanded='true'] .c-hamburger__line {
+    background-color: transparent;
 
-  &::before {
-    rotate: 45deg;
-    translate: 0 0;
-  }
+    &::before {
+      rotate: 45deg;
+      translate: 0 0;
+    }
 
-  &::after {
-    rotate: -45deg;
-    translate: 0 0;
+    &::after {
+      rotate: -45deg;
+      translate: 0 0;
+    }
   }
 }
