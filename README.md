@@ -153,29 +153,6 @@ npm run build
 base: '/my-site/',
 ```
 
-## Design Decisions
-
-### mFLOCSS 層アーキテクチャ
-`token → reset → foundation → layout → component → project → animation → utility` の順で `@layer` を先制宣言。カスケードの優先順位を明示することで、詳細度に頼らないスタイル管理を実現します。
-
-### 論理プロパティ + 論理 viewport 単位（vi, dvb）
-`margin-inline`・`padding-block` などの論理プロパティを全面採用。LTR/RTL どちらの書字方向にも対応できる基盤を持ちます。fluid typography には `vi`（viewport inline）、全高レイアウトには `dvb`（dynamic viewport block）を使用します。
-
-### oklch カラー + 相対カラー関数
-カラーパレットをすべて `oklch` で定義。知覚均一な色空間のため、同じ chroma・lightness の操作が直感的に機能します。シャドウには相対カラー関数（`oklch(from var(--_black) l c h / 透明度)`）を使い、基準色からの派生を宣言的に表現しています。
-
-### --px ヘルパー
-`--px: calc(1rem / 16)` を定義することで、デザインカンプの px 指定値をそのまま `calc(24 * var(--px))` のように記述でき、rem への手動変換が不要になります。
-
-### アクセシビリティ
-ARIA 属性（`aria-label`・`aria-expanded`・`aria-controls` 等）と `translate="no"` をマークアップに明記。視覚的非表示には `visibility: hidden` ではなく `clip-path: inset(50%)` を使い、スクリーンリーダーへの露出を制御しています。
-
-### JS 最小化（:has() + :user-invalid で CSS-only バリデーション）
-必須マークの自動付与は `:has(+ :required)` で実装。フォームのバリデーションスタイルは `:user-invalid` で制御し、JS なしで「ユーザー操作後にのみエラーを表示」を実現しています。
-
-### パフォーマンス
-ヒーロー画像に `fetchpriority="high"` を付与して LCP を改善。スクロールイベントは `{ passive: true }` で登録し、メインスレッドのブロッキングを回避しています。
-
 ## リファレンス
 
 ### コマンド一覧
