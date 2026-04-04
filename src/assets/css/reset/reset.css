@@ -7,7 +7,7 @@
 
 /* Document */
 :where(:root) {
-  scrollbar-gutter: stable; /* Safari 未サポート。オーバーレイスクロールバーのため実害なし */
+  scrollbar-gutter: stable; /* macOS/iOS はオーバーレイスクロールバーのため効果なし */
   line-height: 1.5;
   line-break: strict;
   overflow-wrap: anywhere;
