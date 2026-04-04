@@ -1,7 +1,7 @@
 # コーディングガイド
 
 このプロジェクトで使用する CSS 設計（mFLOCSS）の starter 固有の運用ルールです。
-層の定義・命名規則・カスタムプロパティ参照ルール等の仕様は mFLOCSS spec（§3〜§8）を参照してください。
+層の定義・命名規則・カスタムプロパティ参照ルール等の仕様は [mFLOCSS spec](https://github.com/mflocss/spec)（§3〜§8）を参照してください。
 
 ## Design Decisions
 
