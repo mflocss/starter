@@ -26,7 +26,6 @@
 }
 
 .p-footer__nav-link {
-  /* WCAG 2.5.8: SP でのタッチターゲット 44px 確保 */
   display: inline-flex;
   align-items: center;
   min-block-size: var(--size-tap-target);

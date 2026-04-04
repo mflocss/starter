@@ -83,7 +83,6 @@
 
 .p-contact__radio-label,
 .p-contact__checkbox-label {
-  /* WCAG 2.5.8: SP でのタッチターゲット 44px 確保 */
   display: flex;
   gap: var(--space-sm);
   align-items: center;

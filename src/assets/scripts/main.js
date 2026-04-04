@@ -123,8 +123,11 @@ function initStagger() {
   if (containers.length === 0) return;
 
   containers.forEach((container) => {
-    const children = container.querySelectorAll('[data-animate]');
+    // data-stagger の値をアニメーション名として子要素に data-animate を動的付与
+    const animateName = container.dataset.stagger;
+    const children = Array.from(container.children);
     children.forEach((child, index) => {
+      child.dataset.animate = animateName;
       child.style.setProperty('--stagger-delay', `${index * 0.1}s`);
     });
   });

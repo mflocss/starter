@@ -155,7 +155,7 @@ base: '/my-site/',
 
 ## Design Decisions
 
-### mFLOCSS 8層アーキテクチャ
+### mFLOCSS 層アーキテクチャ
 `token → reset → foundation → layout → component → project → animation → utility` の順で `@layer` を先制宣言。カスケードの優先順位を明示することで、詳細度に頼らないスタイル管理を実現します。
 
 ### 論理プロパティ + 論理 viewport 単位（vi, dvb）
@@ -231,6 +231,7 @@ public/                    # ルートパス固定のファイル
 
 ## 関連リンク
 
+- [デモサイト](https://starter.mflocss.dev) — starter のライブプレビュー
 - [そのFLOCSS、なぜそこに書いた？ —— mFLOCSS で迷わない CSS 設計の判断基準](https://zenn.dev/shunei/books/mflocss-design)
 - [mflocss.dev](https://mflocss.dev)
 - [mFLOCSS Specification](https://github.com/mflocss/spec)
