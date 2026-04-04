@@ -5,9 +5,12 @@
   z-index: var(--z-back-to-top);
   visibility: hidden;
   opacity: 0;
-  transition:
-    opacity var(--duration-normal) var(--ease-out-cubic),
-    visibility var(--duration-normal) var(--ease-out-cubic);
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      opacity var(--duration-normal) var(--ease-out-cubic),
+      visibility var(--duration-normal) var(--ease-out-cubic);
+  }
 
   &[data-visible] {
     visibility: visible;
