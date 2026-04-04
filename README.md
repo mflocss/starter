@@ -197,7 +197,7 @@ Chrome 123+ / Safari 18+ / Firefox 128+
 
 使用しているモダン CSS: `@layer`, `@container`, CSS Nesting, `:has()`, `:where()`, `oklch()`, `light-dark()`, 論理プロパティ, `clamp()`
 
-> **注意:** `text-spacing-trim` / `text-autospace` を使用しています。Chrome 123+ では動作しますが、Safari・Firefox は未対応です（2026年3月時点）。未対応ブラウザでは無視されるため、表示が崩れることはありません。
+> **注意:** `text-spacing-trim` / `text-autospace` を使用しています。Chrome 123+ では動作しますが、Safari・Firefox は未対応です（2026年4月時点）。未対応ブラウザでは無視されるため、表示が崩れることはありません。
 
 ### ファイル構成
 
