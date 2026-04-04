@@ -17,7 +17,6 @@
   text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
 
-  /* ドロワー表示中の背面スクロール抑制 */
   &:has(dialog[open]) {
     overflow: hidden;
   }
