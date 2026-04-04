@@ -22,6 +22,10 @@
 }
 
 .p-header__logo {
+  /* WCAG 2.5.8: タッチターゲット 44px 確保（ロゴリンクの実タップ高さ補正） */
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--size-tap-target);
   font-size: var(--font-size-logo);
   font-weight: var(--font-weight-heading);
   color: var(--color-main);
