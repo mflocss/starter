@@ -64,19 +64,10 @@ ARIA 属性（`aria-label`・`aria-expanded`・`aria-controls` 等）と `transl
 
 ## 流体タイポグラフィ
 
-`typography.css` の `clamp()` 値は viewport-min〜viewport-max 間の直線的な補間で算出しています。
+`typography.css` の `clamp()` 値は viewport-min（400px）〜viewport-max（1440px）間の直線的な補間で算出しています。各変数の min/max は `typography.css` のコメントを参照してください。
 
 ```
 preferred = (max - min) / (viewport-max - viewport-min) × 100vi + 切片rem
-切片 = min - (max - min) / (viewport-max - viewport-min) × viewport-min
-```
-
-例: `--font-size-h1` は 32px → 56px を 400px → 1440px で補間:
-
-```
-傾き = (56 - 32) / (1440 - 400) = 0.02308 → 2.308vi
-切片 = 32/16 - 0.02308 × 400/16 = 2 - 0.577 = 1.4231rem
-→ clamp(calc(32 * var(--px)), 2.308vi + 1.4231rem, calc(56 * var(--px)))
 ```
 
 ## data-immediate
@@ -100,8 +91,6 @@ HTML のクラスと CSS のルールセットは 1:1 で対応させます。�
   /* スタイルなし（HTML クラスとの対応を維持） */
 }
 ```
-
-納品前に `CUSTOMIZE` コメントが残っていないことを確認してください。
 
 ## コミットメッセージ
 
