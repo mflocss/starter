@@ -13,6 +13,11 @@
     "format": "prettier --write .",
     "check": "npm run format && npm run lint:css && npm run lint:js && npm run lint:html"
   },
+  "pnpm": {
+    "overrides": {
+      "minimatch": ">=10.2.3"
+    }
+  },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "eslint": "^10.1.0",
