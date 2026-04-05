@@ -78,6 +78,17 @@ CSS 完結のアニメーション。JS を待たず即時再生。LCP 要素（
 
 `data-animate="アニメーション名"` は JS 待ちアニメーション。IntersectionObserver が `data-visible` を付与した時点で再生を開始する。スクロールで視界に入った要素に使用。
 
+## data-open（ドロワー）
+
+dialog 要素の開閉アニメーション制御。dialog の `close()` は即座に `display: none` にするため、CSS transition だけでは閉じるアニメーションが効かない。
+
+```js
+// 開く: show() → 2フレーム遅延で data-open 付与 → translate トランジション
+// 閉じる: data-open 削除 → translate トランジション → transitionend で close()
+```
+
+`data-open` は JS がアニメーション状態を制御するための属性。dialog の `open` 属性（display の制御）とは責務が異なる。`prefers-reduced-motion: reduce` の場合は transition がないため即座に `close()` する。
+
 ## 空のルールセット
 
 HTML のクラスと CSS のルールセットは 1:1 で対応させます。スタイルが不要なクラスでも、ルールセットを残してコメントで意図を示します。
