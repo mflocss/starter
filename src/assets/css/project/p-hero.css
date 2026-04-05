@@ -15,7 +15,7 @@
   align-items: center;
   text-align: center;
 
-  @media (width >= 768px) {
+  @container (inline-size >= 768px) {
     gap: var(--space-3xl);
   }
 }

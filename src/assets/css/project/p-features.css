@@ -18,7 +18,7 @@
   gap: var(--space-xl);
   align-items: center;
 
-  @media (width >= 768px) {
+  @container (inline-size >= 768px) {
     grid-template-columns: 1fr 1fr;
 
     &:nth-child(even) > :first-child {

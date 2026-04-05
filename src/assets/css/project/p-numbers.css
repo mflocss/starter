@@ -18,7 +18,7 @@
   margin-block-start: var(--space-2xl);
   text-align: center;
 
-  @media (width >= 768px) {
+  @container (inline-size >= 768px) {
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-xl);
   }

@@ -11,7 +11,7 @@
   gap: var(--space-xl);
   margin-block-start: var(--space-2xl);
 
-  @media (width >= 768px) {
+  @container (inline-size >= 768px) {
     grid-template-columns: repeat(2, 1fr);
   }
 }
