@@ -12,7 +12,7 @@ labels: question
 ## どのレイヤーに関する質問ですか？
 
 - [ ] Token
-- [ ] Theme
+- [ ] Reset
 - [ ] Foundation
 - [ ] Layout
 - [ ] Component
