@@ -1,0 +1,67 @@
+/* show() を使用（showModal() だとヘッダーが背面に隠れる） */
+.p-drawer {
+  --_panel-size: min(max(85vi, calc(var(--viewport-min) * var(--px))), calc(100vi - 48px));
+
+  position: fixed;
+  inset: 0;
+  inset-inline-start: auto; /* UA の inset-inline-start: 0 を打ち消す */
+  z-index: var(--z-drawer);
+  inline-size: var(--_panel-size);
+  max-inline-size: none;
+  block-size: auto;
+  max-block-size: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  overscroll-behavior-block: contain;
+  background-color: var(--color-bg);
+  border: none;
+  transform: translateX(100%);
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: transform var(--duration-normal) var(--ease-out-cubic);
+  }
+
+  &[data-open] {
+    transform: translateX(0);
+  }
+}
+
+.p-drawer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  align-items: center;
+  justify-content: safe center;
+  min-block-size: 100%;
+  padding: var(--space-xl);
+  padding-block-start: calc(var(--header-size) + var(--space-xl));
+}
+
+.p-drawer__nav {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-drawer__nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.p-drawer__nav-link {
+  font-size: var(--font-size-nav-lg);
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out-cubic);
+
+  @media (any-hover: hover) {
+    &:hover {
+      color: var(--color-main);
+    }
+  }
+}
+
+.p-drawer__cta {
+  margin-block-start: var(--space-md);
+}

@@ -44,7 +44,6 @@
 
 :where(ul, ol, menu) {
   padding-inline-start: unset;
-
   list-style-type: '';
 }
 

@@ -174,7 +174,7 @@ Chrome 123+ / Safari 18+ / Firefox 128+
 
 使用しているモダン CSS: `@layer`, `@container`, CSS Nesting, `:has()`, `:where()`, `oklch()`, `light-dark()`, 論理プロパティ, `clamp()`
 
-> **注意:** `text-spacing-trim` / `text-autospace` を使用しています。Chrome 123+ では動作しますが、Safari・Firefox は未対応です（2026年4月時点）。未対応ブラウザでは無視されるため、表示が崩れることはありません。
+> **注意:** `text-spacing-trim` は Chrome のみ対応（Safari・Firefox 未対応、2026年4月時点）。未対応ブラウザでは無視されるため、表示が崩れることはありません。
 
 ### ファイル構成
 
@@ -200,6 +200,8 @@ src/
 ├── thanks/index.html      # サンクスページ
 └── privacy/index.html     # プライバシーポリシー
 public/                    # ルートパス固定のファイル
+├── scripts/
+│   └── viewport.js        # ビューポート幅制御（--viewport-min 未満の端末向け）
 ├── favicon.svg
 ├── favicon.ico
 ├── apple-touch-icon.png

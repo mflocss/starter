@@ -1,7 +1,7 @@
 # コーディングガイド
 
 このプロジェクトで使用する CSS 設計（mFLOCSS）の starter 固有の運用ルールです。
-層の定義・命名規則・カスタムプロパティ参照ルール等の仕様は [mFLOCSS spec](https://github.com/mflocss/spec)（§3〜§8）を参照してください。
+層の定義・命名規則・カスタムプロパティ参照ルール等の仕様は [mFLOCSS spec](https://github.com/mflocss/spec) を参照してください。
 
 ## Design Decisions
 
@@ -26,6 +26,21 @@ ARIA 属性（`aria-label`・`aria-expanded`・`aria-controls` 等）と `transl
 ### パフォーマンス
 ヒーロー画像に `fetchpriority="high"` を付与して LCP を改善。スクロールイベントは `{ passive: true }` で登録し、メインスレッドのブロッキングを回避しています。
 
+## 単位の使い分け
+
+| 単位 | 記法 | 対象 |
+|------|------|------|
+| **rem** | `calc(N * var(--px))` | フォントサイズ・余白・ヘッダー高さ等、ユーザーのフォント設定に追従すべき値 |
+| **px** | `Npx` | 角丸・シャドウ・ボーダー幅・コンテンツ幅上限・タップ領域等、物理的な制約に紐づく値 |
+
+## 流体タイポグラフィ
+
+`typography.css` の `clamp()` 値は viewport 400px〜1440px 間の線形補間で算出しています。値を変更する場合は各変数のコメントにある min/max を調整し、clamp の中間値を再計算してください。ブレークポイントなしで滑らかにスケールするため、メディアクエリの管理コストを削減できます。
+
+### ブレークポイント値の CSS/JS 同期
+
+`public/scripts/viewport.js` の `VIEWPORT_MIN` は、`tokens/structure.css` の `--viewport-min` と同じ値に合わせてください。この値を変更する場合は両方を更新する必要があります。CSS と JS の基準値を一致させることで、400px 未満の端末でもレイアウト崩れを防ぎ、変更時の修正漏れを防止できます。
+
 ## @container vs @media
 
 | 観点 | @container | @media |
@@ -37,34 +52,12 @@ ARIA 属性（`aria-label`・`aria-expanded`・`aria-controls` 等）と `transl
 
 `l-container.css` で `container-type: inline-size` を宣言し、Project/Component 層でクエリを記述します。
 
-## モーションガードの実装例
+## モーションガードのルール
 
-```css
-/* ✅ 色変化のみ → ガード不要。前庭障害のトリガーにならないため */
-.c-back-to-top {
-  transition: background-color var(--duration-fast) var(--ease-out-cubic);
-}
+動きを伴うアニメーションは前庭障害を持つユーザーに悪影響を与えることがあります。ガード条件を明確にすることで、アクセシビリティを確保しつつ不要な判断コストを排除できます。
 
-/* ✅ translate を含む → ガードが必要 */
-.c-button {
-  @media (prefers-reduced-motion: no-preference) {
-    transition:
-      background-color var(--duration-normal) var(--ease-out-cubic),
-      translate var(--duration-normal) var(--ease-out-cubic);
-  }
-}
-```
-
-## 単位の使い分け
-
-| 単位 | 記法 | 対象 |
-|------|------|------|
-| **rem** | `calc(N * var(--px))` | フォントサイズ・余白・ヘッダー高さ等、ユーザーのフォント設定に追従すべき値 |
-| **px** | `Npx` | 角丸・シャドウ・ボーダー幅・コンテンツ幅上限・タップ領域等、物理的な制約に紐づく値 |
-
-## 流体タイポグラフィ
-
-`typography.css` の `clamp()` 値は viewport 400px〜1440px 間の線形補間で算出しています。値を変更する場合は各変数のコメントにある min/max を調整し、clamp の中間値を再計算してください。
+- 色変化のみ（`background-color`, `color` 等）→ ガード不要。前庭障害のトリガーにならないため
+- `translate`・`scale`・`rotate` 等の動きを含む → `@media (prefers-reduced-motion: no-preference)` でガード
 
 ## data-immediate
 
@@ -78,20 +71,32 @@ CSS 完結のアニメーション。JS を待たず即時再生。LCP 要素（
 
 `data-animate="アニメーション名"` は JS 待ちアニメーション。IntersectionObserver が `data-visible` を付与した時点で再生を開始する。スクロールで視界に入った要素に使用。
 
-## data-open（ドロワー）
+## ドロワー（p-drawer / c-overlay）
 
-dialog 要素の開閉アニメーション制御。dialog の `close()` は即座に `display: none` にするため、CSS transition だけでは閉じるアニメーションが効かない。
+### HTML 構造
 
-```js
-// 開く: show() → 2フレーム遅延で data-open 付与 → translate トランジション
-// 閉じる: data-open 削除 → translate トランジション → transitionend で close()
+`dialog.p-drawer` は `header` の **兄弟要素**として配置します（header の内側ではない）。`showModal()` を使うと header が `::backdrop` の背面に隠れるため、`show()` を使用します。
+
+```html
+<header class="l-header p-header">...</header>
+<div class="c-overlay" data-drawer-overlay hidden></div>
+<dialog class="p-drawer" id="drawer" data-drawer aria-labelledby="drawer-title">
+  ...
+</dialog>
+<main ... data-drawer-inert>...</main>
 ```
 
-`data-open` は JS がアニメーション状態を制御するための属性。dialog の `open` 属性（display の制御）とは責務が異なる。`prefers-reduced-motion: reduce` の場合は transition がないため即座に `close()` する。
+### c-overlay — 汎用 Component
+
+`c-overlay` はドロワー専用ではなくモーダル・ライトボックス等でも再利用可能な Component です。z-index は `--overlay-z` で利用側から注入します（実装詳細は `c-overlay.css` 参照）。
+
+### data-open — 開閉アニメーション制御
+
+`dialog.close()` は即座に `display: none` にするため、CSS transition だけでは閉じるアニメーションが効きません。`data-open` 属性でアニメーション状態を JS から制御します（dialog の `open` 属性とは責務が異なります）。実装詳細は `src/assets/scripts/main.js` を参照してください。
 
 ## 空のルールセット
 
-HTML のクラスと CSS のルールセットは 1:1 で対応させます。スタイルが不要なクラスでも、ルールセットを残してコメントで意図を示します。
+HTML のクラスと CSS のルールセットは 1:1 で対応させます。スタイルが不要なクラスでも、ルールセットを残してコメントで意図を示します。「スタイルを意図的に書かなかった」と「書き忘れた」を区別でき、後から読んだコーダーが誤ってスタイルを追加するミスを防止できます。
 
 ```css
 .p-header__hamburger {
@@ -100,6 +105,8 @@ HTML のクラスと CSS のルールセットは 1:1 で対応させます。�
 ```
 
 ## コミットメッセージ
+
+prefix で変更の種類を明示し、タイトルで変更の影響を日本語で伝えます。git log を一覧したときに「何が変わったか」が即座に分かり、差し戻しや cherry-pick の判断コストを削減できます。
 
 ```
 <prefix>: 変更内容を日本語で簡潔に

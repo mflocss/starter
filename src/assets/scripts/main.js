@@ -8,59 +8,50 @@
  * - Back to Top ボタン表示制御
  */
 
-/* ----------------------------------------
- * ドロワーメニュー
- * ---------------------------------------- */
-
 function initDrawer() {
-  const drawer = document.getElementById('drawer');
+  const drawer = document.querySelector('[data-drawer]');
   if (!drawer) return;
 
+  const overlay = document.querySelector('[data-drawer-overlay]');
+  if (overlay) overlay.style.setProperty('--overlay-z', 'calc(var(--z-drawer) - 1)');
   const hamburgers = document.querySelectorAll('[data-hamburger]');
-  const nav = document.querySelector('[data-nav]');
-  const skipLink = document.querySelector('.c-skip-link');
-  const logo = document.querySelector('.p-header__logo');
-  const main = document.querySelector('main');
-  const footer = document.querySelector('footer');
+  const inertTargets = document.querySelectorAll('[data-drawer-inert]');
   const drawerLinks = drawer.querySelectorAll('a');
 
   function openDrawer() {
+    if (overlay) overlay.hidden = false;
     drawer.show();
-    // show() 直後は [open] がまだ付いていないため rAF を2段挟んで data-open を付与
+    // rAF 2段：show() 直後に付与すると初期状態が描画されずアニメーションが効かない
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         drawer.dataset.open = '';
       });
     });
-    skipLink?.setAttribute('inert', '');
-    logo?.setAttribute('inert', '');
-    nav?.setAttribute('inert', '');
-    main?.setAttribute('inert', '');
-    footer?.setAttribute('inert', '');
+    inertTargets.forEach((el) => el.setAttribute('inert', ''));
     hamburgers.forEach((btn) => btn.setAttribute('aria-expanded', 'true'));
 
-    // ドロワー内の最初のフォーカス可能要素にフォーカスを移動
     const firstFocusable = drawer.querySelector('a, button, [tabindex="0"]');
-    firstFocusable?.focus();
+    firstFocusable?.focus({ preventScroll: true });
   }
 
   function closeDrawer() {
     delete drawer.dataset.open;
 
-    // reduced-motion の場合はトランジションがないため即座に close
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (overlay) overlay.hidden = true;
       drawer.close();
     } else {
-      drawer.addEventListener('transitionend', () => {
-        drawer.close();
-      }, { once: true });
+      drawer.addEventListener(
+        'transitionend',
+        () => {
+          if (overlay) overlay.hidden = true;
+          drawer.close();
+        },
+        { once: true },
+      );
     }
 
-    skipLink?.removeAttribute('inert');
-    logo?.removeAttribute('inert');
-    nav?.removeAttribute('inert');
-    main?.removeAttribute('inert');
-    footer?.removeAttribute('inert');
+    inertTargets.forEach((el) => el.removeAttribute('inert'));
     hamburgers.forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
   }
 
@@ -75,38 +66,30 @@ function initDrawer() {
     });
   });
 
-  // ドロワー内アンカーリンク（#xxx）クリックでドロワーを閉じる
-  // ページ遷移リンクはそのまま遷移（新ページにドロワーは存在しない）
+  // ページ遷移リンクはそのまま（新ページにドロワーは存在しない）
   drawerLinks.forEach((link) => {
     link.addEventListener('click', () => {
       const href = link.getAttribute('href');
       if (href && href.startsWith('#')) {
         closeDrawer();
-        hamburgers[0]?.focus();
+        hamburgers[0]?.focus({ preventScroll: true });
       }
     });
   });
 
-  // ::backdrop クリックで閉じる
-  drawer.addEventListener('click', (e) => {
-    if (e.target === drawer) {
-      closeDrawer();
-      hamburgers[0]?.focus();
-    }
+  overlay?.addEventListener('click', () => {
+    closeDrawer();
+    hamburgers[0]?.focus({ preventScroll: true });
   });
 
   // show() は Escape キーで自動的に閉じないため、手動で処理
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && drawer.open) {
       closeDrawer();
-      hamburgers[0]?.focus();
+      hamburgers[0]?.focus({ preventScroll: true });
     }
   });
 }
-
-/* ----------------------------------------
- * スクロールアニメーション（data-animate）
- * ---------------------------------------- */
 
 function initScrollAnimation() {
   const targets = document.querySelectorAll('[data-animate]');
@@ -132,16 +115,11 @@ function initScrollAnimation() {
   });
 }
 
-/* ----------------------------------------
- * スタッガーアニメーション（data-stagger）
- * ---------------------------------------- */
-
 function initStagger() {
   const containers = document.querySelectorAll('[data-stagger]');
   if (containers.length === 0) return;
 
   containers.forEach((container) => {
-    // data-stagger の値をアニメーション名として子要素に data-animate を動的付与
     const animateName = container.dataset.stagger;
     const children = Array.from(container.children);
     children.forEach((child, index) => {
@@ -151,12 +129,8 @@ function initStagger() {
   });
 }
 
-/* ----------------------------------------
- * Back to Top
- * ---------------------------------------- */
-
 function initBackToTop() {
-  const backToTop = document.querySelector('.c-back-to-top');
+  const backToTop = document.querySelector('[data-back-to-top]');
   if (!backToTop) return;
 
   const threshold = 300;
@@ -172,10 +146,6 @@ function initBackToTop() {
   window.addEventListener('scroll', toggleVisibility, { passive: true });
   toggleVisibility();
 }
-
-/* ----------------------------------------
- * 初期化
- * ---------------------------------------- */
 
 initDrawer();
 initStagger();

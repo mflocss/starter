@@ -1,7 +1,4 @@
-/* --_ = ブロック内部変数（CODING_GUIDE 参照） */
-
 .p-cta {
-  /* セクション余白を広めに取り、行動を促す間を作る */
   --section-padding-min: var(--section-wide-min);
   --section-padding-max: var(--section-wide-max);
 

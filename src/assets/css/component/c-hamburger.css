@@ -1,8 +1,6 @@
 /* ハンバーガーボタン（☰ ↔ × アニメーション）
    aria-expanded の状態に連動して変化する */
 
-/* --_ = ブロック内部変数（CODING_GUIDE 参照） */
-
 .c-hamburger {
   --_line-width: 20px;
   --_line-height: 2px;

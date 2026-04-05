@@ -1,7 +1,4 @@
-/* --_ = ブロック内部変数（CODING_GUIDE 参照） */
-
 .p-numbers {
-  /* セクション余白を狭めに */
   --section-padding-min: var(--section-narrow-min);
   --section-padding-max: var(--section-narrow-max);
 

@@ -53,4 +53,7 @@
   --color-link: var(--color-main);
   --color-heading: var(--color-text);
   --color-focus-ring: var(--color-main);
+
+  /* オーバーレイ */
+  --color-overlay: oklch(0% 0 0deg / 40%);
 }

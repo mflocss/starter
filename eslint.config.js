@@ -6,7 +6,7 @@ export default [
   js.configs.recommended,
   prettierConfig,
   {
-    files: ['src/**/*.js'],
+    files: ['src/**/*.js', 'public/**/*.js'],
     languageOptions: {
       globals: globals.browser,
     },

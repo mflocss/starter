@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/scripts/viewport.js"></script>
     <meta name="format-detection" content="telephone=no,address=no,email=no" />
     <!-- CUSTOMIZE: ダークモード不要なら content="light" に -->
     <meta name="color-scheme" content="light dark" />
@@ -23,7 +24,7 @@
   </head>
   <body class="l-viewport" id="top">
     <!-- Skip Link -->
-    <a href="#main" class="c-skip-link u-visually-hidden">本文へスキップ</a>
+    <a href="#main" class="c-skip-link u-visually-hidden" data-drawer-inert>本文へスキップ</a>
 
     <!-- NOTE: ヘッダー・フッターは全ページ共通。変更時は全ファイルに反映すること -->
     <!-- Header -->
@@ -51,33 +52,33 @@
         >
           <span class="c-hamburger__line" aria-hidden="true"></span>
         </button>
-
-        <dialog class="p-header__drawer" id="drawer" aria-labelledby="drawer-title">
-          <div class="p-header__drawer-inner">
-            <span id="drawer-title" class="u-visually-hidden">ナビゲーションメニュー</span>
-            <nav class="p-header__drawer-nav" aria-label="ドロワーナビゲーション">
-              <ul class="p-header__drawer-nav-list">
-                <li>
-                  <a href="/#features" class="p-header__drawer-nav-link">特徴</a>
-                </li>
-                <li>
-                  <a href="/#voice" class="p-header__drawer-nav-link">お客様の声</a>
-                </li>
-                <li>
-                  <a href="/#faq" class="p-header__drawer-nav-link">よくある質問</a>
-                </li>
-                <li>
-                  <a href="/contact/" class="p-header__drawer-nav-link">ご予約</a>
-                </li>
-              </ul>
-            </nav>
-            <a href="/contact/" class="c-button -primary p-header__drawer-cta">初回体験を予約する</a>
-          </div>
-        </dialog>
       </div>
     </header>
+    <div class="c-overlay" data-drawer-overlay hidden></div>
+    <dialog class="p-drawer" id="drawer" data-drawer aria-labelledby="drawer-title">
+      <div class="p-drawer__inner">
+        <span id="drawer-title" class="u-visually-hidden">ナビゲーションメニュー</span>
+        <nav class="p-drawer__nav" aria-label="ドロワーナビゲーション">
+          <ul class="p-drawer__nav-list">
+            <li>
+              <a href="/#features" class="p-drawer__nav-link">特徴</a>
+            </li>
+            <li>
+              <a href="/#voice" class="p-drawer__nav-link">お客様の声</a>
+            </li>
+            <li>
+              <a href="/#faq" class="p-drawer__nav-link">よくある質問</a>
+            </li>
+            <li>
+              <a href="/contact/" class="p-drawer__nav-link">ご予約</a>
+            </li>
+          </ul>
+        </nav>
+        <a href="/contact/" class="c-button -primary p-drawer__cta">初回体験を予約する</a>
+      </div>
+    </dialog>
 
-    <main class="l-main" id="main">
+    <main class="l-main" id="main" data-drawer-inert>
       <section class="l-section p-thanks">
         <div class="l-inner p-thanks__inner">
           <h1 class="p-thanks__title">お問い合わせありがとうございます</h1>
@@ -88,7 +89,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="l-footer p-footer">
+    <footer class="l-footer p-footer" data-drawer-inert>
       <div class="l-inner p-footer__inner">
         <nav class="p-footer__nav" aria-label="フッターナビゲーション">
           <ul class="p-footer__nav-list">
@@ -114,7 +115,7 @@
     </footer>
 
     <!-- Back to Top -->
-    <a href="#top" class="c-back-to-top p-back-to-top" aria-label="ページの先頭に戻る">
+    <a href="#top" class="c-back-to-top p-back-to-top" data-back-to-top aria-label="ページの先頭に戻る">
       <svg class="c-icon" width="20" height="20" aria-hidden="true">
         <use href="../assets/images/icons/chevron-up.svg#icon" />
       </svg>

@@ -1,14 +1,14 @@
-/* --_ = ブロック内部変数（CODING_GUIDE 参照） */
-
 .p-header {
   --_blur: 8px;
 
+  /* dialog が header の外にあるため、常に z-index をドロワーより上に設定 */
+  z-index: calc(var(--z-drawer) + 1);
   background-color: oklch(from var(--color-bg) l c h / 92%);
   border-block-end: var(--border-width) solid var(--color-border);
   backdrop-filter: blur(var(--_blur));
 
   /* ドロワー表示中はヘッダーを不透明に（背面コンテンツの透けを防止） */
-  &:has(dialog[open]) {
+  body:has(dialog[open]) & {
     background-color: var(--color-bg);
     backdrop-filter: none;
   }
@@ -67,69 +67,6 @@
   font-size: var(--font-size-caption);
 }
 
-/* show() を使用（showModal() だとヘッダーが背面に隠れる） */
-.p-header__drawer {
-  position: fixed;
-  inset-block: var(--header-size) 0;
-  inset-inline: 0;
-  z-index: var(--z-drawer);
-  inline-size: 100%;
-  block-size: calc(100dvb - var(--header-size));
-  padding: 0;
-  margin: 0;
-  overflow-y: auto;
-  overscroll-behavior-block: contain;
-  background-color: var(--color-bg);
-  border: none;
-  translate: 100% 0;
-
-  @media (prefers-reduced-motion: no-preference) {
-    transition: translate var(--duration-normal) var(--ease-out-cubic);
-  }
-
-  &[data-open] {
-    translate: 0 0;
-  }
-}
-
-.p-header__drawer-inner {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xl);
-  align-items: center;
-  justify-content: safe center;
-  min-block-size: 100%;
-  padding: var(--space-xl);
-}
-
 .p-header__hamburger {
   /* スタイルなし（HTML クラスとの対応を維持） */
-}
-
-.p-header__drawer-nav {
-  /* スタイルなし（HTML クラスとの対応を維持） */
-}
-
-.p-header__drawer-nav-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xl);
-  align-items: center;
-}
-
-.p-header__drawer-nav-link {
-  font-size: var(--font-size-nav-lg);
-  color: var(--color-text);
-  text-decoration: none;
-  transition: color var(--duration-fast) var(--ease-out-cubic);
-
-  @media (any-hover: hover) {
-    &:hover {
-      color: var(--color-main);
-    }
-  }
-}
-
-.p-header__drawer-cta {
-  margin-block-start: var(--space-md);
 }
