@@ -70,7 +70,8 @@
 /*
  * show() を使用（showModal() だとヘッダーが背面に隠れる）
  * @starting-style + allow-discrete で開く/閉じる両方にアニメーションを適用
- * Firefox 128 では @starting-style / allow-discrete 非対応のためアニメーションなし（機能は正常）
+ * Firefox 128 では allow-discrete 非対応のため、閉じるときに display が即座に none になりパッと消える
+ * （開くときの transition は動作する）
  */
 .p-header__drawer {
   position: fixed;
