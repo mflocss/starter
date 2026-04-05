@@ -1,25 +1,23 @@
-@layer animation {
-  @media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
-    @keyframes scale-in {
-      from {
-        opacity: 0;
-        scale: 0.95;
-      }
+@media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      scale: 0.95;
     }
+  }
 
-    /* CSS 完結: LCP 要素用。即時再生 */
-    [data-immediate='scale-in'] {
-      animation: scale-in 0.8s var(--ease-out-quart) both;
-    }
+  /* CSS 完結: LCP 要素用。即時再生 */
+  [data-immediate='scale-in'] {
+    animation: scale-in 0.8s var(--ease-out-quart) both;
+  }
 
-    /* JS 待ち: IntersectionObserver が data-visible を付与して再生 */
-    [data-animate='scale-in'] {
-      animation: scale-in 0.8s var(--ease-out-quart) both;
-      animation-play-state: paused;
+  /* JS 待ち: IntersectionObserver が data-visible を付与して再生 */
+  [data-animate='scale-in'] {
+    animation: scale-in 0.8s var(--ease-out-quart) both;
+    animation-play-state: paused;
 
-      &[data-visible] {
-        animation-play-state: running;
-      }
+    &[data-visible] {
+      animation-play-state: running;
     }
   }
 }

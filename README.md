@@ -42,11 +42,11 @@ mFLOCSS のリファレンス実装。架空の美容サロン「iluha」の LP 
 
 ```css
 :root {
-  /* Main — メインカラー */
+  /* Main — セージグリーン（H:150） */
   --_sage-400: oklch(65% 0.08 150deg);  /* ← 色相(H)を変えるだけで印象が変わる */
   --_sage-600: oklch(45% 0.1 150deg);
 
-  /* Accent — アクセントカラー */
+  /* Accent — テラコッタ（H:35） */
   --_terracotta-400: oklch(65% 0.12 35deg);
   --_terracotta-500: oklch(55% 0.15 35deg);
 }
@@ -95,13 +95,11 @@ Token 層（`src/assets/css/token/`）にデザイン値が集約されていま
 
 ### フォーム送信先の設定
 
-`src/contact/index.html` の `<form>` タグに `action` 属性を追加します:
+現状は `action="/thanks/"` が設定されており、送信後にサンクスページへ遷移します。外部フォームサービスを使う場合は `action` をサービスの URL に変更してください:
 
 ```html
-<form class="p-contact__form" action="https://your-form-service.com/submit" method="POST">
+<form class="p-contact__form" action="https://your-form-service.com/submit" method="post">
 ```
-
-現状は `action` が未設定（フォームサービスに応じて設定してください）。
 
 ## 構造の変更
 

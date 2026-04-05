@@ -35,7 +35,8 @@
 
     @media (prefers-reduced-motion: no-preference) {
       transition:
-        transform var(--duration-normal) var(--ease-out-cubic),
+        rotate var(--duration-normal) var(--ease-out-cubic),
+        translate var(--duration-normal) var(--ease-out-cubic),
         opacity var(--duration-normal) var(--ease-out-cubic);
     }
   }
