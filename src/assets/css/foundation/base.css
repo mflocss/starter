@@ -46,6 +46,6 @@
 @media (prefers-reduced-motion: no-preference) {
   :where(:root) {
     scroll-behavior: smooth;
-    scroll-padding-top: var(--header-size);
+    scroll-padding-block-start: var(--header-size);
   }
 }
