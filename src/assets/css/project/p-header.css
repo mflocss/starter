@@ -87,20 +87,8 @@
     transition: transform var(--duration-normal) var(--ease-out-cubic);
   }
 
-  &[open] {
+  &[data-open] {
     transform: translateX(0);
-  }
-
-  /* 閉じるアニメーション: [open] を上書きして元の位置に戻す */
-  &[data-closing] {
-    transform: translateX(100%);
-  }
-
-  /* 開くアニメーション: open が付いた瞬間の開始値 */
-  @starting-style {
-    &[open] {
-      transform: translateX(100%);
-    }
   }
 }
 

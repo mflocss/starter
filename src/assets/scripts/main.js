@@ -26,7 +26,12 @@ function initDrawer() {
 
   function openDrawer() {
     drawer.show();
-    // @starting-style が開始値を定義するので requestAnimationFrame 不要
+    // show() 直後は [open] がまだ付いていないため rAF を2段挟んで data-open を付与
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        drawer.dataset.open = '';
+      });
+    });
     skipLink?.setAttribute('inert', '');
     logo?.setAttribute('inert', '');
     nav?.setAttribute('inert', '');
@@ -40,15 +45,13 @@ function initDrawer() {
   }
 
   function closeDrawer() {
-    drawer.dataset.closing = '';
+    delete drawer.dataset.open;
 
     // reduced-motion の場合はトランジションがないため即座に close
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      delete drawer.dataset.closing;
       drawer.close();
     } else {
       drawer.addEventListener('transitionend', () => {
-        delete drawer.dataset.closing;
         drawer.close();
       }, { once: true });
     }
