@@ -6,12 +6,10 @@
     }
   }
 
-  /* CSS 完結: LCP 要素用。即時再生 */
   [data-immediate='scale-in'] {
     animation: scale-in 0.8s var(--ease-out-quart) both;
   }
 
-  /* JS 待ち: IntersectionObserver が data-visible を付与して再生 */
   [data-animate='scale-in'] {
     animation: scale-in 0.8s var(--ease-out-quart) both;
     animation-play-state: paused;

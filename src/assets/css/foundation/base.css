@@ -43,6 +43,13 @@
   outline-offset: var(--focus-ring-offset);
 }
 
+:where(:root) {
+  &:has(:modal),
+  &:has(dialog[open]) {
+    overflow: hidden;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   :where(:root) {
     scroll-behavior: smooth;

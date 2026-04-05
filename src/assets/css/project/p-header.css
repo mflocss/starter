@@ -1,8 +1,7 @@
 .p-header {
   --_blur: 8px;
 
-  /* dialog が header の外にあるため、常に z-index をドロワーより上に設定 */
-  z-index: calc(var(--z-drawer) + 1);
+  z-index: var(--z-header);
   background-color: oklch(from var(--color-bg) l c h / 92%);
   border-block-end: var(--border-width) solid var(--color-border);
   backdrop-filter: blur(var(--_blur));
@@ -47,7 +46,6 @@
   gap: var(--space-lg);
 }
 
-/* hover で変数だけ切り替え、transition を1箇所で管理 */
 .p-header__nav-link {
   --_link-color: var(--color-text);
 

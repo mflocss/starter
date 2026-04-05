@@ -1,11 +1,9 @@
-/* Universal */
 *,
 ::before,
 ::after {
   box-sizing: border-box;
 }
 
-/* Document */
 :where(:root) {
   scrollbar-gutter: stable;
   line-height: 1.5;
@@ -16,10 +14,6 @@
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
-
-  &:has(dialog[open]) {
-    overflow: hidden;
-  }
 }
 
 :where(body) {
@@ -27,13 +21,11 @@
   margin: unset;
 }
 
-/* Sections */
 :where(h1, h2, h3, h4, h5, h6) {
   margin-block: unset;
   font-size: unset;
 }
 
-/* Grouping content */
 :where(p, blockquote, figure, pre, ul, ol, dl) {
   margin-block: unset;
 }
@@ -56,7 +48,6 @@
   text-autospace: no-autospace;
 }
 
-/* Text-level semantics */
 :where(em:lang(ja)) {
   font-weight: bolder;
 }
@@ -65,7 +56,6 @@
   font-style: unset;
 }
 
-/* Links */
 :where(a) {
   color: unset;
 }
@@ -74,14 +64,12 @@
   text-decoration-line: unset;
 }
 
-/* Embedded content */
 :where(img, svg, video, canvas, iframe) {
   max-inline-size: 100%;
   block-size: auto;
   vertical-align: bottom;
 }
 
-/* Tabular data */
 :where(table) {
   border-collapse: collapse;
 }
@@ -90,7 +78,6 @@
   text-align: unset;
 }
 
-/* Forms */
 :where(button, input, select, textarea) {
   font: inherit;
   color: inherit;
@@ -119,7 +106,6 @@
   opacity: unset;
 }
 
-/* Interactive */
 :where(summary) {
   cursor: pointer;
   list-style-type: '';

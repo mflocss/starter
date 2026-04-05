@@ -29,7 +29,6 @@
   gap: var(--space-xs);
 }
 
-/* :has() による必須マーク自動付与 */
 .p-contact__label:has(+ :required),
 .p-contact__legend:has(~ * :required) {
   &::after {

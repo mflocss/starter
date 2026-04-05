@@ -1,4 +1,3 @@
-/* ボタン */
 :where(button) {
   padding: 0;
   touch-action: manipulation;
@@ -7,12 +6,10 @@
   border: none;
 }
 
-/* ラベル */
 :where(label) {
   cursor: pointer;
 }
 
-/* セレクトボックス */
 :where(select) {
   --_arrow-space: 2.5rem;
 
@@ -30,7 +27,6 @@
   }
 }
 
-/* ラジオボタン・チェックボックス共通 */
 :where(input[type='radio'], input[type='checkbox']) {
   flex-shrink: 0;
   inline-size: 1.25em;
@@ -53,7 +49,6 @@
   outline-offset: var(--focus-ring-offset);
 }
 
-/* ラジオボタン */
 :where(input[type='radio']) {
   border-radius: 50%;
 }
@@ -62,7 +57,6 @@
   background-image: radial-gradient(circle at center, var(--color-surface) 30%, var(--color-main) 32%);
 }
 
-/* チェックボックス */
 :where(input[type='checkbox']) {
   border-radius: 0.25em;
 }
@@ -78,13 +72,11 @@
   }
 }
 
-/* 無効状態 */
 :where(:disabled) {
   cursor: not-allowed;
   opacity: 0.5;
 }
 
-/* プレースホルダー */
 :where(::placeholder) {
   color: var(--color-text-light);
 }

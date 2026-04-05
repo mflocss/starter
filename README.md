@@ -170,7 +170,7 @@ base: '/my-site/',
 
 ### 対象ブラウザ
 
-Chrome 123+ / Safari 18+ / Firefox 128+
+Baseline Newly Available（全モダンブラウザの最新安定版でサポート済みの機能を使用）
 
 使用しているモダン CSS: `@layer`, `@container`, CSS Nesting, `:has()`, `:where()`, `oklch()`, `light-dark()`, 論理プロパティ, `clamp()`
 
@@ -213,7 +213,7 @@ public/                    # ルートパス固定のファイル
 - [デモサイト](https://starter.mflocss.dev) — starter のライブプレビュー
 - [そのFLOCSS、なぜそこに書いた？ —— mFLOCSS で迷わない CSS 設計の判断基準](https://zenn.dev/shunei/books/mflocss-design)
 - [mflocss.dev](https://mflocss.dev)
-- [mFLOCSS Specification](https://github.com/mflocss/spec)
+- [mFLOCSS Specification](https://mflocss.dev)（準備中）
 
 ## ライセンス
 

@@ -1,19 +1,9 @@
 :root {
-  /* ========================================
-     プリミティブ（--_ = 内部変数）
-     ======================================== */
-
   /* CUSTOMIZE: カラーパレット */
-
-  /* Main — セージグリーン（H:150） */
   --_sage-400: oklch(65% 0.08 150deg);
   --_sage-600: oklch(45% 0.1 150deg);
-
-  /* Accent — テラコッタ（H:35） */
   --_terracotta-400: oklch(65% 0.12 35deg);
   --_terracotta-500: oklch(55% 0.15 35deg);
-
-  /* Neutral — ウォームグレー（H:70） */
   --_neutral-50: oklch(98% 0.005 70deg);
   --_neutral-100: oklch(95% 0.005 70deg);
   --_neutral-300: oklch(83% 0.008 70deg);
@@ -21,18 +11,10 @@
   --_neutral-600: oklch(47% 0.01 70deg);
   --_neutral-800: oklch(26% 0.008 70deg);
   --_neutral-900: oklch(17% 0.008 70deg);
-
-  /* Base */
   --_white: oklch(100% 0 0deg);
   --_black: oklch(0% 0 0deg);
-
-  /* Red（H:15） */
   --_red-400: oklch(65% 0.18 15deg);
   --_red-500: oklch(50% 0.22 15deg);
-
-  /* ========================================
-     セマンティック（上位層が参照する公開 API）
-     ======================================== */
 
   /* CUSTOMIZE: ダークモード不要なら light のみに */
   color-scheme: light dark;
@@ -53,7 +35,5 @@
   --color-link: var(--color-main);
   --color-heading: var(--color-text);
   --color-focus-ring: var(--color-main);
-
-  /* オーバーレイ */
   --color-overlay: oklch(0% 0 0deg / 40%);
 }

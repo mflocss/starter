@@ -6,6 +6,9 @@
  * - スクロールアニメーション（IntersectionObserver + data-animate）
  * - スタッガーアニメーション（data-stagger）
  * - Back to Top ボタン表示制御
+ *
+ * data-immediate: CSS 完結のアニメーション（JS 待ちなし）。LCP 要素の FOIC 防止に使用。
+ * data-animate:   JS 待ちアニメーション。IntersectionObserver が data-visible を付与して再生開始。
  */
 
 function initDrawer() {
@@ -18,13 +21,23 @@ function initDrawer() {
   const inertTargets = document.querySelectorAll('[data-drawer-inert]');
   const drawerLinks = drawer.querySelectorAll('a');
 
+  let isAnimating = false;
+
   function openDrawer() {
+    if (isAnimating) return;
+    isAnimating = true;
+
     if (overlay) overlay.hidden = false;
     drawer.show();
     // rAF 2段：show() 直後に付与すると初期状態が描画されずアニメーションが効かない
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
+        if (!drawer.open) {
+          isAnimating = false;
+          return;
+        }
         drawer.dataset.open = '';
+        isAnimating = false;
       });
     });
     inertTargets.forEach((el) => el.setAttribute('inert', ''));
@@ -34,25 +47,32 @@ function initDrawer() {
     firstFocusable?.focus({ preventScroll: true });
   }
 
-  function closeDrawer() {
+  async function closeDrawer() {
+    if (isAnimating) return;
+    isAnimating = true;
+
     delete drawer.dataset.open;
+    hamburgers.forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       if (overlay) overlay.hidden = true;
       drawer.close();
+      inertTargets.forEach((el) => el.removeAttribute('inert'));
     } else {
-      drawer.addEventListener(
-        'transitionend',
-        () => {
-          if (overlay) overlay.hidden = true;
-          drawer.close();
-        },
-        { once: true },
-      );
+      const allAnimations = drawer.getAnimations({ subtree: true });
+      if (allAnimations.length > 0) {
+        await Promise.all(allAnimations.map((a) => a.finished)).catch(() => {});
+      } else {
+        await new Promise((resolve) => {
+          drawer.addEventListener('transitionend', resolve, { once: true });
+        });
+      }
+      if (overlay) overlay.hidden = true;
+      drawer.close();
+      inertTargets.forEach((el) => el.removeAttribute('inert'));
     }
 
-    inertTargets.forEach((el) => el.removeAttribute('inert'));
-    hamburgers.forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
+    isAnimating = false;
   }
 
   hamburgers.forEach((btn) => {
@@ -133,6 +153,7 @@ function initBackToTop() {
   const backToTop = document.querySelector('[data-back-to-top]');
   if (!backToTop) return;
 
+  // CUSTOMIZE: スクロール量の閾値（px）
   const threshold = 300;
 
   function toggleVisibility() {

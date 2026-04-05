@@ -1,6 +1,3 @@
-/* ハンバーガーボタン（☰ ↔ × アニメーション）
-   aria-expanded の状態に連動して変化する */
-
 .c-hamburger {
   --_line-width: 20px;
   --_line-height: 2px;
@@ -55,7 +52,6 @@
   }
 }
 
-/* aria-expanded が true の時 × アイコンに変形 */
 .c-hamburger[aria-expanded='true'] .c-hamburger__line {
   background-color: transparent;
 

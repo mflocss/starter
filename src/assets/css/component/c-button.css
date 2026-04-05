@@ -30,7 +30,6 @@
     translate: 0 0;
   }
 
-  /* CTA 用。accent で他のボタンと視覚的に差別化 */
   &.-primary {
     color: var(--color-surface);
     background-color: var(--color-accent);
@@ -54,7 +53,6 @@
     }
   }
 
-  /* Hero・CTA 等の主要導線用。vi でコンテナ幅に連動 */
   &.-large {
     padding: var(--space-md) var(--space-xl);
     font-size: var(--font-size-button-lg);

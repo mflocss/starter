@@ -1,7 +1,7 @@
 # コーディングガイド
 
 このプロジェクトで使用する CSS 設計（mFLOCSS）の starter 固有の運用ルールです。
-層の定義・命名規則・カスタムプロパティ参照ルール等の仕様は [mFLOCSS spec](https://github.com/mflocss/spec) を参照してください。
+層の定義・命名規則・カスタムプロパティ参照ルール等の仕様は [mFLOCSS spec](https://mflocss.dev)（準備中）を参照してください。
 
 ## Design Decisions
 
@@ -39,7 +39,7 @@ ARIA 属性（`aria-label`・`aria-expanded`・`aria-controls` 等）と `transl
 
 ### ブレークポイント値の CSS/JS 同期
 
-`public/scripts/viewport.js` の `VIEWPORT_MIN` は、`tokens/structure.css` の `--viewport-min` と同じ値に合わせてください。この値を変更する場合は両方を更新する必要があります。CSS と JS の基準値を一致させることで、400px 未満の端末でもレイアウト崩れを防ぎ、変更時の修正漏れを防止できます。
+`public/scripts/viewport.js` の `VIEWPORT_MIN` は、`token/structure.css` の `--viewport-min` と同じ値に合わせてください。この値を変更する場合は両方を更新する必要があります。CSS と JS の基準値を一致させることで、400px 未満の端末でもレイアウト崩れを防ぎ、変更時の修正漏れを防止できます。
 
 ## @container vs @media
 
@@ -134,4 +134,4 @@ prefix で変更の種類を明示し、タイトルで変更の影響を日本�
 - [デモサイト](https://starter.mflocss.dev) — starter のライブプレビュー
 - [そのFLOCSS、なぜそこに書いた？ —— mFLOCSS で迷わない CSS 設計の判断基準](https://zenn.dev/shunei/books/mflocss-design)
 - [mflocss.dev](https://mflocss.dev)
-- [mFLOCSS Specification](https://github.com/mflocss/spec)
+- [mFLOCSS Specification](https://mflocss.dev)（準備中）
