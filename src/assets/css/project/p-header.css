@@ -87,26 +87,26 @@
   border: none;
 
   /* 閉じた状態 */
-  transform: translateX(100%);
+  translate: 100% 0;
   opacity: 0;
 
   @media (prefers-reduced-motion: no-preference) {
     transition:
-      transform var(--duration-normal) var(--ease-out-cubic),
+      translate var(--duration-normal) var(--ease-out-cubic),
       opacity var(--duration-normal) var(--ease-out-cubic),
       display var(--duration-normal) var(--ease-out-cubic) allow-discrete;
   }
 
   /* 開いた状態 */
   &[open] {
-    transform: translateX(0);
+    translate: 0 0;
     opacity: 1;
   }
 
   /* 開く瞬間の開始状態（Firefox 129+ / Chrome 117+ / Safari 17.5+） */
   @starting-style {
     &[open] {
-      transform: translateX(100%);
+      translate: 100% 0;
       opacity: 0;
     }
   }
