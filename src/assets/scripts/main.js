@@ -110,7 +110,6 @@ function initDrawer() {
     }
   });
 
-  // PC 幅になったらドロワーを閉じる（リサイズ時の残留防止）
   // CUSTOMIZE: この 768px は p-header.css の `@media (width >= 768px)` と同じ値。変更時は両方を更新すること
   window.matchMedia('(min-width: 768px)').addEventListener('change', (e) => {
     if (e.matches) closeDrawer();

@@ -1,4 +1,3 @@
-/* ドロワー用オーバーレイの z-index（ドロワーの 1 つ下） */
 [data-drawer-overlay] {
   --overlay-z: calc(var(--z-drawer) - 1);
 }
