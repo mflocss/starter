@@ -67,7 +67,11 @@
   font-size: var(--font-size-caption);
 }
 
-/* show() を使用（showModal() だとヘッダーが背面に隠れる） */
+/*
+ * show() を使用（showModal() だとヘッダーが背面に隠れる）
+ * @starting-style + allow-discrete で開く/閉じる両方にアニメーションを適用
+ * Firefox 128 では @starting-style / allow-discrete 非対応のためアニメーションなし（機能は正常）
+ */
 .p-header__drawer {
   position: fixed;
   inset-block: var(--header-size) 0;
@@ -81,14 +85,30 @@
   overscroll-behavior-block: contain;
   background-color: var(--color-bg);
   border: none;
+
+  /* 閉じた状態 */
   transform: translateX(100%);
+  opacity: 0;
 
   @media (prefers-reduced-motion: no-preference) {
-    transition: transform var(--duration-normal) var(--ease-out-cubic);
+    transition:
+      transform var(--duration-normal) var(--ease-out-cubic),
+      opacity var(--duration-normal) var(--ease-out-cubic),
+      display var(--duration-normal) var(--ease-out-cubic) allow-discrete;
   }
 
+  /* 開いた状態 */
   &[open] {
     transform: translateX(0);
+    opacity: 1;
+  }
+
+  /* 開く瞬間の開始状態（Firefox 129+ / Chrome 117+ / Safari 17.5+） */
+  @starting-style {
+    &[open] {
+      transform: translateX(100%);
+      opacity: 0;
+    }
   }
 }
 
