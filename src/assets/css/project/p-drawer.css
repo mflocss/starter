@@ -1,3 +1,8 @@
+/* ドロワー用オーバーレイの z-index（ドロワーの 1 つ下） */
+[data-drawer-overlay] {
+  --overlay-z: calc(var(--z-drawer) - 1);
+}
+
 /* show() を使用（showModal() だとヘッダーが背面に隠れる） */
 .p-drawer {
   --_panel-size: min(max(85vi, calc(var(--viewport-min) * var(--px))), calc(100vi - 48px));

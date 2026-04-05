@@ -3,5 +3,11 @@
   --z-back-to-top: 5;
   --z-drawer: 10;
   --z-header: 20;
+
+  /* CUSTOMIZE: モーダルを追加する場合（ヘッダーより前面） */
+  --z-modal: 30;
+
+  /* CUSTOMIZE: トーストを追加する場合（最前面） */
+  --z-toast: 50;
   --z-skip-link: 100;
 }

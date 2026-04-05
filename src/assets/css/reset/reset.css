@@ -6,14 +6,16 @@
 
 :where(:root) {
   scrollbar-gutter: stable;
-  line-height: 1.5;
   line-break: strict;
   overflow-wrap: anywhere;
-  text-spacing-trim: trim-start;
   text-autospace: normal;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
+
+  @supports (text-spacing-trim: trim-start) {
+    text-spacing-trim: trim-start;
+  }
 }
 
 :where(body) {
@@ -44,8 +46,11 @@
 }
 
 :where(pre) {
-  text-spacing-trim: space-all;
   text-autospace: no-autospace;
+
+  @supports (text-spacing-trim: trim-start) {
+    text-spacing-trim: space-all;
+  }
 }
 
 :where(em:lang(ja)) {

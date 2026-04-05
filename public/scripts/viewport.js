@@ -1,4 +1,4 @@
-// CUSTOMIZE: must match --viewport-min in tokens/structure.css
+// CUSTOMIZE: must match --viewport-min in token/structure.css
 const VIEWPORT_MIN = 400;
 const meta = document.querySelector('meta[name="viewport"]');
 

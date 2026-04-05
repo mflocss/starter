@@ -16,6 +16,8 @@
   padding-inline-end: var(--_arrow-space);
   appearance: none;
   background-color: var(--color-surface);
+
+  /* CUSTOMIZE: 矢印の色（%23666 = #666 ライト・%23aaa = #aaa ダーク）。SVG data URI 内では CSS 変数・light-dark() が使えないため手動で更新する */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23666' d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
@@ -62,6 +64,7 @@
 }
 
 :where(input[type='checkbox']:checked) {
+  /* CUSTOMIZE: チェックマークの色（stroke='white' ライト・stroke='%23111' = #111 ダーク）。SVG data URI 内では CSS 変数・light-dark() が使えないため手動で更新する */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' d='M3.5 8l3 3 6-6'/%3E%3C/svg%3E");
   background-position: center;
   background-size: 100%;

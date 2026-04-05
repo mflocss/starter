@@ -1,7 +1,7 @@
 # コーディングガイド
 
 このプロジェクトで使用する CSS 設計（mFLOCSS）の starter 固有の運用ルールです。
-層の定義・命名規則・カスタムプロパティ参照ルール等の仕様は [mFLOCSS spec](https://mflocss.dev)（準備中）を参照してください。
+層の定義・命名規則・カスタムプロパティ参照ルール等の仕様は [mFLOCSS 仕様書](https://mflocss.dev) を参照してください。
 
 ## Design Decisions
 
@@ -133,5 +133,4 @@ prefix で変更の種類を明示し、タイトルで変更の影響を日本�
 
 - [デモサイト](https://starter.mflocss.dev) — starter のライブプレビュー
 - [そのFLOCSS、なぜそこに書いた？ —— mFLOCSS で迷わない CSS 設計の判断基準](https://zenn.dev/shunei/books/mflocss-design)
-- [mflocss.dev](https://mflocss.dev)
-- [mFLOCSS Specification](https://mflocss.dev)（準備中）
+- [mFLOCSS 仕様書](https://mflocss.dev)

@@ -212,8 +212,7 @@ public/                    # ルートパス固定のファイル
 
 - [デモサイト](https://starter.mflocss.dev) — starter のライブプレビュー
 - [そのFLOCSS、なぜそこに書いた？ —— mFLOCSS で迷わない CSS 設計の判断基準](https://zenn.dev/shunei/books/mflocss-design)
-- [mflocss.dev](https://mflocss.dev)
-- [mFLOCSS Specification](https://mflocss.dev)（準備中）
+- [mFLOCSS 仕様書](https://mflocss.dev)
 
 ## ライセンス
 

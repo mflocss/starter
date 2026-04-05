@@ -16,7 +16,6 @@ function initDrawer() {
   if (!drawer) return;
 
   const overlay = document.querySelector('[data-drawer-overlay]');
-  if (overlay) overlay.style.setProperty('--overlay-z', 'calc(var(--z-drawer) - 1)');
   const hamburgers = document.querySelectorAll('[data-hamburger]');
   const inertTargets = document.querySelectorAll('[data-drawer-inert]');
   const drawerLinks = drawer.querySelectorAll('a');
@@ -48,6 +47,7 @@ function initDrawer() {
   }
 
   async function closeDrawer() {
+    if (!drawer.open) return;
     if (isAnimating) return;
     isAnimating = true;
 
@@ -109,6 +109,12 @@ function initDrawer() {
       hamburgers[0]?.focus({ preventScroll: true });
     }
   });
+
+  // PC 幅になったらドロワーを閉じる（リサイズ時の残留防止）
+  // CUSTOMIZE: この 768px は p-header.css の `@media (width >= 768px)` と同じ値。変更時は両方を更新すること
+  window.matchMedia('(min-width: 768px)').addEventListener('change', (e) => {
+    if (e.matches) closeDrawer();
+  });
 }
 
 function initScrollAnimation() {
@@ -138,7 +144,6 @@ function initScrollAnimation() {
 function initStagger() {
   const containers = document.querySelectorAll('[data-stagger]');
   if (containers.length === 0) return;
-
   containers.forEach((container) => {
     const animateName = container.dataset.stagger;
     const children = Array.from(container.children);
