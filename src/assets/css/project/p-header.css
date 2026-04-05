@@ -87,7 +87,7 @@
     transition: transform var(--duration-normal) var(--ease-out-cubic);
   }
 
-  &[open] {
+  &[data-open] {
     transform: translateX(0);
   }
 }

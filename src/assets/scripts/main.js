@@ -26,6 +26,13 @@ function initDrawer() {
 
   function openDrawer() {
     drawer.show();
+    // 2フレーム遅延で data-open を付与（display: none → block 後に transform をトランジション）
+    // 1フレームだとブラウザによっては同一フレームになる場合があるため2重にする
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        drawer.dataset.open = '';
+      });
+    });
     skipLink?.setAttribute('inert', '');
     logo?.setAttribute('inert', '');
     nav?.setAttribute('inert', '');
@@ -39,7 +46,20 @@ function initDrawer() {
   }
 
   function closeDrawer() {
-    drawer.close();
+    delete drawer.dataset.open;
+
+    function handleTransitionEnd() {
+      drawer.removeEventListener('transitionend', handleTransitionEnd);
+      drawer.close();
+    }
+
+    // reduced-motion の場合はトランジションがないため即座に close
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      drawer.close();
+    } else {
+      drawer.addEventListener('transitionend', handleTransitionEnd);
+    }
+
     skipLink?.removeAttribute('inert');
     logo?.removeAttribute('inert');
     nav?.removeAttribute('inert');
