@@ -174,7 +174,7 @@ Baseline Newly Available（全モダンブラウザの最新安定版でサポ�
 
 使用しているモダン CSS: `@layer`, `@container`, CSS Nesting, `:has()`, `:where()`, `oklch()`, `light-dark()`, 論理プロパティ, `clamp()`
 
-> **注意:** `text-spacing-trim` は Chrome のみ対応（Safari・Firefox 未対応、2026年4月時点）。未対応ブラウザでは無視されるため、表示が崩れることはありません。
+> **注意:** `text-spacing-trim` は Chrome のみ対応（Safari・Firefox 未対応、2026年4月時点）。未対応ブラウザでは @supports ガードにより適用されないため、表示が崩れることはありません。
 
 ### ファイル構成
 
