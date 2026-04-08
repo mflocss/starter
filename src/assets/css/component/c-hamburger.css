@@ -10,10 +10,6 @@
   inline-size: var(--size-tap-target);
   block-size: var(--size-tap-target);
   cursor: pointer;
-
-  @media (width >= 768px) {
-    display: none;
-  }
 }
 
 .c-hamburger__line {
