@@ -66,5 +66,7 @@
 }
 
 .p-header__hamburger {
-  /* スタイルなし（HTML クラスとの対応を維持） */
+  @media (width >= 768px) {
+    display: none;
+  }
 }

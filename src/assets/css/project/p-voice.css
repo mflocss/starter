@@ -16,11 +16,6 @@
   }
 }
 
-.p-voice__blockquote {
-  /* スタイルなし（HTML クラスとの対応を維持） */
-}
-
 .p-voice__card {
-  display: flex;
-  flex-direction: column;
+  /* スタイルなし（HTML クラスとの対応を維持） */
 }

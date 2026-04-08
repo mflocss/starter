@@ -11,3 +11,7 @@
   margin-block-start: var(--space-2xl);
   margin-inline: auto;
 }
+
+.p-faq__item {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}

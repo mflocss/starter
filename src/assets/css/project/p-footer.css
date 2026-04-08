@@ -48,6 +48,8 @@
 }
 
 .p-footer__tel {
+  display: block;
+  margin-block-start: var(--space-xs);
   color: inherit;
   text-decoration: none;
 
