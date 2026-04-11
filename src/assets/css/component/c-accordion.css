@@ -1,5 +1,4 @@
 .c-accordion {
-  /* border-radius でアコーディオンコンテンツを角丸クリッピングするため */
   overflow: hidden;
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-md);
