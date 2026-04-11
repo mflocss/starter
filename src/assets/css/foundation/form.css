@@ -80,6 +80,6 @@
   opacity: 0.5;
 }
 
-:where(::placeholder) {
+::placeholder {
   color: var(--color-text-light);
 }
