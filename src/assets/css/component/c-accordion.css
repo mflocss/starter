@@ -1,5 +1,5 @@
 .c-accordion {
-  /* NOTE: spec SHOULD NOT [Component ルート要素への overflow: hidden] の正当な逸脱。border-radius による角丸クリッピングに不可欠 */
+  /* border-radius でアコーディオンコンテンツを角丸クリッピングするため */
   overflow: hidden;
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-md);

@@ -3,9 +3,10 @@
  * --overlay-z で z-index を利用側から上書き可能。
  *
  * position: fixed について:
- *   spec §5.5 では Component 層への position: fixed 使用を SHOULD NOT としているが、
- *   overlay の機能要件（ビューポート全体を覆う）を実現するために不可欠であり、
- *   Portability Test を満たす汎用パーツとして Component 層への配置を正当化する。
+ *   spec §5.5 SHOULD NOT [外部レイアウト影響プロパティの排除] は Component 層への
+ *   position: fixed 使用を制限しているが、overlay の機能要件（ビューポート全体を覆う）
+ *   を実現するために不可欠であり、Portability Test を満たす汎用パーツとして
+ *   Component 層への配置を正当化する。
  */
 .c-overlay {
   --_z: var(--overlay-z, auto);
@@ -14,8 +15,4 @@
   inset: 0;
   z-index: var(--_z);
   background-color: var(--color-overlay);
-
-  &[hidden] {
-    display: none;
-  }
 }
