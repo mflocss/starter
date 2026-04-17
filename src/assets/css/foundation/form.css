@@ -46,12 +46,7 @@
   border-color: var(--color-main);
 }
 
-:where(input[type='radio']:focus-visible, input[type='checkbox']:focus-visible) {
-  outline: var(--focus-ring-width) solid var(--color-focus-ring);
-  outline-offset: var(--focus-ring-offset);
-}
-
-:where(select:focus-visible) {
+:where(input[type='radio']:focus-visible, input[type='checkbox']:focus-visible, select:focus-visible) {
   outline: var(--focus-ring-width) solid var(--color-focus-ring);
   outline-offset: var(--focus-ring-offset);
 }
