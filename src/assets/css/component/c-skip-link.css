@@ -5,4 +5,12 @@
   text-decoration: none;
   background-color: var(--color-main);
   border-radius: var(--radius-sm);
+
+  /* フォーカス時はビューポート左上に固定表示（CLS 防止 + sticky header より前面） */
+  &:focus-visible {
+    position: fixed;
+    inset-block-start: var(--space-sm);
+    inset-inline-start: var(--space-sm);
+    z-index: var(--z-skip-link);
+  }
 }

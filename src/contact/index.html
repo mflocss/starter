@@ -70,7 +70,7 @@
       </div>
     </header>
     <div class="c-overlay" data-drawer-overlay hidden></div>
-    <dialog class="p-drawer" id="drawer" data-drawer aria-labelledby="drawer-title">
+    <dialog class="p-drawer" id="drawer" data-drawer aria-labelledby="drawer-title" aria-modal="true">
       <div class="p-drawer__inner">
         <span id="drawer-title" class="u-visually-hidden">ナビゲーションメニュー</span>
         <nav class="p-drawer__nav" aria-label="ドロワーナビゲーション">
@@ -101,6 +101,9 @@
 
           <!-- CUSTOMIZE: フォーム送信先を実際のバックエンド URL に差し替え -->
           <form class="p-contact__form" action="/contact/thanks/" method="post">
+            <!-- スクリーンリーダー向けバリデーションエラー通知領域 -->
+            <div role="alert" aria-live="assertive" id="form-errors" hidden></div>
+
             <!-- 氏名 -->
             <div class="p-contact__field">
               <label for="name" class="p-contact__label">お名前</label>

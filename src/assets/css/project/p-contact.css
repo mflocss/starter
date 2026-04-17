@@ -30,7 +30,7 @@
 }
 
 .p-contact__label:has(+ :required),
-.p-contact__legend:has(~ * :required) {
+.p-contact__legend:has(~ .p-contact__field :required) {
   &::after {
     color: var(--color-error);
     content: ' *';

@@ -51,6 +51,11 @@
   outline-offset: var(--focus-ring-offset);
 }
 
+:where(select:focus-visible) {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
 :where(input[type='radio']) {
   border-radius: 50%;
 }
