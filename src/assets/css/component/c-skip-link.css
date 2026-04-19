@@ -1,3 +1,13 @@
+/*
+ * アクセシビリティ対応のスキップリンク。キーボード操作のフォーカス時のみ
+ * ビューポート左上に表示される。
+ *
+ * position: fixed について:
+ *   spec の SHOULD NOT [外部レイアウト影響プロパティの排除] は Component 層への
+ *   position: fixed 使用を制限しているが、skip-link の機能要件（フォーカス時に
+ *   ビューポート左上へ確実に出現する）を実現するために不可欠であり、
+ *   Portability Test を満たす汎用パーツとして Component 層への配置を正当化する。
+ */
 .c-skip-link {
   padding: var(--space-sm) var(--space-md);
   font-weight: var(--font-weight-heading);
