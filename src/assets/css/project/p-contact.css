@@ -2,6 +2,10 @@
   /* スタイルなし（HTML クラスとの対応を維持） */
 }
 
+.p-contact__inner {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
 .p-contact__title {
   text-align: center;
 }

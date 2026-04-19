@@ -5,6 +5,10 @@
   background-color: var(--color-bg-secondary);
 }
 
+.p-numbers__inner {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
 .p-numbers__heading {
   /* スタイルなし（HTML クラスとの対応を維持） */
 }
