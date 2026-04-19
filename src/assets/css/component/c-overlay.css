@@ -1,12 +1,10 @@
 /*
+ * spec deviation [外部レイアウト影響プロパティの排除]:
+ *   overlay の機能要件（ビューポート全体を覆う）を実現するために position: fixed を使用。
+ *   Portability Test を満たす汎用パーツとして Component 層への配置を正当化する。
+ *
  * 汎用オーバーレイ。ドロワー・モーダル・ライトボックス等で再利用可能。
  * --overlay-z で z-index を利用側から上書き可能。
- *
- * position: fixed について:
- *   spec の SHOULD NOT [外部レイアウト影響プロパティの排除] は Component 層への
- *   position: fixed 使用を制限しているが、overlay の機能要件（ビューポート全体を覆う）
- *   を実現するために不可欠であり、Portability Test を満たす汎用パーツとして
- *   Component 層への配置を正当化する。
  */
 .c-overlay {
   --_z: var(--overlay-z, auto);
