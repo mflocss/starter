@@ -18,6 +18,7 @@
   inset-inline-end: var(--space-xl);
   z-index: var(--z-back-to-top);
   display: inline-flex;
+  visibility: hidden;
   align-items: center;
   justify-content: center;
   inline-size: var(--size-icon-area);
@@ -25,7 +26,6 @@
   font-size: var(--_icon-size);
   color: var(--color-surface);
   text-decoration: none;
-  visibility: hidden;
   background-color: var(--color-main);
   border-radius: var(--radius-full);
   opacity: 0;
