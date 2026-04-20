@@ -9,9 +9,18 @@
  *
  * data-immediate: CSS 完結のアニメーション（JS 待ちなし）。LCP 要素の FOIC 防止に使用。
  * data-animate:   JS 待ちアニメーション。IntersectionObserver が data-visible を付与して再生開始。
+ *
+ * 各 init 関数は options 引数でカスタマイズ可能。デフォルト値は関数内で定義。
  */
 
-function initDrawer() {
+/**
+ * ドロワーメニュー（dialog show/close + inert）を初期化する。
+ * @param {Object} [options] - カスタマイズオプション
+ * @param {number} [options.breakpoint=768] - PC 判定のブレイクポイント (px)。p-header.css の `@media` と同値にすること（SP/PC 切替時にドロワーを自動で閉じる判定に使用）
+ */
+function initDrawer(options = {}) {
+  const { breakpoint = 768 } = options;
+
   const drawer = document.querySelector('[data-drawer]');
   if (!drawer) return;
 
@@ -86,7 +95,6 @@ function initDrawer() {
     });
   });
 
-  // ページ遷移リンクはそのまま（新ページにドロワーは存在しない）
   drawerLinks.forEach((link) => {
     link.addEventListener('click', () => {
       const href = link.getAttribute('href');
@@ -110,13 +118,20 @@ function initDrawer() {
     }
   });
 
-  // CUSTOMIZE: この 768px は p-header.css の `@media (width >= 768px)` と同じ値。変更時は両方を更新すること
-  window.matchMedia('(min-width: 768px)').addEventListener('change', (e) => {
+  window.matchMedia(`(min-width: ${breakpoint}px)`).addEventListener('change', (e) => {
     if (e.matches) closeDrawer();
   });
 }
 
-function initScrollAnimation() {
+/**
+ * スクロールアニメーション（IntersectionObserver で `data-visible` を付与）を初期化する。
+ * @param {Object} [options] - カスタマイズオプション
+ * @param {number} [options.threshold=0.1] - 要素が何割見えたら発火するか（0〜1）
+ * @param {string} [options.rootMargin='0px 0px -40px 0px'] - 発火タイミング調整。下端を負の値にするとやや早めに発火
+ */
+function initScrollAnimation(options = {}) {
+  const { threshold = 0.1, rootMargin = '0px 0px -40px 0px' } = options;
+
   const targets = document.querySelectorAll('[data-animate]');
   if (targets.length === 0) return;
 
@@ -129,10 +144,7 @@ function initScrollAnimation() {
         }
       });
     },
-    {
-      threshold: 0.1,
-      rootMargin: '0px 0px -40px 0px',
-    },
+    { threshold, rootMargin },
   );
 
   targets.forEach((target) => {
@@ -140,7 +152,14 @@ function initScrollAnimation() {
   });
 }
 
-function initStagger() {
+/**
+ * スタッガーアニメーションを初期化する（`data-stagger` の子要素に順番に delay を付与）。
+ * @param {Object} [options] - カスタマイズオプション
+ * @param {number} [options.delayStep=0.1] - 子要素ごとの遅延時間（秒）
+ */
+function initStagger(options = {}) {
+  const { delayStep = 0.1 } = options;
+
   const containers = document.querySelectorAll('[data-stagger]');
   if (containers.length === 0) return;
   containers.forEach((container) => {
@@ -148,17 +167,21 @@ function initStagger() {
     const children = Array.from(container.children);
     children.forEach((child, index) => {
       child.dataset.animate = animateName;
-      child.style.setProperty('--stagger-delay', `${(index * 0.1).toFixed(1)}s`);
+      child.style.setProperty('--stagger-delay', `${(index * delayStep).toFixed(2)}s`);
     });
   });
 }
 
-function initBackToTop() {
+/**
+ * Back to Top ボタンの表示制御を初期化する。
+ * @param {Object} [options] - カスタマイズオプション
+ * @param {number} [options.threshold=300] - 表示を切替えるスクロール量（px）
+ */
+function initBackToTop(options = {}) {
+  const { threshold = 300 } = options;
+
   const backToTop = document.querySelector('[data-back-to-top]');
   if (!backToTop) return;
-
-  // CUSTOMIZE: スクロール量の閾値（px）
-  const threshold = 300;
 
   function toggleVisibility() {
     if (window.scrollY > threshold) {
@@ -172,7 +195,14 @@ function initBackToTop() {
   toggleVisibility();
 }
 
+// 初期化（デフォルト値で動作）
 initDrawer();
 initStagger();
 initScrollAnimation();
 initBackToTop();
+
+// CUSTOMIZE 例:
+// initDrawer({ breakpoint: 1024 });
+// initStagger({ delayStep: 0.15 });
+// initScrollAnimation({ threshold: 0.3, rootMargin: '0px 0px -100px 0px' });
+// initBackToTop({ threshold: 500 });
