@@ -5,6 +5,10 @@
   background-color: var(--color-bg-secondary);
 }
 
+.p-numbers__container {
+  container-type: inline-size;
+}
+
 .p-numbers__inner {
   /* スタイルなし（HTML クラスとの対応を維持） */
 }
@@ -19,7 +23,7 @@
   margin-block-start: var(--space-2xl);
   text-align: center;
 
-  @container (inline-size >= 48rem) {
+  @container (inline-size >= 40rem) {
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-xl);
   }

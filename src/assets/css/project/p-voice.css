@@ -2,6 +2,10 @@
   /* スタイルなし（HTML クラスとの対応を維持） */
 }
 
+.p-voice__container {
+  container-type: inline-size;
+}
+
 .p-voice__inner {
   /* スタイルなし（HTML クラスとの対応を維持） */
 }
@@ -15,7 +19,7 @@
   gap: var(--space-xl);
   margin-block-start: var(--space-2xl);
 
-  @container (inline-size >= 48rem) {
+  @container (inline-size >= 40rem) {
     grid-template-columns: repeat(2, 1fr);
   }
 }

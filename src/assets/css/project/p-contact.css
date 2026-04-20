@@ -44,7 +44,9 @@
 .p-contact__textarea {
   --_textarea-min: 160px;
 
+  field-sizing: content;
   min-block-size: var(--_textarea-min);
+  max-block-size: 20lh;
 }
 
 .p-contact__input,

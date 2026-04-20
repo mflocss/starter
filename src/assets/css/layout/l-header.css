@@ -2,6 +2,4 @@
   position: sticky;
   inset-block-start: 0;
   z-index: var(--z-header);
-  container-name: header;
-  container-type: inline-size;
 }
