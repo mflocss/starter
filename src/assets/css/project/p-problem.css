@@ -4,7 +4,6 @@
 }
 
 .p-problem__container {
-  container-name: container;
   container-type: inline-size;
 }
 
@@ -21,7 +20,7 @@
   gap: var(--space-lg);
   margin-block-start: var(--space-2xl);
 
-  @container container (inline-size >= 56rem) {
+  @container (inline-size >= 56rem) {
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-xl);
   }

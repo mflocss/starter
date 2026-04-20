@@ -3,7 +3,6 @@
 }
 
 .p-features__container {
-  container-name: container;
   container-type: inline-size;
 }
 
@@ -27,7 +26,7 @@
   gap: var(--space-xl);
   align-items: center;
 
-  @container container (inline-size >= 50rem) {
+  @container (inline-size >= 50rem) {
     grid-template-columns: 1fr 1fr;
 
     &:nth-child(even) > :first-child {

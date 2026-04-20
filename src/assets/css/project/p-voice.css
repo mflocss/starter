@@ -3,7 +3,6 @@
 }
 
 .p-voice__container {
-  container-name: container;
   container-type: inline-size;
 }
 
@@ -20,7 +19,7 @@
   gap: var(--space-xl);
   margin-block-start: var(--space-2xl);
 
-  @container container (inline-size >= 40rem) {
+  @container (inline-size >= 40rem) {
     grid-template-columns: repeat(2, 1fr);
   }
 }
