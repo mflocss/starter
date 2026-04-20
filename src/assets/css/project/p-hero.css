@@ -52,8 +52,8 @@
 }
 
 .p-hero__media {
-  --_overlay-top: light-dark(rgb(255 255 255 / 30%), rgb(0 0 0 / 30%));
-  --_overlay-bottom: light-dark(rgb(255 255 255 / 5%), rgb(0 0 0 / 5%));
+  --_overlay-top: light-dark(rgb(255 255 255 / 30%), rgb(0 0 0 / 60%));
+  --_overlay-bottom: light-dark(rgb(255 255 255 / 5%), rgb(0 0 0 / 30%));
 
   position: relative;
   grid-area: stack;
