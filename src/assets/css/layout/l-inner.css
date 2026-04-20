@@ -1,6 +1,11 @@
+/* コンテンツ最大幅制約 + 中央寄せ + 左右 padding +
+   Container Queries の基盤を提供する。
+   子孫要素の `@container (...)` は最近接祖先 inner を参照する */
 .l-inner {
   box-sizing: content-box;
   max-inline-size: var(--content-width);
   padding-inline: var(--content-padding);
   margin-inline: auto;
+  container-name: inner;
+  container-type: inline-size;
 }

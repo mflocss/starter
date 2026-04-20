@@ -1,7 +1,0 @@
-/* Container Queries の基盤を提供する Layout。
-   `l-inner` に併記して、コンテンツ領域（inner）幅を @container で参照可能にする。
-   子孫要素の `@container (...)` は最近接祖先として inner を参照する */
-.l-container {
-  container-name: inner;
-  container-type: inline-size;
-}
