@@ -1,0 +1,13 @@
+.c-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.c-text-block__title {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.c-text-block__text {
+  color: var(--color-text-light);
+}

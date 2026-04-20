@@ -21,10 +21,6 @@
   max-inline-size: var(--_title-max);
 }
 
-.p-cta__text {
-  color: var(--color-text-light);
-}
-
 .p-cta__button {
   margin-block-start: var(--space-sm);
 }

@@ -31,12 +31,3 @@
   background-color: var(--color-bg-secondary);
   border-radius: var(--radius-md);
 }
-
-.p-problem__item-title {
-  /* スタイルなし（HTML クラスとの対応を維持） */
-}
-
-.p-problem__item-text {
-  margin-block-start: var(--space-sm);
-  color: var(--color-text-light);
-}
