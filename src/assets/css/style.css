@@ -23,6 +23,7 @@
 @import './layout/l-header.css' layer(layout);
 @import './layout/l-footer.css' layer(layout);
 @import './layout/l-section.css' layer(layout);
+@import './layout/l-container.css' layer(layout);
 @import './layout/l-inner.css' layer(layout);
 
 /* Component */

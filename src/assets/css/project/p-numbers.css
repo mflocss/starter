@@ -19,7 +19,7 @@
   margin-block-start: var(--space-2xl);
   text-align: center;
 
-  @container inner (inline-size >= 40rem) {
+  @container container (inline-size >= 40rem) {
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-xl);
   }
