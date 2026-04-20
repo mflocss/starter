@@ -35,7 +35,7 @@
   gap: var(--space-lg);
   align-items: center;
 
-  @media (width >= 768px) {
+  @media (width >= 48rem) {
     display: flex;
   }
 }
@@ -65,7 +65,7 @@
 }
 
 .p-header__hamburger {
-  @media (width >= 768px) {
+  @media (width >= 48rem) {
     display: none;
   }
 }

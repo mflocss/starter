@@ -22,7 +22,7 @@
   gap: var(--space-xl);
   align-items: center;
 
-  @container (inline-size >= 768px) {
+  @container (inline-size >= 48rem) {
     grid-template-columns: 1fr 1fr;
 
     &:nth-child(even) > :first-child {
@@ -36,7 +36,7 @@
   flex-direction: column;
   gap: var(--space-md);
 
-  @container (inline-size >= 400px) {
+  @container (inline-size >= 25rem) {
     gap: clamp(var(--space-md), 3cqi, var(--space-lg));
   }
 }

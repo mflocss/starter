@@ -11,13 +11,13 @@
 }
 
 .u-hidden-pc {
-  @media (width >= 768px) {
+  @media (width >= 48rem) {
     display: none !important;
   }
 }
 
 .u-hidden-sp {
-  @media (width < 768px) {
+  @media (width < 48rem) {
     display: none !important;
   }
 }
