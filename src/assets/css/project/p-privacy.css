@@ -2,6 +2,10 @@
   /* スタイルなし（HTML クラスとの対応を維持） */
 }
 
+.p-privacy__inner {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
 .p-privacy__title {
   font-weight: var(--font-weight-heading);
 }

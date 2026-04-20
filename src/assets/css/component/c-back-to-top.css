@@ -1,7 +1,20 @@
+/*
+ * spec deviation [外部レイアウト影響プロパティの排除]:
+ *   back-to-top の機能要件（ビューポート右下に常駐しスクロールから独立して表示）を実現するために position: fixed を使用。
+ *   Portability Test を満たす汎用パーツとして Component 層への配置を正当化する。
+ *
+ * ページ上部へ戻る機能を持つ、ビューポート右下に常駐する固定配置ボタン。
+ * [data-visible] は JavaScript からスクロール位置に応じて付与される表示状態属性。
+ */
 .c-back-to-top {
   --_icon-size: 20px;
 
+  position: fixed;
+  inset-block-end: var(--space-xl);
+  inset-inline-end: var(--space-xl);
+  z-index: var(--z-back-to-top);
   display: inline-flex;
+  visibility: hidden;
   align-items: center;
   justify-content: center;
   inline-size: var(--size-icon-area);
@@ -11,11 +24,24 @@
   text-decoration: none;
   background-color: var(--color-main);
   border-radius: var(--radius-full);
+  opacity: 0;
   transition: background-color var(--duration-fast) var(--ease-out-cubic);
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      opacity var(--duration-normal) var(--ease-out-cubic),
+      visibility var(--duration-normal) var(--ease-out-cubic),
+      background-color var(--duration-fast) var(--ease-out-cubic);
+  }
 
   @media (any-hover: hover) {
     &:hover {
       background-color: oklch(from var(--color-main) calc(l * 1.1) c h);
     }
+  }
+
+  &[data-visible] {
+    visibility: visible;
+    opacity: 1;
   }
 }

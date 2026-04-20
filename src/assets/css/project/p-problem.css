@@ -3,6 +3,10 @@
   --section-padding-max: var(--section-narrow-max);
 }
 
+.p-problem__inner {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
 .p-problem__heading {
   /* スタイルなし（HTML クラスとの対応を維持） */
 }

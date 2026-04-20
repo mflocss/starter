@@ -3,4 +3,6 @@
   max-inline-size: var(--content-width);
   padding-inline: var(--content-padding);
   margin-inline: auto;
+  container-name: inner;
+  container-type: inline-size;
 }
