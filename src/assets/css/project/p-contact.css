@@ -23,7 +23,7 @@
   flex-direction: column;
   gap: var(--space-lg);
   max-inline-size: var(--_form-max);
-  margin-block-start: var(--space-2xl);
+  margin-block-start: var(--space-xl-2xl);
   margin-inline: auto;
 }
 

@@ -12,7 +12,7 @@
 
 .p-faq__list {
   max-inline-size: var(--content-width-narrow);
-  margin-block-start: var(--space-2xl);
+  margin-block-start: var(--space-xl-2xl);
   margin-inline: auto;
 }
 

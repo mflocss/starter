@@ -7,4 +7,8 @@
   --space-xl: calc(32 * var(--px));
   --space-2xl: calc(48 * var(--px));
   --space-3xl: calc(64 * var(--px));
+
+  /* fluid 中間 tokens（SP/PC で値が変わる場面で使用。viewport 400→1440 で線形補間） */
+  --space-xl-2xl: clamp(var(--space-xl), 1.538vi + 1.615rem, var(--space-2xl));
+  --space-2xl-3xl: clamp(var(--space-2xl), 1.538vi + 2.615rem, var(--space-3xl));
 }

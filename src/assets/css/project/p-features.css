@@ -17,8 +17,8 @@
 .p-features__list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3xl);
-  margin-block-start: var(--space-2xl);
+  gap: var(--space-2xl-3xl);
+  margin-block-start: var(--space-xl-2xl);
 }
 
 .p-features__item {
