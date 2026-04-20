@@ -5,6 +5,11 @@
   background-color: var(--color-bg-secondary);
 }
 
+.p-numbers__container {
+  container-name: container;
+  container-type: inline-size;
+}
+
 .p-numbers__inner {
   /* スタイルなし（HTML クラスとの対応を維持） */
 }
