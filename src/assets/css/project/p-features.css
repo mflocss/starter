@@ -22,46 +22,15 @@
 }
 
 .p-features__item {
-  display: grid;
-  gap: var(--space-xl);
-  align-items: center;
-
-  @container (inline-size >= 50rem) {
-    grid-template-columns: 1fr 1fr;
-
-    &:nth-child(even) > :first-child {
-      order: 2;
-    }
-  }
-}
-
-.p-features__content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-
-.p-features__title {
   /* スタイルなし（HTML クラスとの対応を維持） */
 }
 
-.p-features__badge {
-  align-self: flex-start;
+.p-features__card {
+  /* スタイルなし（HTML クラスとの対応を維持） */
 }
 
-.p-features__text {
-  color: var(--color-text-light);
-}
-
-.p-features__media {
-  & img {
-    inline-size: 100%;
-    border-radius: var(--radius-md);
+.p-features__item:nth-child(even) .p-features__card {
+  @container (inline-size >= 50rem) {
+    --media-card-first-order: 2;
   }
-}
-
-.p-features__caption {
-  margin-block-start: var(--space-sm);
-  font-size: var(--font-size-caption);
-  color: var(--color-text-light);
 }

@@ -1,0 +1,46 @@
+.c-media-card {
+  --_order: var(--media-card-first-order, 0);
+
+  display: grid;
+  gap: var(--space-xl);
+  align-items: center;
+
+  @container (inline-size >= 50rem) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  & > :first-child {
+    order: var(--_order);
+  }
+}
+
+.c-media-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.c-media-card__badge {
+  align-self: start;
+}
+
+.c-media-card__title {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.c-media-card__text {
+  color: var(--color-text-light);
+}
+
+.c-media-card__media {
+  & img {
+    inline-size: 100%;
+    border-radius: var(--radius-md);
+  }
+}
+
+.c-media-card__caption {
+  margin-block-start: var(--space-sm);
+  font-size: var(--font-size-caption);
+  color: var(--color-text-light);
+}
