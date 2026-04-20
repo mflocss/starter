@@ -9,9 +9,15 @@
  *
  * data-immediate: CSS 完結のアニメーション（JS 待ちなし）。LCP 要素の FOIC 防止に使用。
  * data-animate:   JS 待ちアニメーション。IntersectionObserver が data-visible を付与して再生開始。
+ *
+ * 各 init 関数は options 引数でカスタマイズ可能。デフォルト値は関数内で定義。
  */
 
-function initDrawer() {
+function initDrawer(options = {}) {
+  const {
+    breakpoint = 768, // CUSTOMIZE: p-header.css の @media と同値にする（SP/PC 判定）
+  } = options;
+
   const drawer = document.querySelector('[data-drawer]');
   if (!drawer) return;
 
@@ -86,7 +92,6 @@ function initDrawer() {
     });
   });
 
-  // ページ遷移リンクはそのまま（新ページにドロワーは存在しない）
   drawerLinks.forEach((link) => {
     link.addEventListener('click', () => {
       const href = link.getAttribute('href');
@@ -110,13 +115,17 @@ function initDrawer() {
     }
   });
 
-  // CUSTOMIZE: この 768px は p-header.css の `@media (width >= 768px)` と同じ値。変更時は両方を更新すること
-  window.matchMedia('(min-width: 768px)').addEventListener('change', (e) => {
+  window.matchMedia(`(min-width: ${breakpoint}px)`).addEventListener('change', (e) => {
     if (e.matches) closeDrawer();
   });
 }
 
-function initScrollAnimation() {
+function initScrollAnimation(options = {}) {
+  const {
+    threshold = 0.1, // CUSTOMIZE: 要素が何割見えたら発火（0〜1）
+    rootMargin = '0px 0px -40px 0px', // CUSTOMIZE: 発火タイミング調整（下端を -40px で早めに発火）
+  } = options;
+
   const targets = document.querySelectorAll('[data-animate]');
   if (targets.length === 0) return;
 
@@ -129,10 +138,7 @@ function initScrollAnimation() {
         }
       });
     },
-    {
-      threshold: 0.1,
-      rootMargin: '0px 0px -40px 0px',
-    },
+    { threshold, rootMargin },
   );
 
   targets.forEach((target) => {
@@ -140,7 +146,11 @@ function initScrollAnimation() {
   });
 }
 
-function initStagger() {
+function initStagger(options = {}) {
+  const {
+    delayStep = 0.1, // CUSTOMIZE: スタッガー間隔（秒）
+  } = options;
+
   const containers = document.querySelectorAll('[data-stagger]');
   if (containers.length === 0) return;
   containers.forEach((container) => {
@@ -148,17 +158,18 @@ function initStagger() {
     const children = Array.from(container.children);
     children.forEach((child, index) => {
       child.dataset.animate = animateName;
-      child.style.setProperty('--stagger-delay', `${(index * 0.1).toFixed(1)}s`);
+      child.style.setProperty('--stagger-delay', `${(index * delayStep).toFixed(2)}s`);
     });
   });
 }
 
-function initBackToTop() {
+function initBackToTop(options = {}) {
+  const {
+    threshold = 300, // CUSTOMIZE: スクロール量の閾値（px）
+  } = options;
+
   const backToTop = document.querySelector('[data-back-to-top]');
   if (!backToTop) return;
-
-  // CUSTOMIZE: スクロール量の閾値（px）
-  const threshold = 300;
 
   function toggleVisibility() {
     if (window.scrollY > threshold) {
@@ -172,7 +183,14 @@ function initBackToTop() {
   toggleVisibility();
 }
 
+// 初期化（デフォルト値で動作）
 initDrawer();
 initStagger();
 initScrollAnimation();
 initBackToTop();
+
+// CUSTOMIZE 例:
+// initDrawer({ breakpoint: 1024 });
+// initStagger({ delayStep: 0.15 });
+// initScrollAnimation({ threshold: 0.3, rootMargin: '0px 0px -100px 0px' });
+// initBackToTop({ threshold: 500 });
