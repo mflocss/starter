@@ -2,23 +2,20 @@
   --section-padding-min: var(--section-wide-min);
   --section-padding-max: var(--section-wide-max);
 
-  background: radial-gradient(ellipse at 50% 0%, oklch(from var(--color-main) l c h / 6%) 0%, transparent 70%);
-}
-
-.p-hero__inner {
-  /* スタイルなし（拡張点として残す） */
-}
-
-.p-hero__body {
   display: flex;
   flex-direction: column;
   gap: var(--space-2xl);
   align-items: center;
   text-align: center;
+  background: radial-gradient(ellipse at 50% 0%, oklch(from var(--color-main) l c h / 6%) 0%, transparent 70%);
 
   @container page (inline-size >= 48rem) {
     gap: var(--space-3xl);
   }
+}
+
+.p-hero__inner {
+  /* スタイルなし（拡張点として残す） */
 }
 
 .p-hero__content {
@@ -59,12 +56,10 @@
 }
 
 .p-hero__media {
-  --_media-max: 800px;
-
-  inline-size: 100%;
-  max-inline-size: var(--_media-max);
+  inline-size: 100cqi;
 
   & img {
-    border-radius: var(--radius-md);
+    inline-size: 100%;
+    block-size: auto;
   }
 }
