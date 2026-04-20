@@ -6,13 +6,17 @@
 }
 
 .p-hero__inner {
+  /* スタイルなし（拡張点として残す） */
+}
+
+.p-hero__body {
   display: flex;
   flex-direction: column;
   gap: var(--space-2xl);
   align-items: center;
   text-align: center;
 
-  @container (inline-size >= 768px) {
+  @container (inline-size >= 48rem) {
     gap: var(--space-3xl);
   }
 }

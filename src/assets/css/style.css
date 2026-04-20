@@ -19,9 +19,7 @@
 @import './foundation/form.css' layer(foundation);
 
 /* Layout */
-@import './layout/l-viewport.css' layer(layout);
 @import './layout/l-header.css' layer(layout);
-@import './layout/l-main.css' layer(layout);
 @import './layout/l-footer.css' layer(layout);
 @import './layout/l-section.css' layer(layout);
 @import './layout/l-inner.css' layer(layout);
