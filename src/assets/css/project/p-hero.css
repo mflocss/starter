@@ -52,6 +52,9 @@
 }
 
 .p-hero__media {
+  --_overlay-top: light-dark(rgb(255 255 255 / 30%), rgb(0 0 0 / 30%));
+  --_overlay-bottom: light-dark(rgb(255 255 255 / 5%), rgb(0 0 0 / 5%));
+
   position: relative;
   grid-area: stack;
   inline-size: 100cqi;
@@ -61,11 +64,7 @@
     position: absolute;
     inset: 0;
     content: "";
-    background: linear-gradient(
-      to bottom,
-      rgb(255 255 255 / 40%) 0%,
-      rgb(255 255 255 / 10%) 100%
-    );
+    background: linear-gradient(to bottom, var(--_overlay-top) 0%, var(--_overlay-bottom) 100%);
   }
 
   & img {
