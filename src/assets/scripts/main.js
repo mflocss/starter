@@ -13,10 +13,13 @@
  * 各 init 関数は options 引数でカスタマイズ可能。デフォルト値は関数内で定義。
  */
 
+/**
+ * ドロワーメニュー（dialog show/close + inert）を初期化する。
+ * @param {Object} [options] - カスタマイズオプション
+ * @param {number} [options.breakpoint=768] - PC 判定のブレイクポイント (px)。p-header.css の `@media` と同値にすること（SP/PC 切替時にドロワーを自動で閉じる判定に使用）
+ */
 function initDrawer(options = {}) {
-  const {
-    breakpoint = 768, // CUSTOMIZE: p-header.css の @media と同値にする（SP/PC 判定）
-  } = options;
+  const { breakpoint = 768 } = options;
 
   const drawer = document.querySelector('[data-drawer]');
   if (!drawer) return;
@@ -120,11 +123,14 @@ function initDrawer(options = {}) {
   });
 }
 
+/**
+ * スクロールアニメーション（IntersectionObserver で `data-visible` を付与）を初期化する。
+ * @param {Object} [options] - カスタマイズオプション
+ * @param {number} [options.threshold=0.1] - 要素が何割見えたら発火するか（0〜1）
+ * @param {string} [options.rootMargin='0px 0px -40px 0px'] - 発火タイミング調整。下端を負の値にするとやや早めに発火
+ */
 function initScrollAnimation(options = {}) {
-  const {
-    threshold = 0.1, // CUSTOMIZE: 要素が何割見えたら発火（0〜1）
-    rootMargin = '0px 0px -40px 0px', // CUSTOMIZE: 発火タイミング調整（下端を -40px で早めに発火）
-  } = options;
+  const { threshold = 0.1, rootMargin = '0px 0px -40px 0px' } = options;
 
   const targets = document.querySelectorAll('[data-animate]');
   if (targets.length === 0) return;
@@ -146,10 +152,13 @@ function initScrollAnimation(options = {}) {
   });
 }
 
+/**
+ * スタッガーアニメーションを初期化する（`data-stagger` の子要素に順番に delay を付与）。
+ * @param {Object} [options] - カスタマイズオプション
+ * @param {number} [options.delayStep=0.1] - 子要素ごとの遅延時間（秒）
+ */
 function initStagger(options = {}) {
-  const {
-    delayStep = 0.1, // CUSTOMIZE: スタッガー間隔（秒）
-  } = options;
+  const { delayStep = 0.1 } = options;
 
   const containers = document.querySelectorAll('[data-stagger]');
   if (containers.length === 0) return;
@@ -163,10 +172,13 @@ function initStagger(options = {}) {
   });
 }
 
+/**
+ * Back to Top ボタンの表示制御を初期化する。
+ * @param {Object} [options] - カスタマイズオプション
+ * @param {number} [options.threshold=300] - 表示を切替えるスクロール量（px）
+ */
 function initBackToTop(options = {}) {
-  const {
-    threshold = 300, // CUSTOMIZE: スクロール量の閾値（px）
-  } = options;
+  const { threshold = 300 } = options;
 
   const backToTop = document.querySelector('[data-back-to-top]');
   if (!backToTop) return;
