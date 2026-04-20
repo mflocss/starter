@@ -22,7 +22,7 @@
   gap: var(--space-xl);
   align-items: center;
 
-  @container (inline-size >= 48rem) {
+  @container (inline-size >= 50rem) {
     grid-template-columns: 1fr 1fr;
 
     &:nth-child(even) > :first-child {

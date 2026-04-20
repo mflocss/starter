@@ -4,6 +4,8 @@
   line-height: var(--line-height-text);
   color: var(--color-text);
   background-color: var(--color-bg);
+  container-name: page;
+  container-type: inline-size;
   -webkit-font-smoothing: antialiased;
 }
 
