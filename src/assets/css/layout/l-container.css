@@ -2,5 +2,6 @@
    子要素が @container で参照するための inline-size container を作る。
    list / grid / flex 等、子要素レイアウトを親幅で分岐させたい場面で併記する */
 .l-container {
+  container-name: container;
   container-type: inline-size;
 }
