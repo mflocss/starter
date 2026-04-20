@@ -1,7 +1,7 @@
-/* Container Queries の基盤を提供する汎用 Layout。
-   子要素が @container で参照するための inline-size container を作る。
-   list / grid / flex 等、子要素レイアウトを親幅で分岐させたい場面で併記する */
+/* Container Queries の基盤を提供する Layout。
+   `l-inner` に併記して、コンテンツ領域（inner）幅を @container で参照可能にする。
+   子孫要素の `@container (...)` は最近接祖先として inner を参照する */
 .l-container {
-  container-name: container;
+  container-name: inner;
   container-type: inline-size;
 }
