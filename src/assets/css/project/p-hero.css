@@ -28,7 +28,6 @@
 
 .p-hero__lead {
   font-size: var(--font-size-lead);
-  color: var(--color-text-light);
 }
 
 .p-hero__cta {
@@ -40,7 +39,8 @@
 }
 
 .p-hero__sub-cta {
-  /* スタイルなし（HTML クラスとの対応を維持） */
+  color: light-dark(var(--color-main), var(--color-text));
+  border-color: light-dark(var(--color-main), var(--color-text));
 }
 
 .p-hero__actions {
