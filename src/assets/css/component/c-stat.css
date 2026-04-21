@@ -1,0 +1,24 @@
+.c-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  text-align: center;
+}
+
+.c-stat__value {
+  --_line-height: 1.2;
+
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-heading);
+  line-height: var(--_line-height);
+  color: var(--color-main);
+}
+
+.c-stat__unit {
+  font-size: 0.5em;
+}
+
+.c-stat__label {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-light);
+}

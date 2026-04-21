@@ -28,6 +28,7 @@
 @import './component/c-button.css' layer(component);
 @import './component/c-card.css' layer(component);
 @import './component/c-media-card.css' layer(component);
+@import './component/c-stat.css' layer(component);
 @import './component/c-badge.css' layer(component);
 @import './component/c-section-heading.css' layer(component);
 @import './component/c-accordion.css' layer(component);
