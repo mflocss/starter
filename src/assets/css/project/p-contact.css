@@ -42,19 +42,12 @@
 }
 
 .p-contact__fieldset {
-  display: flex;
-  flex-direction: column;
+  /* c-field の gap を radio-group 向けに上書き（c-field default は label-input 用 xs、radio-group fieldset は legend-group 用 sm） */
   gap: var(--space-sm);
 }
 
 .p-contact__legend {
-  font-weight: var(--font-weight-heading);
-}
-
-/* fieldset 内 required のマーク付与（c-field は fieldset 構造に対応しないためここに残す） */
-.p-contact__fieldset:has(:required) .p-contact__legend::after {
-  color: var(--color-error);
-  content: ' *';
+  /* スタイルなし（将来の外部配置制御の拡張点として c-field__legend と併記） */
 }
 
 .p-contact__radio-group {

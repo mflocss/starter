@@ -4,12 +4,25 @@
   gap: var(--space-xs);
 }
 
-.c-field__label {
+/* fieldset として使う時の default 装飾リセット（border / padding / margin を無効化し、div と等価な箱に整える） */
+fieldset.c-field {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.c-field__label,
+.c-field__legend {
+  display: flex;
+  gap: 0.25em;
+  align-items: baseline;
   font-weight: var(--font-weight-heading);
 }
 
-/* 必須マーク: Project 側が --c-field-required-mark を上書きすればサイトごとに表現（「 *」→「 必須」等）を切替可能 */
-.c-field:has(:required) > .c-field__label::after {
+/* 必須マーク: Project 側が --c-field-required-mark を上書きすればサイトごとに表現（「*」→「必須」等）を切替可能。
+   空白は content に含めず gap: 0.25em で視覚的に担保する（コピペ・a11y 読み上げへの混入を回避） */
+.c-field:has(:required) > .c-field__label::after,
+.c-field:has(:required) > .c-field__legend::after {
   color: var(--color-error);
-  content: var(--c-field-required-mark, ' *');
+  content: var(--c-field-required-mark, '*');
 }
