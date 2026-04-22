@@ -1,0 +1,15 @@
+.c-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.c-field__label {
+  font-weight: var(--font-weight-heading);
+}
+
+/* 必須マーク: Project 側が --c-field-required-mark を上書きすればサイトごとに表現（「 *」→「 必須」等）を切替可能 */
+.c-field:has(:required) > .c-field__label::after {
+  color: var(--color-error);
+  content: var(--c-field-required-mark, ' *');
+}

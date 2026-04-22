@@ -1,0 +1,8 @@
+/* radio / checkbox 両用: min-block-size でタップ領域 44px を確保（WCAG 2.5.5 Target Size AAA 相当） */
+.c-choice-label {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+  min-block-size: var(--size-tap-target);
+  cursor: pointer;
+}

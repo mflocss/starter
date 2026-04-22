@@ -509,13 +509,13 @@
           <!-- NOTE: aria-describedby でエラーメッセージ要素を紐付け済み。JS でバリデーション時に hidden を解除し aria-invalid="true" を切り替えること -->
           <form class="p-contact__form" action="/api/contact" method="post" novalidate>
             <!-- 氏名 -->
-            <div class="p-contact__field">
-              <label for="name" class="p-contact__label">お名前</label>
+            <div class="c-field p-contact__field">
+              <label for="name" class="c-field__label p-contact__label">お名前</label>
               <input
                 type="text"
                 id="name"
                 name="name"
-                class="p-contact__input"
+                class="c-input p-contact__input"
                 required
                 autocomplete="name"
                 aria-describedby="name-error"
@@ -524,13 +524,13 @@
             </div>
 
             <!-- メール -->
-            <div class="p-contact__field">
-              <label for="email" class="p-contact__label">メールアドレス</label>
+            <div class="c-field p-contact__field">
+              <label for="email" class="c-field__label p-contact__label">メールアドレス</label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                class="p-contact__input"
+                class="c-input p-contact__input"
                 required
                 autocomplete="email"
                 aria-describedby="email-error"
@@ -541,13 +541,13 @@
             </div>
 
             <!-- 電話番号 -->
-            <div class="p-contact__field">
-              <label for="tel" class="p-contact__label">電話番号</label>
+            <div class="c-field p-contact__field">
+              <label for="tel" class="c-field__label p-contact__label">電話番号</label>
               <input
                 type="tel"
                 id="tel"
                 name="tel"
-                class="p-contact__input"
+                class="c-input p-contact__input"
                 autocomplete="tel"
                 aria-describedby="tel-error"
               />
@@ -555,12 +555,12 @@
             </div>
 
             <!-- お問い合わせ種別 -->
-            <div class="p-contact__field">
-              <label for="category" class="p-contact__label">お問い合わせ種別</label>
+            <div class="c-field p-contact__field">
+              <label for="category" class="c-field__label p-contact__label">お問い合わせ種別</label>
               <select
                 id="category"
                 name="category"
-                class="p-contact__select"
+                class="c-input p-contact__select"
                 required
                 aria-describedby="category-error"
               >
@@ -578,15 +578,15 @@
             <fieldset class="p-contact__fieldset" aria-describedby="plan-error">
               <legend class="p-contact__legend">ご希望のプラン</legend>
               <div class="p-contact__radio-group">
-                <label class="p-contact__radio-label">
+                <label class="c-choice-label p-contact__radio-label">
                   <input type="radio" name="plan" value="body-care" class="p-contact__radio" required />
                   ボディケア（60分）
                 </label>
-                <label class="p-contact__radio-label">
+                <label class="c-choice-label p-contact__radio-label">
                   <input type="radio" name="plan" value="facial" class="p-contact__radio" />
                   フェイシャル（45分）
                 </label>
-                <label class="p-contact__radio-label">
+                <label class="c-choice-label p-contact__radio-label">
                   <input type="radio" name="plan" value="relaxation" class="p-contact__radio" />
                   リラクゼーション（90分）
                 </label>
@@ -595,12 +595,12 @@
             </fieldset>
 
             <!-- メッセージ -->
-            <div class="p-contact__field">
-              <label for="message" class="p-contact__label">メッセージ</label>
+            <div class="c-field p-contact__field">
+              <label for="message" class="c-field__label p-contact__label">メッセージ</label>
               <textarea
                 id="message"
                 name="message"
-                class="p-contact__textarea"
+                class="c-input p-contact__textarea"
                 required
                 rows="6"
                 aria-describedby="message-error"
@@ -609,8 +609,8 @@
             </div>
 
             <!-- 同意確認 -->
-            <div class="p-contact__field">
-              <label class="p-contact__checkbox-label">
+            <div class="c-field p-contact__field">
+              <label class="c-choice-label p-contact__checkbox-label">
                 <input
                   type="checkbox"
                   name="agree"
