@@ -49,6 +49,7 @@
 @import './project/p-problem.css' layer(project);
 @import './project/p-features.css' layer(project);
 @import './project/p-flow.css' layer(project);
+@import './project/p-pricing.css' layer(project);
 @import './project/p-numbers.css' layer(project);
 @import './project/p-voice.css' layer(project);
 @import './project/p-faq.css' layer(project);

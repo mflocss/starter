@@ -1,0 +1,51 @@
+.p-pricing {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-pricing__inner {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-pricing__heading {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+/* WHY: 幅広 table の横スクロール対策（Project 責務、Component 化しない理由:
+   min-inline-size がコンテンツ依存。tabindex="0" でキーボードフォーカスが
+   当たるため :focus-visible のリング描画は reset / foundation 既定で担保） */
+.p-pricing__table-wrapper {
+  margin-block-start: var(--space-xl-2xl);
+  overflow-x: auto;
+}
+
+.p-pricing__table {
+  inline-size: 100%;
+
+  /* WHY: iluha の 3 カラム料金表がここで横スクロールに切り替わる閾値。
+     コンテンツ依存の値なので Component 化せず Project に留める */
+  min-inline-size: 40rem;
+  border-collapse: collapse;
+
+  & th,
+  & td {
+    padding: var(--space-sm) var(--space-md);
+    text-align: start;
+    border-block-end: var(--border-width) solid var(--color-border);
+  }
+
+  & thead th {
+    font-weight: var(--font-weight-heading);
+    background-color: var(--color-bg-secondary);
+  }
+
+  & tbody th {
+    font-weight: var(--font-weight-body);
+  }
+}
+
+.p-pricing__note {
+  margin-block-start: var(--space-lg);
+  font-size: var(--font-size-caption);
+  color: var(--color-text-light);
+  text-align: center;
+}

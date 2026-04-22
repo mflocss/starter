@@ -384,6 +384,55 @@
         </div>
       </section>
 
+      <!-- Pricing -->
+      <!-- CUSTOMIZE: コース内容・所要時間・料金を自社サービスに差し替え -->
+      <section class="l-section p-pricing" id="pricing" aria-labelledby="pricing-heading">
+        <div class="l-inner p-pricing__inner">
+          <hgroup class="c-section-heading p-pricing__heading" data-animate="fade-in-slide-up">
+            <p lang="en">Pricing</p>
+            <h2 id="pricing-heading">料金表</h2>
+          </hgroup>
+
+          <!-- WHY: 幅広 table を wrapper で横スクロール可能に（Project 責務）。
+               Component 化しない理由: min-inline-size はコンテンツ依存。
+               a11y 3 点セット: role="region" + 固有の aria-label（section landmark「料金表」と重複しない一意の accessible name）+ tabindex="0"（キーボードで矢印スクロール可能） -->
+          <div class="p-pricing__table-wrapper" role="region" aria-label="料金表スクロール領域" tabindex="0">
+            <table class="p-pricing__table">
+              <caption class="u-visually-hidden">
+                コース別の料金と所要時間
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">コース</th>
+                  <th scope="col">所要時間</th>
+                  <th scope="col">料金（税込）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">ボディケア</th>
+                  <td>60 分</td>
+                  <td>8,800 円</td>
+                </tr>
+                <tr>
+                  <th scope="row">フェイシャル</th>
+                  <td>45 分</td>
+                  <td>7,700 円</td>
+                </tr>
+                <tr>
+                  <th scope="row">リラクゼーション</th>
+                  <td>90 分</td>
+                  <td>11,000 円</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- CUSTOMIZE: 注記を自社サービスに差し替え -->
+          <p class="p-pricing__note">初回体験は 4,400 円（60 分）。リピート回数券・ペアプランもございます。</p>
+        </div>
+      </section>
+
       <!-- Numbers -->
       <section class="l-section p-numbers" id="numbers" aria-labelledby="numbers-heading">
         <div class="l-inner p-numbers__inner">
