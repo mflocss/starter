@@ -12,7 +12,7 @@
   }
 }
 
-.p-header__inner {
+.p-header__bar {
   display: flex;
   align-items: center;
   justify-content: space-between;

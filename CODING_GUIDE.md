@@ -50,7 +50,7 @@ ARIA 属性（`aria-label`・`aria-expanded`・`aria-controls` 等）と `transl
 | サイズ単位 | `cqi`（container query inline） | `px` / `em` / `rem` |
 | この LP での例 | Features セクション内のコンテンツ余白の流体調整 | ヘッダーのナビ表示/非表示 |
 
-`l-container.css` で `container-type: inline-size` を宣言し、Project/Component 層でクエリを記述します。
+`foundation/base.css` の `body` に `container-type: inline-size`（`container-name: page`）を宣言しており、Project/Component 層でクエリを記述します。セクション内部で独立した container を設けたい場合は、当該 Project のコンテナ要素にも `container-type: inline-size` を追加します（例: `p-features.css`、`p-voice.css`）。
 
 ## モーションガードのルール
 

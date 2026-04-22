@@ -20,8 +20,9 @@ mFLOCSS のリファレンス実装。架空の美容サロン「iluha」の LP 
 
 ### テキスト・画像の差し替え
 
-- `src/index.html` — サービス名、キャッチコピー、各セクションのテキスト
-- `src/contact/index.html` — フォーム項目
+- `src/index.html` — サービス名、キャッチコピー、各セクションのテキスト、Contact セクションのフォーム項目
+- `src/privacy/index.html` — プライバシーポリシー本文
+- `src/404.html` — 404 ページの見出し・リード文
 - 全ページの `<head>` — title, description, OGP 情報
 - `src/assets/images/` — コンテンツ画像（Retina 対応のため表示サイズの **2倍** で書き出し）
 
@@ -95,10 +96,10 @@ Token 層（`src/assets/css/token/`）にデザイン値が集約されていま
 
 ### フォーム送信先の設定
 
-現状は `action="/thanks/"` が設定されており、送信後にサンクスページへ遷移します。外部フォームサービスを使う場合は `action` をサービスの URL に変更してください:
+Contact セクション（`src/index.html` 内）のフォームは `action="/api/contact"` を既定値としています。starter 自体は送信処理を提供しないため、外部フォームサービスやバックエンド API に差し替えてください:
 
 ```html
-<form class="p-contact__form" action="https://your-form-service.com/submit" method="post">
+<form class="c-form p-contact__form" action="https://your-form-service.com/submit" method="post" novalidate>
 ```
 
 ## 構造の変更
@@ -132,7 +133,7 @@ Token 層（`src/assets/css/token/`）にデザイン値が集約されていま
 
 ### ページの削除
 
-1. 対象のディレクトリを削除（例: `src/thanks/`）
+1. 対象のディレクトリを削除（例: `src/privacy/`）
 2. `vite.config.ts` の `rolldownOptions.input` から該当エントリを削除
 3. ヘッダー・フッターのナビリンクを全ページから除去
 4. 不要な Project CSS があれば `style.css` の `@import` を削除
@@ -193,10 +194,9 @@ src/
 │   ├── images/                # コンテンツ画像（ビルドでハッシュ付与）
 │   └── scripts/
 │       └── main.js            # ドロワー・アニメーション・Back to Top
-├── index.html             # トップページ
-├── contact/index.html     # お問い合わせ
-├── thanks/index.html      # サンクスページ
-└── privacy/index.html     # プライバシーポリシー
+├── index.html             # トップページ（Hero〜Contact セクション統合）
+├── privacy/index.html     # プライバシーポリシー
+└── 404.html               # 404 ページ（参考実装。組み込み時は削除推奨）
 public/                    # ルートパス固定のファイル
 ├── scripts/
 │   └── viewport.js        # ビューポート幅制御（--viewport-min 未満の端末向け）

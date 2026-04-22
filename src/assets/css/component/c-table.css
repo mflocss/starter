@@ -1,0 +1,22 @@
+/* Block: 汎用 table ビジュアル（行ごとの罫線・ヘッダーセル装飾）。
+   幅制御（inline-size / min-inline-size）や横スクロール wrapper はコンテンツ依存のため Project に委ねる */
+.c-table {
+  inline-size: 100%;
+  border-collapse: collapse;
+
+  & th,
+  & td {
+    padding: var(--space-sm) var(--space-md);
+    text-align: start;
+    border-block-end: var(--border-width) solid var(--color-border);
+  }
+
+  & thead th {
+    font-weight: var(--font-weight-heading);
+    background-color: var(--color-bg-secondary);
+  }
+
+  & tbody th {
+    font-weight: var(--font-weight-body);
+  }
+}

@@ -71,7 +71,7 @@
     <!-- NOTE: ヘッダー・フッターは全ページ共通。変更時は全ファイルに反映すること -->
     <!-- Header -->
     <header class="l-header p-header">
-      <div class="l-inner p-header__inner">
+      <div class="l-inner p-header__bar">
         <a href="/" class="p-header__logo" translate="no">iluha</a>
 
         <nav class="p-header__nav" aria-label="メインナビゲーション">
@@ -100,7 +100,7 @@
     <!-- Drawer -->
     <div class="c-overlay" data-drawer-overlay hidden></div>
     <dialog class="p-drawer" id="drawer" data-drawer aria-labelledby="drawer-title" aria-modal="true">
-      <div class="p-drawer__inner">
+      <div class="p-drawer__stack">
         <span id="drawer-title" class="u-visually-hidden">ナビゲーションメニュー</span>
         <nav class="p-drawer__nav" aria-label="ドロワーナビゲーション">
           <ul class="p-drawer__nav-list">
@@ -124,9 +124,9 @@
 
     <main id="main" data-drawer-inert>
       <!-- CUSTOMIZE: プライバシーポリシーの内容を差し替え -->
-      <section class="l-section p-privacy">
+      <section class="l-section p-privacy" aria-labelledby="privacy-heading">
         <div class="l-inner p-privacy__inner">
-          <h1 class="p-privacy__title">プライバシーポリシー</h1>
+          <h1 id="privacy-heading" class="p-privacy__title">プライバシーポリシー</h1>
 
           <div class="c-prose p-privacy__body">
             <h2>個人情報の取り扱いについて</h2>
@@ -163,7 +163,7 @@
 
     <!-- Footer -->
     <footer class="l-footer p-footer" data-drawer-inert>
-      <div class="l-inner p-footer__inner">
+      <div class="l-inner p-footer__stack">
         <nav class="p-footer__nav" aria-label="フッターナビゲーション">
           <ul class="p-footer__nav-list">
             <li><a href="/#features" class="p-footer__nav-link">特徴</a></li>

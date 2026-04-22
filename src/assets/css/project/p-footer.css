@@ -4,7 +4,7 @@
   border-block-start: var(--border-width) solid var(--color-border);
 }
 
-.p-footer__inner {
+.p-footer__stack {
   display: flex;
   flex-direction: column;
   gap: var(--space-xl);
