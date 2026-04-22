@@ -191,7 +191,7 @@
     <main id="main" data-drawer-inert>
       <!-- Hero -->
       <section class="l-section p-hero" aria-labelledby="hero-heading" data-immediate="scale-in">
-        <div class="l-inner p-hero__inner">
+        <div class="l-inner p-hero__stack">
           <!-- CUSTOMIZE: サービス名・キャッチコピーを差し替え -->
           <div class="p-hero__content">
             <h1 id="hero-heading" class="p-hero__title">からだの声を、<br class="u-hidden-pc" />聴く時間。</h1>
@@ -351,34 +351,44 @@
           </hgroup>
           <ol class="p-flow__list" data-stagger="fade-in-slide-up">
             <li class="p-flow__item">
-              <h3 class="p-flow__item-title">ご予約</h3>
-              <p class="p-flow__item-description">
-                お問い合わせフォームからご希望の日時・コースをお知らせください。24時間以内に折り返しご連絡いたします。
-              </p>
+              <div class="c-text-block">
+                <h3 class="c-text-block__title">ご予約</h3>
+                <p class="c-text-block__text">
+                  お問い合わせフォームからご希望の日時・コースをお知らせください。24時間以内に折り返しご連絡いたします。
+                </p>
+              </div>
             </li>
             <li class="p-flow__item">
-              <h3 class="p-flow__item-title">カウンセリング</h3>
-              <p class="p-flow__item-description">
-                施術前に30分ほどお時間をいただき、お体の状態やお悩み・ご希望を丁寧にヒアリング。
-              </p>
+              <div class="c-text-block">
+                <h3 class="c-text-block__title">カウンセリング</h3>
+                <p class="c-text-block__text">
+                  施術前に30分ほどお時間をいただき、お体の状態やお悩み・ご希望を丁寧にヒアリング。
+                </p>
+              </div>
             </li>
             <li class="p-flow__item">
-              <h3 class="p-flow__item-title">施術</h3>
-              <p class="p-flow__item-description">
-                選択したコースに沿って45〜90分の施術。完全個室で安心してお過ごしください。
-              </p>
+              <div class="c-text-block">
+                <h3 class="c-text-block__title">施術</h3>
+                <p class="c-text-block__text">
+                  選択したコースに沿って45〜90分の施術。完全個室で安心してお過ごしください。
+                </p>
+              </div>
             </li>
             <li class="p-flow__item">
-              <h3 class="p-flow__item-title">アフターケア</h3>
-              <p class="p-flow__item-description">
-                施術後は水分補給とリラックスタイム。お体の変化を確かめながらゆっくりとお過ごしください。
-              </p>
+              <div class="c-text-block">
+                <h3 class="c-text-block__title">アフターケア</h3>
+                <p class="c-text-block__text">
+                  施術後は水分補給とリラックスタイム。お体の変化を確かめながらゆっくりとお過ごしください。
+                </p>
+              </div>
             </li>
             <li class="p-flow__item">
-              <h3 class="p-flow__item-title">次回のご案内</h3>
-              <p class="p-flow__item-description">
-                お客様のお体に合わせた最適なペースをご提案。ご希望があれば次回のご予約も承ります。
-              </p>
+              <div class="c-text-block">
+                <h3 class="c-text-block__title">次回のご案内</h3>
+                <p class="c-text-block__text">
+                  お客様のお体に合わせた最適なペースをご提案。ご希望があれば次回のご予約も承ります。
+                </p>
+              </div>
             </li>
           </ol>
         </div>
@@ -521,10 +531,14 @@
 
       <!-- CTA -->
       <section class="l-section p-cta" id="cta" aria-labelledby="cta-heading">
-        <div class="l-inner p-cta__inner c-text-block" data-stagger="fade-in-slide-up">
-          <h2 id="cta-heading" class="p-cta__title">まずは一度、からだの声を聴いてみませんか？</h2>
-          <p class="c-text-block__text">初回体験は 60分 4,400円。カウンセリング込み。無理な勧誘はいたしません。</p>
-          <a href="#contact" class="c-button -primary -large p-cta__button">初回体験を予約する</a>
+        <div class="l-inner p-cta__inner">
+          <div class="p-cta__stack" data-stagger="fade-in-slide-up">
+            <div class="c-text-block">
+              <h2 id="cta-heading" class="c-text-block__title">まずは一度、からだの声を聴いてみませんか？</h2>
+              <p class="c-text-block__text">初回体験は 60分 4,400円。カウンセリング込み。無理な勧誘はいたしません。</p>
+            </div>
+            <a href="#contact" class="c-button -primary -large">初回体験を予約する</a>
+          </div>
         </div>
       </section>
 

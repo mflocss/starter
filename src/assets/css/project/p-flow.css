@@ -35,7 +35,7 @@
   /* WHY: CSS counter でステップ番号を円形バッジとして視覚化。<ol> のセマンティクスは保ったまま装飾を自前で描画 */
   &::before {
     display: flex;
-    grid-row: 1 / 3;
+    grid-row: 1;
     align-items: center;
     align-self: start;
     justify-content: center;
@@ -48,12 +48,4 @@
     background-color: var(--color-main);
     border-radius: var(--radius-full);
   }
-}
-
-.p-flow__item-title {
-  /* スタイルなし（:where(h3) の foundation スタイルで十分） */
-}
-
-.p-flow__item-description {
-  /* スタイルなし（body の基本スタイルで十分） */
 }
