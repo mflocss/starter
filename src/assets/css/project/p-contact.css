@@ -16,68 +16,17 @@
   text-align: center;
 }
 
+/* フォーム全体の外部配置（最大幅・上余白・中央寄せ）は Project 側が保持。
+   縦並び / gap 等の内部レイアウトは Component（c-form）が担当。 */
 .p-contact__form {
   --_form-max: 640px;
 
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
   max-inline-size: var(--_form-max);
   margin-block-start: var(--space-xl-2xl);
   margin-inline: auto;
 }
 
-.p-contact__field {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-}
-
-.p-contact__label:has(+ :required),
-.p-contact__legend:has(~ .p-contact__field :required) {
-  &::after {
-    color: var(--color-error);
-    content: ' *';
-  }
-}
-
-.p-contact__textarea {
-  --_textarea-min: 160px;
-
-  field-sizing: content;
-  min-block-size: var(--_textarea-min);
-  max-block-size: 20lh;
-}
-
-.p-contact__input,
-.p-contact__textarea,
-.p-contact__select {
-  padding: var(--space-sm) var(--space-md);
-  font: inherit;
-  color: inherit;
-  background-color: var(--color-surface);
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--radius-sm);
-  transition: border-color var(--duration-fast) var(--ease-out-cubic);
-
-  &:focus {
-    border-color: var(--color-main);
-  }
-
-  &:user-invalid {
-    border-color: var(--color-error);
-  }
-}
-
-.p-contact__fieldset {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-}
-
-.p-contact__legend {
-  font-weight: var(--font-weight-heading);
-}
+/* Project 固有 Element（Component 化しない装飾・配置） */
 
 .p-contact__radio-group {
   display: flex;
@@ -86,20 +35,10 @@
   margin-block-start: var(--space-xs);
 }
 
-.p-contact__radio-label,
-.p-contact__checkbox-label {
-  display: flex;
-  gap: var(--space-sm);
-  align-items: center;
-  min-block-size: var(--size-tap-target);
-  cursor: pointer;
-}
-
-.p-contact__checkbox-label {
-  & a {
-    color: var(--color-main);
-    text-decoration: underline;
-  }
+/* 同意確認リンク（プライバシーポリシー）は p-contact 固有の装飾 */
+.p-contact__form a {
+  color: var(--color-main);
+  text-decoration: underline;
 }
 
 .p-contact__error {
@@ -107,20 +46,15 @@
   color: var(--color-error);
 }
 
-.p-contact__radio {
-  /* スタイルなし（HTML クラスとの対応を維持） */
-}
-
-.p-contact__checkbox {
-  /* スタイルなし（HTML クラスとの対応を維持） */
-}
-
-.p-contact__submit {
-  /* スタイルなし（HTML クラスとの対応を維持） */
-}
-
 .p-contact__actions {
   display: flex;
   justify-content: center;
   margin-block-start: var(--space-md);
 }
+
+/* TEACHING: Project が Component Element を文脈依存に上書きする場合は、子孫セレクタで対応する。
+   例:
+     .p-contact__form .c-form__input {
+       border-radius: var(--radius-md);
+     }
+   Component の公開 API（--c-form-required-mark 等）を使って差し替える方法も推奨される。 */

@@ -39,6 +39,7 @@
 @import './component/c-skip-link.css' layer(component);
 @import './component/c-hamburger.css' layer(component);
 @import './component/c-overlay.css' layer(component);
+@import './component/c-form.css' layer(component);
 
 /* Project */
 @import './project/p-header.css' layer(project);
