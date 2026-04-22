@@ -12,8 +12,6 @@ export default defineConfig({
       // CUSTOMIZE: ページの追加・削除時にエントリを更新
       input: {
         main: resolve(__dirname, 'src/index.html'),
-        contact: resolve(__dirname, 'src/contact/index.html'),
-        thanks: resolve(__dirname, 'src/contact/thanks/index.html'),
         privacy: resolve(__dirname, 'src/privacy/index.html'),
         notFound: resolve(__dirname, 'src/404.html'),
       },

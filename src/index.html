@@ -145,9 +145,9 @@
             <li><a href="#features" class="p-header__nav-link">特徴</a></li>
             <li><a href="#voice" class="p-header__nav-link">お客様の声</a></li>
             <li><a href="#faq" class="p-header__nav-link">よくある質問</a></li>
-            <li><a href="/contact/" class="p-header__nav-link">ご予約</a></li>
+            <li><a href="#contact" class="p-header__nav-link">ご予約</a></li>
           </ul>
-          <a href="/contact/" class="c-button -primary p-header__cta">初回体験を予約する</a>
+          <a href="#contact" class="c-button -primary p-header__cta">初回体験を予約する</a>
         </nav>
 
         <button
@@ -180,11 +180,11 @@
               <a href="#faq" class="p-drawer__nav-link">よくある質問</a>
             </li>
             <li>
-              <a href="/contact/" class="p-drawer__nav-link">ご予約</a>
+              <a href="#contact" class="p-drawer__nav-link">ご予約</a>
             </li>
           </ul>
         </nav>
-        <a href="/contact/" class="c-button -primary p-drawer__cta">初回体験を予約する</a>
+        <a href="#contact" class="c-button -primary p-drawer__cta">初回体験を予約する</a>
       </div>
     </dialog>
 
@@ -200,7 +200,7 @@
               は、内側から整うボディケアサロンです。
             </p>
             <div class="p-hero__actions">
-              <a href="/contact/" class="c-button -primary -large p-hero__cta">
+              <a href="#contact" class="c-button -primary -large p-hero__cta">
                 初回体験を予約する
                 <svg class="c-icon p-hero__cta-icon" width="20" height="20" aria-hidden="true">
                   <use href="./assets/images/icons/arrow-right.svg#icon" />
@@ -492,7 +492,145 @@
         <div class="l-inner p-cta__inner c-text-block" data-stagger="fade-in-slide-up">
           <h2 id="cta-heading" class="p-cta__title c-text-block__title">まずは一度、からだの声を聴いてみませんか？</h2>
           <p class="c-text-block__text">初回体験は 60分 4,400円。カウンセリング込み。無理な勧誘はいたしません。</p>
-          <a href="/contact/" class="c-button -primary -large p-cta__button">初回体験を予約する</a>
+          <a href="#contact" class="c-button -primary -large p-cta__button">初回体験を予約する</a>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="l-section p-contact" id="contact" aria-labelledby="contact-heading">
+        <div class="l-inner p-contact__inner">
+          <hgroup class="c-section-heading p-contact__heading" data-animate="fade-in-slide-up">
+            <p lang="en">Contact</p>
+            <h2 id="contact-heading">ご予約・お問い合わせ</h2>
+          </hgroup>
+          <p class="p-contact__lead">下記フォームからお気軽にどうぞ。24時間以内に折り返しご連絡いたします。</p>
+
+          <!-- CUSTOMIZE: 本番バックエンド URL に差し替え。starter はフォーム送信処理を提供しません -->
+          <!-- NOTE: aria-describedby でエラーメッセージ要素を紐付け済み。JS でバリデーション時に hidden を解除し aria-invalid="true" を切り替えること -->
+          <form class="p-contact__form" action="/api/contact" method="post" novalidate>
+            <!-- 氏名 -->
+            <div class="p-contact__field">
+              <label for="name" class="p-contact__label">お名前</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="p-contact__input"
+                required
+                autocomplete="name"
+                aria-describedby="name-error"
+              />
+              <p id="name-error" class="p-contact__error" role="alert" hidden>お名前を入力してください。</p>
+            </div>
+
+            <!-- メール -->
+            <div class="p-contact__field">
+              <label for="email" class="p-contact__label">メールアドレス</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="p-contact__input"
+                required
+                autocomplete="email"
+                aria-describedby="email-error"
+              />
+              <p id="email-error" class="p-contact__error" role="alert" hidden>
+                メールアドレスの形式が正しくありません。
+              </p>
+            </div>
+
+            <!-- 電話番号 -->
+            <div class="p-contact__field">
+              <label for="tel" class="p-contact__label">電話番号</label>
+              <input
+                type="tel"
+                id="tel"
+                name="tel"
+                class="p-contact__input"
+                autocomplete="tel"
+                aria-describedby="tel-error"
+              />
+              <p id="tel-error" class="p-contact__error" role="alert" hidden>電話番号の形式が正しくありません。</p>
+            </div>
+
+            <!-- お問い合わせ種別 -->
+            <div class="p-contact__field">
+              <label for="category" class="p-contact__label">お問い合わせ種別</label>
+              <select
+                id="category"
+                name="category"
+                class="p-contact__select"
+                required
+                aria-describedby="category-error"
+              >
+                <option value="">選択してください</option>
+                <option value="reservation">初回体験の予約</option>
+                <option value="inquiry">施術に関するお問い合わせ</option>
+                <option value="other">その他</option>
+              </select>
+              <p id="category-error" class="p-contact__error" role="alert" hidden>
+                お問い合わせ種別を選択してください。
+              </p>
+            </div>
+
+            <!-- プラン選択 -->
+            <fieldset class="p-contact__fieldset" aria-describedby="plan-error">
+              <legend class="p-contact__legend">ご希望のプラン</legend>
+              <div class="p-contact__radio-group">
+                <label class="p-contact__radio-label">
+                  <input type="radio" name="plan" value="body-care" class="p-contact__radio" required />
+                  ボディケア（60分）
+                </label>
+                <label class="p-contact__radio-label">
+                  <input type="radio" name="plan" value="facial" class="p-contact__radio" />
+                  フェイシャル（45分）
+                </label>
+                <label class="p-contact__radio-label">
+                  <input type="radio" name="plan" value="relaxation" class="p-contact__radio" />
+                  リラクゼーション（90分）
+                </label>
+              </div>
+              <p id="plan-error" class="p-contact__error" role="alert" hidden>ご希望のプランを選択してください。</p>
+            </fieldset>
+
+            <!-- メッセージ -->
+            <div class="p-contact__field">
+              <label for="message" class="p-contact__label">メッセージ</label>
+              <textarea
+                id="message"
+                name="message"
+                class="p-contact__textarea"
+                required
+                rows="6"
+                aria-describedby="message-error"
+              ></textarea>
+              <p id="message-error" class="p-contact__error" role="alert" hidden>メッセージを入力してください。</p>
+            </div>
+
+            <!-- 同意確認 -->
+            <div class="p-contact__field">
+              <label class="p-contact__checkbox-label">
+                <input
+                  type="checkbox"
+                  name="agree"
+                  id="agree"
+                  class="p-contact__checkbox"
+                  required
+                  aria-describedby="agree-error"
+                />
+                <a href="/privacy/">プライバシーポリシー</a>に同意する
+              </label>
+              <p id="agree-error" class="p-contact__error" role="alert" hidden>
+                プライバシーポリシーへの同意が必要です。
+              </p>
+            </div>
+
+            <!-- 送信 -->
+            <div class="p-contact__actions">
+              <button type="submit" class="c-button -primary -large p-contact__submit">送信する</button>
+            </div>
+          </form>
         </div>
       </section>
     </main>
@@ -505,7 +643,7 @@
             <li><a href="#features" class="p-footer__nav-link">特徴</a></li>
             <li><a href="#voice" class="p-footer__nav-link">お客様の声</a></li>
             <li><a href="#faq" class="p-footer__nav-link">よくある質問</a></li>
-            <li><a href="/contact/" class="p-footer__nav-link">ご予約</a></li>
+            <li><a href="#contact" class="p-footer__nav-link">ご予約</a></li>
             <li>
               <a href="/privacy/" class="p-footer__nav-link">プライバシーポリシー</a>
             </li>
