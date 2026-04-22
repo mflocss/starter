@@ -23,23 +23,16 @@
   counter-reset: step;
 }
 
-/* WHY: li 自体は listing と counter-increment だけを担い、
-   見た目（カード装飾 + grid + badge）は子の .c-card に寄せる。
-   3-level 統一構造（li + .c-card wrapper + content）における
-   Project 固有の責任境界を最小化する設計。 */
+/* WHY: li が c-card.-subtle を併記（2-level 構造）。
+   padding / background / border-radius は c-card.-subtle で委譲、
+   ここは grid + counter badge の「ステップ番号描画」固有の責任に絞る。 */
 .p-flow__item {
-  counter-increment: step;
-}
-
-/* WHY: padding / background-color / border-radius は c-card.-subtle 併記で委譲。
-   ここは grid + counter の「レイアウト + ステップ番号描画」という
-   「カード見た目領域内」固有の責任に絞る。 */
-.p-flow__item > .c-card {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: var(--space-sm) var(--space-lg);
+  counter-increment: step;
 
-  /* WHY: CSS counter でステップ番号を円形バッジとして視覚化。<ol> のセマンティクスは保ったまま装飾を自前で描画 */
+  /* WHY: CSS counter でステップ番号を円形バッジとして視覚化 */
   &::before {
     display: flex;
     grid-row: 1;
