@@ -37,7 +37,7 @@
     <!-- NOTE: ヘッダー・フッターは全ページ共通。変更時は全ファイルに反映すること -->
     <!-- Header -->
     <header class="l-header p-header">
-      <div class="l-inner p-header__inner">
+      <div class="l-inner p-header__bar">
         <a href="/" class="p-header__logo" translate="no">iluha</a>
 
         <nav class="p-header__nav" aria-label="メインナビゲーション">
@@ -66,7 +66,7 @@
     <!-- Drawer -->
     <div class="c-overlay" data-drawer-overlay hidden></div>
     <dialog class="p-drawer" id="drawer" data-drawer aria-labelledby="drawer-title" aria-modal="true">
-      <div class="p-drawer__inner">
+      <div class="p-drawer__stack">
         <span id="drawer-title" class="u-visually-hidden">ナビゲーションメニュー</span>
         <nav class="p-drawer__nav" aria-label="ドロワーナビゲーション">
           <ul class="p-drawer__nav-list">
@@ -100,7 +100,7 @@
             お手数ですが、トップページから目的のページをお探しください。
           </p>
           <div class="p-not-found__actions">
-            <a href="/" class="c-button -primary -large p-not-found__action">トップページへ戻る</a>
+            <a href="/" class="c-button -primary -large p-not-found__cta">トップページへ戻る</a>
           </div>
         </div>
       </section>
@@ -108,7 +108,7 @@
 
     <!-- Footer -->
     <footer class="l-footer p-footer" data-drawer-inert>
-      <div class="l-inner p-footer__inner">
+      <div class="l-inner p-footer__stack">
         <nav class="p-footer__nav" aria-label="フッターナビゲーション">
           <ul class="p-footer__nav-list">
             <li><a href="/#features" class="p-footer__nav-link">特徴</a></li>
