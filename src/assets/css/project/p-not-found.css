@@ -1,23 +1,23 @@
 .p-not-found {
   text-align: center;
+}
 
-  & > .p-not-found__inner {
-    display: grid;
-    gap: var(--space-xl);
-    justify-items: center;
-    max-inline-size: 40rem;
-  }
+.p-not-found__inner {
+  display: grid;
+  gap: var(--space-xl);
+  justify-items: center;
+  max-inline-size: 40rem;
+}
 
-  & .p-not-found__lead {
-    /* font-size は body から継承、line-height は既存 token を使用 */
-    line-height: var(--line-height-text);
-    color: var(--color-text-light);
-  }
+.p-not-found__lead {
+  /* font-size は body から継承、line-height は既存 token を使用 */
+  line-height: var(--line-height-text);
+  color: var(--color-text-light);
+}
 
-  & .p-not-found__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-md);
-    justify-content: center;
-  }
+.p-not-found__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
 }

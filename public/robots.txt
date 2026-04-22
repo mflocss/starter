@@ -2,6 +2,11 @@
 # NOTE: 組み込み時は既存の robots.txt が優先されます。
 #       既存サイトに mFLOCSS を導入する場合、このファイルを削除してください。
 # NOTE: Allow: / は省略可（デフォルトで全許可）。教育用途で意図を明示するため記載
+# CUSTOMIZE: 管理画面・API・下書きなど検索対象外にしたいパスがあれば Disallow を追加
+#   例:
+#     Disallow: /admin/
+#     Disallow: /api/
+#     Disallow: /drafts/
 User-agent: *
 Allow: /
 
