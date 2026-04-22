@@ -76,3 +76,24 @@ textarea.c-form__input {
   min-block-size: var(--size-tap-target);
   cursor: pointer;
 }
+
+/* Element: radio / checkbox グループコンテナ（複数の choice-label を縦に並べる） */
+.c-form__choice-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-block-start: var(--space-xs);
+}
+
+/* Element: エラーメッセージ表示（role="alert" + hidden で JS トグル前提） */
+.c-form__error {
+  font-size: var(--font-size-caption);
+  color: var(--color-error);
+}
+
+/* Element: 送信ボタン配置ラッパー（中央寄せ default、Project 側で上書き可） */
+.c-form__actions {
+  display: flex;
+  justify-content: center;
+  margin-block-start: var(--space-md);
+}

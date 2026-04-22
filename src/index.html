@@ -520,7 +520,7 @@
                 autocomplete="name"
                 aria-describedby="name-error"
               />
-              <p id="name-error" class="p-contact__error" role="alert" hidden>お名前を入力してください。</p>
+              <p id="name-error" class="c-form__error" role="alert" hidden>お名前を入力してください。</p>
             </div>
 
             <!-- メール -->
@@ -535,9 +535,7 @@
                 autocomplete="email"
                 aria-describedby="email-error"
               />
-              <p id="email-error" class="p-contact__error" role="alert" hidden>
-                メールアドレスの形式が正しくありません。
-              </p>
+              <p id="email-error" class="c-form__error" role="alert" hidden>メールアドレスの形式が正しくありません。</p>
             </div>
 
             <!-- 電話番号 -->
@@ -551,7 +549,7 @@
                 autocomplete="tel"
                 aria-describedby="tel-error"
               />
-              <p id="tel-error" class="p-contact__error" role="alert" hidden>電話番号の形式が正しくありません。</p>
+              <p id="tel-error" class="c-form__error" role="alert" hidden>電話番号の形式が正しくありません。</p>
             </div>
 
             <!-- お問い合わせ種別 -->
@@ -563,15 +561,13 @@
                 <option value="inquiry">施術に関するお問い合わせ</option>
                 <option value="other">その他</option>
               </select>
-              <p id="category-error" class="p-contact__error" role="alert" hidden>
-                お問い合わせ種別を選択してください。
-              </p>
+              <p id="category-error" class="c-form__error" role="alert" hidden>お問い合わせ種別を選択してください。</p>
             </div>
 
             <!-- プラン選択 -->
             <fieldset class="c-form__field" aria-describedby="plan-error">
               <legend class="c-form__legend">ご希望のプラン</legend>
-              <div class="p-contact__radio-group">
+              <div class="c-form__choice-group">
                 <label class="c-form__choice-label">
                   <input type="radio" name="plan" value="body-care" required />
                   ボディケア（60分）
@@ -585,7 +581,7 @@
                   リラクゼーション（90分）
                 </label>
               </div>
-              <p id="plan-error" class="p-contact__error" role="alert" hidden>ご希望のプランを選択してください。</p>
+              <p id="plan-error" class="c-form__error" role="alert" hidden>ご希望のプランを選択してください。</p>
             </fieldset>
 
             <!-- メッセージ -->
@@ -599,7 +595,7 @@
                 rows="6"
                 aria-describedby="message-error"
               ></textarea>
-              <p id="message-error" class="p-contact__error" role="alert" hidden>メッセージを入力してください。</p>
+              <p id="message-error" class="c-form__error" role="alert" hidden>メッセージを入力してください。</p>
             </div>
 
             <!-- 同意確認 -->
@@ -608,13 +604,11 @@
                 <input type="checkbox" name="agree" id="agree" required aria-describedby="agree-error" />
                 <a href="/privacy/">プライバシーポリシー</a>に同意する
               </label>
-              <p id="agree-error" class="p-contact__error" role="alert" hidden>
-                プライバシーポリシーへの同意が必要です。
-              </p>
+              <p id="agree-error" class="c-form__error" role="alert" hidden>プライバシーポリシーへの同意が必要です。</p>
             </div>
 
             <!-- 送信 -->
-            <div class="p-contact__actions">
+            <div class="c-form__actions">
               <button type="submit" class="c-button -primary -large">送信する</button>
             </div>
           </form>

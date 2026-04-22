@@ -28,28 +28,10 @@
 
 /* Project 固有 Element（Component 化しない装飾・配置） */
 
-.p-contact__radio-group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-  margin-block-start: var(--space-xs);
-}
-
 /* 同意確認リンク（プライバシーポリシー）は p-contact 固有の装飾 */
 .p-contact__form a {
   color: var(--color-main);
   text-decoration: underline;
-}
-
-.p-contact__error {
-  font-size: var(--font-size-caption);
-  color: var(--color-error);
-}
-
-.p-contact__actions {
-  display: flex;
-  justify-content: center;
-  margin-block-start: var(--space-md);
 }
 
 /* TEACHING: Project が Component Element を文脈依存に上書きする場合は、子孫セレクタで対応する。
