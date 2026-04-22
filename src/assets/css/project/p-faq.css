@@ -12,10 +12,18 @@
 
 .p-faq__list {
   max-inline-size: var(--content-width-narrow);
+
+  /* WHY: <ul> の既定マーカー・字下げを除去。並列項目としての semantics は保ったまま見た目をフラットに */
+  padding-inline-start: 0;
   margin-block-start: var(--space-xl-2xl);
   margin-inline: auto;
+  list-style-type: none;
 }
 
 .p-faq__item {
-  /* スタイルなし（HTML クラスとの対応を維持） */
+  /* WHY: <li> で包んだことで c-accordion の「隣接兄弟で二重ボーダーを解消」ルールが効かなくなる。
+     並列に積層した FAQ の見た目は Project の合成責任なので、ここで境界線を解消する */
+  & + & .c-accordion {
+    border-block-start: none;
+  }
 }

@@ -38,7 +38,11 @@
   appearance: none;
   cursor: pointer;
   border: var(--border-width) solid var(--color-border);
-  transition: border-color var(--duration-fast) var(--ease-out-cubic);
+
+  /* WHY: OS のモーション低減設定を尊重。c-button / c-form 等と一貫して transition をガード */
+  @media (prefers-reduced-motion: no-preference) {
+    transition: border-color var(--duration-fast) var(--ease-out-cubic);
+  }
 }
 
 :where(input[type='radio']:checked, input[type='checkbox']:checked) {

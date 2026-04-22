@@ -27,7 +27,5 @@
 }
 
 .p-problem__item {
-  padding: var(--space-lg);
-  background-color: var(--color-bg-secondary);
-  border-radius: var(--radius-md);
+  /* スタイルなし（カード装飾は c-card -subtle が担当。Project は grid 配置のみを責任範囲とする） */
 }
