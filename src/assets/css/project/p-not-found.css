@@ -1,0 +1,22 @@
+.p-not-found {
+  text-align: center;
+}
+
+.p-not-found__inner {
+  display: grid;
+  gap: var(--space-xl);
+  justify-items: center;
+  max-inline-size: 40rem;
+}
+
+.p-not-found__lead {
+  line-height: var(--line-height-text);
+  color: var(--color-text-light);
+}
+
+.p-not-found__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+}

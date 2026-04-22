@@ -15,6 +15,7 @@ export default defineConfig({
         contact: resolve(__dirname, 'src/contact/index.html'),
         thanks: resolve(__dirname, 'src/contact/thanks/index.html'),
         privacy: resolve(__dirname, 'src/privacy/index.html'),
+        notFound: resolve(__dirname, 'src/404.html'),
       },
     },
     outDir: resolve(__dirname, 'dist'),
