@@ -34,6 +34,7 @@
 @import './component/c-accordion.css' layer(component);
 @import './component/c-blockquote.css' layer(component);
 @import './component/c-text-block.css' layer(component);
+@import './component/c-prose.css' layer(component);
 @import './component/c-icon.css' layer(component);
 @import './component/c-back-to-top.css' layer(component);
 @import './component/c-skip-link.css' layer(component);
