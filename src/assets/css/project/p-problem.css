@@ -27,8 +27,6 @@
 }
 
 .p-problem__item {
-  /* スタイルなし（li は listing 子配置のみを責任範囲とする）。
-     3-level 統一構造（li + .c-card wrapper + .c-text-block content）により
-     カード装飾は inner .c-card.-subtle、内部タイポの縦積みは .c-text-block が担当。
-     HTML レベルで責任を分離する。 */
+  /* スタイルなし（2-level 構造: li 自身が c-card.-subtle wrapper を兼ねる。
+     内部タイポの縦積みは .c-text-block が担当）。 */
 }
