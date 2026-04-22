@@ -1,0 +1,41 @@
+/* Block: リッチテキスト本文（CMS / プライバシーポリシー / 利用規約 / ブログ記事等に使用）
+   子孫セレクタを許容する例外 Component。HTML 構造にクラスを付与できない CMS 流し込みに対応する。
+   public API: --c-prose-max-inline-size（読みやすい最大幅、Project 側で上書き可） */
+.c-prose {
+  max-inline-size: var(--c-prose-max-inline-size, 40rem);
+  line-height: var(--line-height-text);
+
+  & h2 {
+    margin-block-start: var(--space-xl);
+    font-weight: var(--font-weight-heading);
+  }
+
+  & :is(p, ul) {
+    margin-block-start: var(--space-md);
+  }
+
+  /* h2 直下の段落・リストはタイトルと近接させる（視覚的グルーピング） */
+  & h2 + :is(p, ul) {
+    margin-block-start: var(--space-sm);
+  }
+
+  & ul {
+    padding-inline-start: var(--space-lg);
+  }
+
+  & li + li {
+    margin-block-start: var(--space-xs);
+  }
+
+  & a {
+    color: var(--color-main);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+
+    @media (any-hover: hover) {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}

@@ -10,43 +10,7 @@
   font-weight: var(--font-weight-heading);
 }
 
+/* タイトルと本文の間隔のみ Project 責任（本文内のタイポグラフィは c-prose が担う） */
 .p-privacy__body {
-  --_body-max: 640px;
-
-  max-inline-size: var(--_body-max);
   margin-block-start: var(--space-lg);
-  line-height: var(--line-height-text);
-
-  & h2 {
-    margin-block-start: var(--space-xl);
-    font-weight: var(--font-weight-heading);
-  }
-
-  & :is(p, ul) {
-    margin-block-start: var(--space-md);
-  }
-
-  & h2 + :is(p, ul) {
-    margin-block-start: var(--space-sm);
-  }
-
-  & ul {
-    padding-inline-start: var(--space-lg);
-  }
-
-  & li + li {
-    margin-block-start: var(--space-xs);
-  }
-
-  & a {
-    color: var(--color-main);
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
-
-    @media (any-hover: hover) {
-      &:hover {
-        text-decoration: none;
-      }
-    }
-  }
 }
