@@ -9,7 +9,10 @@
     <meta name="color-scheme" content="light dark" />
     <!-- CUSTOMIZE: ページタイトル・説明文を差し替え -->
     <title>ご予約・お問い合わせ — iluha</title>
-    <meta name="description" content="iluha のご予約・お問い合わせフォーム。24時間以内に折り返しご連絡いたします。" />
+    <meta
+      name="description"
+      content="iluha のご予約・お問い合わせフォーム。初回体験 60分 4,400円。カウンセリング込みで無理な勧誘なし。24時間以内に折り返しご連絡いたします。"
+    />
     <!-- CUSTOMIZE: token/color.css のメインカラーに合わせて変更 -->
     <meta name="theme-color" content="#5b7a5e" />
     <!-- CUSTOMIZE: 本番 URL に差し替え -->
@@ -19,15 +22,16 @@
     <meta property="og:title" content="ご予約・お問い合わせ — iluha" />
     <meta
       property="og:description"
-      content="30代・40代の女性のための完全個室ボディケアサロン。カウンセリング重視の施術で、内側からからだを整えます。初回体験 60分 4,400円。"
+      content="iluha のご予約・お問い合わせフォーム。初回体験 60分 4,400円。カウンセリング込みで無理な勧誘なし。24時間以内に折り返しご連絡いたします。"
     />
-    <!-- CUSTOMIZE: OGP画像・faviconを差し替え -->
+    <!-- CUSTOMIZE: OGP 画像を差し替え（必ず absolute URL、1200×630px 推奨） -->
     <meta property="og:image" content="https://example.com/ogp.png" />
     <!-- CUSTOMIZE: 本番 URL に差し替え -->
     <meta property="og:url" content="https://example.com/contact/" />
     <meta property="og:site_name" content="iluha" />
     <meta property="og:locale" content="ja_JP" />
     <meta name="twitter:card" content="summary_large_image" />
+    <!-- NOTE: twitter:title / twitter:description / twitter:image は未設定の場合 og:* が fallback として使われるため省略 -->
     <!-- Favicon -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -37,6 +41,28 @@
 
     <!-- Scripts -->
     <script type="module" src="/assets/scripts/main.js"></script>
+
+    <!-- CUSTOMIZE: 構造化データの URL を本番 URL に差し替え -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "ホーム",
+            "item": "https://example.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "ご予約・お問い合わせ",
+            "item": "https://example.com/contact/"
+          }
+        ]
+      }
+    </script>
   </head>
   <body id="top">
     <!-- Skip Link -->
@@ -103,38 +129,76 @@
           <p class="p-contact__lead">下記フォームからお気軽にどうぞ。24時間以内に折り返しご連絡いたします。</p>
 
           <!-- CUSTOMIZE: フォーム送信先を実際のバックエンド URL に差し替え -->
-          <form class="p-contact__form" action="/contact/thanks/" method="post">
+          <!-- NOTE: aria-describedby でエラーメッセージ要素を紐付け済み。JS でバリデーション時に hidden を解除し aria-invalid="true" を切り替えること -->
+          <form class="p-contact__form" action="/contact/thanks/" method="post" novalidate>
             <!-- 氏名 -->
             <div class="p-contact__field">
               <label for="name" class="p-contact__label">お名前</label>
-              <input type="text" id="name" name="name" class="p-contact__input" required autocomplete="name" />
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="p-contact__input"
+                required
+                autocomplete="name"
+                aria-describedby="name-error"
+              />
+              <p id="name-error" class="p-contact__error" role="alert" hidden>お名前を入力してください。</p>
             </div>
 
             <!-- メール -->
             <div class="p-contact__field">
               <label for="email" class="p-contact__label">メールアドレス</label>
-              <input type="email" id="email" name="email" class="p-contact__input" required autocomplete="email" />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="p-contact__input"
+                required
+                autocomplete="email"
+                aria-describedby="email-error"
+              />
+              <p id="email-error" class="p-contact__error" role="alert" hidden>
+                メールアドレスの形式が正しくありません。
+              </p>
             </div>
 
             <!-- 電話番号 -->
             <div class="p-contact__field">
               <label for="tel" class="p-contact__label">電話番号</label>
-              <input type="tel" id="tel" name="tel" class="p-contact__input" autocomplete="tel" />
+              <input
+                type="tel"
+                id="tel"
+                name="tel"
+                class="p-contact__input"
+                autocomplete="tel"
+                aria-describedby="tel-error"
+              />
+              <p id="tel-error" class="p-contact__error" role="alert" hidden>電話番号の形式が正しくありません。</p>
             </div>
 
             <!-- お問い合わせ種別 -->
             <div class="p-contact__field">
               <label for="category" class="p-contact__label">お問い合わせ種別</label>
-              <select id="category" name="category" class="p-contact__select" required>
+              <select
+                id="category"
+                name="category"
+                class="p-contact__select"
+                required
+                aria-describedby="category-error"
+              >
                 <option value="">選択してください</option>
                 <option value="reservation">初回体験の予約</option>
                 <option value="inquiry">施術に関するお問い合わせ</option>
                 <option value="other">その他</option>
               </select>
+              <p id="category-error" class="p-contact__error" role="alert" hidden>
+                お問い合わせ種別を選択してください。
+              </p>
             </div>
 
             <!-- プラン選択 -->
-            <fieldset class="p-contact__fieldset">
+            <fieldset class="p-contact__fieldset" aria-describedby="plan-error">
               <legend class="p-contact__legend">ご希望のプラン</legend>
               <div class="p-contact__radio-group">
                 <label class="p-contact__radio-label">
@@ -150,20 +214,39 @@
                   リラクゼーション（90分）
                 </label>
               </div>
+              <p id="plan-error" class="p-contact__error" role="alert" hidden>ご希望のプランを選択してください。</p>
             </fieldset>
 
             <!-- メッセージ -->
             <div class="p-contact__field">
               <label for="message" class="p-contact__label">メッセージ</label>
-              <textarea id="message" name="message" class="p-contact__textarea" required rows="6"></textarea>
+              <textarea
+                id="message"
+                name="message"
+                class="p-contact__textarea"
+                required
+                rows="6"
+                aria-describedby="message-error"
+              ></textarea>
+              <p id="message-error" class="p-contact__error" role="alert" hidden>メッセージを入力してください。</p>
             </div>
 
             <!-- 同意確認 -->
             <div class="p-contact__field">
               <label class="p-contact__checkbox-label">
-                <input type="checkbox" name="agree" class="p-contact__checkbox" required />
+                <input
+                  type="checkbox"
+                  name="agree"
+                  id="agree"
+                  class="p-contact__checkbox"
+                  required
+                  aria-describedby="agree-error"
+                />
                 <a href="/privacy/">プライバシーポリシー</a>に同意する
               </label>
+              <p id="agree-error" class="p-contact__error" role="alert" hidden>
+                プライバシーポリシーへの同意が必要です。
+              </p>
             </div>
 
             <!-- 送信 -->
@@ -208,6 +291,5 @@
         <use href="../assets/images/icons/chevron-up.svg#icon" />
       </svg>
     </a>
-
   </body>
 </html>

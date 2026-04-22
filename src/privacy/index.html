@@ -9,7 +9,10 @@
     <meta name="color-scheme" content="light dark" />
     <!-- CUSTOMIZE: ページタイトル・説明文を差し替え -->
     <title>プライバシーポリシー — iluha</title>
-    <meta name="description" content="iluha のプライバシーポリシー。個人情報の取り扱いについてご案内いたします。" />
+    <meta
+      name="description"
+      content="iluha のプライバシーポリシー。施術前後にお預かりする個人情報（氏名・連絡先）の収集目的、第三者提供の方針、お問い合わせ窓口を明記しています。"
+    />
     <!-- CUSTOMIZE: token/color.css のメインカラーに合わせて変更 -->
     <meta name="theme-color" content="#5b7a5e" />
     <!-- CUSTOMIZE: 本番 URL に差し替え -->
@@ -19,15 +22,16 @@
     <meta property="og:title" content="プライバシーポリシー — iluha" />
     <meta
       property="og:description"
-      content="iluha のプライバシーポリシー。個人情報の取り扱いについてご案内いたします。"
+      content="iluha のプライバシーポリシー。施術前後にお預かりする個人情報（氏名・連絡先）の収集目的、第三者提供の方針、お問い合わせ窓口を明記しています。"
     />
-    <!-- CUSTOMIZE: OGP画像・faviconを差し替え -->
+    <!-- CUSTOMIZE: OGP 画像を差し替え（必ず absolute URL、1200×630px 推奨） -->
     <meta property="og:image" content="https://example.com/ogp.png" />
     <!-- CUSTOMIZE: 本番 URL に差し替え -->
     <meta property="og:url" content="https://example.com/privacy/" />
     <meta property="og:site_name" content="iluha" />
     <meta property="og:locale" content="ja_JP" />
     <meta name="twitter:card" content="summary_large_image" />
+    <!-- NOTE: twitter:title / twitter:description / twitter:image は未設定の場合 og:* が fallback として使われるため省略 -->
     <!-- Favicon -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -37,6 +41,28 @@
 
     <!-- Scripts -->
     <script type="module" src="/assets/scripts/main.js"></script>
+
+    <!-- CUSTOMIZE: 構造化データの URL を本番 URL に差し替え -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "ホーム",
+            "item": "https://example.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "プライバシーポリシー",
+            "item": "https://example.com/privacy/"
+          }
+        ]
+      }
+    </script>
   </head>
   <body id="top">
     <!-- Skip Link -->
@@ -166,6 +192,5 @@
         <use href="../assets/images/icons/chevron-up.svg#icon" />
       </svg>
     </a>
-
   </body>
 </html>

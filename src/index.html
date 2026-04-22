@@ -24,22 +24,110 @@
       property="og:description"
       content="30代・40代の女性のための完全個室ボディケアサロン。カウンセリング重視の施術で、内側からからだを整えます。初回体験 60分 4,400円。"
     />
-    <!-- CUSTOMIZE: OGP画像・faviconを差し替え -->
+    <!-- CUSTOMIZE: OGP 画像を差し替え（必ず absolute URL、1200×630px 推奨） -->
     <meta property="og:image" content="https://example.com/ogp.png" />
     <!-- CUSTOMIZE: 本番 URL に差し替え -->
     <meta property="og:url" content="https://example.com/" />
     <meta property="og:site_name" content="iluha" />
     <meta property="og:locale" content="ja_JP" />
     <meta name="twitter:card" content="summary_large_image" />
+    <!-- NOTE: twitter:title / twitter:description / twitter:image は未設定の場合 og:* が fallback として使われるため省略 -->
     <!-- Favicon -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- Hero LCP 最適化: 早期発見のため preload -->
+    <link rel="preload" as="image" href="/assets/images/hero-main.webp" fetchpriority="high" />
     <!-- Styles -->
     <link rel="stylesheet" href="/assets/css/style.css" />
 
     <!-- Scripts -->
     <script type="module" src="/assets/scripts/main.js"></script>
+
+    <!-- CUSTOMIZE: 構造化データの各値を本番情報に差し替え -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://example.com/#organization",
+            "name": "iluha",
+            "url": "https://example.com/",
+            "logo": "https://example.com/ogp.png"
+          },
+          {
+            "@type": "HealthAndBeautyBusiness",
+            "@id": "https://example.com/#local-business",
+            "name": "iluha",
+            "url": "https://example.com/",
+            "image": "https://example.com/ogp.png",
+            "telephone": "03-xxxx-xxxx",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "○○ x-x-x ○○ビル 3F",
+              "addressLocality": "渋谷区",
+              "addressRegion": "東京都",
+              "postalCode": "xxx-xxxx",
+              "addressCountry": "JP"
+            },
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Thursday", "Friday", "Saturday", "Sunday"],
+              "opens": "10:00",
+              "closes": "20:00"
+            },
+            "priceRange": "¥4,400〜"
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://example.com/#website",
+            "url": "https://example.com/",
+            "name": "iluha"
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "施術に痛みはありますか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "痛みを我慢していただくことはありません。からだの状態に合わせて圧を調整します。施術中に眠ってしまう方も多いです。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "どのくらいの頻度で通えばいいですか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "最初の1ヶ月は週1回をおすすめしています。からだが整ってきたら、月1〜2回のメンテナンスに移行される方が多いです。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "予約の変更やキャンセルはできますか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "前日までにご連絡いただければ、変更・キャンセルとも無料で承ります。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "男性も利用できますか？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "現在は女性専用とさせていただいております。"
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body id="top">
     <!-- Skip Link -->
@@ -129,6 +217,8 @@
             alt="サロン内観のイメージ"
             width="1440"
             height="720"
+            loading="eager"
+            decoding="async"
             fetchpriority="high"
           />
         </div>
@@ -187,7 +277,14 @@
                   </div>
                   <!-- CUSTOMIZE: 画像を差し替え（推奨サイズ: 480x320。Retina 対応のため 2 倍サイズで書き出し） -->
                   <figure class="c-media-card__media">
-                    <img src="./assets/images/feature-counseling.webp" alt="" width="480" height="320" loading="lazy" />
+                    <img
+                      src="./assets/images/feature-counseling.webp"
+                      alt=""
+                      width="480"
+                      height="320"
+                      loading="lazy"
+                      decoding="async"
+                    />
                     <figcaption class="c-media-card__caption">カウンセリングの様子</figcaption>
                   </figure>
                 </article>
@@ -204,7 +301,14 @@
                   </div>
                   <!-- CUSTOMIZE: 画像を差し替え（推奨サイズ: 480x320。Retina 対応のため 2 倍サイズで書き出し） -->
                   <figure class="c-media-card__media">
-                    <img src="./assets/images/feature-treatment.webp" alt="" width="480" height="320" loading="lazy" />
+                    <img
+                      src="./assets/images/feature-treatment.webp"
+                      alt=""
+                      width="480"
+                      height="320"
+                      loading="lazy"
+                      decoding="async"
+                    />
                     <figcaption class="c-media-card__caption">施術の様子</figcaption>
                   </figure>
                 </article>
@@ -220,7 +324,14 @@
                   </div>
                   <!-- CUSTOMIZE: 画像を差し替え（推奨サイズ: 480x320。Retina 対応のため 2 倍サイズで書き出し） -->
                   <figure class="c-media-card__media">
-                    <img src="./assets/images/feature-private-room.webp" alt="" width="480" height="320" loading="lazy" />
+                    <img
+                      src="./assets/images/feature-private-room.webp"
+                      alt=""
+                      width="480"
+                      height="320"
+                      loading="lazy"
+                      decoding="async"
+                    />
                     <figcaption class="c-media-card__caption">個室の様子</figcaption>
                   </figure>
                 </article>
@@ -281,6 +392,7 @@
                         width="48"
                         height="48"
                         loading="lazy"
+                        decoding="async"
                       />
                       <cite class="c-blockquote__cite">田中美咲（38歳・会社員）</cite>
                     </footer>
@@ -303,6 +415,7 @@
                         width="48"
                         height="48"
                         loading="lazy"
+                        decoding="async"
                       />
                       <cite class="c-blockquote__cite">山本あかり（42歳・主婦）</cite>
                     </footer>
@@ -417,6 +530,5 @@
         <use href="./assets/images/icons/chevron-up.svg#icon" />
       </svg>
     </a>
-
   </body>
 </html>

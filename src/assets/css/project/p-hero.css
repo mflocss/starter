@@ -1,6 +1,6 @@
 .p-hero {
   display: grid;
-  grid-template-areas: "stack";
+  grid-template-areas: 'stack';
   place-items: center center;
   min-block-size: 60dvb;
   padding-block: 0;
@@ -63,7 +63,7 @@
   &::after {
     position: absolute;
     inset: 0;
-    content: "";
+    content: '';
     background: linear-gradient(to bottom, var(--_overlay-top) 0%, var(--_overlay-bottom) 100%);
   }
 
