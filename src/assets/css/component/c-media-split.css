@@ -1,0 +1,53 @@
+/* Block: 画像 + コンテンツの 2 カラムレイアウトパターン（card 装飾は持たない）。
+   装飾（padding / bg / radius / shadow）が必要な文脈では c-card と併記して組み合わせる。
+   命名は「card＝装飾込みコンテンツボックス」と区別して "-split"（分割レイアウト）を採用。
+
+   public API: Project 側で `--media-split-first-order: 2` を指定すると、インライン方向で
+   一定幅以上のときに左右（画像と content）の配置を反転できる（`:nth-child(even)` 等で活用）。
+   API 命名は spec §6「公開 API: --{対象}-{名前}」に準拠（プレフィックス c- / p- / l- は含まない）。 */
+.c-media-split {
+  --_order: var(--media-split-first-order, 0);
+
+  display: grid;
+  gap: var(--space-xl);
+  align-items: center;
+
+  @container (inline-size >= 50rem) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  & > :first-child {
+    order: var(--_order);
+  }
+}
+
+.c-media-split__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.c-media-split__badge {
+  align-self: start;
+}
+
+.c-media-split__title {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.c-media-split__text {
+  color: var(--color-text-light);
+}
+
+.c-media-split__media {
+  & img {
+    inline-size: 100%;
+    border-radius: var(--radius-md);
+  }
+}
+
+.c-media-split__caption {
+  margin-block-start: var(--space-sm);
+  font-size: var(--font-size-caption);
+  color: var(--color-text-light);
+}

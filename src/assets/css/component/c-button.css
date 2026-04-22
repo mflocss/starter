@@ -10,12 +10,13 @@
   font-weight: var(--font-weight-heading);
   line-height: var(--line-height-title);
 
-  /* WHY: 色系は公開 API 経由でモディファイア・Project から注入。ベースには default を置かず、モディファイア未指定だと無色となる設計（誤用を設計段階で顕在化させる） */
-  color: var(--c-button-color);
+  /* WHY: 色系は公開 API 経由でモディファイア・Project から注入。ベースには default を置かず、モディファイア未指定だと無色となる設計（誤用を設計段階で顕在化させる）。
+     API 命名は spec §6「公開 API: --{対象}-{名前}」に準拠（プレフィックス c- / p- / l- は含まない）。 */
+  color: var(--button-color);
   text-decoration: none;
   cursor: pointer;
-  background-color: var(--c-button-bg-color);
-  border: var(--border-width) solid var(--c-button-border-color);
+  background-color: var(--button-bg-color);
+  border: var(--border-width) solid var(--button-border-color);
   border-radius: var(--radius-lg);
 
   @media (prefers-reduced-motion: no-preference) {
@@ -26,7 +27,7 @@
 
   @media (any-hover: hover) {
     &:hover {
-      background-color: var(--c-button-hover-bg-color);
+      background-color: var(--button-hover-bg-color);
       translate: 0 var(--_hover-lift);
     }
   }
@@ -36,17 +37,17 @@
   }
 
   &.-primary {
-    --c-button-color: var(--color-surface);
-    --c-button-bg-color: var(--color-accent);
-    --c-button-border-color: var(--color-accent);
-    --c-button-hover-bg-color: oklch(from var(--color-accent) calc(l * 1.08) c h);
+    --button-color: var(--color-surface);
+    --button-bg-color: var(--color-accent);
+    --button-border-color: var(--color-accent);
+    --button-hover-bg-color: oklch(from var(--color-accent) calc(l * 1.08) c h);
   }
 
   &.-ghost {
-    --c-button-color: var(--color-main);
-    --c-button-bg-color: transparent;
-    --c-button-border-color: var(--color-main);
-    --c-button-hover-bg-color: oklch(from var(--color-main) l c h / 8%);
+    --button-color: var(--color-main);
+    --button-bg-color: transparent;
+    --button-border-color: var(--color-main);
+    --button-hover-bg-color: oklch(from var(--color-main) l c h / 8%);
   }
 
   &.-large {

@@ -1,8 +1,9 @@
 /* Block: リッチテキスト本文（CMS / プライバシーポリシー / 利用規約 / ブログ記事等に使用）
    子孫セレクタを許容する例外 Component。HTML 構造にクラスを付与できない CMS 流し込みに対応する。
-   public API: --c-prose-max-inline-size（読みやすい最大幅、Project 側で上書き可） */
+   public API: --prose-max-inline-size（読みやすい最大幅、Project 側で上書き可）
+     API 命名は spec §6「公開 API: --{対象}-{名前}」に準拠（プレフィックス c- / p- / l- は含まない）。 */
 .c-prose {
-  max-inline-size: var(--c-prose-max-inline-size, 40rem);
+  max-inline-size: var(--prose-max-inline-size, 40rem);
   line-height: var(--line-height-text);
 
   & h2 {
