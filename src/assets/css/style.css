@@ -26,14 +26,15 @@
 
 /* Component */
 @import './component/c-button.css' layer(component);
-@import './component/c-card.css' layer(component);
 @import './component/c-media-card.css' layer(component);
 @import './component/c-stat.css' layer(component);
 @import './component/c-badge.css' layer(component);
 @import './component/c-section-heading.css' layer(component);
 @import './component/c-accordion.css' layer(component);
 @import './component/c-blockquote.css' layer(component);
+@import './component/c-blockquote-card.css' layer(component);
 @import './component/c-text-block.css' layer(component);
+@import './component/c-text-block-card.css' layer(component);
 @import './component/c-prose.css' layer(component);
 @import './component/c-icon.css' layer(component);
 @import './component/c-back-to-top.css' layer(component);

@@ -1,0 +1,25 @@
+/* Block: 見出し+本文のペア + カード装飾。Problem / 特徴カード等で使用 */
+.c-text-block-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm) var(--color-shadow);
+
+  /* WHY: 影を落とさず背景のみで区切る控えめバリエーション。
+     グレーの面で情報をまとめたい場面（Problem セクション等）向け */
+  &.-subtle {
+    background-color: var(--color-bg-secondary);
+    box-shadow: none;
+  }
+}
+
+.c-text-block-card__title {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.c-text-block-card__text {
+  color: var(--color-text-light);
+}

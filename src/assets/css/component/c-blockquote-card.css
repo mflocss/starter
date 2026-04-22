@@ -1,0 +1,43 @@
+/* Block: 引用 + カード装飾。証言・レビュー・コメント等の
+   「引用コンテンツを視覚的にも独立したカードとして表示」するパターン */
+.c-blockquote-card {
+  --_border-width: 3px;
+
+  padding: var(--space-lg);
+  padding-inline-start: calc(var(--space-lg) + var(--_border-width));
+  background-color: var(--color-surface);
+  border-inline-start: var(--_border-width) solid var(--color-main);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm) var(--color-shadow);
+}
+
+.c-blockquote-card__title {
+  font-weight: var(--font-weight-heading);
+  line-height: var(--line-height-title);
+}
+
+.c-blockquote-card__text {
+  margin-block-start: var(--space-sm);
+  color: var(--color-text-light);
+}
+
+.c-blockquote-card__footer {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  margin-block-start: var(--space-md);
+  font-size: var(--font-size-caption);
+  font-style: normal;
+  color: var(--color-text-light);
+}
+
+.c-blockquote-card__avatar {
+  inline-size: var(--size-icon-area);
+  block-size: var(--size-icon-area);
+  object-fit: cover;
+  border-radius: var(--radius-full);
+}
+
+.c-blockquote-card__cite {
+  font-style: normal;
+}
