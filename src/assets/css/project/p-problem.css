@@ -27,5 +27,6 @@
 }
 
 .p-problem__item {
-  /* スタイルなし（カード装飾は c-card -subtle が担当。Project は grid 配置のみを責任範囲とする） */
+  /* スタイルなし（grid 子配置のみを責任範囲とする。カード装飾は子の c-card.-subtle、
+     内部タイポの縦積みはさらにその子の c-text-block が担当し、HTML レベルで責任を分離する） */
 }
