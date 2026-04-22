@@ -39,8 +39,9 @@
 }
 
 .p-hero__sub-cta {
-  color: light-dark(var(--color-main), var(--color-text));
-  border-color: light-dark(var(--color-main), var(--color-text));
+  /* WHY: Hero 背景のグラデーション上でもテキストとボーダーの可読性を確保するため、ダークモード時は text 色に寄せる。c-button 公開 API 経由で注入し、プロパティ直上書きを避ける */
+  --c-button-color: light-dark(var(--color-main), var(--color-text));
+  --c-button-border-color: light-dark(var(--color-main), var(--color-text));
 }
 
 .p-hero__actions {

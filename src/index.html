@@ -233,19 +233,19 @@
               <h2 id="problem-heading">こんな日々、続いていませんか？</h2>
             </hgroup>
             <ul class="p-problem__list" data-stagger="fade-in-slide-up">
-              <li class="p-problem__item c-text-block">
+              <li class="c-card -subtle c-text-block p-problem__item">
                 <h3 class="c-text-block__title">朝起きても疲れが抜けない</h3>
                 <p class="c-text-block__text">
                   睡眠時間は取っているのに、目覚めがすっきりしない。週末に寝溜めしても月曜にはもう重い。
                 </p>
               </li>
-              <li class="p-problem__item c-text-block">
+              <li class="c-card -subtle c-text-block p-problem__item">
                 <h3 class="c-text-block__title">肩や腰が常に張っている</h3>
                 <p class="c-text-block__text">
                   デスクワークが続くと夕方には限界。マッサージに行っても翌日には戻っている。
                 </p>
               </li>
-              <li class="p-problem__item c-text-block">
+              <li class="c-card -subtle c-text-block p-problem__item">
                 <h3 class="c-text-block__title">自分のための時間がない</h3>
                 <p class="c-text-block__text">
                   仕事、家事、育児。気づけば一日が終わっていて、自分のことは後回しになっている。
@@ -486,56 +486,64 @@
             <p lang="en">FAQ</p>
             <h2 id="faq-heading">よくある質問</h2>
           </hgroup>
-          <div class="p-faq__list" data-stagger="fade-in-slide-up">
-            <details class="c-accordion p-faq__item" open>
-              <summary class="c-accordion__summary">
-                施術に痛みはありますか？
-                <svg class="c-icon c-accordion__icon" width="20" height="20" aria-hidden="true">
-                  <use href="./assets/images/icons/chevron-down.svg#icon" />
-                </svg>
-              </summary>
-              <div class="c-accordion__content">
-                <p>
-                  痛みを我慢していただくことはありません。からだの状態に合わせて圧を調整します。施術中に眠ってしまう方も多いです。
-                </p>
-              </div>
-            </details>
-            <details class="c-accordion p-faq__item">
-              <summary class="c-accordion__summary">
-                どのくらいの頻度で通えばいいですか？
-                <svg class="c-icon c-accordion__icon" width="20" height="20" aria-hidden="true">
-                  <use href="./assets/images/icons/chevron-down.svg#icon" />
-                </svg>
-              </summary>
-              <div class="c-accordion__content">
-                <p>
-                  最初の1ヶ月は週1回をおすすめしています。からだが整ってきたら、月1〜2回のメンテナンスに移行される方が多いです。
-                </p>
-              </div>
-            </details>
-            <details class="c-accordion p-faq__item">
-              <summary class="c-accordion__summary">
-                予約の変更やキャンセルはできますか？
-                <svg class="c-icon c-accordion__icon" width="20" height="20" aria-hidden="true">
-                  <use href="./assets/images/icons/chevron-down.svg#icon" />
-                </svg>
-              </summary>
-              <div class="c-accordion__content">
-                <p>前日までにご連絡いただければ、変更・キャンセルとも無料で承ります。</p>
-              </div>
-            </details>
-            <details class="c-accordion p-faq__item">
-              <summary class="c-accordion__summary">
-                男性も利用できますか？
-                <svg class="c-icon c-accordion__icon" width="20" height="20" aria-hidden="true">
-                  <use href="./assets/images/icons/chevron-down.svg#icon" />
-                </svg>
-              </summary>
-              <div class="c-accordion__content">
-                <p>現在は女性専用とさせていただいております。</p>
-              </div>
-            </details>
-          </div>
+          <ul class="p-faq__list" data-stagger="fade-in-slide-up">
+            <li class="p-faq__item">
+              <details class="c-accordion" open>
+                <summary class="c-accordion__summary">
+                  施術に痛みはありますか？
+                  <svg class="c-icon c-accordion__icon" width="20" height="20" aria-hidden="true">
+                    <use href="./assets/images/icons/chevron-down.svg#icon" />
+                  </svg>
+                </summary>
+                <div class="c-accordion__content">
+                  <p>
+                    痛みを我慢していただくことはありません。からだの状態に合わせて圧を調整します。施術中に眠ってしまう方も多いです。
+                  </p>
+                </div>
+              </details>
+            </li>
+            <li class="p-faq__item">
+              <details class="c-accordion">
+                <summary class="c-accordion__summary">
+                  どのくらいの頻度で通えばいいですか？
+                  <svg class="c-icon c-accordion__icon" width="20" height="20" aria-hidden="true">
+                    <use href="./assets/images/icons/chevron-down.svg#icon" />
+                  </svg>
+                </summary>
+                <div class="c-accordion__content">
+                  <p>
+                    最初の1ヶ月は週1回をおすすめしています。からだが整ってきたら、月1〜2回のメンテナンスに移行される方が多いです。
+                  </p>
+                </div>
+              </details>
+            </li>
+            <li class="p-faq__item">
+              <details class="c-accordion">
+                <summary class="c-accordion__summary">
+                  予約の変更やキャンセルはできますか？
+                  <svg class="c-icon c-accordion__icon" width="20" height="20" aria-hidden="true">
+                    <use href="./assets/images/icons/chevron-down.svg#icon" />
+                  </svg>
+                </summary>
+                <div class="c-accordion__content">
+                  <p>前日までにご連絡いただければ、変更・キャンセルとも無料で承ります。</p>
+                </div>
+              </details>
+            </li>
+            <li class="p-faq__item">
+              <details class="c-accordion">
+                <summary class="c-accordion__summary">
+                  男性も利用できますか？
+                  <svg class="c-icon c-accordion__icon" width="20" height="20" aria-hidden="true">
+                    <use href="./assets/images/icons/chevron-down.svg#icon" />
+                  </svg>
+                </summary>
+                <div class="c-accordion__content">
+                  <p>現在は女性専用とさせていただいております。</p>
+                </div>
+              </details>
+            </li>
+          </ul>
         </div>
       </section>
 
