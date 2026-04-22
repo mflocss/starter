@@ -102,6 +102,11 @@
   }
 }
 
+.p-contact__error {
+  font-size: var(--font-size-caption);
+  color: var(--color-error);
+}
+
 .p-contact__radio {
   /* スタイルなし（HTML クラスとの対応を維持） */
 }
