@@ -550,128 +550,109 @@
 
           <!-- CUSTOMIZE: 本番バックエンド URL に差し替え。starter はフォーム送信処理を提供しません -->
           <!-- NOTE: aria-describedby でエラーメッセージ要素を紐付け済み。JS でバリデーション時に hidden を解除し aria-invalid="true" を切り替えること -->
-          <form class="p-contact__form" action="/api/contact" method="post" novalidate>
+          <form class="c-form p-contact__form" action="/api/contact" method="post" novalidate>
             <!-- 氏名 -->
-            <div class="p-contact__field">
-              <label for="name" class="p-contact__label">お名前</label>
+            <div class="c-form__field">
+              <label for="name" class="c-form__label">お名前</label>
               <input
                 type="text"
                 id="name"
                 name="name"
-                class="p-contact__input"
+                class="c-form__input"
                 required
                 autocomplete="name"
                 aria-describedby="name-error"
               />
-              <p id="name-error" class="p-contact__error" role="alert" hidden>お名前を入力してください。</p>
+              <p id="name-error" class="c-form__error" role="alert" hidden>お名前を入力してください。</p>
             </div>
 
             <!-- メール -->
-            <div class="p-contact__field">
-              <label for="email" class="p-contact__label">メールアドレス</label>
+            <div class="c-form__field">
+              <label for="email" class="c-form__label">メールアドレス</label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                class="p-contact__input"
+                class="c-form__input"
                 required
                 autocomplete="email"
                 aria-describedby="email-error"
               />
-              <p id="email-error" class="p-contact__error" role="alert" hidden>
-                メールアドレスの形式が正しくありません。
-              </p>
+              <p id="email-error" class="c-form__error" role="alert" hidden>メールアドレスの形式が正しくありません。</p>
             </div>
 
             <!-- 電話番号 -->
-            <div class="p-contact__field">
-              <label for="tel" class="p-contact__label">電話番号</label>
+            <div class="c-form__field">
+              <label for="tel" class="c-form__label">電話番号</label>
               <input
                 type="tel"
                 id="tel"
                 name="tel"
-                class="p-contact__input"
+                class="c-form__input"
                 autocomplete="tel"
                 aria-describedby="tel-error"
               />
-              <p id="tel-error" class="p-contact__error" role="alert" hidden>電話番号の形式が正しくありません。</p>
+              <p id="tel-error" class="c-form__error" role="alert" hidden>電話番号の形式が正しくありません。</p>
             </div>
 
             <!-- お問い合わせ種別 -->
-            <div class="p-contact__field">
-              <label for="category" class="p-contact__label">お問い合わせ種別</label>
-              <select
-                id="category"
-                name="category"
-                class="p-contact__select"
-                required
-                aria-describedby="category-error"
-              >
+            <div class="c-form__field">
+              <label for="category" class="c-form__label">お問い合わせ種別</label>
+              <select id="category" name="category" class="c-form__input" required aria-describedby="category-error">
                 <option value="">選択してください</option>
                 <option value="reservation">初回体験の予約</option>
                 <option value="inquiry">施術に関するお問い合わせ</option>
                 <option value="other">その他</option>
               </select>
-              <p id="category-error" class="p-contact__error" role="alert" hidden>
-                お問い合わせ種別を選択してください。
-              </p>
+              <p id="category-error" class="c-form__error" role="alert" hidden>お問い合わせ種別を選択してください。</p>
             </div>
 
             <!-- プラン選択 -->
-            <fieldset class="p-contact__fieldset" aria-describedby="plan-error">
-              <legend class="p-contact__legend">ご希望のプラン</legend>
-              <div class="p-contact__radio-group">
-                <label class="p-contact__radio-label">
-                  <input type="radio" name="plan" value="body-care" class="p-contact__radio" required />
+            <fieldset class="c-form__field" aria-describedby="plan-error">
+              <legend class="c-form__legend">ご希望のプラン</legend>
+              <div class="c-form__choice-group">
+                <label class="c-form__choice-label">
+                  <input type="radio" name="plan" value="body-care" required />
                   ボディケア（60分）
                 </label>
-                <label class="p-contact__radio-label">
-                  <input type="radio" name="plan" value="facial" class="p-contact__radio" />
+                <label class="c-form__choice-label">
+                  <input type="radio" name="plan" value="facial" />
                   フェイシャル（45分）
                 </label>
-                <label class="p-contact__radio-label">
-                  <input type="radio" name="plan" value="relaxation" class="p-contact__radio" />
+                <label class="c-form__choice-label">
+                  <input type="radio" name="plan" value="relaxation" />
                   リラクゼーション（90分）
                 </label>
               </div>
-              <p id="plan-error" class="p-contact__error" role="alert" hidden>ご希望のプランを選択してください。</p>
+              <p id="plan-error" class="c-form__error" role="alert" hidden>ご希望のプランを選択してください。</p>
             </fieldset>
 
             <!-- メッセージ -->
-            <div class="p-contact__field">
-              <label for="message" class="p-contact__label">メッセージ</label>
+            <div class="c-form__field">
+              <label for="message" class="c-form__label">メッセージ</label>
               <textarea
                 id="message"
                 name="message"
-                class="p-contact__textarea"
+                class="c-form__input"
                 required
                 rows="6"
                 aria-describedby="message-error"
               ></textarea>
-              <p id="message-error" class="p-contact__error" role="alert" hidden>メッセージを入力してください。</p>
+              <p id="message-error" class="c-form__error" role="alert" hidden>メッセージを入力してください。</p>
             </div>
 
             <!-- 同意確認 -->
-            <div class="p-contact__field">
-              <label class="p-contact__checkbox-label">
-                <input
-                  type="checkbox"
-                  name="agree"
-                  id="agree"
-                  class="p-contact__checkbox"
-                  required
-                  aria-describedby="agree-error"
-                />
+            <div class="c-form__field">
+              <label class="c-form__choice-label">
+                <input type="checkbox" name="agree" id="agree" required aria-describedby="agree-error" />
                 <a href="/privacy/">プライバシーポリシー</a>に同意する
               </label>
-              <p id="agree-error" class="p-contact__error" role="alert" hidden>
-                プライバシーポリシーへの同意が必要です。
-              </p>
+              <p id="agree-error" class="c-form__error" role="alert" hidden>プライバシーポリシーへの同意が必要です。</p>
             </div>
 
             <!-- 送信 -->
-            <div class="p-contact__actions">
-              <button type="submit" class="c-button -primary -large p-contact__submit">送信する</button>
+            <div class="c-form__actions">
+              <button type="submit" class="c-button -primary -large">送信する</button>
             </div>
           </form>
         </div>
