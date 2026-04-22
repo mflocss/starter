@@ -1,12 +1,26 @@
-.c-card {
-  padding: var(--space-lg);
-  background-color: var(--color-surface);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm) var(--color-shadow);
+/* Block: 装飾だけを担う汎用カード（padding + bg + radius + shadow + border のガワ）。
+   中身の構造（タイトル・本文・メディア配置 等）は持たず、c-text-block / c-media-split 等と
+   併記して組み合わせる。
 
-  /* WHY: 影を落とさず背景のみで区切る控えめバリエーション。グレーの面で情報をまとめたい場面（Problem セクション等）向け */
+   public API: Project 側で値を注入して見た目を切り替える。
+     --card-padding (default: var(--space-lg))
+     --card-bg      (default: var(--color-surface))
+     --card-radius  (default: var(--radius-md))
+     --card-shadow  (default: var(--shadow-sm) var(--color-shadow))
+     --card-border  (default: none)
+   命名は spec §6「公開 API: --{対象}-{名前}」に準拠（プレフィックス c- / p- / l- は含まない）。 */
+.c-card {
+  padding: var(--card-padding, var(--space-lg));
+  background-color: var(--card-bg, var(--color-surface));
+  border: var(--card-border, none);
+  border-radius: var(--card-radius, var(--radius-md));
+  box-shadow: var(--card-shadow, var(--shadow-sm) var(--color-shadow));
+
+  /* WHY: 影を落とさず背景のみで区切る控えめバリエーション。グレーの面で情報をまとめたい
+     場面（Problem セクション等）向け。公開 API 経由で値セットすることで、プロパティ直上書き
+     を避け、Project 側からも同じ差し替え手順で拡張できる。 */
   &.-subtle {
-    background-color: var(--color-bg-secondary);
-    box-shadow: none;
+    --card-bg: var(--color-bg-secondary);
+    --card-shadow: none;
   }
 }

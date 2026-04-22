@@ -28,12 +28,13 @@ fieldset.c-form__field {
   font-weight: var(--font-weight-heading);
 }
 
-/* 必須マーク: Project 側が --c-form-required-mark を上書きすればサイトごとに表現（「*」→「必須」等）を切替可能。
+/* 必須マーク: Project 側が --form-required-mark を上書きすればサイトごとに表現（「*」→「必須」等）を切替可能。
+   API 命名は spec §6「公開 API: --{対象}-{名前}」に準拠（プレフィックス c- / p- / l- は含まない）。
    空白は content に含めず gap: 0.25em で視覚的に担保する（コピペ・a11y 読み上げへの混入を回避） */
 .c-form__field:has(:required) > .c-form__label::after,
 .c-form__field:has(:required) > .c-form__legend::after {
   color: var(--color-error);
-  content: var(--c-form-required-mark, '*');
+  content: var(--form-required-mark, '*');
 }
 
 /* Element: 入力装飾（input / textarea / select 共通のビジュアル定義） */
