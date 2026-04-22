@@ -2,25 +2,21 @@
   --section-padding-min: var(--section-wide-min);
   --section-padding-max: var(--section-wide-max);
 
+  /* c-text-block 公開 API override: CTA の見出しを適度な幅で折り返す */
+  --text-block-title-max-inline-size: 600px;
+
   background-color: var(--color-bg-secondary);
 }
 
 .p-cta__inner {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
-  align-items: center;
   max-inline-size: var(--content-width-narrow);
   margin-inline: auto;
   text-align: center;
 }
 
-.p-cta__title {
-  --_title-max: 600px;
-
-  max-inline-size: var(--_title-max);
-}
-
-.p-cta__button {
-  margin-block-start: var(--space-sm);
+.p-cta__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  align-items: center;
 }

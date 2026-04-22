@@ -7,7 +7,7 @@
   background: radial-gradient(ellipse at 50% 0%, oklch(from var(--color-main) l c h / 6%) 0%, transparent 70%);
 }
 
-.p-hero__inner {
+.p-hero__stack {
   position: relative;
   z-index: 1;
   grid-area: stack;
