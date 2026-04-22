@@ -10,7 +10,6 @@
 }
 
 .p-not-found__lead {
-  /* font-size は body から継承、line-height は既存 token を使用 */
   line-height: var(--line-height-text);
   color: var(--color-text-light);
 }
