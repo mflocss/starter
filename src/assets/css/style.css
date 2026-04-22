@@ -52,7 +52,6 @@
 @import './project/p-cta.css' layer(project);
 @import './project/p-footer.css' layer(project);
 @import './project/p-contact.css' layer(project);
-@import './project/p-thanks.css' layer(project);
 @import './project/p-privacy.css' layer(project);
 @import './project/p-not-found.css' layer(project);
 
