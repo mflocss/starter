@@ -1,0 +1,8 @@
+# CUSTOMIZE: 本番 URL を正しいドメインに差し替えてください
+# NOTE: 組み込み時は既存の robots.txt が優先されます。
+#       既存サイトに mFLOCSS を導入する場合、このファイルを削除してください。
+# NOTE: Allow: / は省略可（デフォルトで全許可）。教育用途で意図を明示するため記載
+User-agent: *
+Allow: /
+
+Sitemap: https://example.com/sitemap.xml
