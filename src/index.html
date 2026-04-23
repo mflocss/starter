@@ -290,7 +290,7 @@
                   <figure class="c-media-split__media">
                     <img
                       src="./assets/images/feature-counseling.webp"
-                      alt=""
+                      alt="カウンセリングルームで施術者が話を聴いている場面"
                       width="480"
                       height="320"
                       loading="lazy"
@@ -314,7 +314,7 @@
                   <figure class="c-media-split__media">
                     <img
                       src="./assets/images/feature-treatment.webp"
-                      alt=""
+                      alt="施術者がベッドに横たわる方の筋膜にアプローチしている様子"
                       width="480"
                       height="320"
                       loading="lazy"
@@ -337,7 +337,7 @@
                   <figure class="c-media-split__media">
                     <img
                       src="./assets/images/feature-private-room.webp"
-                      alt=""
+                      alt="間接照明が灯る静かな完全個室の施術スペース"
                       width="480"
                       height="320"
                       loading="lazy"
@@ -619,15 +619,35 @@
 
           <!-- CUSTOMIZE: 本番バックエンド URL に差し替え。starter はフォーム送信処理を提供しません -->
           <form class="c-form p-contact__form" action="/api/contact" method="post">
-            <p class="c-form__note"><span aria-hidden="true">*</span> は必須項目です</p>
+            <p class="c-form__note"><span>*</span> のついた項目は必須です</p>
             <div class="c-form__field">
               <label class="c-form__label" for="name">お名前</label>
-              <input class="c-form__input" id="name" name="name" type="text" autocomplete="name" required />
+              <input
+                class="c-form__input"
+                id="name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                required
+                aria-describedby="name-error"
+              />
+              <span class="c-form__error" id="name-error" role="alert" hidden>お名前を入力してください</span>
             </div>
 
             <div class="c-form__field">
               <label class="c-form__label" for="email">メールアドレス</label>
-              <input class="c-form__input" id="email" name="email" type="email" autocomplete="email" required />
+              <input
+                class="c-form__input"
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                aria-describedby="email-error"
+              />
+              <span class="c-form__error" id="email-error" role="alert" hidden
+                >有効なメールアドレスを入力してください</span
+              >
             </div>
 
             <div class="c-form__field">
@@ -637,15 +657,18 @@
 
             <div class="c-form__field">
               <label class="c-form__label" for="category">お問い合わせ種別</label>
-              <select class="c-form__input" id="category" name="category" required>
+              <select class="c-form__input" id="category" name="category" required aria-describedby="category-error">
                 <option value="">選択してください</option>
                 <option value="reservation">初回体験の予約</option>
                 <option value="inquiry">施術に関するお問い合わせ</option>
                 <option value="other">その他</option>
               </select>
+              <span class="c-form__error" id="category-error" role="alert" hidden
+                >お問い合わせ種別を選択してください</span
+              >
             </div>
 
-            <fieldset class="c-form__field">
+            <fieldset class="c-form__field" aria-describedby="plan-error">
               <legend class="c-form__legend">ご希望のプラン</legend>
               <div class="c-form__choice-group">
                 <label class="c-form__choice-label">
@@ -661,18 +684,30 @@
                   リラクゼーション（90分）
                 </label>
               </div>
+              <span class="c-form__error" id="plan-error" role="alert" hidden>プランを選択してください</span>
             </fieldset>
 
             <div class="c-form__field">
               <label class="c-form__label" for="message">メッセージ</label>
-              <textarea class="c-form__input" id="message" name="message" rows="6" required></textarea>
+              <textarea
+                class="c-form__input"
+                id="message"
+                name="message"
+                rows="6"
+                required
+                aria-describedby="message-error"
+              ></textarea>
+              <span class="c-form__error" id="message-error" role="alert" hidden>メッセージを入力してください</span>
             </div>
 
             <div class="c-form__field">
-              <div class="c-form__choice-label">
-                <input id="agree" name="agree" type="checkbox" required aria-labelledby="agree-label" />
-                <span id="agree-label"><a href="/privacy/">プライバシーポリシー</a>に同意する</span>
-              </div>
+              <label class="c-form__choice-label" for="agree">
+                <input id="agree" name="agree" type="checkbox" required aria-describedby="agree-error" />
+                <a href="/privacy/">プライバシーポリシー</a>に同意する
+              </label>
+              <span class="c-form__error" id="agree-error" role="alert" hidden
+                >プライバシーポリシーへの同意が必要です</span
+              >
             </div>
 
             <div class="c-form__actions">

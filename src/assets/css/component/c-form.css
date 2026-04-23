@@ -66,6 +66,17 @@ textarea.c-form__input {
   max-block-size: 20lh;
 }
 
+/* Element: error — :user-invalid 時に表示される SR 対応エラーメッセージ（WCAG 3.3.1） */
+.c-form__error {
+  margin-block-start: var(--space-xs);
+  font-size: var(--font-size-caption);
+  color: var(--color-error);
+
+  &[hidden] {
+    display: none;
+  }
+}
+
 /* Element: radio / checkbox ラベル（両用） */
 .c-form__choice-label {
   display: flex;
