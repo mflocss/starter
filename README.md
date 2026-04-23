@@ -206,9 +206,19 @@ public/                    # ルートパス固定のファイル
 └── ogp.png
 ```
 
+## パッケージマネージャー
+
+本 starter は内部的に **pnpm** を使用して開発されており、`pnpm-lock.yaml` が commit されています。ただしエンドユーザーは **npm / pnpm / yarn** のいずれでも動作します:
+
+- 本 README の手順は **npm** 前提（初心者向けの最低障壁）
+- `pnpm install` でも動作（付属の `pnpm-lock.yaml` で高速・再現可能インストール）
+- `npm install` でも動作（`pnpm-lock.yaml` は無視され、独自に `package-lock.json` を生成）
+
+Starter 開発（Contribute）の場合は pnpm 推奨。詳細は [CONTRIBUTING.md](./CONTRIBUTING.md) 参照。
+
 ## GitHub Actions CI
 
-本リポジトリには `.github/workflows/check.yml` で `npm run check` + `npm run build` を検証する CI が設定されています。
+本リポジトリには `.github/workflows/check.yml` で `pnpm run check` + `pnpm run build` を検証する CI が設定されています。
 
 - **本体リポ（mflocss/starter）**: PR / push 時に自動発動
 - **Fork / Clone したリポ**: `if: github.repository == 'mflocss/starter'` の条件で**自動 skip**（初心者が意図せず Actions が走らない設計）
