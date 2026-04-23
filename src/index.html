@@ -131,32 +131,32 @@
   </head>
   <body id="top">
     <!-- Skip Link -->
-    <a href="#main" class="c-skip-link u-visually-hidden" data-drawer-inert>本文へスキップ</a>
+    <a class="c-skip-link u-visually-hidden" data-drawer-inert href="#main">本文へスキップ</a>
 
     <!-- NOTE: ヘッダー・フッターは全ページ共通。変更時は全ファイルに反映すること -->
     <!-- Header -->
     <header class="l-header p-header">
       <div class="l-inner p-header__bar">
         <!-- CUSTOMIZE: サービス名を差し替え -->
-        <a href="/" class="p-header__logo" translate="no">iluha</a>
+        <a class="p-header__logo" href="/" translate="no">iluha</a>
 
         <nav class="p-header__nav" aria-label="メインナビゲーション">
           <ul class="p-header__nav-list">
-            <li><a href="#features" class="p-header__nav-link">特徴</a></li>
-            <li><a href="#voice" class="p-header__nav-link">お客様の声</a></li>
-            <li><a href="#faq" class="p-header__nav-link">よくある質問</a></li>
-            <li><a href="#contact" class="p-header__nav-link">ご予約</a></li>
+            <li><a class="p-header__nav-link" href="#features">特徴</a></li>
+            <li><a class="p-header__nav-link" href="#voice">お客様の声</a></li>
+            <li><a class="p-header__nav-link" href="#faq">よくある質問</a></li>
+            <li><a class="p-header__nav-link" href="#contact">ご予約</a></li>
           </ul>
-          <a href="#contact" class="c-button -primary p-header__cta">初回体験を予約する</a>
+          <a class="c-button -primary p-header__cta" href="#contact">初回体験を予約する</a>
         </nav>
 
         <button
           class="c-hamburger p-header__hamburger"
+          data-hamburger
           type="button"
           aria-expanded="false"
           aria-controls="drawer"
           aria-label="メニュー"
-          data-hamburger
         >
           <span class="c-hamburger__line" aria-hidden="true"></span>
         </button>
@@ -167,46 +167,46 @@
     <div class="c-overlay" data-drawer-overlay hidden></div>
     <dialog class="p-drawer" id="drawer" data-drawer aria-labelledby="drawer-title" aria-modal="true">
       <div class="p-drawer__stack">
-        <span id="drawer-title" class="u-visually-hidden">ナビゲーションメニュー</span>
+        <span class="u-visually-hidden" id="drawer-title">ナビゲーションメニュー</span>
         <nav class="p-drawer__nav" aria-label="ドロワーナビゲーション">
           <ul class="p-drawer__nav-list">
             <li>
-              <a href="#features" class="p-drawer__nav-link">特徴</a>
+              <a class="p-drawer__nav-link" href="#features">特徴</a>
             </li>
             <li>
-              <a href="#voice" class="p-drawer__nav-link">お客様の声</a>
+              <a class="p-drawer__nav-link" href="#voice">お客様の声</a>
             </li>
             <li>
-              <a href="#faq" class="p-drawer__nav-link">よくある質問</a>
+              <a class="p-drawer__nav-link" href="#faq">よくある質問</a>
             </li>
             <li>
-              <a href="#contact" class="p-drawer__nav-link">ご予約</a>
+              <a class="p-drawer__nav-link" href="#contact">ご予約</a>
             </li>
           </ul>
         </nav>
-        <a href="#contact" class="c-button -primary p-drawer__cta">初回体験を予約する</a>
+        <a class="c-button -primary p-drawer__cta" href="#contact">初回体験を予約する</a>
       </div>
     </dialog>
 
     <main id="main" data-drawer-inert>
       <!-- Hero -->
-      <section class="l-section p-hero" aria-labelledby="hero-heading" data-immediate="scale-in">
+      <section class="l-section p-hero" data-immediate="scale-in" aria-labelledby="hero-heading">
         <div class="l-inner p-hero__stack">
           <!-- CUSTOMIZE: サービス名・キャッチコピーを差し替え -->
           <div class="p-hero__content">
-            <h1 id="hero-heading" class="p-hero__title">からだの声を、<br class="u-hidden-pc" />聴く時間。</h1>
+            <h1 class="p-hero__title" id="hero-heading">からだの声を、<br class="u-hidden-pc" />聴く時間。</h1>
             <p class="p-hero__lead">
               忙しい毎日の中で後回しにしてきた自分のケア。<br class="u-hidden-sp" />iluha
               は、内側から整うボディケアサロンです。
             </p>
             <div class="p-hero__actions">
-              <a href="#contact" class="c-icon-button -primary -large p-hero__cta">
+              <a class="c-icon-button -primary -large p-hero__cta" href="#contact">
                 初回体験を予約する
                 <svg class="c-icon-button__icon" width="20" height="20" aria-hidden="true">
                   <use href="./assets/images/icons/arrow-right.svg#icon" />
                 </svg>
               </a>
-              <a href="#features" class="c-button -ghost -large p-hero__sub-cta">選ばれる理由を見る</a>
+              <a class="c-button -ghost -large p-hero__sub-cta" href="#features">選ばれる理由を見る</a>
             </div>
           </div>
         </div>
@@ -412,7 +412,7 @@
           <!-- WHY: 幅広 table を wrapper で横スクロール可能に（Project 責務）。
                Component 化しない理由: min-inline-size はコンテンツ依存。
                a11y 3 点セット: role="region" + 固有の aria-label（section landmark「料金表」と重複しない一意の accessible name）+ tabindex="0"（キーボードで矢印スクロール可能） -->
-          <div class="p-pricing__table-wrapper" role="region" aria-label="料金表スクロール領域" tabindex="0">
+          <div class="p-pricing__table-wrapper" tabindex="0" aria-label="料金表スクロール領域" role="region">
             <table class="c-table p-pricing__table">
               <caption class="u-visually-hidden">
                 コース別の料金と所要時間
@@ -540,10 +540,10 @@
         <div class="l-inner p-cta__inner">
           <div class="p-cta__stack" data-stagger="fade-in-slide-up">
             <div class="c-text-block p-cta__message">
-              <h2 id="cta-heading" class="c-text-block__title">まずは一度、からだの声を聴いてみませんか？</h2>
+              <h2 class="c-text-block__title" id="cta-heading">まずは一度、からだの声を聴いてみませんか？</h2>
               <p class="c-text-block__text">初回体験は 60分 4,400円。カウンセリング込み。無理な勧誘はいたしません。</p>
             </div>
-            <a href="#contact" class="c-button -primary -large p-cta__button">初回体験を予約する</a>
+            <a class="c-button -primary -large p-cta__button" href="#contact">初回体験を予約する</a>
           </div>
         </div>
       </section>
@@ -629,26 +629,26 @@
           <form class="c-form p-contact__form" action="/api/contact" method="post">
             <!-- 氏名 -->
             <div class="c-form__field">
-              <label for="name" class="c-form__label">お名前</label>
-              <input type="text" id="name" name="name" class="c-form__input" required autocomplete="name" />
+              <label class="c-form__label" for="name">お名前</label>
+              <input class="c-form__input" id="name" name="name" type="text" autocomplete="name" required />
             </div>
 
             <!-- メール -->
             <div class="c-form__field">
-              <label for="email" class="c-form__label">メールアドレス</label>
-              <input type="email" id="email" name="email" class="c-form__input" required autocomplete="email" />
+              <label class="c-form__label" for="email">メールアドレス</label>
+              <input class="c-form__input" id="email" name="email" type="email" autocomplete="email" required />
             </div>
 
             <!-- 電話番号 -->
             <div class="c-form__field">
-              <label for="tel" class="c-form__label">電話番号</label>
-              <input type="tel" id="tel" name="tel" class="c-form__input" autocomplete="tel" />
+              <label class="c-form__label" for="tel">電話番号</label>
+              <input class="c-form__input" id="tel" name="tel" type="tel" autocomplete="tel" />
             </div>
 
             <!-- お問い合わせ種別 -->
             <div class="c-form__field">
-              <label for="category" class="c-form__label">お問い合わせ種別</label>
-              <select id="category" name="category" class="c-form__input" required>
+              <label class="c-form__label" for="category">お問い合わせ種別</label>
+              <select class="c-form__input" id="category" name="category" required>
                 <option value="">選択してください</option>
                 <option value="reservation">初回体験の予約</option>
                 <option value="inquiry">施術に関するお問い合わせ</option>
@@ -661,15 +661,15 @@
               <legend class="c-form__legend">ご希望のプラン</legend>
               <div class="c-form__choice-group">
                 <label class="c-form__choice-label">
-                  <input type="radio" name="plan" value="body-care" required />
+                  <input name="plan" type="radio" value="body-care" required />
                   ボディケア（60分）
                 </label>
                 <label class="c-form__choice-label">
-                  <input type="radio" name="plan" value="facial" />
+                  <input name="plan" type="radio" value="facial" />
                   フェイシャル（45分）
                 </label>
                 <label class="c-form__choice-label">
-                  <input type="radio" name="plan" value="relaxation" />
+                  <input name="plan" type="radio" value="relaxation" />
                   リラクゼーション（90分）
                 </label>
               </div>
@@ -677,21 +677,21 @@
 
             <!-- メッセージ -->
             <div class="c-form__field">
-              <label for="message" class="c-form__label">メッセージ</label>
-              <textarea id="message" name="message" class="c-form__input" required rows="6"></textarea>
+              <label class="c-form__label" for="message">メッセージ</label>
+              <textarea class="c-form__input" id="message" name="message" rows="6" required></textarea>
             </div>
 
             <!-- 同意確認 -->
             <div class="c-form__field">
               <label class="c-form__choice-label">
-                <input type="checkbox" name="agree" id="agree" required />
+                <input id="agree" name="agree" type="checkbox" required />
                 <a href="/privacy/">プライバシーポリシー</a>に同意する
               </label>
             </div>
 
             <!-- 送信 -->
             <div class="c-form__actions">
-              <button type="submit" class="c-button -primary -large">送信する</button>
+              <button class="c-button -primary -large" type="submit">送信する</button>
             </div>
           </form>
         </div>
@@ -703,19 +703,19 @@
       <div class="l-inner p-footer__stack">
         <nav class="p-footer__nav" aria-label="フッターナビゲーション">
           <ul class="p-footer__nav-list">
-            <li><a href="#features" class="p-footer__nav-link">特徴</a></li>
-            <li><a href="#voice" class="p-footer__nav-link">お客様の声</a></li>
-            <li><a href="#faq" class="p-footer__nav-link">よくある質問</a></li>
-            <li><a href="#contact" class="p-footer__nav-link">ご予約</a></li>
+            <li><a class="p-footer__nav-link" href="#features">特徴</a></li>
+            <li><a class="p-footer__nav-link" href="#voice">お客様の声</a></li>
+            <li><a class="p-footer__nav-link" href="#faq">よくある質問</a></li>
+            <li><a class="p-footer__nav-link" href="#contact">ご予約</a></li>
             <li>
-              <a href="/privacy/" class="p-footer__nav-link">プライバシーポリシー</a>
+              <a class="p-footer__nav-link" href="/privacy/">プライバシーポリシー</a>
             </li>
           </ul>
         </nav>
         <!-- CUSTOMIZE: 住所・電話番号・営業時間を差し替え -->
         <address class="p-footer__address">
           〒xxx-xxxx 東京都渋谷区○○ x-x-x ○○ビル 3F<br />
-          <a href="tel:03-xxxx-xxxx" class="p-footer__tel" translate="no">TEL: 03-xxxx-xxxx</a><br />
+          <a class="p-footer__tel" href="tel:03-xxxx-xxxx" translate="no">TEL: 03-xxxx-xxxx</a><br />
           営業時間: 10:00〜20:00（最終受付 19:00）<br />
           定休日: 毎週水曜日
         </address>
@@ -726,7 +726,7 @@
     </footer>
 
     <!-- Back to Top -->
-    <a href="#top" class="c-back-to-top" data-back-to-top aria-label="ページの先頭に戻る">
+    <a class="c-back-to-top" data-back-to-top href="#top" aria-label="ページの先頭に戻る">
       <svg class="c-back-to-top__icon" width="20" height="20" aria-hidden="true">
         <use href="./assets/images/icons/chevron-up.svg#icon" />
       </svg>
