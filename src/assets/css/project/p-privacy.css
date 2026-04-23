@@ -10,7 +10,6 @@
   font-weight: var(--font-weight-heading);
 }
 
-/* タイトルと本文の間隔のみ Project 責任（本文内のタイポグラフィは c-prose が担う） */
 .p-privacy__body {
   margin-block-start: var(--space-lg);
 }

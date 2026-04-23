@@ -1,7 +1,5 @@
-/* Block: リッチテキスト本文（CMS / プライバシーポリシー / 利用規約 / ブログ記事等に使用）
-   子孫セレクタを許容する例外 Component。HTML 構造にクラスを付与できない CMS 流し込みに対応する。
-   public API: --prose-max-inline-size（読みやすい最大幅、Project 側で上書き可）
-     API 命名は spec §6「公開 API: --{対象}-{名前}」に準拠（プレフィックス c- / p- / l- は含まない）。 */
+/* 子孫セレクタを許容する例外 Component（CMS 流し込み等、HTML クラス付与不能な用途向け）
+   公開 API: --prose-max-inline-size（読みやすい最大幅、Project 側で上書き可） */
 .c-prose {
   max-inline-size: var(--prose-max-inline-size, 40rem);
   line-height: var(--line-height-text);
@@ -15,7 +13,6 @@
     margin-block-start: var(--space-md);
   }
 
-  /* h2 直下の段落・リストはタイトルと近接させる（視覚的グルーピング） */
   & h2 + :is(p, ul) {
     margin-block-start: var(--space-sm);
   }

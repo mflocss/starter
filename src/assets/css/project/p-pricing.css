@@ -10,18 +10,13 @@
   /* スタイルなし（HTML クラスとの対応を維持） */
 }
 
-/* WHY: 幅広 table の横スクロール対策（Project 責務、Component 化しない理由:
-   min-inline-size がコンテンツ依存。tabindex="0" でキーボードフォーカスが
-   当たるため :focus-visible のリング描画は reset / foundation 既定で担保） */
 .p-pricing__table-wrapper {
   margin-block-start: var(--space-xl-2xl);
   overflow-x: auto;
 }
 
 .p-pricing__table {
-  /* WHY: iluha の 3 カラム料金表がここで横スクロールに切り替わる閾値。
-     コンテンツ依存の値なので Component 化せず Project に留める
-     （inline-size / border-collapse / セル装飾は c-table に委譲） */
+  /* 3 列表示 vs 横スクロールの切替閾値 */
   min-inline-size: 40rem;
 }
 

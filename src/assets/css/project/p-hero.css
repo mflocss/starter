@@ -43,7 +43,7 @@
 }
 
 .p-hero__sub-cta {
-  /* WHY: Hero 背景のグラデーション上でもテキストとボーダーの可読性を確保するため、ダークモード時は text 色に寄せる。c-button 公開 API 経由で注入し、プロパティ直上書きを避ける */
+  /* Hero グラデーション上のダークモード可読性調整（c-button 公開 API override） */
   --button-color: light-dark(var(--color-main), var(--color-text));
   --button-border-color: light-dark(var(--color-main), var(--color-text));
 }
