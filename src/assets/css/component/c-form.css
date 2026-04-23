@@ -41,9 +41,10 @@
     transition: border-color var(--duration-normal) var(--ease-out-cubic);
   }
 
-  &:focus {
-    outline: none;
+  &:focus-visible {
     border-color: var(--color-main);
+
+    /* Foundation の :where(:focus-visible) outline リングを温存（WCAG 2.4.11 AA） */
   }
 
   &:user-invalid {
