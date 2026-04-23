@@ -11,7 +11,7 @@
     "lint:js": "eslint \"src/**/*.js\" --fix",
     "lint:html": "markuplint \"src/**/*.html\"",
     "format": "prettier --write .",
-    "check": "npm run format && npm run lint:css && npm run lint:js && npm run lint:html"
+    "check": "pnpm run format && pnpm run lint:css && pnpm run lint:js && pnpm run lint:html"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

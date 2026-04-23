@@ -49,6 +49,13 @@ Node.js LTS 以降を推奨。
 - 既存 Component / Project のパターンを踏襲
 - コメント方針は CSS 内コメント / PR body 参照
 
+## リリース時の手順
+
+1. `CHANGELOG.md` の `## [Unreleased]` セクション見出しを `## [x.y.z] - YYYY-MM-DD` に置換（リリース実日付を記入）
+2. `## [Unreleased]` セクションをファイル先頭に新設（空の状態で追加）
+3. ファイル末尾の link references を更新（`[Unreleased]` の比較 URL と `[x.y.z]` のタグ URL を追加）
+4. `git tag vx.y.z` でリリースタグを切る
+
 ## 行動規範
 
 本プロジェクトは [Contributor Covenant 2.1](./CODE_OF_CONDUCT.md) を採用します。

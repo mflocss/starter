@@ -2,11 +2,7 @@
 
 mFLOCSS starter の変更履歴。[Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) 形式に準拠し、[Semantic Versioning](https://semver.org/lang/ja/) に従う。
 
-## [Unreleased]
-
-（次期バージョンの変更内容はここに追記）
-
-## [1.0.0] - YYYY-MM-DD
+## [Unreleased] (v1.0 リリース予定)
 
 初回正式リリース。
 
@@ -24,3 +20,5 @@ mFLOCSS starter の変更履歴。[Keep a Changelog](https://keepachangelog.com/
 - Community health files（CHANGELOG / CONTRIBUTING / SECURITY / CODE_OF_CONDUCT）
 - GitHub Actions CI（starter 本体のみ発動、Fork / Clone 時は自動 skip）
 - Issue テンプレート（bug report / feature request）
+
+[Unreleased]: https://github.com/mflocss/starter/compare/v1.0.0...HEAD
