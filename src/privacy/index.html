@@ -74,11 +74,11 @@
     <a class="c-skip-link u-visually-hidden" data-drawer-inert href="#main">本文へスキップ</a>
 
     <!-- Header -->
-    <header class="l-header p-header" data-drawer-inert>
+    <header class="l-header p-header">
       <div class="l-inner p-header__bar">
-        <a href="/" class="p-header__logo" translate="no">iluha</a>
+        <a href="/" class="p-header__logo" data-drawer-inert translate="no">iluha</a>
 
-        <nav class="p-header__nav" aria-label="メインナビゲーション">
+        <nav class="p-header__nav" data-drawer-inert aria-label="メインナビゲーション">
           <ul class="p-header__nav-list">
             <li><a href="/#features" class="p-header__nav-link">特徴</a></li>
             <li><a href="/#voice" class="p-header__nav-link">お客様の声</a></li>
@@ -87,20 +87,20 @@
           </ul>
           <a href="/#contact" class="c-button -primary p-header__cta">初回体験を予約する</a>
         </nav>
+
+        <!-- Hamburger: drawer 開閉中も機能するため data-drawer-inert 対象外 -->
+        <button
+          class="c-hamburger p-header__hamburger"
+          data-hamburger
+          type="button"
+          aria-expanded="false"
+          aria-controls="drawer"
+          aria-label="メニュー"
+        >
+          <span class="c-hamburger__line" aria-hidden="true"></span>
+        </button>
       </div>
     </header>
-
-    <!-- Hamburger（header 外、inert 対象外にして drawer 閉じ動線を確保）-->
-    <button
-      class="c-hamburger p-hamburger"
-      data-hamburger
-      type="button"
-      aria-expanded="false"
-      aria-controls="drawer"
-      aria-label="メニュー"
-    >
-      <span class="c-hamburger__line" aria-hidden="true"></span>
-    </button>
 
     <!-- Drawer -->
     <div class="c-overlay" data-drawer-overlay hidden></div>

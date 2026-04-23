@@ -69,7 +69,6 @@ textarea.c-form__input {
   resize: block; /* 未対応ブラウザでユーザーが手動リサイズ */
 }
 
-/* field-sizing 対応ブラウザでは自動伸縮するため手動リサイズを無効化 */
 @supports (field-sizing: content) {
   textarea.c-form__input {
     resize: none;
