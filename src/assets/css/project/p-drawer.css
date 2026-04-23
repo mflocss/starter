@@ -72,9 +72,3 @@
 .p-drawer__cta {
   margin-block-start: var(--space-md);
 }
-
-/* c-icon-button のデフォルト横パディングを縮小してアイコン単体ボタン形状に */
-.p-drawer__close {
-  align-self: flex-end;
-  padding: var(--space-sm);
-}

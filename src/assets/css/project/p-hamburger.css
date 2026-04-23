@@ -1,0 +1,13 @@
+/* Project: p-hamburger — header 外固定配置の hamburger ボタン
+   header が data-drawer-inert 対象のため header 外に配置し、
+   drawer 開閉中も常にフォーカス可能な状態を維持する */
+.p-hamburger {
+  position: fixed;
+  inset-block-start: var(--space-md);
+  inset-inline-end: var(--space-md);
+  z-index: var(--z-header);
+
+  @media (width >= 48rem) {
+    display: none;
+  }
+}

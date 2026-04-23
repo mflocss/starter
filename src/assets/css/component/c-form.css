@@ -61,22 +61,18 @@
 }
 
 /* NOTE: field-sizing は Baseline 未達（Firefox 145+、2026-04 リリース）。
-   未対応ブラウザでは固定高 textarea になるため、min/max-block-size でサイズ範囲を制限して
-   崩れを抑制している */
+   未対応ブラウザでは手動リサイズでフォールバック */
 textarea.c-form__input {
   field-sizing: content;
   min-block-size: 10lh;
   max-block-size: 20lh;
+  resize: block; /* 未対応ブラウザでユーザーが手動リサイズ */
 }
 
-/* Element: error — :user-invalid 時に表示される SR 対応エラーメッセージ（WCAG 3.3.1） */
-.c-form__error {
-  margin-block-start: var(--space-xs);
-  font-size: var(--font-size-caption);
-  color: var(--color-error);
-
-  &[hidden] {
-    display: none;
+/* field-sizing 対応ブラウザでは自動伸縮するため手動リサイズを無効化 */
+@supports (field-sizing: content) {
+  textarea.c-form__input {
+    resize: none;
   }
 }
 

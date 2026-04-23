@@ -66,9 +66,3 @@
 .p-header__cta {
   font-size: var(--font-size-caption);
 }
-
-.p-header__hamburger {
-  @media (width >= 48rem) {
-    display: none;
-  }
-}

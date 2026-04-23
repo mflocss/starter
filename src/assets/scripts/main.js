@@ -95,15 +95,6 @@ function initDrawer(options = {}) {
     });
   });
 
-  // drawer 内の閉じるボタン（header inert 化により hamburger が使えない場合の代替動線）
-  const drawerCloseButton = drawer.querySelector('[data-drawer-close]');
-  if (drawerCloseButton) {
-    drawerCloseButton.addEventListener('click', () => {
-      closeDrawer();
-      hamburgers[0]?.focus({ preventScroll: true });
-    });
-  }
-
   drawerLinks.forEach((link) => {
     link.addEventListener('click', () => {
       const href = link.getAttribute('href');
@@ -204,73 +195,11 @@ function initBackToTop(options = {}) {
   toggleVisibility();
 }
 
-/**
- * フォームバリデーション（:user-invalid → aria-invalid + error container 表示制御）を初期化する。
- * submit 時・invalid イベント時に aria-invalid="true" と error container を表示し、
- * 修正後 input イベントで valid になったら解除する。
- * @param {Object} [options] - カスタマイズオプション
- * @param {string} [options.formSelector='.c-form'] - フォームのセレクター
- */
-function initFormValidation(options = {}) {
-  const { formSelector = '.c-form' } = options;
-
-  const forms = document.querySelectorAll(formSelector);
-  if (forms.length === 0) return;
-
-  forms.forEach((form) => {
-    const fields = form.querySelectorAll(
-      'input[aria-describedby], select[aria-describedby], textarea[aria-describedby]',
-    );
-
-    function showError(field) {
-      field.setAttribute('aria-invalid', 'true');
-      const errorEl = document.getElementById(field.getAttribute('aria-describedby'));
-      if (errorEl) errorEl.hidden = false;
-    }
-
-    function clearError(field) {
-      field.removeAttribute('aria-invalid');
-      const errorEl = document.getElementById(field.getAttribute('aria-describedby'));
-      if (errorEl) errorEl.hidden = true;
-    }
-
-    fields.forEach((field) => {
-      field.addEventListener('invalid', () => showError(field));
-      field.addEventListener('input', () => {
-        if (field.validity.valid) clearError(field);
-      });
-    });
-
-    // fieldset の radio group: submit 失敗時に plan-error を表示
-    const radioGroups = form.querySelectorAll('fieldset[aria-describedby]');
-    radioGroups.forEach((fieldset) => {
-      const radios = fieldset.querySelectorAll('input[type="radio"]');
-      const firstRequired = fieldset.querySelector('input[type="radio"][required]');
-      if (!firstRequired) return;
-
-      firstRequired.addEventListener('invalid', () => {
-        fieldset.setAttribute('aria-invalid', 'true');
-        const errorEl = document.getElementById(fieldset.getAttribute('aria-describedby'));
-        if (errorEl) errorEl.hidden = false;
-      });
-
-      radios.forEach((radio) => {
-        radio.addEventListener('change', () => {
-          fieldset.removeAttribute('aria-invalid');
-          const errorEl = document.getElementById(fieldset.getAttribute('aria-describedby'));
-          if (errorEl) errorEl.hidden = true;
-        });
-      });
-    });
-  });
-}
-
 // 初期化（デフォルト値で動作）
 initDrawer();
 initStagger();
 initScrollAnimation();
 initBackToTop();
-initFormValidation();
 
 // CUSTOMIZE 例:
 // initDrawer({ breakpoint: 1024 });

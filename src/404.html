@@ -47,35 +47,26 @@
           </ul>
           <a href="/#contact" class="c-button -primary p-header__cta">初回体験を予約する</a>
         </nav>
-
-        <button
-          class="c-hamburger p-header__hamburger"
-          type="button"
-          aria-expanded="false"
-          aria-controls="drawer"
-          aria-label="メニュー"
-          data-hamburger
-        >
-          <span class="c-hamburger__line" aria-hidden="true"></span>
-        </button>
       </div>
     </header>
+
+    <!-- Hamburger（header 外、inert 対象外にして drawer 閉じ動線を確保）-->
+    <button
+      class="c-hamburger p-hamburger"
+      data-hamburger
+      type="button"
+      aria-expanded="false"
+      aria-controls="drawer"
+      aria-label="メニュー"
+    >
+      <span class="c-hamburger__line" aria-hidden="true"></span>
+    </button>
 
     <!-- Drawer -->
     <div class="c-overlay" data-drawer-overlay hidden></div>
     <dialog class="p-drawer" id="drawer" data-drawer aria-labelledby="drawer-title" aria-modal="true">
       <div class="p-drawer__stack">
         <span id="drawer-title" class="u-visually-hidden">ナビゲーションメニュー</span>
-        <button
-          class="c-icon-button -ghost p-drawer__close"
-          type="button"
-          data-drawer-close
-          aria-label="メニューを閉じる"
-        >
-          <svg class="c-icon-button__icon" width="20" height="20" aria-hidden="true">
-            <use href="/assets/images/icons/close.svg#icon" />
-          </svg>
-        </button>
         <nav class="p-drawer__nav" aria-label="ドロワーナビゲーション">
           <ul class="p-drawer__nav-list">
             <li>

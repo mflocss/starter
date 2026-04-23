@@ -160,35 +160,26 @@
           </ul>
           <a class="c-button -primary p-header__cta" href="#contact">初回体験を予約する</a>
         </nav>
-
-        <button
-          class="c-hamburger p-header__hamburger"
-          data-hamburger
-          type="button"
-          aria-expanded="false"
-          aria-controls="drawer"
-          aria-label="メニュー"
-        >
-          <span class="c-hamburger__line" aria-hidden="true"></span>
-        </button>
       </div>
     </header>
+
+    <!-- Hamburger（header 外、inert 対象外にして drawer 閉じ動線を確保）-->
+    <button
+      class="c-hamburger p-hamburger"
+      data-hamburger
+      type="button"
+      aria-expanded="false"
+      aria-controls="drawer"
+      aria-label="メニュー"
+    >
+      <span class="c-hamburger__line" aria-hidden="true"></span>
+    </button>
 
     <!-- Drawer -->
     <div class="c-overlay" data-drawer-overlay hidden></div>
     <dialog class="p-drawer" id="drawer" data-drawer aria-labelledby="drawer-title" aria-modal="true">
       <div class="p-drawer__stack">
         <span class="u-visually-hidden" id="drawer-title">ナビゲーションメニュー</span>
-        <button
-          class="c-icon-button -ghost p-drawer__close"
-          type="button"
-          data-drawer-close
-          aria-label="メニューを閉じる"
-        >
-          <svg class="c-icon-button__icon" width="20" height="20" aria-hidden="true">
-            <use href="/assets/images/icons/close.svg#icon" />
-          </svg>
-        </button>
         <nav class="p-drawer__nav" aria-label="ドロワーナビゲーション">
           <ul class="p-drawer__nav-list">
             <li>
@@ -632,32 +623,12 @@
             <p class="c-form__note"><span>*</span> のついた項目は必須です</p>
             <div class="c-form__field">
               <label class="c-form__label" for="name">お名前</label>
-              <input
-                class="c-form__input"
-                id="name"
-                name="name"
-                type="text"
-                autocomplete="name"
-                required
-                aria-describedby="name-error"
-              />
-              <span class="c-form__error" id="name-error" role="alert" hidden>お名前を入力してください</span>
+              <input class="c-form__input" id="name" name="name" type="text" autocomplete="name" required />
             </div>
 
             <div class="c-form__field">
               <label class="c-form__label" for="email">メールアドレス</label>
-              <input
-                class="c-form__input"
-                id="email"
-                name="email"
-                type="email"
-                autocomplete="email"
-                required
-                aria-describedby="email-error"
-              />
-              <span class="c-form__error" id="email-error" role="alert" hidden
-                >有効なメールアドレスを入力してください</span
-              >
+              <input class="c-form__input" id="email" name="email" type="email" autocomplete="email" required />
             </div>
 
             <div class="c-form__field">
@@ -667,18 +638,15 @@
 
             <div class="c-form__field">
               <label class="c-form__label" for="category">お問い合わせ種別</label>
-              <select class="c-form__input" id="category" name="category" required aria-describedby="category-error">
+              <select class="c-form__input" id="category" name="category" required>
                 <option value="">選択してください</option>
                 <option value="reservation">初回体験の予約</option>
                 <option value="inquiry">施術に関するお問い合わせ</option>
                 <option value="other">その他</option>
               </select>
-              <span class="c-form__error" id="category-error" role="alert" hidden
-                >お問い合わせ種別を選択してください</span
-              >
             </div>
 
-            <fieldset class="c-form__field" aria-describedby="plan-error">
+            <fieldset class="c-form__field">
               <legend class="c-form__legend">ご希望のプラン</legend>
               <div class="c-form__choice-group">
                 <label class="c-form__choice-label">
@@ -694,30 +662,18 @@
                   リラクゼーション（90分）
                 </label>
               </div>
-              <span class="c-form__error" id="plan-error" role="alert" hidden>プランを選択してください</span>
             </fieldset>
 
             <div class="c-form__field">
               <label class="c-form__label" for="message">メッセージ</label>
-              <textarea
-                class="c-form__input"
-                id="message"
-                name="message"
-                rows="6"
-                required
-                aria-describedby="message-error"
-              ></textarea>
-              <span class="c-form__error" id="message-error" role="alert" hidden>メッセージを入力してください</span>
+              <textarea class="c-form__input" id="message" name="message" rows="6" required></textarea>
             </div>
 
             <div class="c-form__field">
               <label class="c-form__choice-label" for="agree">
-                <input id="agree" name="agree" type="checkbox" required aria-describedby="agree-error" />
+                <input id="agree" name="agree" type="checkbox" required />
                 <a href="/privacy/">プライバシーポリシー</a>に同意する
               </label>
-              <span class="c-form__error" id="agree-error" role="alert" hidden
-                >プライバシーポリシーへの同意が必要です</span
-              >
             </div>
 
             <div class="c-form__actions">
