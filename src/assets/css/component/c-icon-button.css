@@ -1,13 +1,8 @@
-/* DEVIATION: spec §6 SHOULD NOT [公開 API プレフィックス含有の回避] の意図的逸脱。
-   c-icon-button は c-button に icon 領域を追加した派生 Component であり、
-   `--button-*` 公開 API を意図的に共有する。
-   上位層で `--button-bg-color` を設定すると両 Component に適用される仕様。 */
-
 /* 公開 API:
-     --button-color             (default: var(--color-surface)、= -primary 相当)
-     --button-bg-color          (default: var(--color-accent)、= -primary 相当)
-     --button-border-color      (default: var(--color-accent)、= -primary 相当)
-     --button-hover-bg-color    (default: -primary 相当) */
+     --icon-button-color             (default: var(--color-surface)、= -primary 相当)
+     --icon-button-bg-color          (default: var(--color-accent)、= -primary 相当)
+     --icon-button-border-color      (default: var(--color-accent)、= -primary 相当)
+     --icon-button-hover-bg-color    (default: -primary 相当) */
 .c-icon-button {
   display: inline-flex;
   gap: var(--space-sm);
@@ -17,11 +12,11 @@
   font-size: inherit;
   font-weight: var(--font-weight-heading);
   line-height: var(--line-height-title);
-  color: var(--button-color, var(--color-surface));
+  color: var(--icon-button-color, var(--color-surface));
   text-decoration: none;
   cursor: pointer;
-  background-color: var(--button-bg-color, var(--color-accent));
-  border: var(--border-width) solid var(--button-border-color, var(--color-accent));
+  background-color: var(--icon-button-bg-color, var(--color-accent));
+  border: var(--border-width) solid var(--icon-button-border-color, var(--color-accent));
   border-radius: var(--radius-lg);
 
   @media (prefers-reduced-motion: no-preference) {
@@ -32,7 +27,7 @@
 
   @media (any-hover: hover) {
     &:hover {
-      background-color: var(--button-hover-bg-color, oklch(from var(--color-accent) calc(l * 1.08) c h));
+      background-color: var(--icon-button-hover-bg-color, oklch(from var(--color-accent) calc(l * 1.08) c h));
       translate: 0 var(--hover-lift);
     }
   }
@@ -59,10 +54,10 @@
 }
 
 .c-icon-button.-ghost {
-  --button-color: var(--color-main);
-  --button-bg-color: transparent;
-  --button-border-color: var(--color-main);
-  --button-hover-bg-color: oklch(from var(--color-main) l c h / 8%);
+  --icon-button-color: var(--color-main);
+  --icon-button-bg-color: transparent;
+  --icon-button-border-color: var(--color-main);
+  --icon-button-hover-bg-color: oklch(from var(--color-main) l c h / 8%);
 }
 
 .c-icon-button.-large {
