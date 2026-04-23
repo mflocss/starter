@@ -9,7 +9,7 @@
 @import './token/radius.css' layer(token);
 @import './token/shadow.css' layer(token);
 @import './token/z-index.css' layer(token);
-@import './token/ease.css' layer(token);
+@import './token/motion.css' layer(token);
 
 /* Reset: ブラウザ環境の初期化 */
 @import './reset/reset.css' layer(reset);

@@ -1,6 +1,9 @@
+/* 公開 API:
+     --button-color             (default: var(--color-surface)、= -primary 相当)
+     --button-bg-color          (default: var(--color-accent)、= -primary 相当)
+     --button-border-color      (default: var(--color-accent)、= -primary 相当)
+     --button-hover-bg-color    (default: -primary 相当) */
 .c-button {
-  --_hover-lift: -2px;
-
   display: inline-flex;
   gap: var(--space-sm);
   align-items: center;
@@ -9,11 +12,11 @@
   font-size: inherit;
   font-weight: var(--font-weight-heading);
   line-height: var(--line-height-title);
-  color: var(--button-color);
+  color: var(--button-color, var(--color-surface));
   text-decoration: none;
   cursor: pointer;
-  background-color: var(--button-bg-color);
-  border: var(--border-width) solid var(--button-border-color);
+  background-color: var(--button-bg-color, var(--color-accent));
+  border: var(--border-width) solid var(--button-border-color, var(--color-accent));
   border-radius: var(--radius-lg);
 
   @media (prefers-reduced-motion: no-preference) {
@@ -24,8 +27,8 @@
 
   @media (any-hover: hover) {
     &:hover {
-      background-color: var(--button-hover-bg-color);
-      translate: 0 var(--_hover-lift);
+      background-color: var(--button-hover-bg-color, oklch(from var(--color-accent) calc(l * 1.08) c h));
+      translate: 0 var(--hover-lift);
     }
   }
 
@@ -39,11 +42,9 @@
   }
 }
 
+/* Modifier: -primary（明示的選択マーカー、デフォルトと同じ値のため空ルール） */
 .c-button.-primary {
-  --button-color: var(--color-surface);
-  --button-bg-color: var(--color-accent);
-  --button-border-color: var(--color-accent);
-  --button-hover-bg-color: oklch(from var(--color-accent) calc(l * 1.08) c h);
+  /* スタイルなし（base のデフォルトが primary 相当） */
 }
 
 .c-button.-ghost {

@@ -1,7 +1,6 @@
-/* 公開 API: --media-split-first-order で左右反転（`:nth-child(even)` 等で活用） */
+/* 公開 API:
+     --media-split-first-order  (default: 0、`:nth-child(even)` 等で 1 を set して左右反転) */
 .c-media-split {
-  --_order: var(--media-split-first-order, 0);
-
   display: grid;
   gap: var(--space-xl);
   align-items: center;
@@ -11,7 +10,7 @@
   }
 
   & > :first-child {
-    order: var(--_order);
+    order: var(--media-split-first-order, 0);
   }
 }
 

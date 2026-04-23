@@ -1,0 +1,8 @@
+/* CUSTOMIZE: イージング・デュレーション・モーション系定数（プロジェクト横断で共通） */
+:root {
+  --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --duration-fast: 0.2s;
+  --duration-normal: 0.3s;
+  --hover-lift: -2px; /* hover 時の translate Y 値、starter 全 hover Component 共用 */
+}
