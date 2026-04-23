@@ -1,3 +1,8 @@
+/* DEVIATION: spec §6 SHOULD NOT [公開 API プレフィックス含有の回避] の意図的逸脱。
+   c-icon-button は c-button に icon 領域を追加した派生 Component であり、
+   `--button-*` 公開 API を意図的に共有する。
+   上位層で `--button-bg-color` を設定すると両 Component に適用される仕様。 */
+
 /* 公開 API:
      --button-color             (default: var(--color-surface)、= -primary 相当)
      --button-bg-color          (default: var(--color-accent)、= -primary 相当)

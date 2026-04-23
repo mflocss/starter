@@ -60,8 +60,9 @@
   }
 }
 
-/* NOTE: field-sizing は Baseline 未達（Firefox 145+、2026-04 リリース）。
-   未対応ブラウザでは手動リサイズでフォールバック */
+/* NOTE: field-sizing は Baseline 未達。Chrome 123+ / Safari 26.2+ 対応、Firefox は 2026-04 時点で全バージョン未対応。
+   未対応ブラウザでは resize: block による手動リサイズでフォールバック
+   （https://caniuse.com/mdn-css_properties_field-sizing） */
 textarea.c-form__input {
   field-sizing: content;
   min-block-size: 10lh;
