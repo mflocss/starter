@@ -43,7 +43,7 @@
 @import './component/c-overlay.css' layer(component);
 @import './component/c-skip-link.css' layer(component);
 
-/* Project - HTML 登場順 */
+/* Project */
 @import './project/p-header.css' layer(project);
 @import './project/p-drawer.css' layer(project);
 @import './project/p-hero.css' layer(project);
