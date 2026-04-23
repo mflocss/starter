@@ -1,14 +1,10 @@
-/* Block: 装飾だけを担う汎用カード（padding + bg + radius + shadow + border のガワ）。
-   中身の構造（タイトル・本文・メディア配置 等）は持たず、c-text-block / c-media-split 等と
-   併記して組み合わせる。
-
-   public API: Project 側で値を注入して見た目を切り替える。
-     --card-padding (default: var(--space-lg))
-     --card-bg      (default: var(--color-surface))
-     --card-radius  (default: var(--radius-md))
-     --card-shadow  (default: var(--shadow-sm) var(--color-shadow))
-     --card-border  (default: none)
-   命名は spec §6「公開 API: --{対象}-{名前}」に準拠（プレフィックス c- / p- / l- は含まない）。 */
+/* Block: 装飾だけを担う汎用カード（c-text-block / c-media-split 等と併記）
+   公開 API:
+     --card-padding  (default: var(--space-lg))
+     --card-bg       (default: var(--color-surface))
+     --card-radius   (default: var(--radius-md))
+     --card-shadow   (default: var(--shadow-sm) var(--color-shadow))
+     --card-border   (default: none) */
 .c-card {
   padding: var(--card-padding, var(--space-lg));
   background-color: var(--card-bg, var(--color-surface));

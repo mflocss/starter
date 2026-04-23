@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- 描画前に viewport 最小幅を確定する必要があるため head で blocking 実行 -->
     <script src="/scripts/viewport.js"></script>
     <meta name="format-detection" content="telephone=no,address=no,email=no" />
     <!-- CUSTOMIZE: ダークモード不要なら content="light" に -->
@@ -623,25 +622,21 @@
 
           <!-- CUSTOMIZE: 本番バックエンド URL に差し替え。starter はフォーム送信処理を提供しません -->
           <form class="c-form p-contact__form" action="/api/contact" method="post">
-            <!-- 氏名 -->
             <div class="c-form__field">
               <label class="c-form__label" for="name">お名前</label>
               <input class="c-form__input" id="name" name="name" type="text" autocomplete="name" required />
             </div>
 
-            <!-- メール -->
             <div class="c-form__field">
               <label class="c-form__label" for="email">メールアドレス</label>
               <input class="c-form__input" id="email" name="email" type="email" autocomplete="email" required />
             </div>
 
-            <!-- 電話番号 -->
             <div class="c-form__field">
               <label class="c-form__label" for="tel">電話番号</label>
               <input class="c-form__input" id="tel" name="tel" type="tel" autocomplete="tel" />
             </div>
 
-            <!-- お問い合わせ種別 -->
             <div class="c-form__field">
               <label class="c-form__label" for="category">お問い合わせ種別</label>
               <select class="c-form__input" id="category" name="category" required>
@@ -652,7 +647,6 @@
               </select>
             </div>
 
-            <!-- プラン選択 -->
             <fieldset class="c-form__field">
               <legend class="c-form__legend">ご希望のプラン</legend>
               <div class="c-form__choice-group">
@@ -671,13 +665,11 @@
               </div>
             </fieldset>
 
-            <!-- メッセージ -->
             <div class="c-form__field">
               <label class="c-form__label" for="message">メッセージ</label>
               <textarea class="c-form__input" id="message" name="message" rows="6" required></textarea>
             </div>
 
-            <!-- 同意確認 -->
             <div class="c-form__field">
               <label class="c-form__choice-label">
                 <input id="agree" name="agree" type="checkbox" required />
@@ -685,7 +677,6 @@
               </label>
             </div>
 
-            <!-- 送信 -->
             <div class="c-form__actions">
               <button class="c-button -primary -large" type="submit">送信する</button>
             </div>
