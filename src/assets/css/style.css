@@ -43,7 +43,7 @@
 @import './component/c-overlay.css' layer(component);
 @import './component/c-form.css' layer(component);
 
-/* Project */
+/* Project - HTML 登場順 */
 @import './project/p-header.css' layer(project);
 @import './project/p-drawer.css' layer(project);
 @import './project/p-hero.css' layer(project);
@@ -53,10 +53,12 @@
 @import './project/p-pricing.css' layer(project);
 @import './project/p-numbers.css' layer(project);
 @import './project/p-voice.css' layer(project);
-@import './project/p-faq.css' layer(project);
 @import './project/p-cta.css' layer(project);
-@import './project/p-footer.css' layer(project);
+@import './project/p-faq.css' layer(project);
 @import './project/p-contact.css' layer(project);
+@import './project/p-footer.css' layer(project);
+
+/* index.html 以外のページで使用 */
 @import './project/p-privacy.css' layer(project);
 @import './project/p-not-found.css' layer(project);
 

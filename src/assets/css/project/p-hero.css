@@ -30,6 +30,14 @@
   font-size: var(--font-size-lead);
 }
 
+.p-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+  margin-block-start: var(--space-sm);
+}
+
 .p-hero__cta {
   /* スタイルなし（HTML クラスとの対応を維持） */
 }
@@ -38,14 +46,6 @@
   /* WHY: Hero 背景のグラデーション上でもテキストとボーダーの可読性を確保するため、ダークモード時は text 色に寄せる。c-button 公開 API 経由で注入し、プロパティ直上書きを避ける */
   --button-color: light-dark(var(--color-main), var(--color-text));
   --button-border-color: light-dark(var(--color-main), var(--color-text));
-}
-
-.p-hero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-md);
-  justify-content: center;
-  margin-block-start: var(--space-sm);
 }
 
 .p-hero__media {
