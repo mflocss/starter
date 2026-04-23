@@ -32,12 +32,10 @@
     <meta property="og:site_name" content="iluha" />
     <meta property="og:locale" content="ja_JP" />
     <meta name="twitter:card" content="summary_large_image" />
-    <!-- NOTE: twitter:title / twitter:description / twitter:image は未設定の場合 og:* が fallback として使われるため省略 -->
     <!-- Favicon -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <!-- Hero LCP 最適化: 早期発見のため preload -->
     <link rel="preload" as="image" href="/assets/images/hero-main.webp" fetchpriority="high" />
     <!-- Styles -->
     <link rel="stylesheet" href="/assets/css/style.css" />
@@ -410,9 +408,8 @@
             <h2 class="c-section-heading__title" id="pricing-heading">料金表</h2>
           </hgroup>
 
-          <!-- WHY: 幅広 table を wrapper で横スクロール可能に（Project 責務）。
-               Component 化しない理由: min-inline-size はコンテンツ依存。
-               a11y 3 点セット: role="region" + 固有の aria-label（section landmark「料金表」と重複しない一意の accessible name）+ tabindex="0"（キーボードで矢印スクロール可能） -->
+          <!-- Component 化しない: min-inline-size はコンテンツ依存 -->
+          <!-- a11y: role="region" + aria-label + tabindex="0" -->
           <div class="p-pricing__table-wrapper" tabindex="0" aria-label="料金表スクロール領域" role="region">
             <table class="c-table p-pricing__table">
               <caption class="u-visually-hidden">
