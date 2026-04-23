@@ -1,6 +1,5 @@
-/* Block: フォーム全体の縦並びレイアウト（max-inline-size / margin 等の外部配置は Project 側で制御）
-   公開 API: Project 側で送信ボタン前の余白を調整できるよう --form-actions-margin-top を露出（§7）。
-   命名は §6「--{対象}-{名前}」に準拠（c- プレフィックスは含めない） */
+/* Block: フォーム全体の縦並びレイアウト
+   公開 API: --form-actions-margin-top（送信ボタン前の余白） */
 .c-form {
   --form-actions-margin-top: var(--space-md);
 
@@ -16,7 +15,6 @@
   gap: var(--space-xs);
 }
 
-/* fieldset として使う時の default 装飾リセット（border / padding / margin を無効化し、div と等価な箱に整える） */
 fieldset.c-form__field {
   padding: 0;
   margin: 0;
@@ -32,9 +30,7 @@ fieldset.c-form__field {
   font-weight: var(--font-weight-heading);
 }
 
-/* 必須マーク: Project 側が --form-required-mark を上書きすればサイトごとに表現（「*」→「必須」等）を切替可能。
-   API 命名は spec §6「公開 API: --{対象}-{名前}」に準拠（プレフィックス c- / p- / l- は含まない）。
-   空白は content に含めず gap: 0.25em で視覚的に担保する（コピペ・a11y 読み上げへの混入を回避） */
+/* 必須マーク: --form-required-mark で「*」→「必須」等に切替可能（公開 API） */
 .c-form__field:has(:required) > .c-form__label::after,
 .c-form__field:has(:required) > .c-form__legend::after {
   color: var(--color-error);
@@ -50,7 +46,6 @@ fieldset.c-form__field {
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-sm);
 
-  /* prefers-reduced-motion: transition を抑制してアニメ酔い対策 */
   @media (prefers-reduced-motion: no-preference) {
     transition: border-color var(--duration-normal) var(--ease-out-cubic);
   }
