@@ -26,22 +26,22 @@
 
 /* Component */
 @import './component/c-button.css' layer(component);
+@import './component/c-form.css' layer(component);
 @import './component/c-icon-button.css' layer(component);
+@import './component/c-accordion.css' layer(component);
+@import './component/c-hamburger.css' layer(component);
 @import './component/c-card.css' layer(component);
 @import './component/c-media-split.css' layer(component);
-@import './component/c-stat.css' layer(component);
-@import './component/c-badge.css' layer(component);
-@import './component/c-section-heading.css' layer(component);
-@import './component/c-accordion.css' layer(component);
 @import './component/c-blockquote.css' layer(component);
-@import './component/c-text-block.css' layer(component);
 @import './component/c-prose.css' layer(component);
+@import './component/c-section-heading.css' layer(component);
+@import './component/c-text-block.css' layer(component);
+@import './component/c-badge.css' layer(component);
+@import './component/c-stat.css' layer(component);
 @import './component/c-table.css' layer(component);
 @import './component/c-back-to-top.css' layer(component);
-@import './component/c-skip-link.css' layer(component);
-@import './component/c-hamburger.css' layer(component);
 @import './component/c-overlay.css' layer(component);
-@import './component/c-form.css' layer(component);
+@import './component/c-skip-link.css' layer(component);
 
 /* Project - HTML 登場順 */
 @import './project/p-header.css' layer(project);
@@ -57,8 +57,6 @@
 @import './project/p-faq.css' layer(project);
 @import './project/p-contact.css' layer(project);
 @import './project/p-footer.css' layer(project);
-
-/* index.html 以外のページで使用 */
 @import './project/p-privacy.css' layer(project);
 @import './project/p-not-found.css' layer(project);
 
