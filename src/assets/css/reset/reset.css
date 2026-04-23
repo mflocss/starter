@@ -87,7 +87,7 @@
   font: inherit;
   color: inherit;
   letter-spacing: unset;
-  border: 1px solid;
+  border: unset;
   border-radius: unset;
 }
 

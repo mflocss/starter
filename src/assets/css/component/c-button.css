@@ -1,3 +1,5 @@
+/* NOTE: c-icon-button も `--button-*` 公開 API を共有（派生関係、c-icon-button.css の DEVIATION 参照） */
+
 /* 公開 API:
      --button-color             (default: var(--color-surface)、= -primary 相当)
      --button-bg-color          (default: var(--color-accent)、= -primary 相当)

@@ -94,6 +94,25 @@ CSS 完結のアニメーション。JS を待たず即時再生。LCP 要素（
 
 `dialog.close()` は即座に `display: none` にするため、CSS transition だけでは閉じるアニメーションが効きません。`data-open` 属性でアニメーション状態を JS から制御します（dialog の `open` 属性とは責務が異なります）。実装詳細は `src/assets/scripts/main.js` を参照してください。
 
+### data-drawer-inert — focus trap 対象マーカー
+
+Drawer open 時に **Drawer 外の全てのフォーカス可能要素を `inert` 化**する必要があります（`dialog.show()` は `showModal()` と異なり自動で inert 化しないため、JS から `setAttribute('inert', '')` で制御）。`data-drawer-inert` は「Drawer open 時に inert 化すべき要素」を明示するマーカー属性です。
+
+#### 付与対象
+
+Drawer と Hamburger トリガー**以外**の、フォーカス可能（= Tab 到達可能）な要素すべて。具体的には:
+
+- `<header>` の子要素（logo リンク・nav 等、ただし hamburger と drawer は除外）
+- `<main>` / `<footer>` 等のランドマーク
+- `<header>` 外の常駐要素（`c-back-to-top` 等、自己配置型 Component — spec §5.5）
+- skip-link（Drawer open 中は到達不要のため）
+
+**新規の自己配置型 Component（例: fixed chat widget、cookie banner 等）を追加する際は、必ず `data-drawer-inert` の付与要否を確認してください。**付与漏れがあると Drawer open 中に Tab が Drawer 外へ脱出し、focus trap が破綻します（WCAG 2.1.1 Keyboard A 違反）。
+
+#### JS 側
+
+`querySelectorAll('[data-drawer-inert]')` で全対象要素を取得 → `openDrawer` で `inert` 属性付与、`closeDrawer` で削除するだけ。新規対象を追加しても JS 側の変更は不要です。
+
 ## 空のルールセット
 
 HTML のクラスと CSS のルールセットは 1:1 で対応させます。スタイルが不要なクラスでも、ルールセットを残してコメントで意図を示します。「スタイルを意図的に書かなかった」と「書き忘れた」を区別でき、後から読んだコーダーが誤ってスタイルを追加するミスを防止できます。

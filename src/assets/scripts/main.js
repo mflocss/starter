@@ -178,6 +178,8 @@ function initStagger(options = {}) {
  * @param {number} [options.threshold=300] - 表示を切替えるスクロール量（px）
  */
 function initBackToTop(options = {}) {
+  // NOTE: CSS animation-timeline: scroll() で代替可能だが、opacity/visibility transition と競合するため
+  //       smooth fade UX 維持を優先して JS 実装を選択。@property + calc() 構成での CSS 化は将来検討。
   const { threshold = 300 } = options;
 
   const backToTop = document.querySelector('[data-back-to-top]');
