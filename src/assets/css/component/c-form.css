@@ -7,6 +7,13 @@
   gap: var(--space-lg);
 }
 
+/* Element: note — フォーム冒頭の必須マーク説明（WCAG 3.3.2 Labels or Instructions） */
+.c-form__note {
+  margin-block-end: var(--space-md);
+  font-size: var(--font-size-caption);
+  color: var(--color-text-light);
+}
+
 /* Element: label + input ラッパー（label / fieldset 両構造に対応） */
 .c-form__field {
   display: flex;
@@ -23,9 +30,10 @@
   font-weight: var(--font-weight-heading);
 }
 
-/* 必須マーク: --form-required-mark で「*」→「必須」等に切替可能（公開 API） */
+/* 必須マーク: --form-required-mark で「*」→「必須」等に切替可能（公開 API）。choice-label は ::before で前置（checkbox の前に表示） */
 .c-form__field:has(:required) > .c-form__label::after,
-.c-form__field:has(:required) > .c-form__legend::after {
+.c-form__field:has(:required) > .c-form__legend::after,
+.c-form__field:has(:required) > .c-form__choice-label::before {
   color: var(--color-error);
   content: var(--form-required-mark, '*');
 }

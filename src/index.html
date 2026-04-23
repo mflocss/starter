@@ -185,7 +185,7 @@
       </div>
     </dialog>
 
-    <main id="main" data-drawer-inert>
+    <main id="main" tabindex="-1" data-drawer-inert>
       <!-- Hero -->
       <section class="l-section p-hero" aria-labelledby="hero-heading">
         <div class="l-inner p-hero__stack">
@@ -605,6 +605,9 @@
 
           <!-- CUSTOMIZE: 本番バックエンド URL に差し替え。starter はフォーム送信処理を提供しません -->
           <form class="c-form p-contact__form" action="/api/contact" method="post">
+            <p class="c-form__note">
+              <span aria-hidden="true">*</span> は必須項目です
+            </p>
             <div class="c-form__field">
               <label class="c-form__label" for="name">お名前</label>
               <input class="c-form__input" id="name" name="name" type="text" autocomplete="name" required />
@@ -654,10 +657,10 @@
             </div>
 
             <div class="c-form__field">
-              <label class="c-form__choice-label">
-                <input id="agree" name="agree" type="checkbox" required />
-                <a href="/privacy/">プライバシーポリシー</a>に同意する
-              </label>
+              <div class="c-form__choice-label">
+                <input id="agree" name="agree" type="checkbox" required aria-labelledby="agree-label" />
+                <span id="agree-label"><a href="/privacy/">プライバシーポリシー</a>に同意する</span>
+              </div>
             </div>
 
             <div class="c-form__actions">
