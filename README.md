@@ -206,6 +206,16 @@ public/                    # ルートパス固定のファイル
 └── ogp.png
 ```
 
+## GitHub Actions CI
+
+本リポジトリには `.github/workflows/check.yml` で `npm run check` + `npm run build` を検証する CI が設定されています。
+
+- **本体リポ（mflocss/starter）**: PR / push 時に自動発動
+- **Fork / Clone したリポ**: `if: github.repository == 'mflocss/starter'` の条件で**自動 skip**（初心者が意図せず Actions が走らない設計）
+- **自分のプロジェクトで有効化する場合**: `.github/workflows/check.yml` の `jobs.check.if` 行を削除してください
+
+これにより「starter 本体の品質ゲート」と「ユーザーに優しいテンプレート」の両立を実現しています。
+
 ## 関連リンク
 
 - [デモサイト](https://starter.mflocss.dev) — starter のライブプレビュー
