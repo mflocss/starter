@@ -3,20 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="/scripts/viewport.js"></script>
-    <meta name="format-detection" content="telephone=no,address=no,email=no" />
-    <!-- CUSTOMIZE: ダークモード不要なら content="light" に -->
-    <meta name="color-scheme" content="light dark" />
     <!-- CUSTOMIZE: ページタイトル・説明文を差し替え -->
     <title>プライバシーポリシー — iluha</title>
     <meta
       name="description"
       content="iluha のプライバシーポリシー。施術前後にお預かりする個人情報（氏名・連絡先）の収集目的、第三者提供の方針、お問い合わせ窓口を明記しています。"
     />
+    <meta name="format-detection" content="telephone=no,address=no,email=no" />
+    <!-- CUSTOMIZE: ダークモード不要なら content="light" に -->
+    <meta name="color-scheme" content="light dark" />
     <!-- CUSTOMIZE: token/color.css のメインカラーに合わせて変更 -->
     <meta name="theme-color" content="#5b7a5e" />
-    <!-- CUSTOMIZE: 本番 URL に差し替え -->
-    <link rel="canonical" href="https://example.com/privacy/" />
     <!-- OGP -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="プライバシーポリシー — iluha" />
@@ -31,15 +28,23 @@
     <meta property="og:site_name" content="iluha" />
     <meta property="og:locale" content="ja_JP" />
     <meta name="twitter:card" content="summary_large_image" />
-    <!-- Favicon -->
+    <meta name="twitter:title" content="プライバシーポリシー — iluha" />
+    <meta
+      name="twitter:description"
+      content="iluha のプライバシーポリシー。施術前後にお預かりする個人情報（氏名・連絡先）の収集目的、第三者提供の方針、お問い合わせ窓口を明記しています。"
+    />
+    <meta name="twitter:image" content="https://example.com/ogp.png" />
+    <!-- CUSTOMIZE: og:* と同値でほとんどの場合 OK。Twitter 専用の差別化が必要な場合のみ変更 -->
+    <!-- CUSTOMIZE: 本番 URL に差し替え -->
+    <link rel="canonical" href="https://example.com/privacy/" />
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <!-- Styles -->
-    <link rel="stylesheet" href="/assets/css/style.css" />
-
     <!-- Scripts -->
     <script type="module" src="/assets/scripts/main.js"></script>
+    <script src="/scripts/viewport.js"></script>
 
     <!-- CUSTOMIZE: 構造化データの URL を本番 URL に差し替え -->
     <script type="application/ld+json">

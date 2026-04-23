@@ -1,6 +1,26 @@
 :root {
-  /* CUSTOMIZE: フォントファミリー */
-  --font-family: 'Noto Sans JP', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', meiryo, sans-serif;
+  /* CUSTOMIZE: Font selection
+   *
+   * Noto Sans JP を使う場合、以下いずれかで読み込み:
+   *
+   * A) Google Fonts CDN（手軽）: <link> を index.html <head> に追加
+   *    <link rel="preconnect" href="https://fonts.googleapis.com">
+   *    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   *    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+   *
+   * B) セルフホスト（推奨、パフォーマンス高）: WOFF2 を配信 + @font-face 宣言
+   *    @font-face {
+   *      font-family: 'Noto Sans JP';
+   *      src: url('/assets/fonts/noto-sans-jp.woff2') format('woff2');
+   *      font-display: swap;
+   *      font-weight: 100 900;
+   *    }
+   *
+   * 読み込みなしの場合: システムフォント（system-ui）にフォールバック
+   */
+  --font-family:
+    'Noto Sans JP', system-ui, -apple-system, blinkmacsystemfont, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', meiryo,
+    sans-serif;
 
   /* CUSTOMIZE: 流体タイポグラフィ（viewport-min → viewport-max の直線的な補間） */
   --font-size-h1: clamp(calc(32 * var(--px)), 2.308vi + 1.4231rem, calc(56 * var(--px)));

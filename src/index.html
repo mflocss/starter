@@ -3,20 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="/scripts/viewport.js"></script>
-    <meta name="format-detection" content="telephone=no,address=no,email=no" />
-    <!-- CUSTOMIZE: ダークモード不要なら content="light" に -->
-    <meta name="color-scheme" content="light dark" />
     <!-- CUSTOMIZE: ページタイトル・説明文を差し替え -->
     <title>iluha — からだの声を、聴く時間。</title>
     <meta
       name="description"
       content="iluha（イルハ）は、30代・40代の女性のための完全個室ボディケアサロン。カウンセリング重視の施術で、内側からからだを整えます。初回体験 60分 4,400円。"
     />
+    <meta name="format-detection" content="telephone=no,address=no,email=no" />
+    <!-- CUSTOMIZE: ダークモード不要なら content="light" に -->
+    <meta name="color-scheme" content="light dark" />
     <!-- CUSTOMIZE: token/color.css のメインカラーに合わせて変更 -->
     <meta name="theme-color" content="#5b7a5e" />
-    <!-- CUSTOMIZE: 本番 URL に差し替え -->
-    <link rel="canonical" href="https://example.com/" />
     <!-- OGP -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="iluha — からだの声を、聴く時間。" />
@@ -31,16 +28,32 @@
     <meta property="og:site_name" content="iluha" />
     <meta property="og:locale" content="ja_JP" />
     <meta name="twitter:card" content="summary_large_image" />
-    <!-- Favicon -->
+    <meta name="twitter:title" content="iluha — からだの声を、聴く時間。" />
+    <meta
+      name="twitter:description"
+      content="30代・40代の女性のための完全個室ボディケアサロン。カウンセリング重視の施術で、内側からからだを整えます。初回体験 60分 4,400円。"
+    />
+    <meta name="twitter:image" content="https://example.com/ogp.png" />
+    <!-- CUSTOMIZE: og:* と同値でほとんどの場合 OK。Twitter 専用の差別化が必要な場合のみ変更 -->
+    <!-- CUSTOMIZE: 本番 URL に差し替え -->
+    <link rel="canonical" href="https://example.com/" />
+    <!-- CUSTOMIZE: フォント読み込み
+       Google Fonts を使う場合、ここに以下を追加:
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+       <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+       詳細: src/assets/css/token/typography.css の CUSTOMIZE コメント参照
+    -->
+    <!-- CUSTOMIZE: LCP 画像を差し替える場合は href + type を更新、image/jpeg image/png image/avif に対応可 -->
+    <link rel="preload" as="image" type="image/webp" href="/assets/images/hero-main.webp" fetchpriority="high" />
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="preload" as="image" href="/assets/images/hero-main.webp" fetchpriority="high" />
-    <!-- Styles -->
-    <link rel="stylesheet" href="/assets/css/style.css" />
-
     <!-- Scripts -->
     <script type="module" src="/assets/scripts/main.js"></script>
+    <script src="/scripts/viewport.js"></script>
 
     <!-- CUSTOMIZE: 構造化データの各値を本番情報に差し替え -->
     <script type="application/ld+json">
