@@ -1,5 +1,4 @@
-/* Block: フォーム全体の縦並びレイアウト
-   公開 API: --form-actions-margin-top（送信ボタン前の余白） */
+/* 公開 API: --form-actions-margin-top（送信ボタン前の余白） */
 .c-form {
   --form-actions-margin-top: var(--space-md);
 

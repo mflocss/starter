@@ -16,8 +16,6 @@
   text-align: center;
 }
 
-/* フォーム全体の外部配置（最大幅・上余白・中央寄せ）は Project 側が保持。
-   縦並び / gap 等の内部レイアウトは Component（c-form）が担当。 */
 .p-contact__form {
   --_form-max: 640px;
 
@@ -26,17 +24,7 @@
   margin-inline: auto;
 }
 
-/* Project 固有 Element（Component 化しない装飾・配置） */
-
-/* 同意確認リンク（プライバシーポリシー）は p-contact 固有の装飾 */
 .p-contact__form a {
   color: var(--color-main);
   text-decoration: underline;
 }
-
-/* TEACHING: Project が Component Element を文脈依存に上書きする場合は、子孫セレクタで対応する。
-   例:
-     .p-contact__form .c-form__input {
-       border-radius: var(--radius-md);
-     }
-   Component の公開 API（--form-required-mark 等）を使って差し替える方法も推奨される。 */

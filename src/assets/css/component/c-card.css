@@ -1,5 +1,4 @@
-/* Block: 装飾だけを担う汎用カード（c-text-block / c-media-split 等と併記）
-   公開 API:
+/* 公開 API:
      --card-padding  (default: var(--space-lg))
      --card-bg       (default: var(--color-surface))
      --card-radius   (default: var(--radius-md))

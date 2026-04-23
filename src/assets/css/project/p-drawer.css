@@ -2,13 +2,13 @@
   --overlay-z: calc(var(--z-drawer) - 1);
 }
 
-/* show() を使用（showModal() だとヘッダーが背面に隠れる） */
+/* show() で非モーダル表示（showModal() はヘッダー背面隠蔽） */
 .p-drawer {
   --_panel-size: min(max(85vi, calc(var(--viewport-min) * var(--px))), calc(100vi - 48px));
 
   position: fixed;
   inset: 0;
-  inset-inline-start: auto; /* UA の inset-inline-start: 0 を打ち消す */
+  inset-inline-start: auto;
   z-index: var(--z-drawer);
   inline-size: var(--_panel-size);
   max-inline-size: none;

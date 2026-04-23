@@ -1,5 +1,4 @@
-/* Block: 画像 + コンテンツの 2 カラムレイアウトパターン
-   公開 API: --media-split-first-order で左右反転（`:nth-child(even)` 等で活用） */
+/* 公開 API: --media-split-first-order で左右反転（`:nth-child(even)` 等で活用） */
 .c-media-split {
   --_order: var(--media-split-first-order, 0);
 

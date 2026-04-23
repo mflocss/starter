@@ -5,7 +5,7 @@
   border-block-end: var(--border-width) solid var(--color-border);
   backdrop-filter: blur(var(--_blur));
 
-  /* ドロワー表示中はヘッダーを不透明に（背面コンテンツの透けを防止） */
+  /* ドロワー表示時の背面透け防止 */
   :root:has(dialog[open]) & {
     background-color: var(--color-bg);
     backdrop-filter: none;
