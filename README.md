@@ -208,11 +208,15 @@ public/                    # ルートパス固定のファイル
 
 ## パッケージマネージャー
 
-本 starter は内部的に **pnpm** を使用して開発されており、`pnpm-lock.yaml` が commit されています。ただしエンドユーザーは **npm / pnpm / yarn** のいずれでも動作します:
+本 starter は pnpm で開発されており、`pnpm-lock.yaml` が commit されています。エンドユーザーは **npm / pnpm / yarn** のいずれでも動作します:
 
-- 本 README の手順は **npm** 前提（初心者向けの最低障壁）
+- 本 README の手順は **npm** で記述（Node.js 同梱ツールのため追加インストール不要）
 - `pnpm install` でも動作（付属の `pnpm-lock.yaml` で高速・再現可能インストール）
-- `npm install` でも動作（`pnpm-lock.yaml` は無視され、独自に `package-lock.json` を生成）
+- `npm install` でも動作（`pnpm-lock.yaml` は無視され、独自に `package-lock.json` がローカル生成される）
+
+### 生成された lockfile の扱い
+
+`npm install` した場合、`package-lock.json` が生成されます。これを commit するかどうかは、あなたのプロジェクトの方針で判断してください（個人プロジェクト・チーム開発では一般的に commit します）。
 
 Starter 開発（Contribute）の場合は pnpm 推奨。詳細は [CONTRIBUTING.md](./CONTRIBUTING.md) 参照。
 
@@ -221,7 +225,7 @@ Starter 開発（Contribute）の場合は pnpm 推奨。詳細は [CONTRIBUTING
 本リポジトリには `.github/workflows/check.yml` で `pnpm run check` + `pnpm run build` を検証する CI が設定されています。
 
 - **本体リポ（mflocss/starter）**: PR / push 時に自動発動
-- **Fork / Clone したリポ**: `if: github.repository == 'mflocss/starter'` の条件で**自動 skip**（初心者が意図せず Actions が走らない設計）
+- **Fork / Clone したリポ**: `if: github.repository == 'mflocss/starter'` の条件で**自動 skip**（Fork 直後に Actions が意図せず走らない設計）
 - **自分のプロジェクトで有効化する場合**: `.github/workflows/check.yml` の `jobs.check.if` 行を削除してください
 
 これにより「starter 本体の品質ゲート」と「ユーザーに優しいテンプレート」の両立を実現しています。
