@@ -95,6 +95,15 @@ function initDrawer(options = {}) {
     });
   });
 
+  // drawer 内の閉じるボタン（header inert 化により hamburger が使えない場合の代替動線）
+  const drawerCloseButton = drawer.querySelector('[data-drawer-close]');
+  if (drawerCloseButton) {
+    drawerCloseButton.addEventListener('click', () => {
+      closeDrawer();
+      hamburgers[0]?.focus({ preventScroll: true });
+    });
+  }
+
   drawerLinks.forEach((link) => {
     link.addEventListener('click', () => {
       const href = link.getAttribute('href');
