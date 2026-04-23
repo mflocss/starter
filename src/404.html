@@ -34,7 +34,7 @@
     <a class="c-skip-link u-visually-hidden" data-drawer-inert href="#main">本文へスキップ</a>
 
     <!-- Header -->
-    <header class="l-header p-header">
+    <header class="l-header p-header" data-drawer-inert>
       <div class="l-inner p-header__bar">
         <a href="/" class="p-header__logo" translate="no">iluha</a>
 
@@ -66,6 +66,16 @@
     <dialog class="p-drawer" id="drawer" data-drawer aria-labelledby="drawer-title" aria-modal="true">
       <div class="p-drawer__stack">
         <span id="drawer-title" class="u-visually-hidden">ナビゲーションメニュー</span>
+        <button
+          class="c-icon-button -ghost p-drawer__close"
+          type="button"
+          data-drawer-close
+          aria-label="メニューを閉じる"
+        >
+          <svg class="c-icon-button__icon" width="20" height="20" aria-hidden="true">
+            <use href="/assets/images/icons/close.svg#icon" />
+          </svg>
+        </button>
         <nav class="p-drawer__nav" aria-label="ドロワーナビゲーション">
           <ul class="p-drawer__nav-list">
             <li>
