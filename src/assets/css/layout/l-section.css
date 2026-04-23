@@ -3,5 +3,4 @@
   --section-padding-max: var(--section-standard-max);
 
   padding-block: clamp(var(--section-padding-min), 3.462vi + 3.1346rem, var(--section-padding-max));
-  scroll-margin-block-start: var(--header-size);
 }
