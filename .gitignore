@@ -3,4 +3,3 @@ dist/
 *.local
 .env
 .DS_Store
-.worker-context.md
