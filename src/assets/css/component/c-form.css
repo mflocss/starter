@@ -60,6 +60,9 @@
   }
 }
 
+/* NOTE: field-sizing は Baseline 未達（Firefox 145+、2026-04 リリース）。
+   未対応ブラウザでは固定高 textarea になるため、min/max-block-size でサイズ範囲を制限して
+   崩れを抑制している */
 textarea.c-form__input {
   field-sizing: content;
   min-block-size: 10lh;
