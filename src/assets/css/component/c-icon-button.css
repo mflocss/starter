@@ -15,9 +15,6 @@
   font-size: inherit;
   font-weight: var(--font-weight-heading);
   line-height: var(--line-height-title);
-
-  /* WHY: 色系は公開 API 経由でモディファイア・Project から注入。ベースには default を置かず、モディファイア未指定だと無色となる設計（誤用を設計段階で顕在化させる）。
-     API 命名は spec §6「公開 API: --{対象}-{名前}」に準拠（プレフィックス c- / p- / l- は含まない）。 */
   color: var(--button-color);
   text-decoration: none;
   cursor: pointer;

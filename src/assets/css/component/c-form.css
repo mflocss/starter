@@ -60,20 +60,18 @@ fieldset.c-form__field {
     border-color: var(--color-main);
   }
 
-  /* :user-invalid: ユーザー操作後のみ invalid 表示（初期表示で赤枠を出さない） */
   &:user-invalid {
     border-color: var(--color-error);
   }
 }
 
-/* textarea は自動リサイズ + 下限/上限行数を指定（field-sizing は Chrome 123+ / Safari 17.4+） */
 textarea.c-form__input {
   field-sizing: content;
   min-block-size: 10lh;
   max-block-size: 20lh;
 }
 
-/* Element: radio / checkbox ラベル（両用、WCAG 2.5.5 Target Size AAA 相当のタップ領域確保） */
+/* Element: radio / checkbox ラベル（両用） */
 .c-form__choice-label {
   display: flex;
   gap: var(--space-sm);
