@@ -3,12 +3,12 @@
   --section-padding-max: var(--section-narrow-max);
 }
 
-.p-problem__container {
-  container-type: inline-size;
-}
-
 .p-problem__inner {
   /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-problem__container {
+  container-type: inline-size;
 }
 
 .p-problem__heading {

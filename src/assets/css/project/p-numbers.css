@@ -5,12 +5,12 @@
   background-color: var(--color-bg-secondary);
 }
 
-.p-numbers__container {
-  container-type: inline-size;
-}
-
 .p-numbers__inner {
   /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-numbers__container {
+  container-type: inline-size;
 }
 
 .p-numbers__heading {

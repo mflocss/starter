@@ -2,12 +2,12 @@
   /* スタイルなし（HTML クラスとの対応を維持） */
 }
 
-.p-voice__container {
-  container-type: inline-size;
-}
-
 .p-voice__inner {
   /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-voice__container {
+  container-type: inline-size;
 }
 
 .p-voice__heading {
