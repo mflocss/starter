@@ -1,7 +1,7 @@
-/* 公開 API: --form-actions-margin-top（送信ボタン前の余白） */
+/* 公開 API:
+     --form-actions-margin-top  (default: var(--space-md))
+     --form-required-mark       (default: '*') */
 .c-form {
-  --form-actions-margin-top: var(--space-md);
-
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
@@ -87,5 +87,5 @@ textarea.c-form__input {
 .c-form__actions {
   display: flex;
   justify-content: center;
-  margin-block-start: var(--form-actions-margin-top);
+  margin-block-start: var(--form-actions-margin-top, var(--space-md));
 }

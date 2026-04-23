@@ -1,14 +1,13 @@
+/* 公開 API:
+     --text-block-title-max-inline-size  (default: none、使う側（project 層）が制御) */
 .c-text-block {
-  /* 公開 API: title 最大幅を使う側（project 層）が制御する */
-  --text-block-title-max-inline-size: none;
-
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
 }
 
 .c-text-block__title {
-  max-inline-size: var(--text-block-title-max-inline-size);
+  max-inline-size: var(--text-block-title-max-inline-size, none);
 }
 
 .c-text-block__text {
