@@ -1,6 +1,5 @@
 .c-table {
   inline-size: 100%;
-  border-collapse: collapse;
   font-size: 0.9375rem;
   line-height: var(--line-height-base);
 
