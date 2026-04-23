@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 描画前に viewport 最小幅を確定する必要があるため head で blocking 実行 -->
     <script src="/scripts/viewport.js"></script>
     <meta name="format-detection" content="telephone=no,address=no,email=no" />
     <!-- CUSTOMIZE: ダークモード不要なら content="light" に -->
@@ -214,7 +215,7 @@
         <div class="p-hero__media">
           <img
             src="./assets/images/hero-main.webp"
-            alt="サロン内観のイメージ"
+            alt="完全個室のサロン内観"
             width="1440"
             height="720"
             loading="eager"
