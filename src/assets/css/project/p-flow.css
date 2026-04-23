@@ -19,7 +19,6 @@
   counter-reset: step;
 }
 
-/* counter badge（::before）を grid col 1、コンテンツを col 2 に分離 */
 .p-flow__item {
   display: grid;
   grid-template-columns: auto 1fr;

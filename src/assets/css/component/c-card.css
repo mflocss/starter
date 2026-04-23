@@ -11,7 +11,6 @@
   border-radius: var(--card-radius, var(--radius-md));
   box-shadow: var(--card-shadow, var(--shadow-sm) var(--color-shadow));
 
-  /* 控えめバリエーション（影なし、背景のみで区切る） */
   &.-subtle {
     --card-bg: var(--color-bg-secondary);
     --card-shadow: none;
