@@ -626,66 +626,38 @@
           <p class="p-contact__lead">下記フォームからお気軽にどうぞ。24時間以内に折り返しご連絡いたします。</p>
 
           <!-- CUSTOMIZE: 本番バックエンド URL に差し替え。starter はフォーム送信処理を提供しません -->
-          <!-- NOTE: aria-describedby でエラーメッセージ要素を紐付け済み。JS でバリデーション時に hidden を解除し aria-invalid="true" を切り替えること -->
-          <form class="c-form p-contact__form" action="/api/contact" method="post" novalidate>
+          <form class="c-form p-contact__form" action="/api/contact" method="post">
             <!-- 氏名 -->
             <div class="c-form__field">
               <label for="name" class="c-form__label">お名前</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                class="c-form__input"
-                required
-                autocomplete="name"
-                aria-describedby="name-error"
-              />
-              <p id="name-error" class="c-form__error" role="alert" hidden>お名前を入力してください。</p>
+              <input type="text" id="name" name="name" class="c-form__input" required autocomplete="name" />
             </div>
 
             <!-- メール -->
             <div class="c-form__field">
               <label for="email" class="c-form__label">メールアドレス</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                class="c-form__input"
-                required
-                autocomplete="email"
-                aria-describedby="email-error"
-              />
-              <p id="email-error" class="c-form__error" role="alert" hidden>メールアドレスの形式が正しくありません。</p>
+              <input type="email" id="email" name="email" class="c-form__input" required autocomplete="email" />
             </div>
 
             <!-- 電話番号 -->
             <div class="c-form__field">
               <label for="tel" class="c-form__label">電話番号</label>
-              <input
-                type="tel"
-                id="tel"
-                name="tel"
-                class="c-form__input"
-                autocomplete="tel"
-                aria-describedby="tel-error"
-              />
-              <p id="tel-error" class="c-form__error" role="alert" hidden>電話番号の形式が正しくありません。</p>
+              <input type="tel" id="tel" name="tel" class="c-form__input" autocomplete="tel" />
             </div>
 
             <!-- お問い合わせ種別 -->
             <div class="c-form__field">
               <label for="category" class="c-form__label">お問い合わせ種別</label>
-              <select id="category" name="category" class="c-form__input" required aria-describedby="category-error">
+              <select id="category" name="category" class="c-form__input" required>
                 <option value="">選択してください</option>
                 <option value="reservation">初回体験の予約</option>
                 <option value="inquiry">施術に関するお問い合わせ</option>
                 <option value="other">その他</option>
               </select>
-              <p id="category-error" class="c-form__error" role="alert" hidden>お問い合わせ種別を選択してください。</p>
             </div>
 
             <!-- プラン選択 -->
-            <fieldset class="c-form__field" aria-describedby="plan-error">
+            <fieldset class="c-form__field">
               <legend class="c-form__legend">ご希望のプラン</legend>
               <div class="c-form__choice-group">
                 <label class="c-form__choice-label">
@@ -701,30 +673,20 @@
                   リラクゼーション（90分）
                 </label>
               </div>
-              <p id="plan-error" class="c-form__error" role="alert" hidden>ご希望のプランを選択してください。</p>
             </fieldset>
 
             <!-- メッセージ -->
             <div class="c-form__field">
               <label for="message" class="c-form__label">メッセージ</label>
-              <textarea
-                id="message"
-                name="message"
-                class="c-form__input"
-                required
-                rows="6"
-                aria-describedby="message-error"
-              ></textarea>
-              <p id="message-error" class="c-form__error" role="alert" hidden>メッセージを入力してください。</p>
+              <textarea id="message" name="message" class="c-form__input" required rows="6"></textarea>
             </div>
 
             <!-- 同意確認 -->
             <div class="c-form__field">
               <label class="c-form__choice-label">
-                <input type="checkbox" name="agree" id="agree" required aria-describedby="agree-error" />
+                <input type="checkbox" name="agree" id="agree" required />
                 <a href="/privacy/">プライバシーポリシー</a>に同意する
               </label>
-              <p id="agree-error" class="c-form__error" role="alert" hidden>プライバシーポリシーへの同意が必要です。</p>
             </div>
 
             <!-- 送信 -->
