@@ -90,12 +90,6 @@ textarea.c-form__input {
   margin-block-start: var(--space-xs);
 }
 
-/* Element: エラーメッセージ表示（role="alert" + hidden で JS トグル前提） */
-.c-form__error {
-  font-size: var(--font-size-caption);
-  color: var(--color-error);
-}
-
 /* Element: 送信ボタン配置ラッパー（中央寄せ default、Project 側で上書き可） */
 .c-form__actions {
   display: flex;
