@@ -39,25 +39,21 @@
   }
 }
 
-/* c-button / c-icon-button 共通 Modifier */
-.c-button.-primary,
-.c-icon-button.-primary {
+.c-button.-primary {
   --button-color: var(--color-surface);
   --button-bg-color: var(--color-accent);
   --button-border-color: var(--color-accent);
   --button-hover-bg-color: oklch(from var(--color-accent) calc(l * 1.08) c h);
 }
 
-.c-button.-ghost,
-.c-icon-button.-ghost {
+.c-button.-ghost {
   --button-color: var(--color-main);
   --button-bg-color: transparent;
   --button-border-color: var(--color-main);
   --button-hover-bg-color: oklch(from var(--color-main) l c h / 8%);
 }
 
-.c-button.-large,
-.c-icon-button.-large {
+.c-button.-large {
   padding: var(--space-md) var(--space-xl);
   font-size: var(--font-size-button-lg);
 }
