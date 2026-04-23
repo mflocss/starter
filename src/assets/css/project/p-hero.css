@@ -34,10 +34,6 @@
   /* スタイルなし（HTML クラスとの対応を維持） */
 }
 
-.p-hero__cta-icon {
-  /* スタイルなし（HTML クラスとの対応を維持） */
-}
-
 .p-hero__sub-cta {
   /* WHY: Hero 背景のグラデーション上でもテキストとボーダーの可読性を確保するため、ダークモード時は text 色に寄せる。c-button 公開 API 経由で注入し、プロパティ直上書きを避ける */
   --button-color: light-dark(var(--color-main), var(--color-text));

@@ -20,6 +20,8 @@
 
 .c-accordion__icon {
   flex-shrink: 0;
+  inline-size: 1em;
+  block-size: 1em;
 
   @media (prefers-reduced-motion: no-preference) {
     transition: rotate var(--duration-normal) var(--ease-out-cubic);
