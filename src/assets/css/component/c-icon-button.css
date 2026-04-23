@@ -1,4 +1,10 @@
-.c-button {
+/*
+ * c-icon-button: アイコン + テキストのボタン Component
+ * テキストのみのボタンは c-button を使う（責任分離）。
+ * __icon は必須 Element（アイコンなしなら c-button を使うべき）。
+ * アイコン位置（右 / 左 / 両側）は HTML 順で表現（inline-flex + gap で自動配置）。
+ */
+.c-icon-button {
   --_hover-lift: -2px;
 
   display: inline-flex;
@@ -42,25 +48,8 @@
   }
 }
 
-/* c-button / c-icon-button 共通 Modifier（両 Component に同じ見た目 API を提供） */
-.c-button.-primary,
-.c-icon-button.-primary {
-  --button-color: var(--color-surface);
-  --button-bg-color: var(--color-accent);
-  --button-border-color: var(--color-accent);
-  --button-hover-bg-color: oklch(from var(--color-accent) calc(l * 1.08) c h);
-}
-
-.c-button.-ghost,
-.c-icon-button.-ghost {
-  --button-color: var(--color-main);
-  --button-bg-color: transparent;
-  --button-border-color: var(--color-main);
-  --button-hover-bg-color: oklch(from var(--color-main) l c h / 8%);
-}
-
-.c-button.-large,
-.c-icon-button.-large {
-  padding: var(--space-md) var(--space-xl);
-  font-size: var(--font-size-button-lg);
+.c-icon-button__icon {
+  flex-shrink: 0;
+  inline-size: 1em;
+  block-size: 1em;
 }
