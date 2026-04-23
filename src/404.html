@@ -1,33 +1,33 @@
 <!doctype html>
 <!--
-  CUSTOMIZE: このファイルは mFLOCSS starter 単体運用時の参考実装です。
-             組み込み時は既存サイトの 404 を使用し、このファイルは削除してください。
+  CUSTOMIZE: 404 ページのデザインやメッセージを自由に調整できます。
+             組み込み先サイトのヘッダー・フッター構造と一致するように改変してください。
 -->
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="/scripts/viewport.js"></script>
-    <meta name="format-detection" content="telephone=no,address=no,email=no" />
-    <!-- CUSTOMIZE: ダークモード不要なら content="light" に -->
-    <meta name="color-scheme" content="light dark" />
-    <meta name="robots" content="noindex,follow" />
     <!-- CUSTOMIZE: ページタイトル・説明文を差し替え -->
     <title>ページが見つかりません — iluha</title>
     <meta
       name="description"
       content="お探しのページは移動または削除された可能性があります。iluha のトップページから目的のページをお探しください。"
     />
-    <!-- CUSTOMIZE: token/color.css のメインカラーに合わせて変更 -->
-    <meta name="theme-color" content="#5b7a5e" />
-    <!-- Favicon -->
+    <meta name="format-detection" content="telephone=no,address=no,email=no" />
+    <!-- CUSTOMIZE: ダークモード不要なら content="light" に -->
+    <meta name="color-scheme" content="light dark" />
+    <meta name="robots" content="noindex,follow" />
+    <!-- CUSTOMIZE: token/color.css のメインカラーに合わせて変更（ライト / ダークそれぞれ指定） -->
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#5b7a5e" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1a2e1f" />
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <!-- Styles -->
-    <link rel="stylesheet" href="/assets/css/style.css" />
     <!-- Scripts -->
     <script type="module" src="/assets/scripts/main.js"></script>
+    <script src="/scripts/viewport.js"></script>
   </head>
   <body id="top">
     <!-- Skip Link -->
@@ -89,10 +89,10 @@
     <main id="main" tabindex="-1" data-drawer-inert>
       <section class="l-section p-not-found" aria-labelledby="not-found-heading">
         <div class="l-inner p-not-found__inner">
-          <div class="c-section-heading p-not-found__heading">
-            <p>404</p>
-            <h1 id="not-found-heading">ページが見つかりません</h1>
-          </div>
+          <hgroup class="c-section-heading p-not-found__heading">
+            <p class="c-section-heading__eyebrow">404</p>
+            <h1 id="not-found-heading" class="c-section-heading__title">ページが見つかりません</h1>
+          </hgroup>
           <p class="p-not-found__lead">
             お探しのページは移動または削除された可能性があります。<br />
             お手数ですが、トップページから目的のページをお探しください。
