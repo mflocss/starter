@@ -12,10 +12,8 @@
 
 .p-faq__list {
   max-inline-size: var(--content-width-narrow);
-  padding-inline-start: 0;
   margin-block-start: var(--space-xl-2xl);
   margin-inline: auto;
-  list-style-type: none;
 }
 
 .p-faq__item {

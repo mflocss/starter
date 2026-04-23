@@ -13,9 +13,7 @@
 .p-flow__list {
   display: grid;
   gap: var(--space-lg);
-  padding-inline-start: 0;
   margin-block-start: var(--space-xl-2xl);
-  list-style: none;
   counter-reset: step;
 }
 
