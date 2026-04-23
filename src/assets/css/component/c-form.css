@@ -14,12 +14,6 @@
   gap: var(--space-xs);
 }
 
-fieldset.c-form__field {
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-
 /* Element: label / legend（見出し扱いのタイポグラフィを共通化） */
 .c-form__label,
 .c-form__legend {
@@ -39,8 +33,6 @@ fieldset.c-form__field {
 /* Element: 入力装飾（input / textarea / select 共通のビジュアル定義） */
 .c-form__input {
   padding: var(--space-sm) var(--space-md);
-  font: inherit;
-  color: var(--color-text);
   background-color: var(--color-surface);
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-sm);
