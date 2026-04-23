@@ -23,19 +23,23 @@
   counter-reset: step;
 }
 
-/* WHY: li が c-card.-subtle を併記（2-level 構造）。
-   padding / background / border-radius は c-card.-subtle で委譲、
-   ここは grid + counter badge の「ステップ番号描画」固有の責任に絞る。 */
+/* WHY: li が c-card.-subtle + c-text-block を併記（2-level 構造、責任直交併記）。
+   padding / background / border-radius は c-card.-subtle、タイポ縦積み（row-gap）は c-text-block、
+   ここは grid + counter badge の「ステップ番号描画」固有の責任に絞る。
+   c-text-block の display: flex は p-flow__item の display: grid で上書きされるが、
+   grid の row-gap が c-text-block の gap と同値（space-sm）なので h3 + p の縦間隔は同等に保たれる。 */
 .p-flow__item {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: var(--space-sm) var(--space-lg);
   counter-increment: step;
 
-  /* WHY: CSS counter でステップ番号を円形バッジとして視覚化 */
+  /* WHY: CSS counter でステップ番号を円形バッジとして視覚化。
+     grid-column: 1 / grid-row: 1 で左上に固定し、h3 + p の折り返しに影響されない。 */
   &::before {
     display: flex;
     grid-row: 1;
+    grid-column: 1;
     align-items: center;
     align-self: start;
     justify-content: center;
@@ -47,5 +51,11 @@
     content: counter(step);
     background-color: var(--color-main);
     border-radius: var(--radius-full);
+  }
+
+  /* WHY: ::before 以外の直接子（h3 + p）を column 2 に揃える。
+     grid auto-flow では p が col 1 row 2（badge 下）に回り込むため明示配置で回避。 */
+  & > * {
+    grid-column: 2;
   }
 }

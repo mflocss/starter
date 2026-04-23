@@ -27,6 +27,6 @@
 }
 
 .p-problem__item {
-  /* スタイルなし（2-level 構造: li 自身が c-card.-subtle wrapper を兼ねる。
-     内部タイポの縦積みは .c-text-block が担当）。 */
+  /* スタイルなし（2-level 構造: li に c-card.-subtle + c-text-block を併記。
+     装飾は c-card.-subtle、タイポの縦積みは c-text-block が担当）。 */
 }
