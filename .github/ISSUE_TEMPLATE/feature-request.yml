@@ -1,0 +1,29 @@
+name: 機能要望
+description: starter への機能追加・改善提案
+title: '[Feature] '
+labels: ['enhancement']
+body:
+  - type: textarea
+    id: motivation
+    attributes:
+      label: 動機・背景
+      description: どのようなユースケース / 課題があって提案しますか？
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 提案内容
+      description: 具体的な実装案 / 設計案があれば記載
+    validations:
+      required: true
+  - type: checkboxes
+    id: mflocss-compliance
+    attributes:
+      label: mFLOCSS spec 整合性確認
+      description: |
+        提案が mFLOCSS spec に準拠していることを確認してください
+      options:
+        - label: 層判断（Token / Reset / Foundation / Layout / Component / Project / Animation / Utility）に矛盾しない
+        - label: 命名規則（spec §8）に従う
+        - label: spec 変更が必要な場合は mflocss/spec で別途 Issue を立てる
