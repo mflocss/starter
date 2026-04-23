@@ -51,7 +51,10 @@
   font-size: var(--font-size-caption);
   color: var(--_link-color);
   text-decoration: none;
-  transition: color var(--duration-fast) var(--ease-out-cubic);
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: color var(--duration-fast) var(--ease-out-cubic);
+  }
 
   @media (any-hover: hover) {
     &:hover {

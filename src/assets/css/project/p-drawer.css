@@ -57,7 +57,10 @@
   font-size: var(--font-size-nav-lg);
   color: var(--color-text);
   text-decoration: none;
-  transition: color var(--duration-fast) var(--ease-out-cubic);
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: color var(--duration-fast) var(--ease-out-cubic);
+  }
 
   @media (any-hover: hover) {
     &:hover {
