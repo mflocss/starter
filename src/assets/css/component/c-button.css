@@ -59,10 +59,16 @@
     pointer-events: none;
     opacity: 0.7;
   }
-}
 
-.c-button__icon {
-  flex-shrink: 0;
-  inline-size: 1em;
-  block-size: 1em;
+  /*
+   * button 内の svg アイコンは子セレクタで汎用サイズを適用。
+   * 固有の振る舞い（回転・状態連動等）を持たないため Element 命名は不要。
+   * アイコン位置（右 / 左 / 両側）は HTML 順で決まる（inline-flex + gap で自動配置）。
+   * cf. c-accordion__icon は [open] 連動の回転アニメという固有責任があるため Element 命名。
+   */
+  & > svg {
+    flex-shrink: 0;
+    inline-size: 1em;
+    block-size: 1em;
+  }
 }
