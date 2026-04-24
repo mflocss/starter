@@ -1,14 +1,18 @@
-/* 公開 API:
+/* 公開 API（型宣言は property.css / 実デフォルトは base ルールで set）:
      --card-padding  (default: var(--space-lg))
      --card-bg       (default: var(--color-surface))
      --card-radius   (default: var(--radius-md))
-     --card-shadow   (default: var(--shadow-sm) var(--color-shadow))
-     --card-border   (default: none) */
+     --card-shadow   (default: var(--shadow-sm) var(--color-shadow)、型未宣言: shorthand)
+     --card-border   (default: none、型未宣言: shorthand) */
 .c-card {
-  padding: var(--card-padding, var(--space-lg));
-  background-color: var(--card-bg, var(--color-surface));
+  --card-padding: var(--space-lg);
+  --card-bg: var(--color-surface);
+  --card-radius: var(--radius-md);
+
+  padding: var(--card-padding);
+  background-color: var(--card-bg);
   border: var(--card-border, none);
-  border-radius: var(--card-radius, var(--radius-md));
+  border-radius: var(--card-radius);
   box-shadow: var(--card-shadow, var(--shadow-sm) var(--color-shadow));
 
   &.-subtle {
