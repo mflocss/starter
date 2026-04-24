@@ -1,4 +1,5 @@
 @import './layer-order.css';
+@import './property.css';
 
 /* Token: デザイン値の定義 + 単位付与（上位層のデザイン値の参照元） */
 @import './token/helpers.css' layer(token);

@@ -1,9 +1,14 @@
-/* 公開 API:
+/* 公開 API（型宣言は property.css / 実デフォルトは base ルールで set）:
      --icon-button-color             (default: var(--color-surface)、= -primary 相当)
      --icon-button-bg-color          (default: var(--color-accent)、= -primary 相当)
      --icon-button-border-color      (default: var(--color-accent)、= -primary 相当)
      --icon-button-hover-bg-color    (default: -primary 相当) */
 .c-icon-button {
+  --icon-button-color: var(--color-surface);
+  --icon-button-bg-color: var(--color-accent);
+  --icon-button-border-color: var(--color-accent);
+  --icon-button-hover-bg-color: oklch(from var(--color-accent) calc(l * 1.08) c h);
+
   display: inline-flex;
   gap: var(--space-sm);
   align-items: center;
@@ -12,11 +17,11 @@
   font-size: inherit;
   font-weight: var(--font-weight-heading);
   line-height: var(--line-height-title);
-  color: var(--icon-button-color, var(--color-surface));
+  color: var(--icon-button-color);
   text-decoration: none;
   cursor: pointer;
-  background-color: var(--icon-button-bg-color, var(--color-accent));
-  border: var(--border-width) solid var(--icon-button-border-color, var(--color-accent));
+  background-color: var(--icon-button-bg-color);
+  border: var(--border-width) solid var(--icon-button-border-color);
   border-radius: var(--radius-lg);
 
   @media (prefers-reduced-motion: no-preference) {
@@ -27,7 +32,7 @@
 
   @media (any-hover: hover) {
     &:hover {
-      background-color: var(--icon-button-hover-bg-color, oklch(from var(--color-accent) calc(l * 1.08) c h));
+      background-color: var(--icon-button-hover-bg-color);
       translate: 0 var(--hover-lift);
     }
   }

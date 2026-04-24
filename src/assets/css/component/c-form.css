@@ -1,7 +1,9 @@
-/* 公開 API:
+/* 公開 API（型宣言は property.css / 実デフォルトは base ルールで set）:
      --form-actions-margin-top  (default: var(--space-md))
-     --form-required-mark       (default: '*') */
+     --form-required-mark       (default: '*'、型未宣言: 文字列リテラル) */
 .c-form {
+  --form-actions-margin-top: var(--space-md);
+
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
@@ -97,5 +99,5 @@ textarea.c-form__input {
 .c-form__actions {
   display: flex;
   justify-content: center;
-  margin-block-start: var(--form-actions-margin-top, var(--space-md));
+  margin-block-start: var(--form-actions-margin-top);
 }

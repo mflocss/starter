@@ -1,0 +1,87 @@
+/* 公開 API Custom Properties の型宣言（spec §7 SHOULD / §8 property.css）
+   initial-value は context 非依存の中立値リテラル（var() / light-dark() は仕様上不可）。
+   実デフォルト値は各 Component の base ルールで set する。 */
+
+@property --button-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --button-bg-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --button-border-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --button-hover-bg-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --icon-button-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --icon-button-bg-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --icon-button-border-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --icon-button-hover-bg-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --card-padding {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --card-bg {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: transparent;
+}
+
+@property --card-radius {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --form-actions-margin-top {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --media-split-first-order {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --prose-max-inline-size {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0;
+}
