@@ -1,13 +1,14 @@
-/* 公開 API（型宣言は property.css / 実デフォルトは base ルールで set）:
+/* 公開 API（Block 冒頭で public → private 代入、fallback で Default 指定）:
      --icon-button-color             (default: var(--color-surface)、= -primary 相当)
      --icon-button-bg-color          (default: var(--color-accent)、= -primary 相当)
      --icon-button-border-color      (default: var(--color-accent)、= -primary 相当)
-     --icon-button-hover-bg-color    (default: -primary 相当) */
+     --icon-button-hover-bg-color    (default: -primary 相当)
+   WHY private 分離の理由は c-button.css 冒頭参照 */
 .c-icon-button {
-  --icon-button-color: var(--color-surface);
-  --icon-button-bg-color: var(--color-accent);
-  --icon-button-border-color: var(--color-accent);
-  --icon-button-hover-bg-color: oklch(from var(--color-accent) calc(l * 1.08) c h);
+  --_color: var(--icon-button-color, var(--color-surface));
+  --_bg-color: var(--icon-button-bg-color, var(--color-accent));
+  --_border-color: var(--icon-button-border-color, var(--color-accent));
+  --_hover-bg-color: var(--icon-button-hover-bg-color, oklch(from var(--color-accent) calc(l * 1.08) c h));
 
   display: inline-flex;
   gap: var(--space-sm);
@@ -17,11 +18,11 @@
   font-size: inherit;
   font-weight: var(--font-weight-heading);
   line-height: var(--line-height-title);
-  color: var(--icon-button-color);
+  color: var(--_color);
   text-decoration: none;
   cursor: pointer;
-  background-color: var(--icon-button-bg-color);
-  border: var(--border-width) solid var(--icon-button-border-color);
+  background-color: var(--_bg-color);
+  border: var(--border-width) solid var(--_border-color);
   border-radius: var(--radius-lg);
 
   @media (prefers-reduced-motion: no-preference) {
@@ -32,7 +33,7 @@
 
   @media (any-hover: hover) {
     &:hover {
-      background-color: var(--icon-button-hover-bg-color);
+      background-color: var(--_hover-bg-color);
       translate: 0 var(--hover-lift);
     }
   }
@@ -58,11 +59,12 @@
   /* スタイルなし（base のデフォルトが primary 相当） */
 }
 
+/* Modifier: -ghost（fallback 差し替えで default 値を上書き、親継承時は親値が勝つ） */
 .c-icon-button.-ghost {
-  --icon-button-color: var(--color-main);
-  --icon-button-bg-color: transparent;
-  --icon-button-border-color: var(--color-main);
-  --icon-button-hover-bg-color: oklch(from var(--color-main) l c h / 8%);
+  --_color: var(--icon-button-color, var(--color-main));
+  --_bg-color: var(--icon-button-bg-color, transparent);
+  --_border-color: var(--icon-button-border-color, var(--color-main));
+  --_hover-bg-color: var(--icon-button-hover-bg-color, oklch(from var(--color-main) l c h / 8%));
 }
 
 .c-icon-button.-large {

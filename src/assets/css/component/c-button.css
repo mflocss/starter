@@ -1,13 +1,19 @@
-/* 公開 API（型宣言は property.css / 実デフォルトは base ルールで set）:
+/* 公開 API（Block 冒頭で public → private 代入、fallback で Default 指定）:
      --button-color             (default: var(--color-surface)、= -primary 相当)
      --button-bg-color          (default: var(--color-accent)、= -primary 相当)
      --button-border-color      (default: var(--color-accent)、= -primary 相当)
-     --button-hover-bg-color    (default: -primary 相当) */
+     --button-hover-bg-color    (default: -primary 相当)
+
+   WHY private 分離（Z パターン）:
+   Block 本体で公開 API を再宣言すると local declaration が inherited value を shadow するため、
+   親要素で `--button-bg-color: red` を set しても子 .c-button に継承されない（Issue #116）。
+   公開 API は Block 内で set せず private 変数（--_*）に fallback 付きで代入することで
+   4 パターン（Default / Modifier / use-site override / 親継承）全てを動作させる。 */
 .c-button {
-  --button-color: var(--color-surface);
-  --button-bg-color: var(--color-accent);
-  --button-border-color: var(--color-accent);
-  --button-hover-bg-color: oklch(from var(--color-accent) calc(l * 1.08) c h);
+  --_color: var(--button-color, var(--color-surface));
+  --_bg-color: var(--button-bg-color, var(--color-accent));
+  --_border-color: var(--button-border-color, var(--color-accent));
+  --_hover-bg-color: var(--button-hover-bg-color, oklch(from var(--color-accent) calc(l * 1.08) c h));
 
   display: inline-flex;
   gap: var(--space-sm);
@@ -17,11 +23,11 @@
   font-size: inherit;
   font-weight: var(--font-weight-heading);
   line-height: var(--line-height-title);
-  color: var(--button-color);
+  color: var(--_color);
   text-decoration: none;
   cursor: pointer;
-  background-color: var(--button-bg-color);
-  border: var(--border-width) solid var(--button-border-color);
+  background-color: var(--_bg-color);
+  border: var(--border-width) solid var(--_border-color);
   border-radius: var(--radius-lg);
 
   @media (prefers-reduced-motion: no-preference) {
@@ -32,7 +38,7 @@
 
   @media (any-hover: hover) {
     &:hover {
-      background-color: var(--button-hover-bg-color);
+      background-color: var(--_hover-bg-color);
       translate: 0 var(--hover-lift);
     }
   }
@@ -52,11 +58,12 @@
   /* スタイルなし（base のデフォルトが primary 相当） */
 }
 
+/* Modifier: -ghost（fallback 差し替えで default 値を上書き、親継承時は親値が勝つ） */
 .c-button.-ghost {
-  --button-color: var(--color-main);
-  --button-bg-color: transparent;
-  --button-border-color: var(--color-main);
-  --button-hover-bg-color: oklch(from var(--color-main) l c h / 8%);
+  --_color: var(--button-color, var(--color-main));
+  --_bg-color: var(--button-bg-color, transparent);
+  --_border-color: var(--button-border-color, var(--color-main));
+  --_hover-bg-color: var(--button-hover-bg-color, oklch(from var(--color-main) l c h / 8%));
 }
 
 .c-button.-large {
