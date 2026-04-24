@@ -1,7 +1,6 @@
-/* 公開 API（Block 冒頭で public → private 代入、fallback で Default 指定）:
+/* 公開 API:
      --form-actions-margin-top  (default: var(--space-md))
-     --form-required-mark       (default: '*')
-   WHY private 分離の理由は c-button.css 冒頭参照 */
+     --form-required-mark       (default: '*') */
 .c-form {
   --_actions-margin-top: var(--form-actions-margin-top, var(--space-md));
 
@@ -33,10 +32,7 @@
   font-weight: var(--font-weight-heading);
 }
 
-/* 必須マーク: --form-required-mark で「*」→「必須」等に切替可能（公開 API）。choice-label は ::before で前置（checkbox の前に表示）。
-   WHY use-site で fallback 構文を直接使用:
-   このルールは Element セレクタ（__label / __legend / __choice-label）のため Block 冒頭の --_actions-margin-top と同じ要素スコープを共有しない。
-   Z パターンの private 分離は Block 本体でのみ成立する。Element ルールでは use-site fallback で親継承を成立させる。 */
+/* 必須マーク: --form-required-mark で「*」→「必須」等に切替可能（公開 API）。choice-label は ::before で前置（checkbox の前に表示） */
 .c-form__field:has(:required) > .c-form__label::after,
 .c-form__field:has(:required) > .c-form__legend::after,
 .c-form__field:has(:required) > .c-form__choice-label::before {
@@ -66,14 +62,11 @@
   }
 }
 
-/* NOTE: field-sizing は Baseline 未達。Chrome 123+ / Safari 26.2+ 対応、Firefox は 2026-04 時点で全バージョン未対応。
-   未対応ブラウザでは resize: block による手動リサイズでフォールバック
-   （https://caniuse.com/mdn-css_properties_field-sizing） */
 textarea.c-form__input {
   field-sizing: content;
   min-block-size: 10lh;
   max-block-size: 20lh;
-  resize: block; /* 未対応ブラウザでユーザーが手動リサイズ */
+  resize: block;
 }
 
 @supports (field-sizing: content) {
@@ -99,8 +92,7 @@ textarea.c-form__input {
   margin-block-start: var(--space-xs);
 }
 
-/* Element: 送信ボタン配置ラッパー（中央寄せ default、Project 側で上書き可）。
-   Block 冒頭で宣言した --_actions-margin-top を参照（private 変数は子孫 Element に継承される） */
+/* Element: 送信ボタン配置ラッパー（中央寄せ default、Project 側で上書き可） */
 .c-form__actions {
   display: flex;
   justify-content: center;

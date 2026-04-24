@@ -1,10 +1,9 @@
-/* 公開 API（Block 冒頭で public → private 代入、fallback で Default 指定）:
+/* 公開 API:
      --card-padding  (default: var(--space-lg))
      --card-bg       (default: var(--color-surface))
      --card-radius   (default: var(--radius-md))
      --card-shadow   (default: var(--shadow-sm) var(--color-shadow))
-     --card-border   (default: none)
-   WHY private 分離の理由は c-button.css 冒頭参照 */
+     --card-border   (default: none) */
 .c-card {
   --_padding: var(--card-padding, var(--space-lg));
   --_bg: var(--card-bg, var(--color-surface));
@@ -18,7 +17,7 @@
   border-radius: var(--_radius);
   box-shadow: var(--_shadow);
 
-  /* Modifier: -subtle（fallback 差し替えで default 値を上書き、親継承時は親値が勝つ） */
+  /* Modifier: -subtle */
   &.-subtle {
     --_bg: var(--card-bg, var(--color-bg-secondary));
     --_shadow: var(--card-shadow, none);
