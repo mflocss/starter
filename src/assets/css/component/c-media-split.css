@@ -1,6 +1,5 @@
-/* 公開 API（Block 冒頭で public → private 代入、fallback で Default 指定）:
-     --media-split-first-order  (default: 0、`:nth-child(even)` 等で 1 を set して左右反転)
-   WHY private 分離の理由は c-button.css 冒頭参照 */
+/* 公開 API:
+     --media-split-first-order  (default: 0、`:nth-child(even)` 等で 1 を set して左右反転) */
 .c-media-split {
   --_first-order: var(--media-split-first-order, 0);
 

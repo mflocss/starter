@@ -1,14 +1,8 @@
-/* 公開 API（Block 冒頭で public → private 代入、fallback で Default 指定）:
-     --button-color             (default: var(--color-surface)、= -primary 相当)
-     --button-bg-color          (default: var(--color-accent)、= -primary 相当)
-     --button-border-color      (default: var(--color-accent)、= -primary 相当)
-     --button-hover-bg-color    (default: -primary 相当)
-
-   WHY private 分離（Z パターン）:
-   Block 本体で公開 API を再宣言すると local declaration が inherited value を shadow するため、
-   親要素で `--button-bg-color: red` を set しても子 .c-button に継承されない（Issue #116）。
-   公開 API は Block 内で set せず private 変数（--_*）に fallback 付きで代入することで
-   4 パターン（Default / Modifier / use-site override / 親継承）全てを動作させる。 */
+/* 公開 API:
+     --button-color             (default: var(--color-surface))
+     --button-bg-color          (default: var(--color-accent))
+     --button-border-color      (default: var(--color-accent))
+     --button-hover-bg-color    (default: oklch(from var(--color-accent) calc(l * 1.08) c h)) */
 .c-button {
   --_color: var(--button-color, var(--color-surface));
   --_bg-color: var(--button-bg-color, var(--color-accent));
@@ -58,7 +52,7 @@
   /* スタイルなし（base のデフォルトが primary 相当） */
 }
 
-/* Modifier: -ghost（fallback 差し替えで default 値を上書き、親継承時は親値が勝つ） */
+/* Modifier: -ghost */
 .c-button.-ghost {
   --_color: var(--button-color, var(--color-main));
   --_bg-color: var(--button-bg-color, transparent);

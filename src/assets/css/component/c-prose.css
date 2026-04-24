@@ -1,7 +1,6 @@
 /* 子孫セレクタを許容する例外 Component（CMS 流し込み等、HTML クラス付与不能な用途向け）
-   公開 API（Block 冒頭で public → private 代入、fallback で Default 指定）:
-     --prose-max-inline-size  (default: 40rem、読みやすい最大幅、Project 側で上書き可)
-   WHY private 分離の理由は c-button.css 冒頭参照 */
+   公開 API:
+     --prose-max-inline-size  (default: 40rem) */
 .c-prose {
   --_max-inline-size: var(--prose-max-inline-size, 40rem);
 
