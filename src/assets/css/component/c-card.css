@@ -1,22 +1,26 @@
-/* 公開 API（型宣言は property.css / 実デフォルトは base ルールで set）:
+/* 公開 API（Block 冒頭で public → private 代入、fallback で Default 指定）:
      --card-padding  (default: var(--space-lg))
      --card-bg       (default: var(--color-surface))
      --card-radius   (default: var(--radius-md))
-     --card-shadow   (default: var(--shadow-sm) var(--color-shadow)、型未宣言: shorthand)
-     --card-border   (default: none、型未宣言: shorthand) */
+     --card-shadow   (default: var(--shadow-sm) var(--color-shadow))
+     --card-border   (default: none)
+   WHY private 分離の理由は c-button.css 冒頭参照 */
 .c-card {
-  --card-padding: var(--space-lg);
-  --card-bg: var(--color-surface);
-  --card-radius: var(--radius-md);
+  --_padding: var(--card-padding, var(--space-lg));
+  --_bg: var(--card-bg, var(--color-surface));
+  --_radius: var(--card-radius, var(--radius-md));
+  --_shadow: var(--card-shadow, var(--shadow-sm) var(--color-shadow));
+  --_border: var(--card-border, none);
 
-  padding: var(--card-padding);
-  background-color: var(--card-bg);
-  border: var(--card-border, none);
-  border-radius: var(--card-radius);
-  box-shadow: var(--card-shadow, var(--shadow-sm) var(--color-shadow));
+  padding: var(--_padding);
+  background-color: var(--_bg);
+  border: var(--_border);
+  border-radius: var(--_radius);
+  box-shadow: var(--_shadow);
 
+  /* Modifier: -subtle（fallback 差し替えで default 値を上書き、親継承時は親値が勝つ） */
   &.-subtle {
-    --card-bg: var(--color-bg-secondary);
-    --card-shadow: none;
+    --_bg: var(--card-bg, var(--color-bg-secondary));
+    --_shadow: var(--card-shadow, none);
   }
 }
