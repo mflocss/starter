@@ -1,8 +1,10 @@
 /* 公開 API:
      --form-actions-margin-top  (default: var(--space-md))
-     --form-required-mark       (default: '*') */
+     --form-required-mark       (default: '*')
+     --form-link-color          (default: var(--color-link)) */
 .c-form {
   --_actions-margin-top: var(--form-actions-margin-top, var(--space-md));
+  --_link-color: var(--form-link-color, var(--color-link));
 
   display: flex;
   flex-direction: column;
@@ -97,4 +99,11 @@ textarea.c-form__input {
   display: flex;
   justify-content: center;
   margin-block-start: var(--_actions-margin-top);
+}
+
+/* フォーム内リンク（プライバシーポリシー等、クラス付与なしで使われることが多い子孫 <a>）
+   Reset で color / text-decoration-line が unset されるため Block 内で正規化 */
+.c-form a {
+  color: var(--_link-color);
+  text-decoration: underline;
 }

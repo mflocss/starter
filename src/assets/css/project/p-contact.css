@@ -18,13 +18,9 @@
 
 .p-contact__form {
   --_form-max: 640px;
+  --form-link-color: var(--color-main);
 
   max-inline-size: var(--_form-max);
   margin-block-start: var(--space-xl-2xl);
   margin-inline: auto;
-}
-
-.p-contact__form a {
-  color: var(--color-main);
-  text-decoration: underline;
 }
