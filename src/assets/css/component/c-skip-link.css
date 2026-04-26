@@ -14,6 +14,19 @@
   background-color: var(--color-main);
   border-radius: var(--radius-sm);
 
+  /* u-visually-hidden 相当の視覚的非表示を内部統合（Component 単体で機能完結、display: none / visibility: hidden を使わず SR からは常に読み上げ可） */
+  &:not(:focus, :active, :focus-within) {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    white-space: nowrap;
+    border: 0;
+    clip-path: inset(50%);
+  }
+
   &:focus-visible {
     position: fixed;
     inset-block-start: var(--space-sm);
