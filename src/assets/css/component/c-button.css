@@ -47,11 +47,6 @@
   }
 }
 
-/* Modifier: -primary（明示的選択マーカー、デフォルトと同じ値のため空ルール） */
-.c-button.-primary {
-  /* スタイルなし（base のデフォルトが primary 相当） */
-}
-
 /* Modifier: -ghost */
 .c-button.-ghost {
   --_color: var(--button-color, var(--color-main));

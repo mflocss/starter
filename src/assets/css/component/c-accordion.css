@@ -2,10 +2,6 @@
   overflow: hidden;
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-md);
-
-  & + & {
-    border-block-start: none;
-  }
 }
 
 .c-accordion__summary {
