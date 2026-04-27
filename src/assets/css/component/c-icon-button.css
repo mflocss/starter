@@ -53,11 +53,6 @@
   block-size: 1em;
 }
 
-/* Modifier: -primary（明示的選択マーカー、デフォルトと同じ値のため空ルール） */
-.c-icon-button.-primary {
-  /* スタイルなし（base のデフォルトが primary 相当） */
-}
-
 /* Modifier: -ghost */
 .c-icon-button.-ghost {
   --_color: var(--icon-button-color, var(--color-main));
