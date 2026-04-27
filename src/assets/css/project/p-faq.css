@@ -11,16 +11,15 @@
 }
 
 .p-faq__list {
+  display: grid;
   max-inline-size: var(--content-width-narrow);
+  gap: var(--space-md);
   margin-block-start: var(--space-xl-2xl);
   margin-inline: auto;
 }
 
 .p-faq__item {
-  /* li wrapper で c-accordion 隣接兄弟ルールが無効化されるため再現 */
-  & + & .c-accordion {
-    border-block-start: none;
-  }
+  /* スタイルなし（HTML クラスとの対応を維持） */
 }
 
 .p-faq__accordion {
