@@ -18,6 +18,7 @@
 }
 
 .p-flow__item {
+  /* c-text-block の display: flex / gap を意図的に grid で上書き（番号バッジの列配置が必要なため） */
   display: grid;
   grid-template-columns: auto 1fr;
   gap: var(--space-sm) var(--space-lg);
