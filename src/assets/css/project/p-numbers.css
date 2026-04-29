@@ -1,6 +1,6 @@
 .p-numbers {
-  --section-padding-min: var(--section-narrow-min);
-  --section-padding-max: var(--section-narrow-max);
+  --l-section-padding-min: var(--section-narrow-min);
+  --l-section-padding-max: var(--section-narrow-max);
 
   background-color: var(--color-bg-secondary);
 }
