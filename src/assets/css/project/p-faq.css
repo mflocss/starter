@@ -12,8 +12,8 @@
 
 .p-faq__list {
   display: grid;
-  max-inline-size: var(--content-width-narrow);
   gap: var(--space-md);
+  max-inline-size: var(--content-width-narrow);
   margin-block-start: var(--space-xl-2xl);
   margin-inline: auto;
 }
