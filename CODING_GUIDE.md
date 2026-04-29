@@ -75,16 +75,84 @@ CSS 完結のアニメーション。JS を待たず即時再生。LCP 要素（
 
 ### HTML 構造
 
-`dialog.p-drawer` は `header` の **兄弟要素**として配置します（header の内側ではない）。`showModal()` を使うと header が `::backdrop` の背面に隠れるため、`show()` を使用します。
+`dialog.p-drawer` は `header` の **兄弟要素**として配置します（header の内側ではない）。`showModal()` を使うと header が `::backdrop` の背面に隠れるため、`show()` を使用します（採用根拠の詳細は後述）。
 
 ```html
 <header class="l-header p-header">...</header>
 <div class="c-overlay" data-drawer-overlay hidden></div>
-<dialog class="p-drawer" id="drawer" data-drawer aria-labelledby="drawer-title">
+<dialog class="p-drawer" id="drawer" data-drawer aria-labelledby="drawer-title" aria-modal="true">
   ...
 </dialog>
 <main ... data-drawer-inert>...</main>
 ```
+
+### show() 採用根拠（showModal() 不採用の理由）
+
+starter は `<header>` 内のハンバーガーボタンをドロワーの開閉トリガーとして共用しています。この UX を成立させるため、`showModal()` ではなく `show()` を採用しています。
+
+- **`showModal()` の制約**
+  - dialog を [top layer](https://developer.mozilla.org/ja/docs/Glossary/Top_layer) に昇格させ、`::backdrop` 疑似要素が body 全体を覆う
+  - top layer は通常の z-index コンテキストの上位に強制配置されるため、`l-header` が `::backdrop` の背面に隠蔽される
+  - 結果としてハンバーガーボタンが視覚・操作の両面でアクセス不能になり、「開いたら別ボタンからしか閉じられない」UX 制約が生じる
+- **`show()` の利点**
+  - dialog が通常のレンダーツリーに留まるため、後述の z-index 設計で header をドロワーより前面に置ける
+  - ハンバーガーボタンが open / close の両状態で常にアクセス可能
+- **a11y は inert + aria-modal で補完**
+  - `show()` は背景要素を自動 inert 化しないため、JS から `[data-drawer-inert]` を持つ要素に `inert` を付与（`src/assets/scripts/main.js`）
+  - `aria-modal="true"` で支援技術にモーダル role を明示
+  - Escape キーによる close も `show()` には備わっていないため JS で実装
+
+### z-index 設計（starter 固有）
+
+`token/z-index.css` で意図的に **`--z-header (20) > --z-drawer (10)`** の順を取り、ドロワー open 中も header（=ハンバーガーボタン）が前面に残る設計にしています。
+
+| token | 値 | 役割 |
+|------|---|------|
+| `--z-back-to-top` | 5 | 戻るボタン（ドロワー open 時は inert 化） |
+| `--z-drawer` | 10 | `dialog.p-drawer` 本体 |
+| `--z-header` | 20 | `l-header`（ハンバーガーボタンを含む、ドロワーより前面） |
+| `--z-modal` | 30 | 将来のモーダル想定 |
+
+- `c-overlay` は z-index 値を持たず、`--overlay-z` 公開 API で利用側から注入する汎用 Component（spec §6 公開 API パターン）
+- ドロワーのオーバーレイは `p-drawer.css` 側で `[data-drawer-overlay] { --overlay-z: calc(var(--z-drawer) - 1); }` のように注入し、ドロワー本体より 1 段下に積む
+- Component 自身は重ね順を持たず、呼び出し元（Project 層 or 利用側）が責任を持つ
+
+### show() 運用上の SR 実機検証手順
+
+`show()` は `showModal()` の自動 focus trap を持たないため、`inert` + `aria-modal` で同等の挙動を再現できているか実機検証が必要です。
+
+| 環境 | 検証項目 |
+|------|---------|
+| NVDA + Firefox / Chrome | Browse mode で Tab / 矢印キーが drawer 外に脱出しないこと |
+| JAWS + Chrome | Virtual cursor（PC Cursor）で drawer 外要素が読み上げられないこと |
+| VoiceOver + Safari (macOS / iOS) | VO + 矢印 / Rotor で drawer 外が読み上げられないこと |
+
+ドロワー open 状態でのチェックリスト:
+
+- [ ] `[data-drawer-inert]` を付与した全要素が SR 読み上げ対象から除外される
+- [ ] Tab で drawer 内のフォーカス可能要素のみを巡回する（drawer 外に脱出しない）
+- [ ] ハンバーガーボタン（trigger）は inert ではないので Tab で到達して閉じられる
+- [ ] Escape キーで close される（JS 実装）
+- [ ] `aria-modal="true"` により SR が「ダイアログ」として announce する
+- [ ] `aria-labelledby` で参照されるドロワータイトルが SR で読み上げられる
+
+`inert` 属性は WCAG 2.1.1 Keyboard (Level A) と 2.4.3 Focus Order に直結します。新規の自己配置型 Component を追加する際は、必ず `data-drawer-inert` の付与要否を確認してください（前述「data-drawer-inert」節と同じ運用）。
+
+### showModal() を選ぶケース（参考、starter 採用外）
+
+starter のドロワー UX には不適合ですが、以下のケースでは `showModal()` の方が適しています。プロジェクト固有の判断で選ぶ場合の参考です。
+
+- header にトリガーが共存しない（フッター固定や本文中ボタンから開く）
+- 開閉操作が dialog 内部のボタンで完結する設計
+- top layer による z-index 自動解決が欲しい（既存の z-index 積層が複雑な場合）
+- `::backdrop` で背景操作不可を CSS だけで宣言したい
+- focus trap / Escape 自動 close を JS で実装したくない（`showModal()` なら browser native 提供）
+
+z-index の注意点:
+
+- top layer に昇格した dialog の `::backdrop` は z-index 値を持たず、**全要素より手前**に強制配置される
+- header やトリガー UI を `::backdrop` より手前に出すことは仕様上できない（top layer は CSS で上書き不可能）
+- そのため、トリガー UI を dialog 内に閉じ込められる UI 設計でのみ採用が成立する
 
 ### c-overlay — 汎用 Component
 
@@ -112,6 +180,72 @@ Drawer と Hamburger トリガー**以外**の、フォーカス可能（= Tab �
 #### JS 側
 
 `querySelectorAll('[data-drawer-inert]')` で全対象要素を取得 → `openDrawer` で `inert` 属性付与、`closeDrawer` で削除するだけ。新規対象を追加しても JS 側の変更は不要です。
+
+## Modifier 記法選択根拠（業界標準比較）
+
+mFLOCSS は Modifier を `.c-button.-ghost` のような **`.-modifier` ドット記法（独立 class）** で表現します。BEM / CUBE CSS / Tailwind の各業界標準アプローチと比較した上での選択根拠を以下に記します。
+
+### 4 流派比較
+
+| 流派 | 記法 | 例 |
+|------|------|-----|
+| **BEM** | サフィックス（block と一体） | `.c-button--ghost` |
+| **CUBE CSS** | Exception（HTML 属性） | `<button class="c-button" data-variant="ghost">` |
+| **Tailwind** | Variant prefix（utility 列挙） | `<button class="bg-transparent border-current ...">` |
+| **mFLOCSS** | ドット記法（独立 class、複数併記） | `.c-button.-ghost.-large` |
+
+### mFLOCSS の `.-modifier` ドット記法を選ぶ根拠
+
+1. **Element / Modifier の視覚分離**
+   - BEM の `c-button--ghost` は 1 つの class でブロックと修飾が連結されているため、grep で `c-button` を探すと `c-button--ghost` も `c-button__icon` も全て hit して S/N が悪い
+   - mFLOCSS の `.c-button.-ghost` は base class `c-button` と修飾 class `-ghost` が独立しているため、grep の精度が高い。HTML を読むときもスタイルの基盤と差分が視覚的に分離する
+2. **複数 Modifier 共存（組み合わせ可能性）**
+   - `.c-button.-primary.-large` のように複数の Modifier を併記して合成できる
+   - BEM サフィックスは `c-button--primary--large` のような連結記法を取らないため別 class を立てる必要があり、命名爆発を起こしやすい
+   - CUBE CSS の data 属性は単一値中心のため、複数 variant を表現するには `data-variant="primary large"` のような split が必要 + CSS 側で `[data-variant~="primary"]` のセレクタを書くことになり、詳細度と attribute selector のオーバーヘッドが発生する
+3. **@layer cascade との親和性**
+   - mFLOCSS は 8 層の `@layer`（`token / reset / foundation / layout / component / project / animation / utility`）で先制宣言する
+   - `.c-button.-ghost` は同一 `@layer` 内の独立宣言として記述でき、ブロックのデフォルトと Modifier 上書きの順序が cascade に明示される
+   - Tailwind の variant prefix（`hover:bg-blue` 等）は utility 単位の派生で、Component 単位で見たときの派生の俯瞰がコード上に現れない
+4. **Tailwind との対比（utility 列挙 vs Component 抽象）**
+   - Tailwind は Component を抽象化せず utility を直接 HTML に並べる思想
+   - mFLOCSS の Component は responsibility（テーマ・余白・タイポグラフィ）を内側に閉じ込め、`.-modifier` で variant を宣言的に切替える思想
+   - HTML が semantic 中心になるか utility 列挙になるかの価値観の違いで、starter は前者を採用している
+
+### 実装サンプル（c-button からの引用）
+
+```css
+/* src/assets/css/component/c-button.css 抜粋 */
+.c-button {
+  /* 公開 API: --button-color / --button-bg-color / --button-border-color / --button-hover-bg-color */
+  /* デフォルトのスタイル */
+}
+
+.c-button.-ghost {
+  /* 透過背景・線のみの Modifier */
+}
+
+.c-button.-large {
+  /* サイズ拡張の Modifier */
+}
+```
+
+```html
+<!-- 単独 -->
+<button class="c-button">既定のボタン</button>
+
+<!-- Modifier 1 つ -->
+<button class="c-button -ghost">透過ボタン</button>
+
+<!-- Modifier 複数併記 -->
+<button class="c-button -ghost -large">透過 × 大サイズ</button>
+```
+
+### 注意点
+
+- Modifier class の単独使用は禁止: `.c-button` を必ず併記する（`.-ghost` 単体は意味を持たない）
+- セレクタは `.c-button.-ghost` のように block class とチェーンする（spec §6 参照）
+- Modifier 名は必ず `-` プレフィックスで始める（プレフィックスなしの class は禁止）
 
 ## 空のルールセット
 
