@@ -1,7 +1,10 @@
-/* 子孫セレクタを許容する例外 Component（CMS 流し込み等、HTML クラス付与不能な用途向け）
-   AGENT_GUIDE S2-4 例外: https://github.com/mflocss/agent-reference/blob/feature/agent-guide-initial-draft/AGENT_GUIDE.md
-   公開 API:
+/* 公開 API:
      --prose-max-inline-size  (default: 40rem) */
+
+/*
+ * 子孫セレクタを許容する例外 Component（CMS 流し込み等、HTML クラス付与不能な用途向け）。
+ * agent-reference S2-4（子孫セレクタ許容例外）参照。
+ */
 .c-prose {
   --_max-inline-size: var(--prose-max-inline-size, 40rem);
 
