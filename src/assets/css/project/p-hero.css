@@ -8,7 +8,6 @@
 }
 
 .p-hero__inner {
-  /* l-inner p-hero__inner 併記により .p-hero の grid 直接子になったため grid-area を宣言 */
   grid-area: stack;
 }
 
