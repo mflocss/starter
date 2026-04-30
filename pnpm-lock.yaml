@@ -39,7 +39,7 @@ importers:
         specifier: ^40.0.0
         version: 40.0.0(stylelint@17.9.0)
       vite:
-        specifier: ^8.0.3
+        specifier: ^8.0.5
         version: 8.0.10(@types/node@25.6.0)
 
 packages:
