@@ -3,10 +3,13 @@
 }
 
 .p-404__inner {
+  max-inline-size: 40rem;
+}
+
+.p-404__stack {
   display: grid;
   gap: var(--space-xl);
   justify-items: center;
-  max-inline-size: 40rem;
 }
 
 .p-404__lead {
