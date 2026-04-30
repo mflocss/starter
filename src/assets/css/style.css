@@ -18,13 +18,13 @@
 @import './foundation/base.css' layer(foundation);
 @import './foundation/form.css' layer(foundation);
 
-/* Layout */
+/* Layout: ページの大枠を構成するブロック（l- プレフィックス） */
 @import './layout/l-header.css' layer(layout);
 @import './layout/l-footer.css' layer(layout);
 @import './layout/l-section.css' layer(layout);
 @import './layout/l-inner.css' layer(layout);
 
-/* Component */
+/* Component: 再利用可能な UI 部品（c- プレフィックス） */
 @import './component/c-button.css' layer(component);
 @import './component/c-form.css' layer(component);
 @import './component/c-icon-button.css' layer(component);
@@ -43,7 +43,7 @@
 @import './component/c-overlay.css' layer(component);
 @import './component/c-skip-link.css' layer(component);
 
-/* Project */
+/* Project: ページ / プロジェクト固有のブロック（p- プレフィックス） */
 @import './project/p-header.css' layer(project);
 @import './project/p-drawer.css' layer(project);
 @import './project/p-hero.css' layer(project);
@@ -60,9 +60,9 @@
 @import './project/p-privacy.css' layer(project);
 @import './project/p-404.css' layer(project);
 
-/* Animation */
+/* Animation: アニメーション・トランジション定義 */
 @import './animation/fade-in-slide-up.css' layer(animation);
 @import './animation/scale-in.css' layer(animation);
 
-/* Utility */
+/* Utility: 単一プロパティの汎用上書き（u- プレフィックス） */
 @import './utility/u-hidden.css' layer(utility);
