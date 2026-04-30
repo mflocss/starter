@@ -1,26 +1,26 @@
-.p-not-found {
+.p-404 {
   text-align: center;
 }
 
-.p-not-found__inner {
+.p-404__inner {
   display: grid;
   gap: var(--space-xl);
   justify-items: center;
   max-inline-size: 40rem;
 }
 
-.p-not-found__lead {
+.p-404__lead {
   line-height: var(--line-height-text);
   color: var(--color-text-light);
 }
 
-.p-not-found__actions {
+.p-404__actions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-md);
   justify-content: center;
 }
 
-.p-not-found__cta {
+.p-404__cta {
   /* スタイルなし（HTML クラスとの対応を維持） */
 }
