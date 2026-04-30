@@ -30,6 +30,9 @@ export default defineConfig({
   },
 
   plugins: [
+    // 本番ホスティング（Cloudflare Pages / Netlify / Vercel 等）は dist/404.html を
+    // 404 Not Found 時に自動配信する標準仕様。本 plugin はローカル `pnpm preview` で
+    // 同じ動作を再現するため。
     {
       name: 'preview-404-fallback',
       configurePreviewServer(server) {
