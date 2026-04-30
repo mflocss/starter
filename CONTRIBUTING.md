@@ -35,6 +35,18 @@ npm / pnpm / yarn いずれでも動作します。README の手順は npm 前�
 
 Node.js LTS 以降を推奨。
 
+## 404 ページの動作確認
+
+`src/404.html` をカスタマイズした際は、ローカル `pnpm preview` で表示確認できます:
+
+```bash
+pnpm build
+pnpm preview
+# http://localhost:4173/nonexistent など存在しない URL にアクセス → カスタム 404 ページ表示
+```
+
+`vite.config.ts` の `preview-404-fallback` plugin が、本番（Cloudflare Pages 等）と同じ 404 フォールバック動作をローカルで再現します。本番デプロイ後は設定ファイル不要で自動配信されます。
+
 ## 基本フロー
 
 1. Issue で議論（小さい修正は直接 PR でも OK）

@@ -154,6 +154,26 @@ base: '/my-site/',
 
 納品前にプロジェクト全体で `CUSTOMIZE` を検索し、差し替え忘れがないことを確認してください。
 
+## 404 ページの動作確認
+
+### 本番デプロイ後
+
+`dist/404.html` を root に置けば、Cloudflare Pages / Netlify / Vercel / GitHub Pages 等が **404 Not Found 時に自動配信** します。設定ファイル（`_redirects` 等）は不要です。
+
+### ローカル `pnpm preview`
+
+`vite.config.ts` の `preview-404-fallback` plugin により、存在しない URL アクセスで `dist/404.html` が表示されます。
+
+```bash
+pnpm build
+pnpm preview
+# ブラウザで http://localhost:4173/nonexistent などにアクセス → カスタム 404 ページ表示
+```
+
+### 直接アクセス
+
+`http://localhost:4173/404.html` で 404.html の内容を直接確認できます。
+
 ## リファレンス
 
 ### コマンド一覧
