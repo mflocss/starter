@@ -8,7 +8,12 @@
 }
 
 .p-hero__inner {
-  /* スタイルなし（HTML クラスとの対応を維持） */
+  /*
+   * Hero stack レイアウトの grid セル配置（原則 9 の明示理由付き例外）
+   * .p-hero の grid-template-areas: 'stack' に対して、.p-hero__media と同セルに配置する
+   * （l-inner p-hero__inner 併記により .p-hero の grid 直接子になったため）
+   */
+  grid-area: stack;
 }
 
 .p-hero__stack {
