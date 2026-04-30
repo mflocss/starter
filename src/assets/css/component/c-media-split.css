@@ -16,6 +16,15 @@
   }
 }
 
+/* Modifier: -stacked（投稿カード等の縦並び固定バリエーション） */
+.c-media-split.-stacked {
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  align-items: start;
+
+  /* @container クエリなしで常に縦並び（投稿カード一覧の小さなカード内で適合） */
+}
+
 .c-media-split__content {
   display: flex;
   flex-direction: column;
