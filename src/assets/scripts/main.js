@@ -7,7 +7,7 @@
  * - スタッガーアニメーション（data-stagger）
  * - Back to Top ボタン表示制御
  *
- * data-immediate: CSS 完結のアニメーション（JS 待ちなし）。LCP 要素の FOIC 防止に使用。
+ * data-immediate: CSS 完結のアニメーション（JS 待ちなし）。ファーストビュー要素のアニメーション遅延防止に使用。
  * data-animate:   JS 待ちアニメーション。IntersectionObserver が data-visible を付与して再生開始。
  *
  * 各 init 関数は options 引数でカスタマイズ可能。デフォルト値は関数内で定義。

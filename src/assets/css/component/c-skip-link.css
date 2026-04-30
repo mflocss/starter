@@ -2,9 +2,6 @@
  * DEVIATION: spec §5.5 SHOULD NOT [外部レイアウト影響プロパティの排除] の例外。
  *   自己配置型 Component（spec §5.5 例外条項）として :focus-visible 時 position: fixed を宣言。
  *   :focus-visible によるスキップリンク可視化がこの Component の機能本質（機能本質の担保 / 配置基準の独立性を満たす）。
- *
- * アクセシビリティ対応のスキップリンク。キーボード操作のフォーカス時のみ
- * ビューポート左上に表示される。
  */
 .c-skip-link {
   padding: var(--space-sm) var(--space-md);
