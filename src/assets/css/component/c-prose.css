@@ -3,7 +3,7 @@
 
 /*
  * 子孫セレクタを許容する例外 Component（CMS 流し込み等、HTML クラス付与不能な用途向け）。
- * spec §5.5 / agent-reference S2-4（子孫セレクタ許容例外）参照。
+ * agent-reference S2-4（子孫セレクタ許容例外）参照。
  */
 .c-prose {
   --_max-inline-size: var(--prose-max-inline-size, 40rem);
