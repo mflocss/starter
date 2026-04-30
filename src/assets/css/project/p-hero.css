@@ -7,6 +7,10 @@
   background: radial-gradient(ellipse at 50% 0%, oklch(from var(--color-main) l c h / 6%) 0%, transparent 70%);
 }
 
+.p-hero__inner {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
 .p-hero__stack {
   position: relative;
   z-index: 1;

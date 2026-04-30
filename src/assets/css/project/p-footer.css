@@ -4,6 +4,10 @@
   border-block-start: var(--border-width) solid var(--color-border);
 }
 
+.p-footer__inner {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
 .p-footer__stack {
   display: flex;
   flex-direction: column;

@@ -12,6 +12,10 @@
   }
 }
 
+.p-header__inner {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
 .p-header__bar {
   display: flex;
   align-items: center;
