@@ -147,31 +147,33 @@
 
     <!-- Header -->
     <header class="l-header p-header">
-      <div class="l-inner p-header__bar">
-        <!-- CUSTOMIZE: サービス名を差し替え -->
-        <a class="p-header__logo" data-drawer-inert href="/" translate="no">iluha</a>
+      <div class="l-inner">
+        <div class="p-header__bar">
+          <!-- CUSTOMIZE: サービス名を差し替え -->
+          <a class="p-header__logo" data-drawer-inert href="/" translate="no">iluha</a>
 
-        <nav class="p-header__nav" data-drawer-inert aria-label="メインナビゲーション">
-          <ul class="p-header__nav-list">
-            <li><a class="p-header__nav-link" href="#features">特徴</a></li>
-            <li><a class="p-header__nav-link" href="#voice">お客様の声</a></li>
-            <li><a class="p-header__nav-link" href="#faq">よくある質問</a></li>
-            <li><a class="p-header__nav-link" href="#contact">ご予約</a></li>
-          </ul>
-          <a class="c-button p-header__cta" href="#contact">初回体験を予約する</a>
-        </nav>
+          <nav class="p-header__nav" data-drawer-inert aria-label="メインナビゲーション">
+            <ul class="p-header__nav-list">
+              <li><a class="p-header__nav-link" href="#features">特徴</a></li>
+              <li><a class="p-header__nav-link" href="#voice">お客様の声</a></li>
+              <li><a class="p-header__nav-link" href="#faq">よくある質問</a></li>
+              <li><a class="p-header__nav-link" href="#contact">ご予約</a></li>
+            </ul>
+            <a class="c-button p-header__cta" href="#contact">初回体験を予約する</a>
+          </nav>
 
-        <!-- Hamburger: drawer 開閉中も機能するため data-drawer-inert 対象外 -->
-        <button
-          class="c-hamburger p-header__hamburger"
-          data-hamburger
-          type="button"
-          aria-expanded="false"
-          aria-controls="drawer"
-          aria-label="メニュー"
-        >
-          <span class="c-hamburger__line" aria-hidden="true"></span>
-        </button>
+          <!-- Hamburger: drawer 開閉中も機能するため data-drawer-inert 対象外 -->
+          <button
+            class="c-hamburger p-header__hamburger"
+            data-hamburger
+            type="button"
+            aria-expanded="false"
+            aria-controls="drawer"
+            aria-label="メニュー"
+          >
+            <span class="c-hamburger__line" aria-hidden="true"></span>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -203,22 +205,24 @@
     <main id="main" tabindex="-1" data-drawer-inert>
       <!-- Hero -->
       <section class="l-section p-hero" aria-labelledby="hero-heading">
-        <div class="l-inner p-hero__stack">
-          <!-- CUSTOMIZE: サービス名・キャッチコピーを差し替え -->
-          <div class="p-hero__content" data-immediate="scale-in">
-            <h1 class="p-hero__title" id="hero-heading">からだの声を、<br class="u-hidden-pc" />聴く時間。</h1>
-            <p class="p-hero__lead">
-              忙しい毎日の中で後回しにしてきた自分のケア。<br class="u-hidden-sp" />iluha
-              は、内側から整うボディケアサロンです。
-            </p>
-            <div class="p-hero__actions">
-              <a class="c-icon-button -large p-hero__cta" href="#contact">
-                初回体験を予約する
-                <svg class="c-icon-button__icon" width="20" height="20" aria-hidden="true">
-                  <use href="/assets/images/icons/arrow-right.svg#icon" />
-                </svg>
-              </a>
-              <a class="c-button -ghost -large p-hero__sub-cta" href="#features">選ばれる理由を見る</a>
+        <div class="l-inner">
+          <div class="p-hero__stack">
+            <!-- CUSTOMIZE: サービス名・キャッチコピーを差し替え -->
+            <div class="p-hero__content" data-immediate="scale-in">
+              <h1 class="p-hero__title" id="hero-heading">からだの声を、<br class="u-hidden-pc" />聴く時間。</h1>
+              <p class="p-hero__lead">
+                忙しい毎日の中で後回しにしてきた自分のケア。<br class="u-hidden-sp" />iluha
+                は、内側から整うボディケアサロンです。
+              </p>
+              <div class="p-hero__actions">
+                <a class="c-icon-button -large p-hero__cta" href="#contact">
+                  初回体験を予約する
+                  <svg class="c-icon-button__icon" width="20" height="20" aria-hidden="true">
+                    <use href="/assets/images/icons/arrow-right.svg#icon" />
+                  </svg>
+                </a>
+                <a class="c-button -ghost -large p-hero__sub-cta" href="#features">選ばれる理由を見る</a>
+              </div>
             </div>
           </div>
         </div>
@@ -530,13 +534,17 @@
 
       <!-- CTA -->
       <section class="l-section p-cta" id="cta" aria-labelledby="cta-heading">
-        <div class="l-inner p-cta__inner">
-          <div class="p-cta__stack" data-stagger="fade-in-slide-up">
-            <div class="c-text-block p-cta__message">
-              <h2 class="c-text-block__title" id="cta-heading">まずは一度、からだの声を聴いてみませんか？</h2>
-              <p class="c-text-block__text">初回体験は 60分 4,400円。カウンセリング込み。無理な勧誘はいたしません。</p>
+        <div class="l-inner">
+          <div class="p-cta__inner">
+            <div class="p-cta__stack" data-stagger="fade-in-slide-up">
+              <div class="c-text-block p-cta__message">
+                <h2 class="c-text-block__title" id="cta-heading">まずは一度、からだの声を聴いてみませんか？</h2>
+                <p class="c-text-block__text">
+                  初回体験は 60分 4,400円。カウンセリング込み。無理な勧誘はいたしません。
+                </p>
+              </div>
+              <a class="c-button -large p-cta__button" href="#contact">初回体験を予約する</a>
             </div>
-            <a class="c-button -large p-cta__button" href="#contact">初回体験を予約する</a>
           </div>
         </div>
       </section>
@@ -686,28 +694,30 @@
 
     <!-- Footer -->
     <footer class="l-footer p-footer" data-drawer-inert>
-      <div class="l-inner p-footer__stack">
-        <nav class="p-footer__nav" aria-label="フッターナビゲーション">
-          <ul class="p-footer__nav-list">
-            <li><a class="p-footer__nav-link" href="#features">特徴</a></li>
-            <li><a class="p-footer__nav-link" href="#voice">お客様の声</a></li>
-            <li><a class="p-footer__nav-link" href="#faq">よくある質問</a></li>
-            <li><a class="p-footer__nav-link" href="#contact">ご予約</a></li>
-            <li>
-              <a class="p-footer__nav-link" href="/privacy/">プライバシーポリシー</a>
-            </li>
-          </ul>
-        </nav>
-        <!-- CUSTOMIZE: 住所・電話番号・営業時間を差し替え -->
-        <address class="p-footer__address">
-          〒xxx-xxxx 東京都渋谷区○○ x-x-x ○○ビル 3F<br />
-          <a class="p-footer__tel" href="tel:03-xxxx-xxxx" translate="no">TEL: 03-xxxx-xxxx</a><br />
-          営業時間: 10:00〜20:00（最終受付 19:00）<br />
-          定休日: 毎週水曜日
-        </address>
-        <p class="p-footer__copyright">
-          <small><span translate="no">© 2026 iluha</span></small>
-        </p>
+      <div class="l-inner">
+        <div class="p-footer__stack">
+          <nav class="p-footer__nav" aria-label="フッターナビゲーション">
+            <ul class="p-footer__nav-list">
+              <li><a class="p-footer__nav-link" href="#features">特徴</a></li>
+              <li><a class="p-footer__nav-link" href="#voice">お客様の声</a></li>
+              <li><a class="p-footer__nav-link" href="#faq">よくある質問</a></li>
+              <li><a class="p-footer__nav-link" href="#contact">ご予約</a></li>
+              <li>
+                <a class="p-footer__nav-link" href="/privacy/">プライバシーポリシー</a>
+              </li>
+            </ul>
+          </nav>
+          <!-- CUSTOMIZE: 住所・電話番号・営業時間を差し替え -->
+          <address class="p-footer__address">
+            〒xxx-xxxx 東京都渋谷区○○ x-x-x ○○ビル 3F<br />
+            <a class="p-footer__tel" href="tel:03-xxxx-xxxx" translate="no">TEL: 03-xxxx-xxxx</a><br />
+            営業時間: 10:00〜20:00（最終受付 19:00）<br />
+            定休日: 毎週水曜日
+          </address>
+          <p class="p-footer__copyright">
+            <small><span translate="no">© 2026 iluha</span></small>
+          </p>
+        </div>
       </div>
     </footer>
 
