@@ -94,6 +94,13 @@ textarea.c-form__input {
   margin-block-start: var(--space-xs);
 }
 
+/* Element: バリデーションエラーメッセージ（JS が hidden 解除 + textContent 投入で表示）。
+   表示制御は HTML の hidden 属性で行うため、CSS の display 制御は不要 */
+.c-form__error {
+  font-size: var(--font-size-caption);
+  color: var(--color-error);
+}
+
 /* Element: 送信ボタン配置ラッパー（中央寄せ default、Project 側で上書き可） */
 .c-form__actions {
   display: flex;

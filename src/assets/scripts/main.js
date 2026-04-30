@@ -6,6 +6,7 @@
  * - スクロールアニメーション（IntersectionObserver + data-animate）
  * - スタッガーアニメーション（data-stagger）
  * - Back to Top ボタン表示制御
+ * - フォームバリデーション a11y（HTML5 制約検証 + role="alert" 動的表示）
  *
  * data-immediate: CSS 完結のアニメーション（JS 待ちなし）。ファーストビュー要素のアニメーション遅延防止に使用。
  * data-animate:   JS 待ちアニメーション。IntersectionObserver が data-visible を付与して再生開始。
@@ -197,14 +198,100 @@ function initBackToTop(options = {}) {
   toggleVisibility();
 }
 
+/**
+ * フォームバリデーション a11y を初期化する（HTML5 制約検証 + role="alert" 動的表示）。
+ * フォームに novalidate が必要（ブラウザネイティブ tooltip を抑制して JS で制御）。
+ * @param {Object} [options] - カスタマイズオプション
+ * @param {string} [options.formSelector='.c-form'] - 対象フォームのセレクタ
+ */
+function initFormValidation(options = {}) {
+  const { formSelector = '.c-form' } = options;
+  const forms = document.querySelectorAll(formSelector);
+  if (forms.length === 0) return;
+
+  forms.forEach((form) => {
+    const fields = form.querySelectorAll('[aria-describedby]');
+
+    /**
+     * fieldset は制約検証対象外（barred from constraint validation）のため、
+     * 内部の最初の required 入力要素を代わりに検査する。
+     */
+    function getRepresentativeInput(field) {
+      if (field.tagName === 'FIELDSET') {
+        return field.querySelector('[required]') ?? null;
+      }
+      return field;
+    }
+
+    // 送信時バリデーション
+    form.addEventListener('submit', (event) => {
+      let firstInvalid = null;
+
+      fields.forEach((field) => {
+        const errorId = field.getAttribute('aria-describedby');
+        const errorEl = document.getElementById(errorId);
+        if (!errorEl) return;
+
+        const input = getRepresentativeInput(field);
+        if (!input) return;
+
+        if (!input.checkValidity()) {
+          // エラー表示
+          errorEl.textContent = input.validationMessage;
+          errorEl.hidden = false;
+          field.setAttribute('aria-invalid', 'true');
+          if (!firstInvalid) firstInvalid = input;
+        } else {
+          // エラー解除
+          errorEl.textContent = '';
+          errorEl.hidden = true;
+          field.removeAttribute('aria-invalid');
+        }
+      });
+
+      // 最初のエラーフィールドに focus
+      if (firstInvalid) {
+        event.preventDefault();
+        firstInvalid.focus({ preventScroll: false });
+        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+
+    // input / change イベントで有効化時にエラー解除
+    fields.forEach((field) => {
+      const errorId = field.getAttribute('aria-describedby');
+      const errorEl = document.getElementById(errorId);
+      if (!errorEl) return;
+
+      const input = getRepresentativeInput(field);
+      if (!input) return;
+
+      const handler = () => {
+        if (input.checkValidity()) {
+          errorEl.textContent = '';
+          errorEl.hidden = true;
+          field.removeAttribute('aria-invalid');
+        }
+      };
+
+      // input は textarea / input[type=text|email|tel] 等
+      // change は select / radio / checkbox
+      field.addEventListener('input', handler);
+      field.addEventListener('change', handler);
+    });
+  });
+}
+
 // 初期化（デフォルト値で動作）
 initDrawer();
 initStagger();
 initScrollAnimation();
 initBackToTop();
+initFormValidation();
 
 // CUSTOMIZE 例:
 // initDrawer({ breakpoint: 1024 });
 // initStagger({ delayStep: 0.15 });
 // initScrollAnimation({ threshold: 0.3, rootMargin: '0px 0px -100px 0px' });
 // initBackToTop({ threshold: 500 });
+// initFormValidation({ formSelector: '#my-form' });
