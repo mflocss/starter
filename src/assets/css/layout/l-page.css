@@ -1,0 +1,11 @@
+/* ページ全体の骨格（spec §5.4 Layout 層責任）。
+   sticky footer 動作: 短いコンテンツでも footer をウィンドウ下部に配置 */
+.l-page {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100dvb;
+}
+
+.l-page > main {
+  flex: 1;
+}
