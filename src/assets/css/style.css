@@ -19,6 +19,7 @@
 @import './foundation/form.css' layer(foundation);
 
 /* Layout: ページの大枠を構成するブロック（l- プレフィックス） */
+@import './layout/l-page.css' layer(layout);
 @import './layout/l-header.css' layer(layout);
 @import './layout/l-footer.css' layer(layout);
 @import './layout/l-section.css' layer(layout);
