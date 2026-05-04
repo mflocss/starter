@@ -20,5 +20,6 @@ mFLOCSS starter の変更履歴。[Keep a Changelog](https://keepachangelog.com/
 - Community health files（CHANGELOG / CONTRIBUTING / SECURITY / CODE_OF_CONDUCT）
 - GitHub Actions CI（starter 本体のみ発動、Fork / Clone 時は自動 skip）
 - Issue テンプレート（bug report / feature request）
+- ローカル `npm run preview` での 404 fallback 動作（`vite.config.ts` の `preview-404-fallback` plugin により本番ホスティング動作を完全再現、教材性向上）
 
 [Unreleased]: https://github.com/mflocss/starter/compare/v1.0.0...HEAD
