@@ -154,6 +154,26 @@ base: '/my-site/',
 
 納品前にプロジェクト全体で `CUSTOMIZE` を検索し、差し替え忘れがないことを確認してください。
 
+### 404 ページの動作確認
+
+`src/404.html` は本番ホスティングで存在しないパスにアクセスされた際の Not Found ページです。動作確認方法は以下の 3 通り:
+
+| 確認方法 | URL | 期待動作 |
+|---------|-----|---------|
+| 本番ホスティング | `https://example.com/nonexistent` | ホスティング側が `404.html` を **HTTP 404** で自動配信 |
+| ローカル preview | `http://localhost:4173/nonexistent` | `vite.config.ts` の preview-404-fallback plugin が `404.html` を **HTTP 404** で配信 |
+| 直接アクセス（内容確認） | `http://localhost:4173/404.html` | `404.html` が **HTTP 200** で配信（デザイン確認用） |
+
+ローカル動作確認の手順:
+
+```bash
+npm run build
+npm run preview
+# 別タブで http://localhost:4173/nonexistent にアクセス
+```
+
+本番側は **Cloudflare Pages / Netlify / Vercel / GitHub Pages のいずれも `dist/404.html` を root に配置するだけで自動配信**します（追加設定ファイル不要）。ローカル `npm run preview` でも同じ動作を再現するため `vite.config.ts` に `preview-404-fallback` plugin を含めています。
+
 ## リファレンス
 
 ### コマンド一覧

@@ -41,7 +41,8 @@ Node.js LTS 以降を推奨。
 2. ブランチ名: `feat/` `fix/` `refactor/` `chore/` `docs/` のいずれか + 短い要約
 3. commit message: `type(scope): subject`（日本語 OK、例: `fix(c-form): focus-visible でリング温存`）
 4. PR 作成前に `pnpm run check` + `pnpm run build` 通過確認
-5. PR body に変更理由・spec 参照節・動作確認項目を記載
+5. PR 作成前に `pnpm run preview` で動作確認（404 ページの fallback 含む。詳細は [README.md「404 ページの動作確認」](./README.md#404-ページの動作確認) 参照）
+6. PR body に変更理由・spec 参照節・動作確認項目を記載
 
 ## コード規約
 
