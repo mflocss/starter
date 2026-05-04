@@ -14,6 +14,37 @@ mFLOCSS のリファレンス実装。架空の美容サロン「iluha」の LP 
    ```
 3. ターミナルに表示された URL をブラウザで開き、LP が表示されることを確認
 
+## ファイル構成
+
+```
+src/
+├── assets/
+│   ├── css/
+│   │   ├── style.css          # エントリポイント
+│   │   ├── layer-order.css    # @layer 先制宣言
+│   │   ├── token/             # デザイントークン（カラー・タイポグラフィ・余白等）
+│   │   ├── reset/             # ブラウザリセット
+│   │   ├── foundation/        # 要素の基本スタイル（base + form）
+│   │   ├── layout/            # レイアウトプリミティブ
+│   │   ├── component/         # 再利用可能な UI パーツ
+│   │   ├── project/           # ページ固有のスタイル
+│   │   ├── animation/         # 装飾的アニメーション
+│   │   └── utility/           # ユーティリティ
+│   ├── images/                # コンテンツ画像（ビルドでハッシュ付与）
+│   └── scripts/
+│       └── main.js            # ドロワー・アニメーション・Back to Top
+├── index.html             # トップページ（Hero〜Contact セクション統合）
+├── privacy/index.html     # プライバシーポリシー
+└── 404.html               # 404 ページ（カスタマイズして使う）
+public/                    # ルートパス固定のファイル
+├── scripts/
+│   └── viewport.js        # ビューポート幅制御（--viewport-min 未満の端末向け）
+├── favicon.svg
+├── favicon.ico
+├── apple-touch-icon.png
+└── ogp.png
+```
+
 ## カスタマイズ
 
 プロジェクト全体で `CUSTOMIZE` を検索すると、差し替えポイントが見つかります（HTML・CSS・vite.config.ts）。
@@ -55,6 +86,23 @@ mFLOCSS のリファレンス実装。架空の美容サロン「iluha」の LP 
 
 `color.css` がセマンティック変数を通して全体に反映するため、パレットを変えるだけで LP 全体の配色が切り替わります。oklch 以外の形式（HEX, rgb 等）でも動作します。
 
+### ダークモード
+
+初期設定では OS のダークモード設定に自動追従します（手動切り替え UI はありません）。
+
+**無効化する場合:**
+
+1. 全ページの `<meta name="color-scheme" content="light dark">` を `<meta name="color-scheme" content="light">` に変更
+2. `src/assets/css/token/color.css` の `light-dark()` 関数を light 側の値に置き換え
+
+```css
+/* Before */
+--color-main: light-dark(var(--_sage-600), var(--_sage-400));
+
+/* After */
+--color-main: var(--_sage-600);
+```
+
 ### 余白・文字サイズの変え方
 
 Token 層（`src/assets/css/token/`）にデザイン値が集約されています。`--px` ヘルパー（`calc(1rem / 16)`）により、数値はデザインカンプの px 指定値をそのまま記述できます。
@@ -72,23 +120,6 @@ Token 層（`src/assets/css/token/`）にデザイン値が集約されていま
    ```css
    --font-family: 'Inter', 'Noto Sans JP', sans-serif;
    ```
-
-### ダークモード
-
-初期設定では OS のダークモード設定に自動追従します（手動切り替え UI はありません）。
-
-**無効化する場合:**
-
-1. 全ページの `<meta name="color-scheme" content="light dark">` を `<meta name="color-scheme" content="light">` に変更
-2. `src/assets/css/token/color.css` の `light-dark()` 関数を light 側の値に置き換え
-
-```css
-/* Before */
---color-main: light-dark(var(--_sage-600), var(--_sage-400));
-
-/* After */
---color-main: var(--_sage-600);
-```
 
 ### ブレークポイントの変更
 
@@ -194,37 +225,6 @@ npm run preview
 Baseline Newly Available（全モダンブラウザの最新安定版でサポート済みの機能を使用）
 
 使用しているモダン CSS: `@layer`, `@container`, CSS Nesting, `:has()`, `:where()`, `oklch()`, `light-dark()`, 論理プロパティ, `clamp()`
-
-### ファイル構成
-
-```
-src/
-├── assets/
-│   ├── css/
-│   │   ├── style.css          # エントリポイント
-│   │   ├── layer-order.css    # @layer 先制宣言
-│   │   ├── token/             # デザイントークン（カラー・タイポグラフィ・余白等）
-│   │   ├── reset/             # ブラウザリセット
-│   │   ├── foundation/        # 要素の基本スタイル（base + form）
-│   │   ├── layout/            # レイアウトプリミティブ
-│   │   ├── component/         # 再利用可能な UI パーツ
-│   │   ├── project/           # ページ固有のスタイル
-│   │   ├── animation/         # 装飾的アニメーション
-│   │   └── utility/           # ユーティリティ
-│   ├── images/                # コンテンツ画像（ビルドでハッシュ付与）
-│   └── scripts/
-│       └── main.js            # ドロワー・アニメーション・Back to Top
-├── index.html             # トップページ（Hero〜Contact セクション統合）
-├── privacy/index.html     # プライバシーポリシー
-└── 404.html               # 404 ページ（カスタマイズして使う）
-public/                    # ルートパス固定のファイル
-├── scripts/
-│   └── viewport.js        # ビューポート幅制御（--viewport-min 未満の端末向け）
-├── favicon.svg
-├── favicon.ico
-├── apple-touch-icon.png
-└── ogp.png
-```
 
 ## パッケージマネージャー
 
