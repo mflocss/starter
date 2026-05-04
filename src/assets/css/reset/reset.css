@@ -127,3 +127,12 @@
 :where([hidden]:not([hidden='until-found' i])) {
   display: none !important;
 }
+
+/* CSS-FLEXBOX-1 §4.5 / CSS-GRID-1 §6.2 罠の予防
+   flex item / Grid item の main axis で min-*: auto が content-based minimum size に
+   解決される確定的罠を構造的に予防する（cortex#448、spec §5.2 Reset SHOULD 準拠）。
+   副作用: input / textarea / replaced element の min-width: auto 依存箇所は個別 override。 */
+* {
+  min-inline-size: 0;
+  min-block-size: 0;
+}
