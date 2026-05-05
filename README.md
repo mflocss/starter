@@ -47,7 +47,7 @@ public/                    # ルートパス固定のファイル
 
 ## カスタマイズ・構造の変更
 
-詳細は **[mFLOCSS 書籍 ch5（Token・Reset・Foundation）+ ch12（スターターで動かす）](https://zenn.dev/shunei/books/mflocss-design)** を参照してください。
+詳細は **[mFLOCSS 書籍](https://zenn.dev/shunei/books/mflocss-design)** を参照してください。
 
 差し替えポイントはコード全体で `CUSTOMIZE` コメントを検索すると発見できます（HTML・CSS・vite.config.ts に記載）。
 
@@ -73,9 +73,9 @@ base: '/my-site/',
 
 | 確認方法 | URL | 期待動作 |
 |---------|-----|---------|
-| 本番ホスティング | `https://example.com/nonexistent` | ホスティング側が `404.html` を **HTTP 404** で自動配信 |
-| ローカル preview | `http://localhost:4173/nonexistent` | `vite.config.ts` の preview-404-fallback plugin が `404.html` を **HTTP 404** で配信 |
-| 直接アクセス（内容確認） | `http://localhost:4173/404.html` | `404.html` が **HTTP 200** で配信（デザイン確認用） |
+| ローカル dev（見た目確認）| `http://localhost:5173/404.html` | HTTP 200 で配信（デザイン確認用、HMR 効く）|
+| ローカル preview（HTTP 404 検証）| `http://localhost:4173/nonexistent` | `vite.config.ts` の preview-404-fallback plugin が HTTP 404 で配信 |
+| 本番ホスティング | `https://example.com/nonexistent` | HTTP 404 で配信 |
 
 ローカル動作確認の手順:
 
@@ -127,6 +127,13 @@ Starter 開発（Contribute）の場合は pnpm 推奨。詳細は [CONTRIBUTING
 `.github/workflows/check.yml` 参照。Fork / Clone 後は自動 skip（自分のプロジェクトで有効化する場合は `jobs.check.if` 行を削除）。
 
 ## 関連リンク
+
+リポ内ドキュメント:
+
+- [CODING_GUIDE.md](./CODING_GUIDE.md) — starter のコードを書く / 拡張する開発者向けの規約
+- [CHANGELOG.md](./CHANGELOG.md) — 変更履歴（Keep a Changelog 準拠）
+
+mFLOCSS エコシステム:
 
 - [mFLOCSS 公式サイト](https://mflocss.dev/) — 認知 → 理解 → 書籍購入のファネル中枢、エコシステム全体ナビ
 - [デモサイト](https://starter.mflocss.dev) — starter のライブプレビュー
