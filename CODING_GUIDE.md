@@ -1,7 +1,8 @@
 # コーディングガイド
 
-このプロジェクトで使用する CSS 設計（mFLOCSS）の starter 固有の運用ルールです。
+**starter のコードを書く / 拡張する開発者向け**の運用ルールです（mFLOCSS の starter 固有の規約）。
 層の定義・命名規則・カスタムプロパティ参照ルール等の仕様は [mFLOCSS 仕様書](https://github.com/mflocss/spec) を参照してください。
+関連リンク（公式サイト / デモサイト / 書籍）は [README.md](./README.md) を参照してください。
 
 ## ブレークポイント値の CSS/JS 同期
 
@@ -92,10 +93,3 @@ prefix で変更の種類を明示し、タイトルで変更の影響を日本�
 - prefix は英語、タイトルは日本語
 - 「何を変えたか」ではなく「何が変わるか」を書く
 - 1行目は 72 文字以内を目安に
-
-## 関連リンク
-
-- [mFLOCSS 公式サイト](https://mflocss.dev/) — 認知 → 理解 → 書籍購入のファネル中枢、エコシステム全体ナビ
-- [デモサイト](https://starter.mflocss.dev) — starter のライブプレビュー
-- [そのFLOCSS、なぜそこに書いた？ —— mFLOCSS で迷わない CSS 設計の判断基準](https://zenn.dev/shunei/books/mflocss-design)
-- [mFLOCSS 仕様書](https://github.com/mflocss/spec)

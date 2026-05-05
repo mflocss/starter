@@ -242,20 +242,7 @@ Starter 開発（Contribute）の場合は pnpm 推奨。詳細は [CONTRIBUTING
 
 ## GitHub Actions CI
 
-本リポジトリには `.github/workflows/check.yml` で `pnpm run check` + `pnpm run build` を検証する CI が設定されています。
-
-- **本体リポ（mflocss/starter）**: PR / push 時に自動発動
-- **Fork / Clone したリポ**: `if: github.repository == 'mflocss/starter'` の条件で**自動 skip**（Fork 直後に Actions が意図せず走らない設計）
-- **自分のプロジェクトで有効化する場合**: `.github/workflows/check.yml` の `jobs.check.if` 行を削除してください
-
-これにより「starter 本体の品質ゲート」と「ユーザーに優しいテンプレート」の両立を実現しています。
-
-## 設計判断の詳細
-
-starter で採用している設計判断（Component 原則・順序ルール・コメント方針・命名規則等）の詳細は以下を参照してください:
-
-- [mFLOCSS 仕様書](https://github.com/mflocss/spec) — 公式規範（MUST / SHOULD / MAY、無料）
-- [そのFLOCSS、なぜそこに書いた？](https://zenn.dev/shunei/books/mflocss-design) — 公式書籍、判断基準の詳細解説（Zenn、一部無料・全編有料）
+`.github/workflows/check.yml` 参照。Fork / Clone 後は自動 skip（自分のプロジェクトで有効化する場合は `jobs.check.if` 行を削除）。
 
 ## 関連リンク
 
