@@ -4,6 +4,24 @@
 層の定義・命名規則・カスタムプロパティ参照ルール等の仕様は [mFLOCSS 仕様書](https://github.com/mflocss/spec) を参照してください。
 関連リンク（公式サイト / デモサイト / 書籍）は [README.md](./README.md) を参照してください。
 
+## パッケージマネージャー
+
+本 starter は pnpm で開発されており、`pnpm-lock.yaml` が commit されています。エンドユーザーは **npm / pnpm / yarn** のいずれでも動作します:
+
+- 本 README の手順は **npm** で記述（Node.js 同梱ツールのため追加インストール不要）
+- `pnpm install` でも動作（付属の `pnpm-lock.yaml` で高速・再現可能インストール）
+- `npm install` でも動作（`pnpm-lock.yaml` は無視され、独自に `package-lock.json` がローカル生成される）
+
+### 生成された lockfile の扱い
+
+`npm install` した場合、`package-lock.json` が生成されます。これを commit するかどうかは、あなたのプロジェクトの方針で判断してください（個人プロジェクト・チーム開発では一般的に commit します）。
+
+Starter 開発（Contribute）の場合は pnpm 推奨。詳細は [CONTRIBUTING.md](./CONTRIBUTING.md) 参照。
+
+## GitHub Actions CI
+
+`.github/workflows/check.yml` 参照。Fork / Clone 後は自動 skip（自分のプロジェクトで有効化する場合は `jobs.check.if` 行を削除）。
+
 ## カスタマイズ・構造の変更
 
 詳細は **[mFLOCSS 書籍](https://zenn.dev/shunei/books/mflocss-design)** を参照してください。
@@ -45,24 +63,6 @@ npm run preview
 ```
 
 本番側は **Cloudflare Pages / Netlify / Vercel / GitHub Pages のいずれも `dist/404.html` を root に配置するだけで自動配信**します（追加設定ファイル不要）。ローカル `npm run preview` でも同じ動作を再現するため `vite.config.ts` に `preview-404-fallback` plugin を含めています。
-
-## パッケージマネージャー
-
-本 starter は pnpm で開発されており、`pnpm-lock.yaml` が commit されています。エンドユーザーは **npm / pnpm / yarn** のいずれでも動作します:
-
-- 本 README の手順は **npm** で記述（Node.js 同梱ツールのため追加インストール不要）
-- `pnpm install` でも動作（付属の `pnpm-lock.yaml` で高速・再現可能インストール）
-- `npm install` でも動作（`pnpm-lock.yaml` は無視され、独自に `package-lock.json` がローカル生成される）
-
-### 生成された lockfile の扱い
-
-`npm install` した場合、`package-lock.json` が生成されます。これを commit するかどうかは、あなたのプロジェクトの方針で判断してください（個人プロジェクト・チーム開発では一般的に commit します）。
-
-Starter 開発（Contribute）の場合は pnpm 推奨。詳細は [CONTRIBUTING.md](./CONTRIBUTING.md) 参照。
-
-## GitHub Actions CI
-
-`.github/workflows/check.yml` 参照。Fork / Clone 後は自動 skip（自分のプロジェクトで有効化する場合は `jobs.check.if` 行を削除）。
 
 ## ブレークポイント値の CSS/JS 同期
 

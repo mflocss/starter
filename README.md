@@ -1,6 +1,8 @@
 # mFLOCSS Starter
 
-mFLOCSS のリファレンス実装。架空の美容サロン「iluha」の LP をサンプルとして、テキストや画像を差し替えるだけでそのまま使える構成です。
+mFLOCSS のリファレンス実装。**実装者 / Web 制作者 / AI agent** がモダンで高品質な CSS 設計を学び、テンプレートとしてそのまま案件に投入できます。架空の美容サロン「iluha」の LP をサンプルとして、テキストや画像を差し替えるだけで使い始められます。
+
+開発者向け運用ルール: [CODING_GUIDE.md](./CODING_GUIDE.md) / 設計判断の詳細: [mFLOCSS 書籍](https://zenn.dev/shunei/books/mflocss-design)
 
 ## クイックスタート
 

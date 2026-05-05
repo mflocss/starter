@@ -26,27 +26,22 @@ pnpm install
 pnpm dev
 ```
 
-### エンドユーザー向け（starter を clone して使う）
-
-npm / pnpm / yarn いずれでも動作します。README の手順は npm 前提ですが、好みで変更可能です。
-
-- `pnpm-lock.yaml` は starter 本体の開発用（無視して問題なし）
-- `npm install` すると npm 独自の `package-lock.json` がローカル生成される
-
-Node.js LTS 以降を推奨。
+エンドユーザー向け手順は [README.md](./README.md) を、運用ルール（パッケージマネージャー / ビルド・納品 / 各種規約）は [CODING_GUIDE.md](./CODING_GUIDE.md) を参照してください。
 
 ## 基本フロー
 
 1. Issue で議論（小さい修正は直接 PR でも OK）
 2. ブランチ名: `feat/` `fix/` `refactor/` `chore/` `docs/` のいずれか + 短い要約
-3. commit message: `type(scope): subject`（日本語 OK、例: `fix(c-form): focus-visible でリング温存`）
+3. commit message: 詳細は [CODING_GUIDE.md「コミットメッセージ」](./CODING_GUIDE.md#コミットメッセージ) 参照
 4. PR 作成前に `pnpm run check` + `pnpm run build` 通過確認
-5. PR 作成前に `pnpm run preview` で動作確認（404 ページの fallback 含む。詳細は [README.md「404 ページの動作確認」](./README.md#404-ページの動作確認) 参照）
+5. PR 作成前に `pnpm run preview` で動作確認（404 ページの fallback 含む。詳細は [CODING_GUIDE.md「404 ページの動作確認」](./CODING_GUIDE.md#404-ページの動作確認) 参照）
 6. PR body に変更理由・spec 参照節・動作確認項目を記載
 
 ## コード規約
 
-- spec § の該当節に準拠すること
+詳細は [CODING_GUIDE.md](./CODING_GUIDE.md) 参照。基本原則:
+
+- mFLOCSS spec § の該当節に準拠
 - 既存 Component / Project のパターンを踏襲
 - コメント方針は CSS 内コメント / PR body 参照
 
