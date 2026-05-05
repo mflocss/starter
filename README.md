@@ -254,14 +254,14 @@ Starter 開発（Contribute）の場合は pnpm 推奨。詳細は [CONTRIBUTING
 
 starter で採用している設計判断（Component 原則・順序ルール・コメント方針・命名規則等）の詳細は以下を参照してください:
 
-- [mFLOCSS 仕様書](https://mflocss.dev) — 公式規範（MUST / SHOULD / MAY、無料）
+- [mFLOCSS 仕様書](https://github.com/mflocss/spec) — 公式規範（MUST / SHOULD / MAY、無料）
 - [そのFLOCSS、なぜそこに書いた？](https://zenn.dev/shunei/books/mflocss-design) — 公式書籍、判断基準の詳細解説（Zenn、一部無料・全編有料）
 
 ## 関連リンク
 
 - [デモサイト](https://starter.mflocss.dev) — starter のライブプレビュー
 - [そのFLOCSS、なぜそこに書いた？ —— mFLOCSS で迷わない CSS 設計の判断基準](https://zenn.dev/shunei/books/mflocss-design)
-- [mFLOCSS 仕様書](https://mflocss.dev)
+- [mFLOCSS 仕様書](https://github.com/mflocss/spec)
 
 ## ライセンス
 

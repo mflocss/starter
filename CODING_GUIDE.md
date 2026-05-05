@@ -1,81 +1,17 @@
 # コーディングガイド
 
 このプロジェクトで使用する CSS 設計（mFLOCSS）の starter 固有の運用ルールです。
-層の定義・命名規則・カスタムプロパティ参照ルール等の仕様は [mFLOCSS 仕様書](https://mflocss.dev) を参照してください。
+層の定義・命名規則・カスタムプロパティ参照ルール等の仕様は [mFLOCSS 仕様書](https://github.com/mflocss/spec) を参照してください。
 
-## Design Decisions
-
-### mFLOCSS 層アーキテクチャ
-`token → reset → foundation → layout → component → project → animation → utility` の順で `@layer` を先制宣言。カスケードの優先順位を明示することで、詳細度に頼らないスタイル管理を実現します。
-
-### 論理プロパティ + 論理 viewport 単位（vi, dvb）
-`margin-inline`・`padding-block` などの論理プロパティを全面採用。LTR/RTL どちらの書字方向にも対応できる基盤を持ちます。fluid typography には `vi`（viewport inline）、全高レイアウトには `dvb`（dynamic viewport block）を使用します。
-
-### oklch カラー + 相対カラー関数
-カラーパレットをすべて `oklch` で定義。知覚均一な色空間のため、同じ chroma・lightness の操作が直感的に機能します。シャドウには相対カラー関数（`oklch(from var(--_black) l c h / 透明度)`）を使い、基準色からの派生を宣言的に表現しています。
-
-### --px ヘルパー
-`--px: calc(1rem / 16)` を定義することで、デザインカンプの px 指定値をそのまま `calc(24 * var(--px))` のように記述でき、rem への手動変換が不要になります。
-
-### アクセシビリティ
-ARIA 属性（`aria-label`・`aria-expanded`・`aria-controls` 等）と `translate="no"` をマークアップに明記。視覚的非表示には `visibility: hidden` ではなく `clip-path: inset(50%)` を使い、スクリーンリーダーへの露出を制御しています。
-
-### JS 最小化（:has() + :user-invalid で CSS-only バリデーション）
-必須マークの自動付与は `:has(+ :required)` で実装。フォームのバリデーションスタイルは `:user-invalid` で制御し、JS なしで「ユーザー操作後にのみエラーを表示」を実現しています。
-
-### パフォーマンス
-ヒーロー画像に `fetchpriority="high"` を付与して LCP を改善。スクロールイベントは `{ passive: true }` で登録し、メインスレッドのブロッキングを回避しています。
-
-## 単位の使い分け
-
-| 単位 | 記法 | 対象 |
-|------|------|------|
-| **rem** | `calc(N * var(--px))` | フォントサイズ・余白・ヘッダー高さ等、ユーザーのフォント設定に追従すべき値 |
-| **px** | `Npx` | 角丸・シャドウ・ボーダー幅・コンテンツ幅上限・タップ領域等、物理的な制約に紐づく値 |
-
-## 流体タイポグラフィ
-
-`typography.css` の `clamp()` 値は viewport 400px〜1440px 間の線形補間で算出しています。値を変更する場合は各変数のコメントにある min/max を調整し、clamp の中間値を再計算してください。ブレークポイントなしで滑らかにスケールするため、メディアクエリの管理コストを削減できます。
-
-### ブレークポイント値の CSS/JS 同期
+## ブレークポイント値の CSS/JS 同期
 
 `public/scripts/viewport.js` の `VIEWPORT_MIN` は、`token/structure.css` の `--viewport-min` と同じ値に合わせてください。この値を変更する場合は両方を更新する必要があります。CSS と JS の基準値を一致させることで、400px 未満の端末でもレイアウト崩れを防ぎ、変更時の修正漏れを防止できます。
-
-## @container vs @media
-
-| 観点 | @container | @media |
-|------|-----------|--------|
-| 基準 | 親コンテナの幅 | ビューポートの幅 |
-| 用途 | コンポーネント単位のレスポンシブ | ページ全体のレイアウト切替 |
-| サイズ単位 | `cqi`（container query inline） | `px` / `em` / `rem` |
-| この LP での例 | Features セクション内のコンテンツ余白の流体調整 | ヘッダーのナビ表示/非表示 |
-
-`foundation/base.css` の `body` に `container-type: inline-size`（`container-name: page`）を宣言しており、Project/Component 層でクエリを記述します。セクション内部で独立した container を設けたい場合は、当該 Project のコンテナ要素にも `container-type: inline-size` を追加します（例: `p-features.css`、`p-voice.css`）。
-
-## モーションガードのルール
-
-動きを伴うアニメーションは前庭障害を持つユーザーに悪影響を与えることがあります。ガード条件を明確にすることで、アクセシビリティを確保しつつ不要な判断コストを排除できます。
-
-- 色変化のみ（`background-color`, `color` 等）→ ガード不要。前庭障害のトリガーにならないため
-- `translate`・`scale`・`rotate` 等の動きを含む → `@media (prefers-reduced-motion: no-preference)` でガード
-
-## data-immediate
-
-CSS 完結のアニメーション。JS を待たず即時再生。LCP 要素（Hero 等）に使用。
-
-```html
-<section data-immediate="scale-in">...</section>
-```
-
-`data-immediate="アニメーション名"` を付与した要素は JS の `data-visible` を待たずにアニメーションを開始するため、CSS 適用〜JS 実行の間に `opacity: 0` が発生する FOIC（Flash Of Invisible Content）を防止できる。`data-animate` と併用しない（属性名自体が挙動を表す）。
-
-`data-animate="アニメーション名"` は JS 待ちアニメーション。IntersectionObserver が `data-visible` を付与した時点で再生を開始する。スクロールで視界に入った要素に使用。
 
 ## ドロワー（p-drawer / c-overlay）
 
 ### HTML 構造
 
-`dialog.p-drawer` は `header` の **兄弟要素**として配置します（header の内側ではない）。`showModal()` を使うと header が `::backdrop` の背面に隠れるため、`show()` を使用します（採用根拠の詳細は後述）。
+`dialog.p-drawer` は `header` の **兄弟要素**として配置します（header の内側ではない）。`show()` を採用しているため、`[data-drawer-inert]` を持つ要素に JS から `inert` を付与して focus trap を再現します。
 
 ```html
 <header class="l-header p-header">...</header>
@@ -86,36 +22,11 @@ CSS 完結のアニメーション。JS を待たず即時再生。LCP 要素（
 <main ... data-drawer-inert>...</main>
 ```
 
-### show() 採用根拠（showModal() 不採用の理由）
-
-starter は `<header>` 内のハンバーガーボタンをドロワーの開閉トリガーとして共用しています。この UX を成立させるため、`showModal()` ではなく `show()` を採用しています。
-
-- **`showModal()` の制約**
-  - dialog を [top layer](https://developer.mozilla.org/ja/docs/Glossary/Top_layer) に昇格させ、`::backdrop` 疑似要素が body 全体を覆う
-  - top layer は通常の z-index コンテキストの上位に強制配置されるため、`l-header` が `::backdrop` の背面に隠蔽される
-  - 結果としてハンバーガーボタンが視覚・操作の両面でアクセス不能になり、「開いたら別ボタンからしか閉じられない」UX 制約が生じる
-- **`show()` の利点**
-  - dialog が通常のレンダーツリーに留まるため、後述の z-index 設計で header をドロワーより前面に置ける
-  - ハンバーガーボタンが open / close の両状態で常にアクセス可能
-- **a11y は inert + aria-modal で補完**
-  - `show()` は背景要素を自動 inert 化しないため、JS から `[data-drawer-inert]` を持つ要素に `inert` を付与（`src/assets/scripts/main.js`）
-  - `aria-modal="true"` で支援技術にモーダル role を明示
-  - Escape キーによる close も `show()` には備わっていないため JS で実装
-
 ### z-index 設計（starter 固有）
 
-`token/z-index.css` で意図的に **`--z-header (20) > --z-drawer (10)`** の順を取り、ドロワー open 中も header（=ハンバーガーボタン）が前面に残る設計にしています。
+token は `src/assets/css/token/z-index.css` を参照。
 
-| token | 値 | 役割 |
-|------|---|------|
-| `--z-back-to-top` | 5 | 戻るボタン（ドロワー open 時は inert 化） |
-| `--z-drawer` | 10 | `dialog.p-drawer` 本体 |
-| `--z-header` | 20 | `l-header`（ハンバーガーボタンを含む、ドロワーより前面） |
-| `--z-modal` | 30 | 将来のモーダル想定 |
-
-- `c-overlay` は z-index 値を持たず、`--overlay-z` 公開 API で利用側から注入する汎用 Component（spec §6 公開 API パターン）
-- ドロワーのオーバーレイは `p-drawer.css` 側で `[data-drawer-overlay] { --overlay-z: calc(var(--z-drawer) - 1); }` のように注入し、ドロワー本体より 1 段下に積む
-- Component 自身は重ね順を持たず、呼び出し元（Project 層 or 利用側）が責任を持つ
+starter 固有の設計判断: `--z-header` を `--z-drawer` より前面に置き、ドロワー open 中もハンバーガーボタン（header 内）が常にアクセス可能。
 
 ### show() 運用上の SR 実機検証手順
 
@@ -136,31 +47,7 @@ starter は `<header>` 内のハンバーガーボタンをドロワーの開閉
 - [ ] `aria-modal="true"` により SR が「ダイアログ」として announce する
 - [ ] `aria-labelledby` で参照されるドロワータイトルが SR で読み上げられる
 
-`inert` 属性は WCAG 2.1.1 Keyboard (Level A) と 2.4.3 Focus Order に直結します。新規の自己配置型 Component を追加する際は、必ず `data-drawer-inert` の付与要否を確認してください（前述「data-drawer-inert」節と同じ運用）。
-
-### showModal() を選ぶケース（参考、starter 採用外）
-
-starter のドロワー UX には不適合ですが、以下のケースでは `showModal()` の方が適しています。プロジェクト固有の判断で選ぶ場合の参考です。
-
-- header にトリガーが共存しない（フッター固定や本文中ボタンから開く）
-- 開閉操作が dialog 内部のボタンで完結する設計
-- top layer による z-index 自動解決が欲しい（既存の z-index 積層が複雑な場合）
-- `::backdrop` で背景操作不可を CSS だけで宣言したい
-- focus trap / Escape 自動 close を JS で実装したくない（`showModal()` なら browser native 提供）
-
-z-index の注意点:
-
-- top layer に昇格した dialog の `::backdrop` は z-index 値を持たず、**全要素より手前**に強制配置される
-- header やトリガー UI を `::backdrop` より手前に出すことは仕様上できない（top layer は CSS で上書き不可能）
-- そのため、トリガー UI を dialog 内に閉じ込められる UI 設計でのみ採用が成立する
-
-### c-overlay — 汎用 Component
-
-`c-overlay` はドロワー専用ではなくモーダル・ライトボックス等でも再利用可能な Component です。z-index は `--overlay-z` で利用側から注入します（実装詳細は `c-overlay.css` 参照）。
-
-### data-open — 開閉アニメーション制御
-
-`dialog.close()` は即座に `display: none` にするため、CSS transition だけでは閉じるアニメーションが効きません。`data-open` 属性でアニメーション状態を JS から制御します（dialog の `open` 属性とは責務が異なります）。実装詳細は `src/assets/scripts/main.js` を参照してください。
+`inert` 属性は WCAG 2.1.1 Keyboard (Level A) と 2.4.3 Focus Order に直結します。新規の自己配置型 Component を追加する際は、必ず `data-drawer-inert` の付与要否を確認してください（後述「data-drawer-inert」節と同じ運用）。
 
 ### data-drawer-inert — focus trap 対象マーカー
 
@@ -180,82 +67,6 @@ Drawer と Hamburger トリガー**以外**の、フォーカス可能（= Tab �
 #### JS 側
 
 `querySelectorAll('[data-drawer-inert]')` で全対象要素を取得 → `openDrawer` で `inert` 属性付与、`closeDrawer` で削除するだけ。新規対象を追加しても JS 側の変更は不要です。
-
-## Modifier 記法選択根拠（業界標準比較）
-
-mFLOCSS は Modifier を `.c-button.-ghost` のような **`.-modifier` ドット記法（独立 class）** で表現します。BEM / CUBE CSS / Tailwind の各業界標準アプローチと比較した上での選択根拠を以下に記します。
-
-### 4 流派比較
-
-| 流派 | 記法 | 例 |
-|------|------|-----|
-| **BEM** | サフィックス（block と一体） | `.c-button--ghost` |
-| **CUBE CSS** | Exception（HTML 属性） | `<button class="c-button" data-variant="ghost">` |
-| **Tailwind** | Variant prefix（utility 列挙） | `<button class="bg-transparent border-current ...">` |
-| **mFLOCSS** | ドット記法（独立 class、複数併記） | `.c-button.-ghost.-large` |
-
-### mFLOCSS の `.-modifier` ドット記法を選ぶ根拠
-
-1. **Element / Modifier の視覚分離**
-   - BEM の `c-button--ghost` は 1 つの class でブロックと修飾が連結されているため、grep で `c-button` を探すと `c-button--ghost` も `c-button__icon` も全て hit して S/N が悪い
-   - mFLOCSS の `.c-button.-ghost` は base class `c-button` と修飾 class `-ghost` が独立しているため、grep の精度が高い。HTML を読むときもスタイルの基盤と差分が視覚的に分離する
-2. **複数 Modifier 共存（組み合わせ可能性）**
-   - `.c-button.-primary.-large` のように複数の Modifier を併記して合成できる
-   - BEM サフィックスは `c-button--primary--large` のような連結記法を取らないため別 class を立てる必要があり、命名爆発を起こしやすい
-   - CUBE CSS の data 属性は単一値中心のため、複数 variant を表現するには `data-variant="primary large"` のような split が必要 + CSS 側で `[data-variant~="primary"]` のセレクタを書くことになり、詳細度と attribute selector のオーバーヘッドが発生する
-3. **@layer cascade との親和性**
-   - mFLOCSS は 8 層の `@layer`（`token / reset / foundation / layout / component / project / animation / utility`）で先制宣言する
-   - `.c-button.-ghost` は同一 `@layer` 内の独立宣言として記述でき、ブロックのデフォルトと Modifier 上書きの順序が cascade に明示される
-   - Tailwind の variant prefix（`hover:bg-blue` 等）は utility 単位の派生で、Component 単位で見たときの派生の俯瞰がコード上に現れない
-4. **Tailwind との対比（utility 列挙 vs Component 抽象）**
-   - Tailwind は Component を抽象化せず utility を直接 HTML に並べる思想
-   - mFLOCSS の Component は responsibility（テーマ・余白・タイポグラフィ）を内側に閉じ込め、`.-modifier` で variant を宣言的に切替える思想
-   - HTML が semantic 中心になるか utility 列挙になるかの価値観の違いで、starter は前者を採用している
-
-### 実装サンプル（c-button からの引用）
-
-```css
-/* src/assets/css/component/c-button.css 抜粋 */
-.c-button {
-  /* 公開 API: --button-color / --button-bg-color / --button-border-color / --button-hover-bg-color */
-  /* デフォルトのスタイル */
-}
-
-.c-button.-ghost {
-  /* 透過背景・線のみの Modifier */
-}
-
-.c-button.-large {
-  /* サイズ拡張の Modifier */
-}
-```
-
-```html
-<!-- 単独 -->
-<button class="c-button">既定のボタン</button>
-
-<!-- Modifier 1 つ -->
-<button class="c-button -ghost">透過ボタン</button>
-
-<!-- Modifier 複数併記 -->
-<button class="c-button -ghost -large">透過 × 大サイズ</button>
-```
-
-### 注意点
-
-- Modifier class の単独使用は禁止: `.c-button` を必ず併記する（`.-ghost` 単体は意味を持たない）
-- セレクタは `.c-button.-ghost` のように block class とチェーンする（spec §6 参照）
-- Modifier 名は必ず `-` プレフィックスで始める（プレフィックスなしの class は禁止）
-
-## 空のルールセット
-
-HTML のクラスと CSS のルールセットは 1:1 で対応させます。スタイルが不要なクラスでも、ルールセットを残してコメントで意図を示します。「スタイルを意図的に書かなかった」と「書き忘れた」を区別でき、後から読んだコーダーが誤ってスタイルを追加するミスを防止できます。
-
-```css
-.p-header__hamburger {
-  /* スタイルなし（HTML クラスとの対応を維持） */
-}
-```
 
 ## コミットメッセージ
 
@@ -286,4 +97,4 @@ prefix で変更の種類を明示し、タイトルで変更の影響を日本�
 
 - [デモサイト](https://starter.mflocss.dev) — starter のライブプレビュー
 - [そのFLOCSS、なぜそこに書いた？ —— mFLOCSS で迷わない CSS 設計の判断基準](https://zenn.dev/shunei/books/mflocss-design)
-- [mFLOCSS 仕様書](https://mflocss.dev)
+- [mFLOCSS 仕様書](https://github.com/mflocss/spec)
