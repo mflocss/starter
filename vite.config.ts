@@ -8,7 +8,12 @@ export default defineConfig({
   // CUSTOMIZE: サブディレクトリにデプロイする場合はパスを変更（例: '/my-site/'）
   base: '/',
 
+  css: {
+    transformer: 'lightningcss',
+  },
+
   build: {
+    cssMinify: 'lightningcss',
     rolldownOptions: {
       // CUSTOMIZE: ページの追加・削除時にエントリを更新
       input: {
@@ -46,10 +51,7 @@ export default defineConfig({
             // 既存ファイル / ディレクトリが存在する場合は Vite に処理を委譲する
             // 候補 1: dist/{url}（静的ファイル直接 or ディレクトリ）
             // 候補 2: dist/{url}/index.html（ディレクトリ配下の index.html）
-            const candidates = [
-              resolve(distDir, url.slice(1)),
-              resolve(distDir, url.slice(1), 'index.html'),
-            ];
+            const candidates = [resolve(distDir, url.slice(1)), resolve(distDir, url.slice(1), 'index.html')];
 
             for (const candidate of candidates) {
               if (fs.existsSync(candidate)) {
