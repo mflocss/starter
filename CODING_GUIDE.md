@@ -143,14 +143,11 @@ Drawer と Hamburger トリガー**以外**の、フォーカス可能（= Tab �
 
 ## JS フックの分離
 
-JS で DOM 要素を取得する際は **`data-*` 属性** または **ID 等の直接セレクタ** を使います。スタイルクラス（`c-` / `p-` / `l-` / `u-` プレフィックス）を JS フックに使ってはいけません。
+JS で DOM 要素を取得する際は **`data-*` 属性** を使います。スタイルクラス（`c-` / `p-` / `l-` / `u-` プレフィックス）を JS フックに使ってはいけません。
 
 ```js
-// ✅ data-* 属性（推奨）
+// ✅ data-* 属性で JS フック
 document.querySelectorAll('[data-validate]');
-
-// ✅ ID 直接指定
-document.querySelector('#contact-form');
 
 // ❌ スタイルクラスを JS フックに使用（禁止）
 document.querySelectorAll('.c-form');
