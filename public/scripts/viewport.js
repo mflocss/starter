@@ -23,8 +23,7 @@ const meta = document.querySelector('meta[name="viewport"]');
 
 function updateViewport() {
   const value = window.outerWidth > VIEWPORT_MIN ? 'device-width' : String(VIEWPORT_MIN);
-  // 固定幅時は initial-scale=1 を省略する。
-  // initial-scale=1 を付与すると 390px 端末等で約 10px の横スクロールが発生する。
+  // 固定幅指定時は initial-scale を併記しない（一部端末で横スクロールを誘発するため）
   const content = value === 'device-width' ? `width=${value},initial-scale=1` : `width=${value}`;
   if (meta.content !== content) {
     meta.content = content;
