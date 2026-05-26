@@ -17,9 +17,19 @@ export default defineConfig({
     rolldownOptions: {
       // CUSTOMIZE: ページの追加・削除時にエントリを更新
       input: {
-        main: resolve(__dirname, 'src/index.html'),
+        index: resolve(__dirname, 'src/index.html'),
         privacy: resolve(__dirname, 'src/privacy/index.html'),
         notFound: resolve(__dirname, 'src/404.html'),
+      },
+      output: {
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.names?.some((n) => n.endsWith('.css'))) {
+            return 'assets/css/[name][extname]';
+          }
+          return 'assets/[name][extname]';
+        },
+        entryFileNames: 'assets/scripts/[name].js',
+        chunkFileNames: 'assets/scripts/[name].js',
       },
     },
     outDir: resolve(__dirname, 'dist'),
