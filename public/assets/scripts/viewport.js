@@ -14,7 +14,7 @@
  * CUSTOMIZE:
  * - VIEWPORT_MIN の値は token/structure.css の `--viewport-min` と必ず一致させる
  * - 最小幅制限が不要なサイト（全幅でレスポンシブ対応済み）は
- *   <script src="/scripts/viewport.js"> および ResizeObserver ごと削除可
+ *   <script src="/assets/scripts/viewport.js"> および ResizeObserver ごと削除可
  */
 
 // CUSTOMIZE: must match --viewport-min in token/structure.css

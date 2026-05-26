@@ -39,8 +39,9 @@ src/
 ├── privacy/index.html     # プライバシーポリシー
 └── 404.html               # 404 ページ（カスタマイズして使う）
 public/                    # ルートパス固定のファイル
-├── scripts/
-│   └── viewport.js        # ビューポート幅制御（--viewport-min 未満の端末向け）
+├── assets/
+│   └── scripts/
+│       └── viewport.js    # ビューポート幅制御（--viewport-min 未満の端末向け）
 ├── favicon.svg
 ├── favicon.ico
 ├── apple-touch-icon.png
