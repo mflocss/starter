@@ -202,10 +202,10 @@ function initBackToTop(options = {}) {
  * フォームバリデーション a11y を初期化する（HTML5 制約検証 + role="alert" 動的表示）。
  * フォームに novalidate が必要（ブラウザネイティブ tooltip を抑制して JS で制御）。
  * @param {Object} [options] - カスタマイズオプション
- * @param {string} [options.formSelector='.c-form'] - 対象フォームのセレクタ
+ * @param {string} [options.formSelector='[data-validate]'] - 対象フォームのセレクタ。JS フックは data-* 属性で指定する（スタイルクラスとの分離）
  */
 function initFormValidation(options = {}) {
-  const { formSelector = '.c-form' } = options;
+  const { formSelector = '[data-validate]' } = options;
   const forms = document.querySelectorAll(formSelector);
   if (forms.length === 0) return;
 
@@ -294,4 +294,5 @@ initFormValidation();
 // initStagger({ delayStep: 0.15 });
 // initScrollAnimation({ threshold: 0.3, rootMargin: '0px 0px -100px 0px' });
 // initBackToTop({ threshold: 500 });
-// initFormValidation({ formSelector: '#my-form' });
+// initFormValidation({ formSelector: '[data-validate]' });
+// initFormValidation({ formSelector: '.c-form' }); // クラスセレクタ（旧方式）も引き続き使用可
