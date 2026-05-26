@@ -202,7 +202,7 @@ function initBackToTop(options = {}) {
  * フォームバリデーション a11y を初期化する（HTML5 制約検証 + role="alert" 動的表示）。
  * フォームに novalidate が必要（ブラウザネイティブ tooltip を抑制して JS で制御）。
  * @param {Object} [options] - カスタマイズオプション
- * @param {string} [options.formSelector='[data-validate]'] - 対象フォームのセレクタ。JS フックは data-* 属性で指定する（スタイルクラスとの分離）
+ * @param {string} [options.formSelector='[data-validate]'] - 対象フォームのセレクタ
  */
 function initFormValidation(options = {}) {
   const { formSelector = '[data-validate]' } = options;
