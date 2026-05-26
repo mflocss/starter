@@ -64,9 +64,21 @@ npm run preview
 
 本番側は **Cloudflare Pages / Netlify / Vercel / GitHub Pages のいずれも `dist/404.html` を root に配置するだけで自動配信**します（追加設定ファイル不要）。ローカル `npm run preview` でも同じ動作を再現するため `vite.config.ts` に `preview-404-fallback` plugin を含めています。
 
+## アセット配置規約
+
+mFLOCSS starter family（static starter / wordpress-starter）共通の配置基準です。
+
+| 対象 | 配置先 | 理由 |
+|------|--------|------|
+| favicon / OGP / robots.txt / sitemap.xml | `public/` 直下 | ルートパス固定が必要な静的ファイル |
+| viewport.js 等の非バンドル JS | `public/assets/scripts/` | `src/assets/scripts/` と階層を対称に揃えつつ非バンドル維持 |
+| WP テーマメタファイル（style.css メタ / screenshot.png）| theme root | wordpress-starter のみ該当（静的 starter では不要） |
+
+Vite は `publicDir`（= `public/`）配下のファイルをそのまま `dist/` へコピーします。`public/assets/scripts/` に置くことで `dist/assets/scripts/` に出力され、バンドル対象の `src/assets/scripts/` の出力先と階層が一致します。
+
 ## ブレークポイント値の CSS/JS 同期
 
-`public/scripts/viewport.js` の `VIEWPORT_MIN` は、`token/structure.css` の `--viewport-min` と同じ値に合わせてください。この値を変更する場合は両方を更新する必要があります。CSS と JS の基準値を一致させることで、400px 未満の端末でもレイアウト崩れを防ぎ、変更時の修正漏れを防止できます。
+`public/assets/scripts/viewport.js` の `VIEWPORT_MIN` は、`token/structure.css` の `--viewport-min` と同じ値に合わせてください。この値を変更する場合は両方を更新する必要があります。CSS と JS の基準値を一致させることで、400px 未満の端末でもレイアウト崩れを防ぎ、変更時の修正漏れを防止できます。
 
 ## ドロワー（p-drawer / c-overlay）
 
