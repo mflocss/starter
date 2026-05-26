@@ -141,6 +141,23 @@ Drawer と Hamburger トリガー**以外**の、フォーカス可能（= Tab �
 
 `querySelectorAll('[data-drawer-inert]')` で全対象要素を取得 → `openDrawer` で `inert` 属性付与、`closeDrawer` で削除するだけ。新規対象を追加しても JS 側の変更は不要です。
 
+## JS フックの分離
+
+JS で DOM 要素を取得する際は **`data-*` 属性** または **ID 等の直接セレクタ** を使います。スタイルクラス（`c-` / `p-` / `l-` / `u-` プレフィックス）を JS フックに使ってはいけません。
+
+```js
+// ✅ data-* 属性（推奨）
+document.querySelectorAll('[data-validate]');
+
+// ✅ ID 直接指定
+document.querySelector('#contact-form');
+
+// ❌ スタイルクラスを JS フックに使用（禁止）
+document.querySelectorAll('.c-form');
+```
+
+**理由**: スタイルクラスは CSS 設計の都合で変更・削除されることがあります。JS フックにスタイルクラスを使うと、デザイン変更が JS バグに直結します（スタイルと挙動の結合）。`data-*` 属性はスタイルとは独立しており、HTML の意味を壊さずに JS の選択対象を明示できます。
+
 ## コミットメッセージ
 
 prefix で変更の種類を明示し、タイトルで変更の影響を日本語で伝えます。git log を一覧したときに「何が変わったか」が即座に分かり、差し戻しや cherry-pick の判断コストを削減できます。
