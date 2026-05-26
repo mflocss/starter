@@ -294,5 +294,5 @@ initFormValidation();
 // initStagger({ delayStep: 0.15 });
 // initScrollAnimation({ threshold: 0.3, rootMargin: '0px 0px -100px 0px' });
 // initBackToTop({ threshold: 500 });
-// initFormValidation({ formSelector: '[data-validate]' });
-// initFormValidation({ formSelector: '.c-form' }); // クラスセレクタ（旧方式）も引き続き使用可
+// initFormValidation({ formSelector: '[data-validate]' }); // data 属性で指定（推奨）
+// initFormValidation({ formSelector: '#contact-form' }); // ID で直接指定
