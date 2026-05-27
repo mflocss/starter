@@ -1,6 +1,3 @@
-/* 顧客の悩み・課題を提示するカード。title + text の縦積み。
-   初期スタイルは c-text-block と近いが、CTA の有無や type scale がサイトごとに
-   分岐しうる独立した意味単位として専用化している（汎用 title+text への押し込みを避ける）。 */
 .c-concern-card {
   display: flex;
   flex-direction: column;

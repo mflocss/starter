@@ -1,6 +1,4 @@
-/* 番号付きステップ。連番バッジ（::before）+ バッジと本文の 2 列グリッドを担う。
-   counter は使う側のリスト要素が `counter-reset: step` を宣言することで連動する
-   （このコンポーネントは counter-increment のみ担当）。 */
+/* counter-reset は使う側のリスト要素が宣言する（本コンポーネントは counter-increment のみ）。 */
 .c-step {
   display: grid;
   grid-template-columns: auto 1fr;
