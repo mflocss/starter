@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint:css": "stylelint \"src/**/*.css\" --fix",
-    "lint:js": "eslint \"src/**/*.js\" --fix",
+    "lint:js": "eslint \"src/**/*.js\" \"public/**/*.js\" --fix",
     "lint:html": "markuplint \"src/**/*.html\"",
     "format": "prettier --write .",
     "check": "npm run format && npm run lint:css && npm run lint:js && npm run lint:html"

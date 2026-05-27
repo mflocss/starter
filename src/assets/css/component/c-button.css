@@ -37,6 +37,7 @@
     }
   }
 
+  /* タッチ端末は :hover が発火しないため :active で押下フィードバックを提供 */
   &:active {
     opacity: 0.8;
     translate: 0 0;
