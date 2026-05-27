@@ -1,5 +1,5 @@
-/* counter-reset は使う側のリスト要素が宣言する（本コンポーネントは counter-increment のみ）。 */
-.c-step {
+/* 連番は使う側のリスト要素で `counter-reset: step;` を宣言（本コンポーネントは counter-increment のみ）。 */
+.c-step-card {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: var(--space-sm) var(--space-lg);
@@ -27,10 +27,10 @@
   }
 }
 
-.c-step__title {
+.c-step-card__title {
   /* スタイルなし（HTML クラスとの対応を維持） */
 }
 
-.c-step__text {
+.c-step-card__text {
   color: var(--color-text-light);
 }

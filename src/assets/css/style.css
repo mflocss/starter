@@ -34,7 +34,7 @@
 @import './component/c-card.css' layer(component);
 @import './component/c-media-card.css' layer(component);
 @import './component/c-concern-card.css' layer(component);
-@import './component/c-step.css' layer(component);
+@import './component/c-step-card.css' layer(component);
 @import './component/c-blockquote.css' layer(component);
 @import './component/c-prose.css' layer(component);
 @import './component/c-section-heading.css' layer(component);
