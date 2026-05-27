@@ -1,8 +1,7 @@
 :root {
   /* CUSTOMIZE: フォント
    * 既定は system-ui（先頭の Noto Sans JP は <head> で読み込めば自動適用）。
-   * カスタム Web フォントの読み込みは <head> 側で設定:
-   *   starter = index.html / WordPress = inc/enqueue.php のフォント CUSTOMIZE コメント参照。 */
+   * カスタム Web フォントを使う場合は <head>（index.html）側で読み込む。 */
   --font-family:
     'Noto Sans JP', system-ui, -apple-system, blinkmacsystemfont, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', meiryo,
     sans-serif;
