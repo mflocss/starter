@@ -11,7 +11,7 @@
 }
 
 .c-section-heading__title {
-  /* スタイルなし（foundation の h2 デフォルトを継承、HTML クラスとの対応を維持） */
+  /* スタイルなし（HTML クラスとの対応を維持） */
 }
 
 .c-section-heading__eyebrow + .c-section-heading__title {

@@ -31,6 +31,6 @@
 
 .p-features__item:nth-child(even) .p-features__card {
   @container (inline-size >= 50rem) {
-    --media-split-first-order: 2;
+    --media-card-first-order: 2;
   }
 }

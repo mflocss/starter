@@ -27,5 +27,5 @@
 }
 
 .p-problem__item {
-  /* スタイルなし（HTML クラスとの対応を維持。c-card.-subtle + c-text-block の Block+Element 併記） */
+  /* スタイルなし（HTML クラスとの対応を維持） */
 }

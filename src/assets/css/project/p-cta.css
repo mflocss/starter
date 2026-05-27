@@ -22,9 +22,9 @@
 }
 
 .p-cta__message {
-  /* スタイルなし（HTML クラスとの対応を維持。c-text-block と Block+Element 併記パターン統一） */
+  /* スタイルなし（HTML クラスとの対応を維持） */
 }
 
 .p-cta__button {
-  /* スタイルなし（HTML クラスとの対応を維持。c-button と Block+Element 併記パターン統一） */
+  /* スタイルなし（HTML クラスとの対応を維持） */
 }

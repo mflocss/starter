@@ -32,7 +32,9 @@
 @import './component/c-accordion.css' layer(component);
 @import './component/c-hamburger.css' layer(component);
 @import './component/c-card.css' layer(component);
-@import './component/c-media-split.css' layer(component);
+@import './component/c-media-card.css' layer(component);
+@import './component/c-concern-card.css' layer(component);
+@import './component/c-step-card.css' layer(component);
 @import './component/c-blockquote.css' layer(component);
 @import './component/c-prose.css' layer(component);
 @import './component/c-section-heading.css' layer(component);
