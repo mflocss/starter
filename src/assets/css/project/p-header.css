@@ -50,21 +50,10 @@
 }
 
 .p-header__nav-link {
-  --_link-color: var(--color-text);
+  --link-color: var(--color-text);
 
   font-size: var(--font-size-caption);
-  color: var(--_link-color);
   text-decoration: none;
-
-  @media (prefers-reduced-motion: no-preference) {
-    transition: color var(--duration-fast) var(--ease-out-cubic);
-  }
-
-  @media (any-hover: hover) {
-    &:hover {
-      --_link-color: var(--color-main);
-    }
-  }
 }
 
 .p-header__cta {

@@ -6,6 +6,7 @@
   /* CUSTOMIZE: コンテンツ領域 */
   --content-width: 1280px;
   --content-width-narrow: 720px;
+  --content-width-form: 640px;
   --content-padding-min: calc(16 * var(--px));
   --content-padding-max: calc(40 * var(--px));
   --content-padding: clamp(var(--content-padding-min), 2.308vi + 0.4231rem, var(--content-padding-max));
