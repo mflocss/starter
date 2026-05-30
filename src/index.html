@@ -94,6 +94,11 @@
         ]
       }
     </script>
+    <!--
+      FAQPage 構造化データ: Google は 2026-05-07 に FAQ リッチリザルト表示を終了。
+      検索結果での装飾効果はないが、生成 AI / セマンティック検索でのコンテキスト提供のため schema を残置。
+      schema 自体は有効・無害なため除去せず維持。
+    -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -273,7 +278,7 @@
           <div class="p-features__container">
             <hgroup class="c-section-heading p-features__heading" data-animate="fade-in-slide-up">
               <p class="c-section-heading__eyebrow" lang="en">Features</p>
-              <h2 class="c-section-heading__title" id="features-heading">iluha が選ばれる理由</h2>
+              <h2 class="c-section-heading__title" id="features-heading">iluha のケアが選ばれる理由</h2>
             </hgroup>
             <ul class="p-features__list" data-stagger="fade-in-slide-up">
               <li class="p-features__item">
@@ -357,7 +362,7 @@
         <div class="l-inner p-flow__inner">
           <hgroup class="c-section-heading p-flow__heading" data-animate="fade-in-slide-up">
             <p class="c-section-heading__eyebrow" lang="en">Flow</p>
-            <h2 class="c-section-heading__title" id="flow-heading">ご利用の流れ</h2>
+            <h2 class="c-section-heading__title" id="flow-heading">ご予約から施術までの流れ</h2>
           </hgroup>
           <ol class="p-flow__list" data-stagger="fade-in-slide-up">
             <li class="c-card -subtle c-step-card p-flow__item">
@@ -400,7 +405,7 @@
         <div class="l-inner p-pricing__inner">
           <hgroup class="c-section-heading p-pricing__heading" data-animate="fade-in-slide-up">
             <p class="c-section-heading__eyebrow" lang="en">Pricing</p>
-            <h2 class="c-section-heading__title" id="pricing-heading">料金表</h2>
+            <h2 class="c-section-heading__title" id="pricing-heading">コース・料金</h2>
           </hgroup>
 
           <div class="p-pricing__table-wrapper" tabindex="0" aria-label="料金表スクロール領域" role="region">
@@ -476,50 +481,52 @@
             </hgroup>
             <ul class="p-voice__list" data-stagger="fade-in-slide-up">
               <li class="p-voice__item">
-                <article class="c-card p-voice__card">
-                  <blockquote class="c-blockquote">
-                    <p class="c-blockquote__title">毎週通うつもりはなかったのに、からだが求めるようになりました</p>
-                    <p class="c-blockquote__text">
+                <figure class="c-card -subtle c-testimonial-card">
+                  <blockquote class="c-testimonial-card__quote">
+                    <p class="c-testimonial-card__title">
+                      毎週通うつもりはなかったのに、からだが求めるようになりました
+                    </p>
+                    <p class="c-testimonial-card__text">
                       3ヶ月前、慢性的な肩こりで初めて来ました。最初のカウンセリングで「それは肩だけの問題じゃない」と言われたのが印象的で。今は月2回、自分を整える時間として通っています。
                     </p>
-                    <footer class="c-blockquote__footer">
-                      <!-- CUSTOMIZE: 画像を差し替え（推奨サイズ: 48x48。Retina 対応のため 2 倍サイズで書き出し） -->
-                      <img
-                        class="c-blockquote__avatar"
-                        src="./assets/images/avatar-1.webp"
-                        alt=""
-                        width="48"
-                        height="48"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <cite class="c-blockquote__cite">田中美咲（38歳・会社員）</cite>
-                    </footer>
                   </blockquote>
-                </article>
+                  <figcaption class="c-testimonial-card__footer">
+                    <!-- CUSTOMIZE: 画像を差し替え（推奨サイズ: 48x48。Retina 対応のため 2 倍サイズで書き出し） -->
+                    <img
+                      class="c-testimonial-card__avatar"
+                      src="./assets/images/avatar-1.webp"
+                      alt=""
+                      width="48"
+                      height="48"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span class="c-testimonial-card__cite">田中美咲（38歳・会社員）</span>
+                  </figcaption>
+                </figure>
               </li>
               <li class="p-voice__item">
-                <article class="c-card p-voice__card">
-                  <blockquote class="c-blockquote">
-                    <p class="c-blockquote__title">ここに来ると、呼吸が深くなるんです</p>
-                    <p class="c-blockquote__text">
+                <figure class="c-card -subtle c-testimonial-card">
+                  <blockquote class="c-testimonial-card__quote">
+                    <p class="c-testimonial-card__title">ここに来ると、呼吸が深くなるんです</p>
+                    <p class="c-testimonial-card__text">
                       育児で自分の時間がなくて、気づいたら浅い呼吸が癖になっていました。施術後にからだが軽くなるだけでなく、気持ちまでゆるむ感覚がありました。
                     </p>
-                    <footer class="c-blockquote__footer">
-                      <!-- CUSTOMIZE: 画像を差し替え（推奨サイズ: 48x48。Retina 対応のため 2 倍サイズで書き出し） -->
-                      <img
-                        class="c-blockquote__avatar"
-                        src="./assets/images/avatar-2.webp"
-                        alt=""
-                        width="48"
-                        height="48"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <cite class="c-blockquote__cite">山本あかり（42歳・主婦）</cite>
-                    </footer>
                   </blockquote>
-                </article>
+                  <figcaption class="c-testimonial-card__footer">
+                    <!-- CUSTOMIZE: 画像を差し替え（推奨サイズ: 48x48。Retina 対応のため 2 倍サイズで書き出し） -->
+                    <img
+                      class="c-testimonial-card__avatar"
+                      src="./assets/images/avatar-2.webp"
+                      alt=""
+                      width="48"
+                      height="48"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span class="c-testimonial-card__cite">山本あかり（42歳・主婦）</span>
+                  </figcaption>
+                </figure>
               </li>
             </ul>
           </div>
@@ -530,9 +537,9 @@
       <section class="l-section p-cta" id="cta" aria-labelledby="cta-heading">
         <div class="l-inner p-cta__inner">
           <div class="p-cta__stack" data-stagger="fade-in-slide-up">
-            <div class="c-text-block p-cta__message">
-              <h2 class="c-text-block__title" id="cta-heading">まずは一度、からだの声を聴いてみませんか？</h2>
-              <p class="c-text-block__text">初回体験は 60分 4,400円。カウンセリング込み。無理な勧誘はいたしません。</p>
+            <div class="p-cta__message">
+              <h2 class="p-cta__title" id="cta-heading">まずは一度、からだの声を聴いてみませんか？</h2>
+              <p class="p-cta__text">初回体験は 60分 4,400円。カウンセリング込み。無理な勧誘はいたしません。</p>
             </div>
             <a class="c-button -large p-cta__button" href="#contact">初回体験を予約する</a>
           </div>
@@ -612,7 +619,7 @@
         <div class="l-inner p-contact__inner">
           <hgroup class="c-section-heading p-contact__heading" data-animate="fade-in-slide-up">
             <p class="c-section-heading__eyebrow" lang="en">Contact</p>
-            <h2 class="c-section-heading__title" id="contact-heading">ご予約・お問い合わせ</h2>
+            <h2 class="c-section-heading__title" id="contact-heading">初回体験のご予約・お問い合わせ</h2>
           </hgroup>
           <p class="p-contact__lead">下記フォームからお気軽にどうぞ。24時間以内に折り返しご連絡いたします。</p>
 
@@ -621,19 +628,42 @@
             <p class="c-form__note"><span aria-hidden="true">*</span> のついた項目は必須です</p>
             <div class="c-form__field">
               <label class="c-form__label" for="name">お名前</label>
-              <input class="c-form__input" id="name" name="name" type="text" autocomplete="name" required aria-describedby="name-error" />
+              <input
+                class="c-form__input"
+                id="name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                required
+                aria-describedby="name-error"
+              />
               <p class="c-form__error" id="name-error" role="alert" hidden></p>
             </div>
 
             <div class="c-form__field">
               <label class="c-form__label" for="email">メールアドレス</label>
-              <input class="c-form__input" id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-error" />
+              <input
+                class="c-form__input"
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                aria-describedby="email-error"
+              />
               <p class="c-form__error" id="email-error" role="alert" hidden></p>
             </div>
 
             <div class="c-form__field">
               <label class="c-form__label" for="tel">電話番号</label>
-              <input class="c-form__input" id="tel" name="tel" type="tel" autocomplete="tel" aria-describedby="tel-error" />
+              <input
+                class="c-form__input"
+                id="tel"
+                name="tel"
+                type="tel"
+                autocomplete="tel"
+                aria-describedby="tel-error"
+              />
               <p class="c-form__error" id="tel-error" role="alert" hidden></p>
             </div>
 
@@ -669,7 +699,14 @@
 
             <div class="c-form__field">
               <label class="c-form__label" for="message">メッセージ</label>
-              <textarea class="c-form__input" id="message" name="message" rows="6" required aria-describedby="message-error"></textarea>
+              <textarea
+                class="c-form__input"
+                id="message"
+                name="message"
+                rows="6"
+                required
+                aria-describedby="message-error"
+              ></textarea>
               <p class="c-form__error" id="message-error" role="alert" hidden></p>
             </div>
 

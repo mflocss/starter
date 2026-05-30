@@ -1,5 +1,5 @@
 .p-404 {
-  text-align: center;
+  /* スタイルなし（HTML クラスとの対応を維持） */
 }
 
 .p-404__inner {
@@ -15,6 +15,7 @@
 .p-404__lead {
   line-height: var(--line-height-text);
   color: var(--color-text-light);
+  text-align: center;
 }
 
 .p-404__actions {

@@ -1,37 +1,39 @@
-.c-blockquote {
-  --_border-width: 3px;
-
-  padding-inline-start: var(--space-lg);
-  border-inline-start: var(--_border-width) solid var(--color-main);
+.c-testimonial-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
 }
 
-.c-blockquote__title {
+.c-testimonial-card__quote {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.c-testimonial-card__title {
   font-weight: var(--font-weight-heading);
   line-height: var(--line-height-title);
 }
 
-.c-blockquote__text {
-  margin-block-start: var(--space-sm);
+.c-testimonial-card__text {
   color: var(--color-text-light);
 }
 
-.c-blockquote__footer {
+.c-testimonial-card__footer {
   display: flex;
   gap: var(--space-md);
   align-items: center;
-  margin-block-start: var(--space-md);
   font-size: var(--font-size-caption);
-  font-style: normal;
   color: var(--color-text-light);
 }
 
-.c-blockquote__avatar {
+.c-testimonial-card__avatar {
   inline-size: var(--size-icon-area);
   block-size: var(--size-icon-area);
   object-fit: cover;
   border-radius: var(--radius-full);
 }
 
-.c-blockquote__cite {
-  font-style: normal;
+.c-testimonial-card__cite {
+  /* スタイルなし（HTML クラスとの対応を維持） */
 }

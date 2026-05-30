@@ -35,10 +35,9 @@
 @import './component/c-media-card.css' layer(component);
 @import './component/c-concern-card.css' layer(component);
 @import './component/c-step-card.css' layer(component);
-@import './component/c-blockquote.css' layer(component);
+@import './component/c-testimonial-card.css' layer(component);
 @import './component/c-prose.css' layer(component);
 @import './component/c-section-heading.css' layer(component);
-@import './component/c-text-block.css' layer(component);
 @import './component/c-badge.css' layer(component);
 @import './component/c-stat.css' layer(component);
 @import './component/c-table.css' layer(component);

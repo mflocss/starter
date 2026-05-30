@@ -54,19 +54,10 @@
 }
 
 .p-drawer__nav-link {
+  --link-color: var(--color-text);
+
   font-size: var(--font-size-nav-lg);
-  color: var(--color-text);
   text-decoration: none;
-
-  @media (prefers-reduced-motion: no-preference) {
-    transition: color var(--duration-fast) var(--ease-out-cubic);
-  }
-
-  @media (any-hover: hover) {
-    &:hover {
-      color: var(--color-main);
-    }
-  }
 }
 
 .p-drawer__cta {

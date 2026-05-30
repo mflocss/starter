@@ -2,9 +2,6 @@
   --section-padding-min: var(--section-wide-min);
   --section-padding-max: var(--section-wide-max);
 
-  /* c-text-block 公開 API override: CTA の見出しを適度な幅で折り返す */
-  --text-block-title-max-inline-size: 600px;
-
   background-color: var(--color-bg-secondary);
 }
 
@@ -22,7 +19,17 @@
 }
 
 .p-cta__message {
-  /* スタイルなし（HTML クラスとの対応を維持） */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.p-cta__title {
+  max-inline-size: 600px;
+}
+
+.p-cta__text {
+  color: var(--color-text-light);
 }
 
 .p-cta__button {
