@@ -1,10 +1,7 @@
 :root {
-  /* CUSTOMIZE: フォント
-   * 既定は system-ui（先頭の Noto Sans JP は <head> で読み込めば自動適用）。
-   * カスタム Web フォントを使う場合は <head>（index.html）側で読み込む。 */
-  --font-family:
-    'Noto Sans JP', system-ui, -apple-system, blinkmacsystemfont, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', meiryo,
-    sans-serif;
+  /* CUSTOMIZE: フォント（システムフォント = 外部依存なしで即動作）
+   * Web フォント（例: Noto Sans JP）を使う場合は先頭に足し、<head>（index.html）側で読み込む。 */
+  --font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', meiryo, system-ui, sans-serif;
 
   /* CUSTOMIZE: 流体タイポグラフィ（viewport-min → viewport-max の直線的な補間） */
   --font-size-h1: clamp(calc(32 * var(--px)), 2.308vi + 1.4231rem, calc(56 * var(--px)));
