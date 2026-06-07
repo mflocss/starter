@@ -6,9 +6,7 @@
 }
 
 .p-cta__inner {
-  max-inline-size: var(--content-width-narrow);
-  margin-inline: auto;
-  text-align: center;
+  --inner-width: var(--content-width-narrow);
 }
 
 .p-cta__stack {
@@ -16,6 +14,7 @@
   flex-direction: column;
   gap: var(--space-lg);
   align-items: center;
+  text-align: center;
 }
 
 .p-cta__message {

@@ -1,6 +1,7 @@
 export default {
   extends: ['stylelint-config-standard', 'stylelint-config-recess-order'],
   rules: {
+    'order/order': ['custom-properties', 'declarations'],
     'block-no-empty': [true, { severity: 'warning' }],
     'selector-class-pattern': null,
     'custom-property-pattern': '^([a-z][a-z0-9]*(-[a-z0-9]+)*|_[a-z0-9]+(-[a-z0-9]+)*)$',
