@@ -16,9 +16,6 @@
   --_red-400: oklch(65% 0.18 15deg);
   --_red-500: oklch(50% 0.22 15deg);
 
-  /* CUSTOMIZE: ダークモード不要なら light のみに */
-  color-scheme: light dark;
-
   /* CUSTOMIZE: パレット → 用途のマッピング */
   --color-main: light-dark(var(--_sage-600), var(--_sage-400));
   --color-accent: light-dark(var(--_terracotta-500), var(--_terracotta-400));
@@ -36,4 +33,7 @@
   --color-heading: var(--color-text);
   --color-focus-ring: var(--color-main);
   --color-overlay: oklch(0% 0 0deg / 40%);
+
+  /* CUSTOMIZE: ダークモード不要なら light のみに */
+  color-scheme: light dark;
 }
