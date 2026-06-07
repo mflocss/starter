@@ -4,6 +4,7 @@
      --form-link-color          (default: var(--color-link)) */
 .c-form {
   --_actions-margin-top: var(--form-actions-margin-top, var(--space-md));
+  --_required-mark: var(--form-required-mark, '*');
   --_link-color: var(--form-link-color, var(--color-link));
 
   display: flex;
@@ -39,7 +40,7 @@
 .c-form__field:has(:required) > .c-form__legend::after,
 .c-form__field:has(:required) > .c-form__choice-label::before {
   color: var(--color-error);
-  content: var(--form-required-mark, '*');
+  content: var(--_required-mark);
 }
 
 /* Element: 入力装飾（input / textarea / select 共通のビジュアル定義） */
