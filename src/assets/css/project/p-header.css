@@ -6,7 +6,7 @@
   backdrop-filter: blur(var(--_blur));
 
   /* ドロワー表示時の背面透け防止 */
-  :root:has(dialog[open]) & {
+  :root:has(.p-drawer[open]) & {
     background-color: var(--color-bg);
     backdrop-filter: none;
   }
