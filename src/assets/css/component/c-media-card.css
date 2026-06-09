@@ -11,7 +11,7 @@
     grid-template-columns: 1fr 1fr;
   }
 
-  & > :first-child {
+  > :first-child {
     order: var(--_first-order);
   }
 }
@@ -44,7 +44,7 @@
 }
 
 .c-media-card__media {
-  & img {
+  img {
     inline-size: 100%;
     border-radius: var(--radius-md);
   }
