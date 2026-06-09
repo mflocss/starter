@@ -64,8 +64,7 @@
 :where(:root) {
   scroll-padding-block-start: var(--header-size);
 
-  &:has(:modal),
-  &:has(dialog[open]) {
+  &:has(:modal) {
     overflow: hidden;
   }
 }

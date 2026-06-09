@@ -31,6 +31,14 @@
   }
 }
 
+/* 背景スクロール固定: ドロワーは show()（modeless）採用で :modal に非該当のため、Foundation の
+   汎用固定 :has(:modal) では対象外（modeless 採用理由は上記 show() コメント参照）。判定は表示中
+   ずっと真の native [open] を使用（[data-open] は閉じアニメ開始で外れ、閉じ途中にスクロールが
+   復帰するため不可。main.js closeDrawer 参照）。 */
+:root:has(.p-drawer[open]) {
+  overflow: hidden;
+}
+
 .p-drawer__stack {
   display: flex;
   flex-direction: column;
