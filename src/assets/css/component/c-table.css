@@ -1,19 +1,19 @@
 .c-table {
   inline-size: 100%;
 
-  & th,
-  & td {
+  th,
+  td {
     padding: var(--space-sm) var(--space-md);
     text-align: start;
     border-block-end: var(--border-width) solid var(--color-border);
   }
 
-  & thead th {
+  thead th {
     font-weight: var(--font-weight-heading);
     background-color: var(--color-bg-secondary);
   }
 
-  & tbody th {
+  tbody th {
     font-weight: var(--font-weight-body);
   }
 }

@@ -11,28 +11,28 @@
   max-inline-size: var(--_max-inline-size);
   line-height: var(--line-height-text);
 
-  & h2 {
+  h2 {
     margin-block-start: var(--space-xl);
     font-weight: var(--font-weight-heading);
   }
 
-  & :is(p, ul) {
+  :is(p, ul) {
     margin-block-start: var(--space-md);
   }
 
-  & h2 + :is(p, ul) {
+  h2 + :is(p, ul) {
     margin-block-start: var(--space-sm);
   }
 
-  & ul {
+  ul {
     padding-inline-start: var(--space-lg);
   }
 
-  & li + li {
+  li + li {
     margin-block-start: var(--space-xs);
   }
 
-  & a {
+  a {
     color: var(--color-main);
     text-decoration: underline;
     text-underline-offset: 0.2em;

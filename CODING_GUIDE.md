@@ -141,6 +141,25 @@ Drawer と Hamburger トリガー**以外**の、フォーカス可能（= Tab �
 
 `querySelectorAll('[data-drawer-inert]')` で全対象要素を取得 → `openDrawer` で `inert` 属性付与、`closeDrawer` で削除するだけ。新規対象を追加しても JS 側の変更は不要です。
 
+## CSS Nesting の `&` 方針（shunei流）
+
+starter は shunei流として **ネストの子孫は `&` を省略**します（クリーン・読みやすさ重視）。
+
+```css
+.c-card {
+  .c-card__title { } /* = .c-card .c-card__title（子孫、& 省略）*/
+  th { }             /* = .c-card th（型セレクタも & 不要、Baseline WA 2026-06-11）*/
+  &.-subtle { }      /* 複合（同一要素）は & 必須 */
+  &:hover { }        /* 擬似クラスも & 必須 */
+}
+```
+
+**`&` が必須な箇所**（仕様上の必然、好みでない）: State/Modifier（同一要素の複合 `&.-active`）/ 擬似（`&:hover`）/ 属性（`&[...]`）。これらで `&` を省くと**別要素の子孫**になる（`.c-card { .-active {} }` は `.c-card .-active` になり `.c-card.-active` にならない）か、擬似は無効になります。
+
+**⚠️ BEM 連結は不可**: Sass の `&__title` のような文字列連結は CSS Nesting ではできません。Element は**フルのクラス名**を書いてください（`.c-card__title`）。
+
+**mFLOCSS spec（mFLOCSS流）は Nesting の `&` 方針を規定しません**（任意）。本 `&` 省略は starter が採る shunei流であり spec 規範ではありません。プロジェクトで `&` を明示しても mFLOCSS 準拠は変わりません。
+
 ## JS フックの分離
 
 JS で DOM 要素を取得する際は **`data-*` 属性** を使います。スタイルクラス（`c-` / `p-` / `l-` / `u-` プレフィックス）を JS フックに使ってはいけません。

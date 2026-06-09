@@ -68,7 +68,7 @@
     background: linear-gradient(to bottom, var(--_overlay-top) 0%, var(--_overlay-bottom) 100%);
   }
 
-  & img {
+  img {
     inline-size: 100%;
     block-size: 100%;
     object-fit: cover;
