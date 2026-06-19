@@ -1,3 +1,4 @@
+/* 公開 API: --stagger-delay（順に現れる間隔） */
 @media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
   @keyframes fade-in-slide-up {
     from {
@@ -7,9 +8,7 @@
   }
 
   [data-animate='fade-in-slide-up'] {
-    --_duration: 0.6s;
-
-    animation: fade-in-slide-up var(--_duration) var(--ease-out-quart) both;
+    animation: fade-in-slide-up 0.6s var(--ease-out-quart) both;
     animation-delay: var(--stagger-delay, 0s);
     animation-play-state: paused;
 
