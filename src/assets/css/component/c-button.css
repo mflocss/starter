@@ -18,6 +18,7 @@
   font-weight: var(--font-weight-heading);
   line-height: var(--line-height-title);
   color: var(--_color);
+  text-align: center;
   text-decoration: none;
   cursor: pointer;
   background-color: var(--_bg-color);
