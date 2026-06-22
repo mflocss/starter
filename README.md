@@ -6,6 +6,8 @@ mFLOCSS のリファレンス実装。**実装者 / Web 制作者 / AI agent** �
 
 ## クイックスタート
 
+> **前提**: 実行には Node.js が必要です（v24 で動作確認）。未導入なら [nodejs.org](https://nodejs.org/) から LTS 版を入れてください（パッケージ管理コマンドの `npm` も同梱されます）。
+
 1. GitHub の「**Use this template**」ボタンから新しいリポジトリを作成
 2. 作成したリポジトリをクローン:
    ```bash
