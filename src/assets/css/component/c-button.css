@@ -50,6 +50,12 @@
   }
 }
 
+.c-button__icon {
+  flex-shrink: 0;
+  inline-size: 1em;
+  block-size: 1em;
+}
+
 /* Modifier: -ghost */
 .c-button.-ghost {
   --_color: var(--button-color, var(--color-main));
