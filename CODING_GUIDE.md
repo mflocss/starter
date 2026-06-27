@@ -25,7 +25,43 @@ Starter 開発（Contribute）の場合は pnpm 推奨。詳細は [CONTRIBUTING
 - 脆弱性 pin の **追加・剪定時は両方を同時に更新**してください。片方だけの変更は禁止。
 - 純粋なバージョン制約（`">=x.y.z"` 等）は npm / pnpm で同形式互換のため、そのままミラーすれば動作します。
 - 同期確認: `npm install --package-lock-only` 後 `npm ls <pkg>` で pin 版に解決されることを検証。
-- **剪定の運用**: 上流が修正版を出した後の冗長判定は、対象 override を一時的に外して `pnpm install --lockfile-only` + `pnpm audit`（lockfile-only dry-run）→ 脆弱性が出なければ剪定可。**剪定時は commit メッセージに GHSA-ID を残す**（Dependabot 等で再 flag された際に出所を辿って re-add 判断するため）。
+
+### 剪定 policy（追加と剪定の両輪で運用）
+
+`overrides` は **transitive 依存の脆弱版を強制上書きする「一時的緩和」機構**であり、`dependencies` のような恒久宣言ではありません。**追加だけでなく剪定まで lifecycle として回す**のが健全です。積み上げのみは「誤った安心感 / 監査不能化 / 将来の major 強制 bump 衝突」というアンチパターンを招きます。
+
+剪定の機械判定（dry-run 検証）:
+
+```bash
+# pnpm の場合（本 starter の lock を汚さないために /tmp 等で実施）
+# 1. 一時コピーで pnpm.overrides を空に or 個別エントリ削除
+# 2. lock のみ再解決
+pnpm install --lockfile-only
+# 3. 脆弱性確認
+pnpm audit
+# 脆弱性 0 → その override は冗長（latest-satisfying で安全版に解決されている = 剪定可）
+# 脆弱性あり → 実効（残す）
+```
+
+```bash
+# npm の場合
+npm install --package-lock-only
+npm audit
+```
+
+剪定タイミング:
+
+- 依存更新の節目（vite / stylelint / eslint 等の major bump 時）
+- 月次など定期 cadence
+- Dependabot alert を消化したとき
+
+剪定 commit には **GHSA-ID を残す**（再発時に同 ID で即 re-add 可能、監査性が累積する）:
+
+```
+chore(deps): 冗長 override を剪定 — fast-uri / brace-expansion を削除（registry latest が修正版を満たし冗長化、uuid のみ実効維持）
+```
+
+参考: 本 starter の [PR #234](https://github.com/mflocss/starter/pull/234)（pnpm.overrides の dry-run 検証 + npm overrides 同期実例）/ [PR #241](https://github.com/mflocss/starter/pull/241)（冗長 override 剪定の実例）。
 
 ## GitHub Actions CI
 
