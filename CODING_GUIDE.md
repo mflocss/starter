@@ -25,6 +25,7 @@ Starter 開発（Contribute）の場合は pnpm 推奨。詳細は [CONTRIBUTING
 - 脆弱性 pin の **追加・剪定時は両方を同時に更新**してください。片方だけの変更は禁止。
 - 純粋なバージョン制約（`">=x.y.z"` 等）は npm / pnpm で同形式互換のため、そのままミラーすれば動作します。
 - 同期確認: `npm install --package-lock-only` 後 `npm ls <pkg>` で pin 版に解決されることを検証。
+- **剪定の運用**: 上流が修正版を出した後の冗長判定は、対象 override を一時的に外して `pnpm install --lockfile-only` + `pnpm audit`（lockfile-only dry-run）→ 脆弱性が出なければ剪定可。**剪定時は commit メッセージに GHSA-ID を残す**（Dependabot 等で再 flag された際に出所を辿って re-add 判断するため）。
 
 ## GitHub Actions CI
 
