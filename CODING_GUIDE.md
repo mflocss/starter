@@ -18,6 +18,14 @@
 
 Starter 開発（Contribute）の場合は pnpm 推奨。詳細は [CONTRIBUTING.md](./CONTRIBUTING.md) 参照。
 
+### 脆弱性 pin（npm / pnpm 両系統の同期）
+
+`package.json` の **npm `overrides`** と **`pnpm.overrides`** は同一内容に保ちます（npm は `pnpm.overrides` を読まないため、npm 利用者にも pin を効かせるためのミラー）。
+
+- 脆弱性 pin の **追加・剪定時は両方を同時に更新**してください。片方だけの変更は禁止。
+- 純粋なバージョン制約（`">=x.y.z"` 等）は npm / pnpm で同形式互換のため、そのままミラーすれば動作します。
+- 同期確認: `npm install --package-lock-only` 後 `npm ls <pkg>` で pin 版に解決されることを検証。
+
 ## GitHub Actions CI
 
 `.github/workflows/check.yml` 参照。Fork / Clone 後は自動 skip（自分のプロジェクトで有効化する場合は `jobs.check.if` 行を削除）。
