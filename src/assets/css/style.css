@@ -28,7 +28,6 @@
 /* Component: 再利用可能な UI 部品（c- プレフィックス） */
 @import './component/c-button.css' layer(component);
 @import './component/c-form.css' layer(component);
-@import './component/c-icon-button.css' layer(component);
 @import './component/c-accordion.css' layer(component);
 @import './component/c-hamburger.css' layer(component);
 @import './component/c-card.css' layer(component);
