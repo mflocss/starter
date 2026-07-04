@@ -1,10 +1,8 @@
 /* 公開 API:
      --form-actions-margin-top  (default: var(--space-md))
-     --form-required-mark       (default: '*')
      --form-link-color          (default: var(--color-link)) */
 .c-form {
   --_actions-margin-top: var(--form-actions-margin-top, var(--space-md));
-  --_required-mark: var(--form-required-mark, '*');
   --_link-color: var(--form-link-color, var(--color-link));
 
   display: flex;
@@ -35,12 +33,9 @@
   font-weight: var(--font-weight-heading);
 }
 
-/* 必須マーク: --form-required-mark で「*」→「必須」等に切替可能（公開 API）。choice-label は ::before で前置（checkbox の前に表示） */
-.c-form__field:has(:required) > .c-form__label::after,
-.c-form__field:has(:required) > .c-form__legend::after,
-.c-form__field:has(:required) > .c-form__choice-label::before {
+/* Element: required — テンプレート手書きの必須マーク（実 DOM、`*` は aria-hidden で視覚のみ） */
+.c-form__required {
   color: var(--color-error);
-  content: var(--_required-mark);
 }
 
 /* Element: 入力装飾（input / textarea / select 共通のビジュアル定義） */

@@ -629,7 +629,9 @@
           <form class="c-form p-contact__form" action="/api/contact" method="post" novalidate data-validate>
             <p class="c-form__note"><span aria-hidden="true">*</span> のついた項目は必須です</p>
             <div class="c-form__field">
-              <label class="c-form__label" for="name">お名前</label>
+              <label class="c-form__label" for="name"
+                >お名前<span class="c-form__required"><span aria-hidden="true">*</span></span></label
+              >
               <input
                 class="c-form__input"
                 id="name"
@@ -643,7 +645,9 @@
             </div>
 
             <div class="c-form__field">
-              <label class="c-form__label" for="email">メールアドレス</label>
+              <label class="c-form__label" for="email"
+                >メールアドレス<span class="c-form__required"><span aria-hidden="true">*</span></span></label
+              >
               <input
                 class="c-form__input"
                 id="email"
@@ -670,7 +674,9 @@
             </div>
 
             <div class="c-form__field">
-              <label class="c-form__label" for="category">お問い合わせ種別</label>
+              <label class="c-form__label" for="category"
+                >お問い合わせ種別<span class="c-form__required"><span aria-hidden="true">*</span></span></label
+              >
               <select class="c-form__input" id="category" name="category" required aria-describedby="category-error">
                 <option value="">選択してください</option>
                 <option value="reservation">初回体験の予約</option>
@@ -681,7 +687,11 @@
             </div>
 
             <fieldset class="c-form__field" aria-describedby="plan-error">
-              <legend class="c-form__legend">ご希望のプラン</legend>
+              <legend class="c-form__legend">
+                ご希望のプラン<span class="c-form__required"
+                  ><span aria-hidden="true">*</span><span class="u-visually-hidden">必須</span></span
+                >
+              </legend>
               <div class="c-form__choice-group">
                 <label class="c-form__choice-label">
                   <input name="plan" type="radio" value="body-care" required />
@@ -700,7 +710,9 @@
             </fieldset>
 
             <div class="c-form__field">
-              <label class="c-form__label" for="message">メッセージ</label>
+              <label class="c-form__label" for="message"
+                >メッセージ<span class="c-form__required"><span aria-hidden="true">*</span></span></label
+              >
               <textarea
                 class="c-form__input"
                 id="message"
@@ -715,7 +727,9 @@
             <div class="c-form__field">
               <label class="c-form__choice-label" for="agree">
                 <input id="agree" name="agree" type="checkbox" required aria-describedby="agree-error" />
-                <a href="/privacy/">プライバシーポリシー</a>に同意する
+                <a href="/privacy/">プライバシーポリシー</a>に同意する<span class="c-form__required"
+                  ><span aria-hidden="true">*</span><span class="u-visually-hidden">必須</span></span
+                >
               </label>
               <p class="c-form__error" id="agree-error" role="alert" hidden></p>
             </div>
