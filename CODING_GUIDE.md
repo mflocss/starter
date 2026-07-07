@@ -73,6 +73,34 @@ chore(deps): 冗長 override を剪定 — fast-uri / brace-expansion を削除�
 
 差し替えポイントはコード全体で `CUSTOMIZE` コメントを検索すると発見できます（HTML・CSS・vite.config.ts に記載）。
 
+## Modifier 記法
+
+Modifier は Block/Element 内に `&.-modifier` でネストして記述します（State セレクタ `&:hover` / `&[data-*]` と同じ書き味）。Block に属するルールはすべて `&` でネストし、関連性を示します。トップレベルのフラット `.c-block.-modifier {}` は使いません。
+
+```css
+/* ✅ Block 内にネスト */
+.c-card {
+  padding: var(--_padding);
+
+  &.-subtle {
+    --_bg: var(--card-bg, var(--color-bg-secondary));
+  }
+}
+
+/* ❌ トップレベルのフラット記法（使わない） */
+.c-card {
+  padding: var(--_padding);
+}
+
+.c-card.-subtle {
+  --_bg: var(--card-bg, var(--color-bg-secondary));
+}
+```
+
+**理由**: Block に属するルールをすべて `&` でネストすることで、State セレクタ（`&:hover` / `&[data-loading]`）と同じ書き味になり、Modifier も「その Block に関するルール」として一目で判別できます。コンパイル後の出力セレクタ（例: `.c-card.-subtle`）はネストの有無で変わりません。
+
+参考実装: `c-button.css`（`&.-ghost` / `&.-large`）/ `c-media-card.css`（`&.-stacked`）/ `c-card.css`（`&.-subtle`）/ `c-badge.css`（`&.-accent`）。
+
 ## ビルドと納品
 
 ```bash

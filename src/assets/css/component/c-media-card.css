@@ -14,15 +14,15 @@
   > :first-child {
     order: var(--_first-order);
   }
-}
 
-/* Modifier: -stacked（投稿カード等の縦並び固定バリエーション） */
-.c-media-card.-stacked {
-  grid-template-columns: 1fr;
-  gap: var(--space-md);
-  align-items: start;
+  /* Modifier: -stacked（投稿カード等の縦並び固定バリエーション） */
+  &.-stacked {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    align-items: start;
 
-  /* @container クエリなしで常に縦並び（投稿カード一覧の小さなカード内で適合） */
+    /* @container クエリなしで常に縦並び（投稿カード一覧の小さなカード内で適合） */
+  }
 }
 
 .c-media-card__content {
