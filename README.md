@@ -2,7 +2,7 @@
 
 mFLOCSS のリファレンス実装。**実装者 / Web 制作者 / AI agent** がモダンで高品質な CSS 設計を学び、テンプレートとしてそのまま案件に投入できます。架空の美容サロン「iluha」の LP をサンプルとして、テキストや画像を差し替えるだけで使い始められます。
 
-開発者向け運用ルール: [CODING_GUIDE.md](./CODING_GUIDE.md) / 設計判断の詳細: [mFLOCSS 書籍](https://zenn.dev/shunei/books/mflocss-design)
+使うときの運用ガイド: [CODING_GUIDE.md](./CODING_GUIDE.md) / 貢献・コード規約: [CONTRIBUTING.md](./CONTRIBUTING.md) / 設計判断の詳細: [mFLOCSS 書籍](https://zenn.dev/shunei/books/mflocss-design)
 
 ## クイックスタート
 
@@ -76,7 +76,8 @@ Baseline Newly Available（全モダンブラウザの最新安定版でサポ�
 
 リポ内ドキュメント:
 
-- [CODING_GUIDE.md](./CODING_GUIDE.md) — starter のコードを書く / 拡張する開発者向けの規約
+- [CODING_GUIDE.md](./CODING_GUIDE.md) — starter を使うときの運用ガイド（ビルド / カスタマイズ / メンテ / デプロイ）
+- [CONTRIBUTING.md](./CONTRIBUTING.md) — starter 本体への貢献フローとコード規約
 - [CHANGELOG.md](./CHANGELOG.md) — 変更履歴（Keep a Changelog 準拠）
 
 mFLOCSS エコシステム:

@@ -1,8 +1,10 @@
 # コーディングガイド
 
-**starter のコードを書く / 拡張する開発者向け**の運用ルールです（mFLOCSS の starter 固有の規約）。
-層の定義・命名規則・カスタムプロパティ参照ルール等の仕様は [mFLOCSS 仕様書](https://github.com/mflocss/spec) を参照してください。
-関連リンク（公式サイト / デモサイト / 書籍）は [README.md](./README.md) を参照してください。
+この starter を**使う（ビルド・カスタマイズ・メンテナンス・デプロイ）ときの運用ガイド**です。mFLOCSS 仕様書 v1.0 準拠のリファレンス実装として、パッケージ管理・CI・ビルド・アセット配置・コンポーネント運用の勘所をまとめています。
+
+- **mFLOCSS の設計そのもの**（層の定義・命名規則・カスタムプロパティ参照ルール等）は [mFLOCSS 仕様書](https://github.com/mflocss/spec) と [mFLOCSS 書籍](https://zenn.dev/shunei/books/mflocss-design) を参照してください。この starter は仕様を**コードで実証**します。
+- **starter 本体へ貢献するときのコード規約**（JS フックの分離・コミットメッセージ規約等）は [CONTRIBUTING.md](./CONTRIBUTING.md) を参照してください。
+- 関連リンク（公式サイト / デモサイト / 書籍）は [README.md](./README.md) を参照してください。
 
 ## パッケージマネージャー
 
@@ -72,34 +74,6 @@ chore(deps): 冗長 override を剪定 — fast-uri / brace-expansion を削除�
 詳細は **[mFLOCSS 書籍](https://zenn.dev/shunei/books/mflocss-design)** を参照してください。
 
 差し替えポイントはコード全体で `CUSTOMIZE` コメントを検索すると発見できます（HTML・CSS・vite.config.ts に記載）。
-
-## Modifier 記法
-
-Modifier は Block/Element 内に `&.-modifier` でネストして記述します（State セレクタ `&:hover` / `&[data-*]` と同じ書き味）。Block に属するルールはすべて `&` でネストし、関連性を示します。トップレベルのフラット `.c-block.-modifier {}` は使いません。
-
-```css
-/* ✅ Block 内にネスト */
-.c-card {
-  padding: var(--_padding);
-
-  &.-subtle {
-    --_bg: var(--card-bg, var(--color-bg-secondary));
-  }
-}
-
-/* ❌ トップレベルのフラット記法（使わない） */
-.c-card {
-  padding: var(--_padding);
-}
-
-.c-card.-subtle {
-  --_bg: var(--card-bg, var(--color-bg-secondary));
-}
-```
-
-**理由**: Block に属するルールをすべて `&` でネストすることで、State セレクタ（`&:hover` / `&[data-loading]`）と同じ書き味になり、Modifier も「その Block に関するルール」として一目で判別できます。コンパイル後の出力セレクタ（例: `.c-card.-subtle`）はネストの有無で変わりません。
-
-参考実装: `c-button.css`（`&.-ghost` / `&.-large`）/ `c-media-card.css`（`&.-stacked`）/ `c-card.css`（`&.-subtle`）/ `c-badge.css`（`&.-accent`）。
 
 ## ビルドと納品
 
@@ -213,42 +187,3 @@ Drawer と Hamburger トリガー**以外**の、フォーカス可能（= Tab �
 #### JS 側
 
 `querySelectorAll('[data-drawer-inert]')` で全対象要素を取得 → `openDrawer` で `inert` 属性付与、`closeDrawer` で削除するだけ。新規対象を追加しても JS 側の変更は不要です。
-
-## JS フックの分離
-
-JS で DOM 要素を取得する際は **`data-*` 属性** を使います。スタイルクラス（`c-` / `p-` / `l-` / `u-` プレフィックス）を JS フックに使ってはいけません。
-
-```js
-// ✅ data-* 属性で JS フック
-document.querySelectorAll('[data-validate]');
-
-// ❌ スタイルクラスを JS フックに使用（禁止）
-document.querySelectorAll('.c-form');
-```
-
-**理由**: スタイルクラスは CSS 設計の都合で変更・削除されることがあります。JS フックにスタイルクラスを使うと、デザイン変更が JS バグに直結します（スタイルと挙動の結合）。`data-*` 属性はスタイルとは独立しており、HTML の意味を壊さずに JS の選択対象を明示できます。
-
-## コミットメッセージ
-
-prefix で変更の種類を明示し、タイトルで変更の影響を日本語で伝えます。git log を一覧したときに「何が変わったか」が即座に分かり、差し戻しや cherry-pick の判断コストを削減できます。
-
-```
-<prefix>: 変更内容を日本語で簡潔に
-```
-
-### prefix
-
-| prefix | 用途 | 例 |
-|--------|------|-----|
-| `feat` | 新機能・新コンポーネント追加 | `feat: FAQ セクションにアコーディオンを追加` |
-| `fix` | バグ修正・表示崩れ修正 | `fix: SP でハンバーガーメニューが閉じない問題を修正` |
-| `refactor` | 動作を変えないコード改善 | `refactor: p-header の CSS 変数をトークン参照に統一` |
-| `style` | フォーマット・空白・セミコロン等 | `style: Prettier による自動整形` |
-| `docs` | ドキュメントのみの変更 | `docs: README にダークモード無効化手順を追加` |
-| `chore` | ビルド・設定・依存関係 | `chore: Stylelint を v17 に更新` |
-
-### ルール
-
-- prefix は英語、タイトルは日本語
-- 「何を変えたか」ではなく「何が変わるか」を書く
-- 1行目は 72 文字以内を目安に
