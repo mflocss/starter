@@ -125,7 +125,7 @@ Vite は `publicDir`（= `public/`）配下のファイルをそのまま `dist/
 
 ## ブレークポイント値の CSS/JS 同期
 
-`public/assets/scripts/viewport.js` の `VIEWPORT_MIN` は、`token/structure.css` の `--viewport-min` と同じ値に合わせてください。この値を変更する場合は両方を更新する必要があります。CSS と JS の基準値を一致させることで、400px 未満の端末でもレイアウト崩れを防ぎ、変更時の修正漏れを防止できます。
+`public/assets/scripts/viewport.js` の `VIEWPORT_MIN` は、`src/assets/css/token/structure.css` の `--viewport-min` と同じ値に合わせてください。この値を変更する場合は両方を更新する必要があります。CSS と JS の基準値を一致させることで、400px 未満の端末でもレイアウト崩れを防ぎ、変更時の修正漏れを防止できます。
 
 ## ドロワー（p-drawer / c-overlay）
 
