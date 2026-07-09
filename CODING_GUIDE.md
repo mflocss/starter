@@ -73,7 +73,7 @@ chore(deps): 冗長 override を剪定 — fast-uri / brace-expansion を削除�
 
 詳細は **[mFLOCSS 書籍](https://zenn.dev/shunei/books/mflocss-design)** を参照してください。
 
-差し替えポイントはコード全体で `CUSTOMIZE` コメントを検索すると発見できます（HTML・CSS・vite.config.ts に記載）。
+差し替えポイントはコード全体で `CUSTOMIZE` コメントを検索すると発見できます。
 
 ## ビルドと納品
 
@@ -113,13 +113,12 @@ npm run preview
 
 ## アセット配置規約
 
-mFLOCSS starter family（static starter / wordpress-starter）共通の配置基準です。
+本 starter の静的アセット配置基準です。
 
 | 対象 | 配置先 | 理由 |
 |------|--------|------|
 | favicon / OGP / robots.txt / sitemap.xml | `public/` 直下 | ルートパス固定が必要な静的ファイル |
 | viewport.js 等の非バンドル JS | `public/assets/scripts/` | `src/assets/scripts/` と階層を対称に揃えつつ非バンドル維持 |
-| WP テーマメタファイル（style.css メタ / screenshot.png）| theme root | wordpress-starter のみ該当（静的 starter では不要） |
 
 Vite は `publicDir`（= `public/`）配下のファイルをそのまま `dist/` へコピーします。`public/assets/scripts/` に置くことで `dist/assets/scripts/` に出力され、バンドル対象の `src/assets/scripts/` の出力先と階層が一致します。
 
@@ -142,7 +141,7 @@ Vite は `publicDir`（= `public/`）配下のファイルをそのまま `dist/
 <main ... data-drawer-inert>...</main>
 ```
 
-### z-index 設計（starter 固有）
+### z-index 設計
 
 token は `src/assets/css/token/z-index.css` を参照。
 
