@@ -11,9 +11,7 @@
 }
 
 .c-section-heading__title {
-  /* スタイルなし（HTML クラスとの対応を維持） */
-}
-
-.c-section-heading__eyebrow + .c-section-heading__title {
-  margin-block-start: var(--space-sm);
+  .c-section-heading__eyebrow + & {
+    margin-block-start: var(--space-sm);
+  }
 }

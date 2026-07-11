@@ -4,8 +4,8 @@
   display: flex;
   flex-direction: column;
   min-block-size: 100dvb;
-}
 
-.l-page > main {
-  flex: 1;
+  > main {
+    flex: 1;
+  }
 }

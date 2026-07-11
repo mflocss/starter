@@ -46,18 +46,18 @@
   &::after {
     translate: 0 var(--_line-gap);
   }
-}
 
-.c-hamburger[aria-expanded='true'] .c-hamburger__line {
-  background-color: transparent;
+  .c-hamburger[aria-expanded='true'] & {
+    background-color: transparent;
 
-  &::before {
-    rotate: 45deg;
-    translate: 0 0;
-  }
+    &::before {
+      rotate: 45deg;
+      translate: 0 0;
+    }
 
-  &::after {
-    rotate: -45deg;
-    translate: 0 0;
+    &::after {
+      rotate: -45deg;
+      translate: 0 0;
+    }
   }
 }
