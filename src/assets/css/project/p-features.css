@@ -26,11 +26,9 @@
 }
 
 .p-features__card {
-  /* スタイルなし（HTML クラスとの対応を維持） */
-}
-
-.p-features__item:nth-child(even) .p-features__card {
-  @container (inline-size >= 50rem) {
-    --media-card-first-order: 2;
+  .p-features__item:nth-child(even) & {
+    @container (inline-size >= 50rem) {
+      --media-card-first-order: 2;
+    }
   }
 }
