@@ -45,7 +45,7 @@ starter 本体のコードを書く / 拡張するときの規約です。
 
 - mFLOCSS spec § の該当節に準拠
 - 既存 Component / Project のパターンを踏襲
-- コメント方針は CSS 内コメント / PR body 参照
+- コメント方針は [CODING_GUIDE.md「コメント方針」](./CODING_GUIDE.md#コメント方針) 参照
 
 ### JS フックの分離
 
