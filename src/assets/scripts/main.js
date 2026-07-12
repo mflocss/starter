@@ -17,10 +17,10 @@
 /**
  * ドロワーメニュー（dialog show/close + inert）を初期化する。
  * @param {Object} [options] - カスタマイズオプション
- * @param {number} [options.breakpoint=768] - PC 判定のブレイクポイント (px)。p-header.css の `@media` と同値にすること（SP/PC 切替時にドロワーを自動で閉じる判定に使用）
+ * @param {string} [options.breakpoint='48rem'] - PC 判定のブレイクポイント。p-header.css の `@media (width >= ...)` と同値にすること（SP/PC 切替時にドロワーを自動で閉じる判定に使用）。CSS が rem 基準のため、JS 側も rem 表記で帯域ズレを防ぐ
  */
 function initDrawer(options = {}) {
-  const { breakpoint = 768 } = options;
+  const { breakpoint = '48rem' } = options;
 
   const drawer = document.querySelector('[data-drawer]');
   if (!drawer) return;
@@ -30,64 +30,82 @@ function initDrawer(options = {}) {
   const inertTargets = document.querySelectorAll('[data-drawer-inert]');
   const drawerLinks = drawer.querySelectorAll('a');
 
-  let isAnimating = false;
+  // 世代カウンター：open / close / PC 化の各操作が自分の世代番号を持ち、rAF やアニメ完了 await 後の
+  // 遅延処理は「自分の世代がまだ最新か」を確認してから状態を触る。古い操作の遅延コールバックが
+  // 新しい状態を上書きするのを防ぐ（アニメ中の breakpoint 越え resize / 連続トグルの取りこぼし対策）。
+  let generation = 0;
 
   function openDrawer() {
-    if (isAnimating) return;
-    isAnimating = true;
+    const gen = ++generation;
 
     if (overlay) overlay.hidden = false;
     drawer.show();
+    inertTargets.forEach((el) => el.setAttribute('inert', ''));
+    hamburgers.forEach((btn) => btn.setAttribute('aria-expanded', 'true'));
+
     // rAF 2段：show() 直後に付与すると初期状態が描画されずアニメーションが効かない
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        if (!drawer.open) {
-          isAnimating = false;
-          return;
-        }
+        if (gen !== generation || !drawer.open) return;
         drawer.dataset.open = '';
-        isAnimating = false;
       });
     });
-    inertTargets.forEach((el) => el.setAttribute('inert', ''));
-    hamburgers.forEach((btn) => btn.setAttribute('aria-expanded', 'true'));
 
     const firstFocusable = drawer.querySelector('a, button, [tabindex="0"]');
     firstFocusable?.focus({ preventScroll: true });
   }
 
+  // アニメ完了待ち。transition 無効化カスタマイズや無限アニメ同居では完了イベントが発火せず永久に
+  // close できなくなるため（Why not: 完了待ちが解決しない構成での恒久 deadlock 回避）、上限 800ms で
+  // 打ち切る（--duration-normal 0.3s + 余裕）。
+  function waitForDrawerAnimation() {
+    const TIMEOUT_MS = 800;
+    const timeout = new Promise((resolve) => setTimeout(resolve, TIMEOUT_MS));
+    const animations = drawer.getAnimations({ subtree: true });
+    const done =
+      animations.length > 0
+        ? Promise.all(animations.map((a) => a.finished)).catch(() => {})
+        : new Promise((resolve) => {
+            drawer.addEventListener('transitionend', resolve, { once: true });
+          });
+    return Promise.race([done, timeout]);
+  }
+
   async function closeDrawer() {
     if (!drawer.open) return;
-    if (isAnimating) return;
-    isAnimating = true;
+    const gen = ++generation;
 
     delete drawer.dataset.open;
     hamburgers.forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      if (overlay) overlay.hidden = true;
-      drawer.close();
-      inertTargets.forEach((el) => el.removeAttribute('inert'));
-    } else {
-      const allAnimations = drawer.getAnimations({ subtree: true });
-      if (allAnimations.length > 0) {
-        await Promise.all(allAnimations.map((a) => a.finished)).catch(() => {});
-      } else {
-        await new Promise((resolve) => {
-          drawer.addEventListener('transitionend', resolve, { once: true });
-        });
-      }
-      if (overlay) overlay.hidden = true;
-      drawer.close();
-      inertTargets.forEach((el) => el.removeAttribute('inert'));
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      await waitForDrawerAnimation();
+      // 待機中に新しい操作（別の open / close / PC 化）が始まっていたら後片付けを新世代に委ねる
+      if (gen !== generation) return;
     }
 
-    isAnimating = false;
+    if (overlay) overlay.hidden = true;
+    drawer.close();
+    inertTargets.forEach((el) => el.removeAttribute('inert'));
+  }
+
+  // PC 化時はドロワー自体が不可視になるためアニメ不要。世代を進めて進行中の open / close の残処理を
+  // 無効化し、状態を同期的に解除する（アニメ完了待ちの窓で close が取りこぼされる問題を回避）。
+  function closeImmediately() {
+    ++generation;
+    delete drawer.dataset.open;
+    hamburgers.forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
+    if (overlay) overlay.hidden = true;
+    if (drawer.open) drawer.close();
+    inertTargets.forEach((el) => el.removeAttribute('inert'));
   }
 
   hamburgers.forEach((btn) => {
     btn.addEventListener('click', () => {
-      if (drawer.open) {
+      // トグル判定は「開く意図の状態」(data-open) を基準にする。アニメ中でも受け付けて世代を進める
+      // ため、閉じアニメ中の再クリックで開き直せる（native drawer.open は close() まで true のまま
+      // 残るのでトグル基準に使わない）。
+      if ('open' in drawer.dataset) {
         closeDrawer();
         btn.focus();
       } else {
@@ -119,8 +137,10 @@ function initDrawer(options = {}) {
     }
   });
 
-  window.matchMedia(`(min-width: ${breakpoint}px)`).addEventListener('change', (e) => {
-    if (e.matches) closeDrawer();
+  // p-header.css の @media (width >= 48rem) と同一表記。px 換算するとルートフォントサイズ変更時に
+  // CSS の rem 判定と帯域がズレるため、rem のまま matchMedia へ渡す。
+  window.matchMedia(`(width >= ${breakpoint})`).addEventListener('change', (e) => {
+    if (e.matches) closeImmediately();
   });
 }
 
@@ -223,12 +243,26 @@ function initFormValidation(options = {}) {
       return field;
     }
 
+    /**
+     * aria-describedby は複数 ID（ヒント文＋エラー文など）を空白区切りで持てるため、
+     * 各 ID を順に引いて `.c-form__error` を持つ要素をエラー表示先として採用する。
+     * 先頭 ID 決め打ちだとヒント文が先に来た場合にフィールド検証が黙って無効化される。
+     */
+    function getErrorElement(field) {
+      const describedby = field.getAttribute('aria-describedby');
+      if (!describedby) return null;
+      for (const id of describedby.trim().split(/\s+/)) {
+        const el = document.getElementById(id);
+        if (el?.classList.contains('c-form__error')) return el;
+      }
+      return null;
+    }
+
     form.addEventListener('submit', (event) => {
       let firstInvalid = null;
 
       fields.forEach((field) => {
-        const errorId = field.getAttribute('aria-describedby');
-        const errorEl = document.getElementById(errorId);
+        const errorEl = getErrorElement(field);
         if (!errorEl) return;
 
         const input = getRepresentativeInput(field);
@@ -253,9 +287,20 @@ function initFormValidation(options = {}) {
       }
     });
 
+    // reset 時にエラー表示 / aria-invalid が残留しないよう全フィールドをクリアする
+    form.addEventListener('reset', () => {
+      fields.forEach((field) => {
+        const errorEl = getErrorElement(field);
+        if (errorEl) {
+          errorEl.textContent = '';
+          errorEl.hidden = true;
+        }
+        field.removeAttribute('aria-invalid');
+      });
+    });
+
     fields.forEach((field) => {
-      const errorId = field.getAttribute('aria-describedby');
-      const errorEl = document.getElementById(errorId);
+      const errorEl = getErrorElement(field);
       if (!errorEl) return;
 
       const input = getRepresentativeInput(field);
@@ -285,7 +330,7 @@ initBackToTop();
 initFormValidation();
 
 // CUSTOMIZE 例:
-// initDrawer({ breakpoint: 1024 });
+// initDrawer({ breakpoint: '64rem' });
 // initStagger({ delayStep: 0.15 });
 // initScrollAnimation({ threshold: 0.3, rootMargin: '0px 0px -100px 0px' });
 // initBackToTop({ threshold: 500 });
