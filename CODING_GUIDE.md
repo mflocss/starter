@@ -152,7 +152,7 @@ Vite は `publicDir`（= `public/`）配下のファイルをそのまま `dist/
 ```html
 <header class="l-header p-header">...</header>
 <div class="c-overlay" data-drawer-overlay hidden></div>
-<dialog class="p-drawer" id="drawer" data-drawer aria-labelledby="drawer-title" aria-modal="true">
+<dialog class="p-drawer" id="drawer" data-drawer aria-labelledby="drawer-title">
   ...
 </dialog>
 <main ... data-drawer-inert>...</main>
@@ -166,7 +166,7 @@ starter 固有の設計判断: `--z-header` を `--z-drawer` より前面に置�
 
 ### show() 運用上の SR 実機検証手順
 
-`show()` は `showModal()` の自動 focus trap を持たないため、`inert` + `aria-modal` で同等の挙動を再現できているか実機検証が必要です。
+`show()` は `showModal()` の自動 focus trap を持たないため、`inert` で同等の挙動を再現できているか実機検証が必要です。`aria-modal="true"` は付与しません（`show()` は modeless であり、ブラウザ・SR はダイアログを modal として扱わないため、`aria-modal="true"` は実態と矛盾する。ダイアログとしての announce は `<dialog>` の暗黙 role="dialog" が担う）。
 
 | 環境 | 検証項目 |
 |------|---------|
@@ -180,7 +180,7 @@ starter 固有の設計判断: `--z-header` を `--z-drawer` より前面に置�
 - [ ] Tab で drawer 内のフォーカス可能要素のみを巡回する（drawer 外に脱出しない）
 - [ ] ハンバーガーボタン（trigger）は inert ではないので Tab で到達して閉じられる
 - [ ] Escape キーで close される（JS 実装）
-- [ ] `aria-modal="true"` により SR が「ダイアログ」として announce する
+- [ ] `<dialog>` の暗黙 role="dialog" により SR が「ダイアログ」として announce する
 - [ ] `aria-labelledby` で参照されるドロワータイトルが SR で読み上げられる
 
 `inert` 属性は WCAG 2.1.1 Keyboard (Level A) と 2.4.3 Focus Order に直結します。新規の自己配置型 Component を追加する際は、必ず `data-drawer-inert` の付与要否を確認してください（後述「data-drawer-inert」節と同じ運用）。
