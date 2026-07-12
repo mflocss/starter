@@ -107,7 +107,7 @@ function initDrawer(options = {}) {
       // 残るのでトグル基準に使わない）。
       if ('open' in drawer.dataset) {
         closeDrawer();
-        btn.focus();
+        btn.focus({ preventScroll: true });
       } else {
         openDrawer();
       }
