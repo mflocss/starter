@@ -223,7 +223,6 @@ function initFormValidation(options = {}) {
       return field;
     }
 
-    // 送信時バリデーション
     form.addEventListener('submit', (event) => {
       let firstInvalid = null;
 
@@ -236,20 +235,17 @@ function initFormValidation(options = {}) {
         if (!input) return;
 
         if (!input.checkValidity()) {
-          // エラー表示
           errorEl.textContent = input.validationMessage;
           errorEl.hidden = false;
           field.setAttribute('aria-invalid', 'true');
           if (!firstInvalid) firstInvalid = input;
         } else {
-          // エラー解除
           errorEl.textContent = '';
           errorEl.hidden = true;
           field.removeAttribute('aria-invalid');
         }
       });
 
-      // 最初のエラーフィールドに focus
       if (firstInvalid) {
         event.preventDefault();
         firstInvalid.focus({ preventScroll: false });
@@ -257,7 +253,6 @@ function initFormValidation(options = {}) {
       }
     });
 
-    // input / change イベントで有効化時にエラー解除
     fields.forEach((field) => {
       const errorId = field.getAttribute('aria-describedby');
       const errorEl = document.getElementById(errorId);

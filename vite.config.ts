@@ -59,8 +59,6 @@ export default defineConfig({
             const distDir = resolve(__dirname, 'dist');
 
             // 既存ファイル / ディレクトリが存在する場合は Vite に処理を委譲する
-            // 候補 1: dist/{url}（静的ファイル直接 or ディレクトリ）
-            // 候補 2: dist/{url}/index.html（ディレクトリ配下の index.html）
             const candidates = [resolve(distDir, url.slice(1)), resolve(distDir, url.slice(1), 'index.html')];
 
             for (const candidate of candidates) {
@@ -69,7 +67,6 @@ export default defineConfig({
               }
             }
 
-            // どちらも存在しない → 404.html を 404 ステータスで返す
             const notFoundPath = resolve(distDir, '404.html');
             if (fs.existsSync(notFoundPath)) {
               res.statusCode = 404;
