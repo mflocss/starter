@@ -9,12 +9,12 @@
  * なぜ head で blocking 実行か:
  * - 描画開始前に viewport の content を確定する必要がある
  * - defer / async にすると初回レンダリング後に viewport が変わり CLS が発生する
- * - ResizeObserver で resize にも追従するため、初期値だけでなく継続的に更新
+ * - window の resize イベントで追従するため、初期値だけでなく継続的に更新
  *
  * CUSTOMIZE:
  * - VIEWPORT_MIN の値は token/structure.css の `--viewport-min` と必ず一致させる
  * - 最小幅制限が不要なサイト（全幅でレスポンシブ対応済み）は
- *   <script src="/assets/scripts/viewport.js"> および ResizeObserver ごと削除可
+ *   <script src="/assets/scripts/viewport.js"> および resize リスナーごと削除可
  */
 
 // CUSTOMIZE: must match --viewport-min in token/structure.css
@@ -31,4 +31,7 @@ function updateViewport() {
 }
 
 updateViewport();
-new ResizeObserver(updateViewport).observe(document.documentElement);
+// ResizeObserver(documentElement) は使わない: 固定幅 viewport 適用中は layout 幅が
+// VIEWPORT_MIN のまま変わらず発火しない（device-width へ復帰不能になる）。
+// window の resize はウィンドウ操作で常に発火するため、こちらで追従する。
+window.addEventListener('resize', updateViewport);
