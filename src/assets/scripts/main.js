@@ -245,7 +245,7 @@ function initFormValidation(options = {}) {
 
     /**
      * aria-describedby は複数 ID（ヒント文＋エラー文など）を空白区切りで持てるため、
-     * 各 ID を順に引いて `.c-form__error` を持つ要素をエラー表示先として採用する。
+     * 各 ID を順に引いて `data-form-error` を持つ要素をエラー表示先として採用する。
      * 先頭 ID 決め打ちだとヒント文が先に来た場合にフィールド検証が黙って無効化される。
      */
     function getErrorElement(field) {
@@ -253,7 +253,7 @@ function initFormValidation(options = {}) {
       if (!describedby) return null;
       for (const id of describedby.trim().split(/\s+/)) {
         const el = document.getElementById(id);
-        if (el?.classList.contains('c-form__error')) return el;
+        if (el?.hasAttribute('data-form-error')) return el;
       }
       return null;
     }
