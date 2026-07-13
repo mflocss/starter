@@ -1,0 +1,27 @@
+.p-faq {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-faq__inner {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-faq__heading {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-faq__list {
+  display: grid;
+  gap: var(--space-md);
+  max-inline-size: var(--content-width-narrow);
+  margin-block-start: var(--space-xl-2xl);
+  margin-inline: auto;
+}
+
+.p-faq__item {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-faq__accordion {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}

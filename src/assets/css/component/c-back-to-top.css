@@ -1,0 +1,51 @@
+/*
+ * DEVIATION: spec §5.5 SHOULD NOT [外部レイアウト影響プロパティの排除] の例外。
+ *   自己配置型 Component（spec §5.5 例外条項）として position: fixed を宣言。
+ *   ビューポート右下常駐がこの Component の機能本質（機能本質の担保 / 配置基準の独立性を満たす）。
+ *
+ * [data-visible] は JavaScript からスクロール位置に応じて付与される表示状態属性。
+ */
+.c-back-to-top {
+  --_icon-size: 20px;
+
+  position: fixed;
+  inset-block-end: var(--space-xl);
+  inset-inline-end: var(--space-xl);
+  z-index: var(--z-back-to-top);
+  display: inline-flex;
+  visibility: hidden;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--size-icon-area);
+  block-size: var(--size-icon-area);
+  font-size: var(--_icon-size);
+  color: var(--color-surface);
+  text-decoration: none;
+  background-color: var(--color-main);
+  border-radius: var(--radius-full);
+  opacity: 0;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      opacity var(--duration-normal) var(--ease-out-cubic),
+      visibility var(--duration-normal) var(--ease-out-cubic),
+      background-color var(--duration-fast) var(--ease-out-cubic);
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: oklch(from var(--color-main) calc(l * 1.1) c h);
+    }
+  }
+
+  &[data-visible] {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.c-back-to-top__icon {
+  flex-shrink: 0;
+  inline-size: 1em;
+  block-size: 1em;
+}

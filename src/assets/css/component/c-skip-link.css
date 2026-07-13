@@ -1,0 +1,33 @@
+/*
+ * DEVIATION: spec §5.5 SHOULD NOT [外部レイアウト影響プロパティの排除] の例外。
+ *   自己配置型 Component（spec §5.5 例外条項）として :focus-visible 時 position: fixed を宣言。
+ *   :focus-visible によるスキップリンク可視化がこの Component の機能本質（機能本質の担保 / 配置基準の独立性を満たす）。
+ */
+.c-skip-link {
+  padding: var(--space-sm) var(--space-md);
+  font-weight: var(--font-weight-heading);
+  color: var(--color-surface);
+  text-decoration: none;
+  background-color: var(--color-main);
+  border-radius: var(--radius-sm);
+
+  /* u-visually-hidden 相当の視覚的非表示を内部統合（Component 単体で機能完結、display: none / visibility: hidden を使わず SR からは常に読み上げ可） */
+  &:not(:focus, :active, :focus-within) {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    white-space: nowrap;
+    border: 0;
+    clip-path: inset(50%);
+  }
+
+  &:focus-visible {
+    position: fixed;
+    inset-block-start: var(--space-sm);
+    inset-inline-start: var(--space-sm);
+    z-index: var(--z-skip-link);
+  }
+}

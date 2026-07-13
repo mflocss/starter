@@ -1,0 +1,21 @@
+@media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      scale: 0.95;
+    }
+  }
+
+  [data-immediate='scale-in'] {
+    animation: scale-in 0.8s var(--ease-out-quart) both;
+  }
+
+  [data-animate='scale-in'] {
+    animation: scale-in 0.8s var(--ease-out-quart) both;
+    animation-play-state: paused;
+
+    &[data-visible] {
+      animation-play-state: running;
+    }
+  }
+}

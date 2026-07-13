@@ -1,0 +1,67 @@
+.p-header {
+  --_blur: 8px;
+
+  background-color: oklch(from var(--color-bg) l c h / 92%);
+  border-block-end: var(--border-width) solid var(--color-border);
+  backdrop-filter: blur(var(--_blur));
+
+  /* ドロワー表示時の背面透け防止 */
+  :root:has(dialog[open]) & {
+    background-color: var(--color-bg);
+    backdrop-filter: none;
+  }
+}
+
+.p-header__inner {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-header__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  block-size: var(--header-size);
+}
+
+.p-header__logo {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--size-tap-target);
+  font-size: var(--font-size-logo);
+  font-weight: var(--font-weight-heading);
+  color: var(--color-main);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+
+.p-header__nav {
+  display: none;
+  gap: var(--space-lg);
+  align-items: center;
+
+  @media (width >= 48rem) {
+    display: flex;
+  }
+}
+
+.p-header__nav-list {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.p-header__nav-link {
+  --link-color: var(--color-text);
+
+  font-size: var(--font-size-caption);
+  text-decoration: none;
+}
+
+.p-header__cta {
+  font-size: var(--font-size-caption);
+}
+
+.p-header__hamburger {
+  @media (width >= 48rem) {
+    display: none;
+  }
+}

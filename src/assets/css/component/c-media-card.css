@@ -1,0 +1,57 @@
+/* 公開 API:
+     --media-card-first-order  (default: 0、`:nth-child(even)` 等で 1 を set して左右反転) */
+.c-media-card {
+  --_first-order: var(--media-card-first-order, 0);
+
+  display: grid;
+  gap: var(--space-xl);
+  align-items: center;
+
+  @container (inline-size >= 50rem) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  > :first-child {
+    order: var(--_first-order);
+  }
+
+  /* Modifier: -stacked（投稿カード等の縦並び固定バリエーション） */
+  &.-stacked {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    align-items: start;
+
+    /* @container クエリなしで常に縦並び（投稿カード一覧の小さなカード内で適合） */
+  }
+}
+
+.c-media-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.c-media-card__badge {
+  align-self: start;
+}
+
+.c-media-card__title {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.c-media-card__text {
+  color: var(--color-text-light);
+}
+
+.c-media-card__media {
+  img {
+    inline-size: 100%;
+    border-radius: var(--radius-md);
+  }
+}
+
+.c-media-card__caption {
+  margin-block-start: var(--space-sm);
+  font-size: var(--font-size-caption);
+  color: var(--color-text-light);
+}

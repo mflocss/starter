@@ -1,0 +1,89 @@
+:where(button, input[type='submit'], input[type='button'], input[type='reset']) {
+  padding: 0;
+  appearance: none;
+  touch-action: manipulation;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+:where(label) {
+  cursor: pointer;
+}
+
+:where(select) {
+  --_arrow-space: 2.5rem;
+
+  padding-inline-end: var(--_arrow-space);
+  appearance: none;
+  background-color: var(--color-surface);
+
+  /* CUSTOMIZE: 矢印の色（%23666 = #666 ライト・%23aaa = #aaa ダーク）。SVG data URI 内では CSS 変数・light-dark() が使えないため手動で更新する */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23666' d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+
+  /* NOTE: SVG data URI 内では CSS カスタムプロパティ・light-dark() が使えないため、Foundation でダークモード対応する（spec の SHOULD [セマンティック変数経由の参照] の正当な逸脱） */
+  @media (prefers-color-scheme: dark) {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23aaa' d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  }
+}
+
+:where(input[type='radio'], input[type='checkbox']) {
+  flex-shrink: 0;
+  inline-size: 1.25em;
+  block-size: 1.25em;
+  margin: 0;
+  vertical-align: middle;
+  appearance: none;
+  cursor: pointer;
+  border: var(--border-width) solid var(--color-border);
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: border-color var(--duration-fast) var(--ease-out-cubic);
+  }
+}
+
+:where(input[type='radio']:checked, input[type='checkbox']:checked) {
+  background-color: var(--color-main);
+  border-color: var(--color-main);
+}
+
+:where(input[type='radio']:focus-visible, input[type='checkbox']:focus-visible, select:focus-visible) {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+:where(input[type='radio']) {
+  border-radius: 50%;
+}
+
+:where(input[type='radio']:checked) {
+  background-image: radial-gradient(circle at center, var(--color-surface) 30%, var(--color-main) 32%);
+}
+
+:where(input[type='checkbox']) {
+  border-radius: 0.25em;
+}
+
+:where(input[type='checkbox']:checked) {
+  /* CUSTOMIZE: チェックマークの色（stroke='white' ライト・stroke='%23111' = #111 ダーク）。SVG data URI 内では CSS 変数・light-dark() が使えないため手動で更新する */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' d='M3.5 8l3 3 6-6'/%3E%3C/svg%3E");
+  background-position: center;
+  background-size: 100%;
+
+  /* NOTE: SVG data URI 内では CSS カスタムプロパティ・light-dark() が使えないため、Foundation でダークモード対応する（spec の SHOULD [セマンティック変数経由の参照] の正当な逸脱） */
+  @media (prefers-color-scheme: dark) {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23111' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' d='M3.5 8l3 3 6-6'/%3E%3C/svg%3E");
+  }
+}
+
+:where(:disabled) {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+::placeholder {
+  color: var(--color-text-light);
+}

@@ -11,7 +11,8 @@ labels: question
 
 ## どのレイヤーに関する質問ですか？
 
-- [ ] Variable
+- [ ] Token
+- [ ] Reset
 - [ ] Foundation
 - [ ] Layout
 - [ ] Component

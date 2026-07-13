@@ -1,0 +1,12 @@
+/* 公開 API:
+     --inner-width      (default: var(--content-width))
+     --inner-padding    (default: var(--content-padding)) */
+.l-inner {
+  --_width: var(--inner-width, var(--content-width));
+  --_padding: var(--inner-padding, var(--content-padding));
+
+  box-sizing: content-box;
+  max-inline-size: var(--_width);
+  padding-inline: var(--_padding);
+  margin-inline: auto;
+}

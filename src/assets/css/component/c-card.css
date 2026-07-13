@@ -1,0 +1,25 @@
+/* 公開 API:
+     --card-padding  (default: var(--space-lg))
+     --card-bg       (default: var(--color-surface))
+     --card-radius   (default: var(--radius-md))
+     --card-shadow   (default: var(--shadow-sm) var(--color-shadow))
+     --card-border   (default: none) */
+.c-card {
+  --_padding: var(--card-padding, var(--space-lg));
+  --_bg: var(--card-bg, var(--color-surface));
+  --_radius: var(--card-radius, var(--radius-md));
+  --_shadow: var(--card-shadow, var(--shadow-sm) var(--color-shadow));
+  --_border: var(--card-border, none);
+
+  padding: var(--_padding);
+  background-color: var(--_bg);
+  border: var(--_border);
+  border-radius: var(--_radius);
+  box-shadow: var(--_shadow);
+
+  /* Modifier: -subtle */
+  &.-subtle {
+    --_bg: var(--card-bg, var(--color-bg-secondary));
+    --_shadow: var(--card-shadow, none);
+  }
+}

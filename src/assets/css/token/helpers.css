@@ -1,0 +1,3 @@
+:root {
+  --px: calc(1rem / 16); /* 1px の rem 等価。数値 × --px で rem に変換 */
+}

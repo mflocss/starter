@@ -1,0 +1,24 @@
+:root {
+  /* CUSTOMIZE: フォント（システムフォント = 外部依存なしで即動作）
+   * Web フォント（例: Noto Sans JP）を使う場合は先頭に足し、<head>（index.html）側で読み込む。 */
+  --font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', meiryo, system-ui, sans-serif;
+
+  /* CUSTOMIZE: 流体タイポグラフィ（viewport-min → viewport-max の直線的な補間） */
+  --font-size-h1: clamp(calc(32 * var(--px)), 2.308vi + 1.4231rem, calc(56 * var(--px)));
+  --font-size-h2: clamp(calc(24 * var(--px)), 1.154vi + 1.2115rem, calc(36 * var(--px)));
+  --font-size-h3: clamp(calc(18 * var(--px)), 0.288vi + 1.0529rem, calc(21 * var(--px)));
+  --font-size-lead: clamp(calc(16 * var(--px)), 0.192vi + 0.9519rem, calc(18 * var(--px)));
+  --font-size-button-lg: clamp(calc(16 * var(--px)), 0.192vi + 0.9519rem, calc(18 * var(--px)));
+  --font-size-logo: clamp(calc(20 * var(--px)), 0.385vi + 1.1538rem, calc(24 * var(--px)));
+  --font-size-nav-lg: clamp(calc(18 * var(--px)), 0.192vi + 1.0769rem, calc(20 * var(--px)));
+  --font-size-display: clamp(calc(40 * var(--px)), 1.538vi + 2.1154rem, calc(56 * var(--px)));
+  --font-size-caption: calc(14 * var(--px));
+
+  /* CUSTOMIZE: 行間 */
+  --line-height-text: 1.8;
+  --line-height-title: 1.4;
+
+  /* CUSTOMIZE: ウェイト */
+  --font-weight-heading: 700;
+  --font-weight-body: 400;
+}

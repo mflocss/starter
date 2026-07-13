@@ -1,0 +1,36 @@
+.p-cta {
+  --section-padding-min: var(--section-wide-min);
+  --section-padding-max: var(--section-wide-max);
+
+  background-color: var(--color-bg-secondary);
+}
+
+.p-cta__inner {
+  --inner-width: var(--content-width-narrow);
+}
+
+.p-cta__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  align-items: center;
+  text-align: center;
+}
+
+.p-cta__message {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.p-cta__title {
+  max-inline-size: 600px;
+}
+
+.p-cta__text {
+  color: var(--color-text-light);
+}
+
+.p-cta__button {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}

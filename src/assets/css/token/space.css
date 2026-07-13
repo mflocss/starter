@@ -1,0 +1,14 @@
+/* CUSTOMIZE: 余白スケール（8px グリッド。数値 = デザイナーの px 指定値） */
+:root {
+  --space-xs: calc(4 * var(--px));
+  --space-sm: calc(8 * var(--px));
+  --space-md: calc(16 * var(--px));
+  --space-lg: calc(24 * var(--px));
+  --space-xl: calc(32 * var(--px));
+  --space-2xl: calc(48 * var(--px));
+  --space-3xl: calc(64 * var(--px));
+
+  /* fluid 中間 tokens（SP/PC で値が変わる場面で使用） */
+  --space-xl-2xl: clamp(var(--space-xl), 1.538vi + 1.615rem, var(--space-2xl));
+  --space-2xl-3xl: clamp(var(--space-2xl), 1.538vi + 2.615rem, var(--space-3xl));
+}

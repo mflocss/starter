@@ -1,0 +1,33 @@
+name: バグ報告
+description: starter の動作に関する不具合を報告する
+title: '[Bug] '
+labels: ['bug']
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: バグの説明
+      description: どのような動作・振る舞いが問題ですか？
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 再現手順
+      description: |
+        最小再現手順を記載してください（コード例 + 期待 vs 実際）
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 環境
+      description: OS / ブラウザ / Node.js バージョン / 関連バージョン
+    validations:
+      required: true
+  - type: textarea
+    id: additional
+    attributes:
+      label: その他（スクリーンショット等）
+    validations:
+      required: false

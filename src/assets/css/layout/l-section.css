@@ -1,0 +1,9 @@
+/* 公開 API:
+     --section-padding-min    (default: var(--section-standard-min))
+     --section-padding-max    (default: var(--section-standard-max)) */
+.l-section {
+  --_padding-min: var(--section-padding-min, var(--section-standard-min));
+  --_padding-max: var(--section-padding-max, var(--section-standard-max));
+
+  padding-block: clamp(var(--_padding-min), 3.462vi + 3.1346rem, var(--_padding-max));
+}

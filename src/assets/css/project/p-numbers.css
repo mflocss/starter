@@ -1,0 +1,33 @@
+.p-numbers {
+  --section-padding-min: var(--section-narrow-min);
+  --section-padding-max: var(--section-narrow-max);
+
+  background-color: var(--color-bg-secondary);
+}
+
+.p-numbers__inner {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-numbers__container {
+  container-type: inline-size;
+}
+
+.p-numbers__heading {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-numbers__list {
+  display: grid;
+  gap: var(--space-lg);
+  margin-block-start: var(--space-xl-2xl);
+
+  @container (inline-size >= 40rem) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+  }
+}
+
+.p-numbers__item {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}

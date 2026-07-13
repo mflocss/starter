@@ -1,0 +1,22 @@
+.p-flow {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-flow__inner {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-flow__heading {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-flow__list {
+  display: grid;
+  gap: var(--space-lg);
+  margin-block-start: var(--space-xl-2xl);
+  counter-reset: step;
+}
+
+.p-flow__item {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}

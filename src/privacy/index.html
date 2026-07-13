@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CUSTOMIZE: ページタイトル・説明文を差し替え -->
+    <title>プライバシーポリシー — iluha</title>
+    <meta
+      name="description"
+      content="iluha のプライバシーポリシー。施術前後にお預かりする個人情報（氏名・連絡先）の収集目的、第三者提供の方針、お問い合わせ窓口を明記しています。"
+    />
+    <meta name="format-detection" content="telephone=no,address=no,email=no" />
+    <!-- CUSTOMIZE: ダークモード不要なら content="light" に -->
+    <meta name="color-scheme" content="light dark" />
+    <!-- OGP -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="プライバシーポリシー — iluha" />
+    <meta
+      property="og:description"
+      content="iluha のプライバシーポリシー。施術前後にお預かりする個人情報（氏名・連絡先）の収集目的、第三者提供の方針、お問い合わせ窓口を明記しています。"
+    />
+    <!-- CUSTOMIZE: OGP 画像を差し替え（必ず absolute URL、1200×630px 推奨） -->
+    <meta property="og:image" content="https://example.com/ogp.png" />
+    <!-- CUSTOMIZE: 本番 URL に差し替え -->
+    <meta property="og:url" content="https://example.com/privacy/" />
+    <meta property="og:site_name" content="iluha" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="プライバシーポリシー — iluha" />
+    <meta
+      name="twitter:description"
+      content="iluha のプライバシーポリシー。施術前後にお預かりする個人情報（氏名・連絡先）の収集目的、第三者提供の方針、お問い合わせ窓口を明記しています。"
+    />
+    <meta name="twitter:image" content="https://example.com/ogp.png" />
+    <!-- CUSTOMIZE: og:* と同値でほとんどの場合 OK。Twitter 専用の差別化が必要な場合のみ変更 -->
+    <!-- CUSTOMIZE: 本番 URL に差し替え -->
+    <link rel="canonical" href="https://example.com/privacy/" />
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- Scripts -->
+    <script type="module" src="/assets/scripts/main.js"></script>
+    <script src="/assets/scripts/viewport.js"></script>
+
+    <!-- CUSTOMIZE: 構造化データの URL を本番 URL に差し替え -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "ホーム",
+            "item": "https://example.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "プライバシーポリシー",
+            "item": "https://example.com/privacy/"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body id="top" class="l-page">
+    <!-- Skip Link -->
+    <a class="c-skip-link" data-drawer-inert href="#main">本文へスキップ</a>
+
+    <!-- Header -->
+    <header class="l-header p-header">
+      <div class="l-inner p-header__inner">
+        <div class="p-header__bar">
+          <a class="p-header__logo" data-drawer-inert href="/" translate="no">iluha</a>
+
+          <nav class="p-header__nav" data-drawer-inert aria-label="メインナビゲーション">
+            <ul class="p-header__nav-list">
+              <li><a class="p-header__nav-link" href="/#features">特徴</a></li>
+              <li><a class="p-header__nav-link" href="/#voice">お客様の声</a></li>
+              <li><a class="p-header__nav-link" href="/#faq">よくある質問</a></li>
+              <li><a class="p-header__nav-link" href="/#contact">ご予約</a></li>
+            </ul>
+            <a class="c-button p-header__cta" href="/#contact">初回体験を予約する</a>
+          </nav>
+
+          <!-- Hamburger: drawer 開閉中も機能するため data-drawer-inert 対象外 -->
+          <button
+            class="c-hamburger p-header__hamburger"
+            data-hamburger
+            type="button"
+            aria-expanded="false"
+            aria-controls="drawer"
+            aria-label="メニュー"
+          >
+            <span class="c-hamburger__line" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Drawer -->
+    <div class="c-overlay" data-drawer-overlay hidden></div>
+    <dialog class="p-drawer" id="drawer" data-drawer aria-labelledby="drawer-title">
+      <div class="p-drawer__stack">
+        <span class="u-visually-hidden" id="drawer-title">ナビゲーションメニュー</span>
+        <nav class="p-drawer__nav" aria-label="ドロワーナビゲーション">
+          <ul class="p-drawer__nav-list">
+            <li>
+              <a class="p-drawer__nav-link" href="/#features">特徴</a>
+            </li>
+            <li>
+              <a class="p-drawer__nav-link" href="/#voice">お客様の声</a>
+            </li>
+            <li>
+              <a class="p-drawer__nav-link" href="/#faq">よくある質問</a>
+            </li>
+            <li>
+              <a class="p-drawer__nav-link" href="/#contact">ご予約</a>
+            </li>
+          </ul>
+        </nav>
+        <a class="c-button p-drawer__cta" href="/#contact">初回体験を予約する</a>
+      </div>
+    </dialog>
+
+    <main id="main" tabindex="-1" data-drawer-inert>
+      <!-- CUSTOMIZE: プライバシーポリシーの内容を差し替え -->
+      <section class="l-section p-privacy" aria-labelledby="privacy-heading">
+        <div class="l-inner p-privacy__inner">
+          <h1 class="p-privacy__title" id="privacy-heading">プライバシーポリシー</h1>
+
+          <div class="c-prose p-privacy__body">
+            <h2>個人情報の取り扱いについて</h2>
+            <p>当サロン（以下「当店」）は、お客様の個人情報を適切に保護し、以下の方針に基づいて取り扱います。</p>
+
+            <h2>収集する情報</h2>
+            <p>当店では、ご予約・お問い合わせの際に以下の情報をお伺いすることがあります。</p>
+            <ul>
+              <li>お名前</li>
+              <li>メールアドレス</li>
+              <li>電話番号</li>
+              <li>お問い合わせ内容</li>
+            </ul>
+
+            <h2>利用目的</h2>
+            <p>収集した個人情報は、以下の目的にのみ使用いたします。</p>
+            <ul>
+              <li>ご予約の確認・連絡</li>
+              <li>お問い合わせへの回答</li>
+              <li>サービス向上のための分析（個人を特定しない形で）</li>
+            </ul>
+
+            <h2>第三者への提供</h2>
+            <p>法令に基づく場合を除き、お客様の同意なく個人情報を第三者に提供することはありません。</p>
+
+            <h2>お問い合わせ</h2>
+            <p>
+              個人情報の取り扱いに関するお問い合わせは、<a href="/#contact">お問い合わせフォーム</a>よりご連絡ください。
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="l-footer p-footer" data-drawer-inert>
+      <div class="l-inner p-footer__inner">
+        <div class="p-footer__stack">
+          <nav class="p-footer__nav" aria-label="フッターナビゲーション">
+            <ul class="p-footer__nav-list">
+              <li><a class="p-footer__nav-link" href="/#features">特徴</a></li>
+              <li><a class="p-footer__nav-link" href="/#voice">お客様の声</a></li>
+              <li><a class="p-footer__nav-link" href="/#faq">よくある質問</a></li>
+              <li><a class="p-footer__nav-link" href="/#contact">ご予約</a></li>
+              <li>
+                <a class="p-footer__nav-link" href="/privacy/" aria-current="page">プライバシーポリシー</a>
+              </li>
+            </ul>
+          </nav>
+          <!-- CUSTOMIZE: 住所・電話番号・営業時間を差し替え -->
+          <address class="p-footer__address">
+            〒xxx-xxxx 東京都渋谷区○○ x-x-x ○○ビル 3F<br />
+            <a class="p-footer__tel" href="tel:03-xxxx-xxxx" translate="no">03-xxxx-xxxx</a><br />
+            営業時間: 10:00〜20:00（最終受付 19:00）<br />
+            定休日: 毎週水曜日
+          </address>
+          <p class="p-footer__copyright">
+            <small><span translate="no">© 2026 iluha</span></small>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a class="c-back-to-top" data-back-to-top data-drawer-inert href="#top" aria-label="ページの先頭に戻る">
+      <svg class="c-back-to-top__icon" width="20" height="20" aria-hidden="true">
+        <use href="/assets/images/icons/chevron-up.svg#icon" />
+      </svg>
+    </a>
+  </body>
+</html>

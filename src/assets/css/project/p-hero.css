@@ -1,0 +1,76 @@
+.p-hero {
+  display: grid;
+  grid-template-areas: 'stack';
+  place-items: center center;
+  min-block-size: 60dvb;
+  padding-block: 0;
+  background: radial-gradient(ellipse at 50% 0%, oklch(from var(--color-main) l c h / 6%) 0%, transparent 70%);
+}
+
+.p-hero__inner {
+  grid-area: stack;
+}
+
+.p-hero__stack {
+  position: relative;
+  z-index: 1;
+  grid-area: stack;
+}
+
+.p-hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  align-items: center;
+  max-inline-size: var(--content-width-narrow);
+  text-align: center;
+}
+
+.p-hero__title {
+  letter-spacing: 0.04em;
+}
+
+.p-hero__lead {
+  font-size: var(--font-size-lead);
+}
+
+.p-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+  margin-block-start: var(--space-sm);
+}
+
+.p-hero__cta {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-hero__sub-cta {
+  /* Hero グラデーション上のダークモード可読性調整（c-button 公開 API override） */
+  --button-color: light-dark(var(--color-main), var(--color-text));
+  --button-border-color: light-dark(var(--color-main), var(--color-text));
+}
+
+.p-hero__media {
+  --_overlay-top: light-dark(rgb(255 255 255 / 30%), rgb(0 0 0 / 60%));
+  --_overlay-bottom: light-dark(rgb(255 255 255 / 5%), rgb(0 0 0 / 30%));
+
+  position: relative;
+  grid-area: stack;
+  inline-size: 100cqi;
+  block-size: 100%;
+
+  &::after {
+    position: absolute;
+    inset: 0;
+    content: '';
+    background: linear-gradient(to bottom, var(--_overlay-top) 0%, var(--_overlay-bottom) 100%);
+  }
+
+  img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+}

@@ -1,5 +1,0 @@
-/*
- * mFLOCSS レイヤー順序宣言
- * 8 層の優先順位を @layer で明示的に固定
- */
-@layer tokens, theme, foundation, layout, component, project, animation, utility;

@@ -1,0 +1,23 @@
+.u-visually-hidden:not(:focus, :active, :focus-within) {
+  position: absolute !important;
+  inline-size: 1px !important;
+  block-size: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  clip-path: inset(50%) !important;
+}
+
+.u-hidden-pc {
+  @media (width >= 48rem) {
+    display: none !important;
+  }
+}
+
+.u-hidden-sp {
+  @media (width < 48rem) {
+    display: none !important;
+  }
+}

@@ -1,0 +1,73 @@
+[data-drawer-overlay] {
+  --overlay-z: calc(var(--z-drawer) - 1);
+}
+
+/* show() で非モーダル表示（showModal() はヘッダー背面隠蔽） */
+.p-drawer {
+  --_panel-size: min(max(85vi, calc(var(--viewport-min) * var(--px))), calc(100vi - 48px));
+
+  position: fixed;
+  inset: 0;
+  inset-inline-start: auto;
+  z-index: var(--z-drawer);
+  inline-size: var(--_panel-size);
+  max-inline-size: none;
+  block-size: auto;
+  max-block-size: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  overscroll-behavior-block: contain;
+  background-color: var(--color-bg);
+  border: none;
+  translate: 100% 0;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: translate var(--duration-normal) var(--ease-out-cubic);
+  }
+
+  &[data-open] {
+    translate: 0 0;
+  }
+}
+
+/* 背景スクロール固定: ドロワーは show()（modeless）採用で :modal に非該当のため、Foundation の
+   汎用固定 :has(:modal) では対象外（modeless 採用理由は上記 show() コメント参照）。判定は表示中
+   ずっと真の native [open] を使用（[data-open] は閉じアニメ開始で外れ、閉じ途中にスクロールが
+   復帰するため不可。main.js closeDrawer 参照）。 */
+:root:has(.p-drawer[open]) {
+  overflow: hidden;
+}
+
+.p-drawer__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  align-items: center;
+  justify-content: safe center;
+  min-block-size: 100%;
+  padding: var(--space-xl);
+  padding-block-start: calc(var(--header-size) + var(--space-xl));
+}
+
+.p-drawer__nav {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-drawer__nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.p-drawer__nav-link {
+  --link-color: var(--color-text);
+
+  font-size: var(--font-size-nav-lg);
+  text-decoration: none;
+}
+
+.p-drawer__cta {
+  margin-block-start: var(--space-md);
+}

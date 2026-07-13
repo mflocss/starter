@@ -1,0 +1,32 @@
+:root {
+  /* CUSTOMIZE: デザインカンプ幅（単位なし px 値。流体補間の範囲） */
+  --viewport-min: 400;
+  --viewport-max: 1440;
+
+  /* CUSTOMIZE: コンテンツ領域 */
+  --content-width: 1280px;
+  --content-width-narrow: 720px;
+  --content-width-form: 640px;
+  --content-padding-min: calc(16 * var(--px));
+  --content-padding-max: calc(40 * var(--px));
+  --content-padding: clamp(var(--content-padding-min), 2.308vi + 0.4231rem, var(--content-padding-max));
+  --header-size: calc(64 * var(--px));
+
+  /* CUSTOMIZE: セクション余白
+     wide = Hero, CTA（広い余白で訴求力を高める）
+     standard = Features, Voice, FAQ（通常のセクション）
+     narrow = Problem, Numbers（密度を上げて情報を凝縮） */
+  --section-wide-min: calc(100 * var(--px));
+  --section-wide-max: calc(160 * var(--px));
+  --section-standard-min: calc(64 * var(--px));
+  --section-standard-max: calc(100 * var(--px));
+  --section-narrow-min: calc(40 * var(--px));
+  --section-narrow-max: calc(64 * var(--px));
+
+  /* CUSTOMIZE: インタラクション */
+  --size-tap-target: 44px;
+  --size-icon-area: 48px;
+  --border-width: 1px;
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+}

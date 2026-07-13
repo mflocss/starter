@@ -1,0 +1,7 @@
+/* CUSTOMIZE: シャドウ（形状 px + 色は color.css の --color-shadow を参照） */
+
+/* 使用例: box-shadow: var(--shadow-md) var(--color-shadow); */
+:root {
+  --shadow-sm: 0 1px 3px;
+  --shadow-md: 0 4px 12px;
+}

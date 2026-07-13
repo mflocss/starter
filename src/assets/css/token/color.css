@@ -1,0 +1,39 @@
+:root {
+  /* CUSTOMIZE: カラーパレット */
+  --_sage-400: oklch(65% 0.08 150deg);
+  --_sage-600: oklch(45% 0.1 150deg);
+  --_terracotta-400: oklch(65% 0.12 35deg);
+  --_terracotta-500: oklch(55% 0.15 35deg);
+  --_neutral-50: oklch(98% 0.005 70deg);
+  --_neutral-100: oklch(95% 0.005 70deg);
+  --_neutral-300: oklch(83% 0.008 70deg);
+  --_neutral-400: oklch(70% 0.01 70deg);
+  --_neutral-600: oklch(47% 0.01 70deg);
+  --_neutral-800: oklch(26% 0.008 70deg);
+  --_neutral-900: oklch(17% 0.008 70deg);
+  --_white: oklch(100% 0 0deg);
+  --_black: oklch(0% 0 0deg);
+  --_red-400: oklch(65% 0.18 15deg);
+  --_red-500: oklch(50% 0.22 15deg);
+
+  /* CUSTOMIZE: パレット → 用途のマッピング */
+  --color-main: light-dark(var(--_sage-600), var(--_sage-400));
+  --color-accent: light-dark(var(--_terracotta-500), var(--_terracotta-400));
+  --color-bg: light-dark(var(--_neutral-50), var(--_neutral-900));
+  --color-bg-secondary: light-dark(var(--_neutral-100), var(--_neutral-800));
+  --color-surface: light-dark(var(--_white), var(--_neutral-800));
+  --color-text: light-dark(var(--_neutral-900), var(--_neutral-50));
+  --color-text-light: light-dark(var(--_neutral-600), var(--_neutral-400));
+  --color-border: light-dark(var(--_neutral-300), var(--_neutral-600));
+  --color-error: light-dark(var(--_red-500), var(--_red-400));
+  --color-shadow: light-dark(oklch(from var(--_black) l c h / 10%), oklch(from var(--_white) l c h / 8%));
+
+  /* CUSTOMIZE: コンテキストカラー */
+  --color-link: var(--color-main);
+  --color-heading: var(--color-text);
+  --color-focus-ring: var(--color-main);
+  --color-overlay: oklch(0% 0 0deg / 40%);
+
+  /* CUSTOMIZE: ダークモード不要なら light のみに */
+  color-scheme: light dark;
+}

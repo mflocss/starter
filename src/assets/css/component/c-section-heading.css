@@ -1,0 +1,17 @@
+.c-section-heading {
+  text-align: center;
+}
+
+.c-section-heading__eyebrow {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-heading);
+  color: var(--color-main);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.c-section-heading__title {
+  .c-section-heading__eyebrow + & {
+    margin-block-start: var(--space-sm);
+  }
+}

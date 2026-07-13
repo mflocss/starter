@@ -1,0 +1,31 @@
+.p-problem {
+  --section-padding-min: var(--section-narrow-min);
+  --section-padding-max: var(--section-narrow-max);
+}
+
+.p-problem__inner {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-problem__container {
+  container-type: inline-size;
+}
+
+.p-problem__heading {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-problem__list {
+  display: grid;
+  gap: var(--space-lg);
+  margin-block-start: var(--space-xl-2xl);
+
+  @container (inline-size >= 56rem) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+  }
+}
+
+.p-problem__item {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}

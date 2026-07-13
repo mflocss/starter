@@ -1,0 +1,25 @@
+.p-contact {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-contact__inner {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-contact__heading {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-contact__lead {
+  margin-block-start: var(--space-md);
+  color: var(--color-text-light);
+  text-align: center;
+}
+
+.p-contact__form {
+  --form-link-color: var(--color-main);
+
+  max-inline-size: var(--content-width-form);
+  margin-block-start: var(--space-xl-2xl);
+  margin-inline: auto;
+}

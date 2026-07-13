@@ -1,0 +1,15 @@
+.c-badge {
+  display: inline-block;
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-heading);
+  line-height: var(--line-height-title);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: var(--radius-sm);
+
+  &.-accent {
+    color: var(--color-accent);
+    background-color: oklch(from var(--color-accent) l c h / 12%);
+  }
+}

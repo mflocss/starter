@@ -1,0 +1,28 @@
+.p-pricing {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-pricing__inner {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-pricing__heading {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-pricing__table-wrapper {
+  margin-block-start: var(--space-xl-2xl);
+  overflow-x: auto;
+}
+
+.p-pricing__table {
+  /* 3 列表示 vs 横スクロールの切替閾値 */
+  min-inline-size: 40rem;
+}
+
+.p-pricing__note {
+  margin-block-start: var(--space-lg);
+  font-size: var(--font-size-caption);
+  color: var(--color-text-light);
+  text-align: center;
+}

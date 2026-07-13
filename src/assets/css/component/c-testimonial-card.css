@@ -1,0 +1,39 @@
+.c-testimonial-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.c-testimonial-card__quote {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.c-testimonial-card__title {
+  font-weight: var(--font-weight-heading);
+  line-height: var(--line-height-title);
+}
+
+.c-testimonial-card__text {
+  color: var(--color-text-light);
+}
+
+.c-testimonial-card__footer {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  font-size: var(--font-size-caption);
+  color: var(--color-text-light);
+}
+
+.c-testimonial-card__avatar {
+  inline-size: var(--size-icon-area);
+  block-size: var(--size-icon-area);
+  object-fit: cover;
+  border-radius: var(--radius-full);
+}
+
+.c-testimonial-card__cite {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}

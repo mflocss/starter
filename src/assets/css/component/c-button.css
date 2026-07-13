@@ -1,0 +1,70 @@
+/* 公開 API:
+     --button-color             (default: var(--color-surface))
+     --button-bg-color          (default: var(--color-accent))
+     --button-border-color      (default: var(--color-accent))
+     --button-hover-bg-color    (default: oklch(from var(--color-accent) calc(l * 1.08) c h)) */
+.c-button {
+  --_color: var(--button-color, var(--color-surface));
+  --_bg-color: var(--button-bg-color, var(--color-accent));
+  --_border-color: var(--button-border-color, var(--color-accent));
+  --_hover-bg-color: var(--button-hover-bg-color, oklch(from var(--color-accent) calc(l * 1.08) c h));
+
+  display: inline-flex;
+  gap: var(--space-sm);
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm) var(--space-lg);
+  font-size: inherit;
+  font-weight: var(--font-weight-heading);
+  line-height: var(--line-height-title);
+  color: var(--_color);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: var(--_bg-color);
+  border: var(--border-width) solid var(--_border-color);
+  border-radius: var(--radius-lg);
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      background-color var(--duration-normal) var(--ease-out-cubic),
+      translate var(--duration-normal) var(--ease-out-cubic);
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: var(--_hover-bg-color);
+      translate: 0 var(--hover-lift);
+    }
+  }
+
+  /* タッチ端末は :hover が発火しないため :active で押下フィードバックを提供 */
+  &:active {
+    opacity: 0.8;
+    translate: 0 0;
+  }
+
+  &[data-loading] {
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  /* Modifier: -ghost */
+  &.-ghost {
+    --_color: var(--button-color, var(--color-main));
+    --_bg-color: var(--button-bg-color, transparent);
+    --_border-color: var(--button-border-color, var(--color-main));
+    --_hover-bg-color: var(--button-hover-bg-color, oklch(from var(--color-main) l c h / 8%));
+  }
+
+  &.-large {
+    padding: var(--space-md) var(--space-xl);
+    font-size: var(--font-size-button-lg);
+  }
+}
+
+.c-button__icon {
+  flex-shrink: 0;
+  inline-size: 1em;
+  block-size: 1em;
+}

@@ -1,0 +1,112 @@
+/* 公開 API:
+     --form-actions-margin-top  (default: var(--space-md))
+     --form-link-color          (default: var(--color-link)) */
+.c-form {
+  --_actions-margin-top: var(--form-actions-margin-top, var(--space-md));
+  --_link-color: var(--form-link-color, var(--color-link));
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Element: note — フォーム冒頭の必須マーク説明 */
+.c-form__note {
+  margin-block-end: var(--space-md);
+  font-size: var(--font-size-caption);
+  color: var(--color-text-light);
+}
+
+/* Element: label + input ラッパー（label / fieldset 両構造に対応） */
+.c-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+/* Element: label / legend（見出し扱いのタイポグラフィを共通化） */
+.c-form__label,
+.c-form__legend {
+  display: flex;
+  gap: 0.25em;
+  align-items: baseline;
+  font-weight: var(--font-weight-heading);
+}
+
+/* Element: required — テンプレート手書きの必須マーク（実 DOM、`*` は aria-hidden で視覚のみ） */
+.c-form__required {
+  color: var(--color-error);
+}
+
+/* Element: 入力装飾（input / textarea / select 共通のビジュアル定義） */
+.c-form__input {
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: border-color var(--duration-normal) var(--ease-out-cubic);
+  }
+
+  &:focus-visible {
+    border-color: var(--color-main);
+
+    /* Foundation の :focus-visible outline リングを温存 */
+  }
+
+  &:user-invalid {
+    border-color: var(--color-error);
+  }
+}
+
+textarea.c-form__input {
+  field-sizing: content;
+  min-block-size: 10lh;
+  max-block-size: 20lh;
+  resize: block;
+}
+
+@supports (field-sizing: content) {
+  textarea.c-form__input {
+    resize: none;
+  }
+}
+
+/* Element: radio / checkbox ラベル（両用） */
+.c-form__choice-label {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+  min-block-size: var(--size-tap-target);
+  cursor: pointer;
+}
+
+/* Element: radio / checkbox グループコンテナ（複数の choice-label を縦に並べる） */
+.c-form__choice-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-block-start: var(--space-xs);
+}
+
+/* Element: バリデーションエラーメッセージ（JS が hidden 解除 + textContent 投入で表示）。
+   表示制御は HTML の hidden 属性で行うため、CSS の display 制御は不要 */
+.c-form__error {
+  font-size: var(--font-size-caption);
+  color: var(--color-error);
+}
+
+/* Element: 送信ボタン配置ラッパー（中央寄せ default、Project 側で上書き可） */
+.c-form__actions {
+  display: flex;
+  justify-content: center;
+  margin-block-start: var(--_actions-margin-top);
+}
+
+/* フォーム内リンク（プライバシーポリシー等、クラス付与なしで使われることが多い子孫 <a>）
+   Reset で color / text-decoration-line が unset されるため Block 内で正規化 */
+.c-form a {
+  color: var(--_link-color);
+  text-decoration: underline;
+}

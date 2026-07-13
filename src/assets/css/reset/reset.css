@@ -1,0 +1,130 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  min-block-size: 0;
+}
+
+:where(:root) {
+  scrollbar-gutter: stable;
+  line-break: strict;
+  overflow-wrap: anywhere;
+  text-autospace: normal;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+
+  @supports (text-spacing-trim: trim-start) {
+    text-spacing-trim: trim-start;
+  }
+}
+
+:where(body) {
+  margin: unset;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  margin-block: unset;
+  font-size: unset;
+}
+
+:where(p, blockquote, figure, pre, ul, ol, dl) {
+  margin-block: unset;
+}
+
+:where(blockquote, figure) {
+  margin-inline: unset;
+}
+
+:where(ul, ol, menu) {
+  padding-inline-start: unset;
+  list-style-type: '';
+}
+
+:where(dd) {
+  margin-inline-start: unset;
+}
+
+:where(pre) {
+  text-autospace: no-autospace;
+
+  @supports (text-spacing-trim: trim-start) {
+    text-spacing-trim: space-all;
+  }
+}
+
+:where(em:lang(ja)) {
+  font-weight: bolder;
+}
+
+:where(:is(i, cite, em, dfn, address):lang(ja)) {
+  font-style: unset;
+}
+
+:where(a) {
+  color: unset;
+}
+
+:where(a:any-link) {
+  text-decoration-line: unset;
+}
+
+:where(img, svg, video, canvas, iframe) {
+  max-inline-size: 100%;
+  block-size: auto;
+  vertical-align: bottom;
+}
+
+:where(table) {
+  border-collapse: collapse;
+}
+
+:where(caption, th) {
+  text-align: unset;
+}
+
+:where(button, input, select, textarea) {
+  font: inherit;
+  color: inherit;
+  letter-spacing: unset;
+  border: unset;
+  border-radius: unset;
+}
+
+:where(fieldset) {
+  min-inline-size: 0;
+  padding: unset;
+  margin: unset;
+  border: unset;
+}
+
+:where(legend) {
+  padding-inline: unset;
+}
+
+:where(textarea) {
+  margin-block: unset;
+  resize: block;
+}
+
+::placeholder {
+  opacity: unset;
+}
+
+:where(summary) {
+  cursor: pointer;
+  list-style-type: '';
+}
+
+:where(dialog, [popover]) {
+  padding: unset;
+  border: unset;
+}
+
+:where(:disabled, [aria-disabled='true' i]) {
+  cursor: default;
+}
+
+:where([hidden]:not([hidden='until-found' i])) {
+  display: none !important;
+}

@@ -1,0 +1,145 @@
+<!doctype html>
+<!--
+  CUSTOMIZE: 404 ページのデザインやメッセージを自由に調整できます。
+             組み込み先サイトのヘッダー・フッター構造と一致するように改変してください。
+-->
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CUSTOMIZE: ページタイトル・説明文を差し替え -->
+    <title>ページが見つかりません — iluha</title>
+    <meta
+      name="description"
+      content="お探しのページは移動または削除された可能性があります。iluha のトップページから目的のページをお探しください。"
+    />
+    <meta name="format-detection" content="telephone=no,address=no,email=no" />
+    <!-- CUSTOMIZE: ダークモード不要なら content="light" に -->
+    <meta name="color-scheme" content="light dark" />
+    <meta name="robots" content="noindex,follow" />
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- Scripts -->
+    <script type="module" src="/assets/scripts/main.js"></script>
+    <script src="/assets/scripts/viewport.js"></script>
+  </head>
+  <body id="top" class="l-page">
+    <!-- Skip Link -->
+    <a class="c-skip-link" data-drawer-inert href="#main">本文へスキップ</a>
+
+    <!-- Header -->
+    <header class="l-header p-header">
+      <div class="l-inner p-header__inner">
+        <div class="p-header__bar">
+          <a class="p-header__logo" data-drawer-inert href="/" translate="no">iluha</a>
+
+          <nav class="p-header__nav" data-drawer-inert aria-label="メインナビゲーション">
+            <ul class="p-header__nav-list">
+              <li><a class="p-header__nav-link" href="/#features">特徴</a></li>
+              <li><a class="p-header__nav-link" href="/#voice">お客様の声</a></li>
+              <li><a class="p-header__nav-link" href="/#faq">よくある質問</a></li>
+              <li><a class="p-header__nav-link" href="/#contact">ご予約</a></li>
+            </ul>
+            <a class="c-button p-header__cta" href="/#contact">初回体験を予約する</a>
+          </nav>
+
+          <!-- Hamburger: drawer 開閉中も機能するため data-drawer-inert 対象外 -->
+          <button
+            class="c-hamburger p-header__hamburger"
+            data-hamburger
+            type="button"
+            aria-expanded="false"
+            aria-controls="drawer"
+            aria-label="メニュー"
+          >
+            <span class="c-hamburger__line" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Drawer -->
+    <div class="c-overlay" data-drawer-overlay hidden></div>
+    <dialog class="p-drawer" id="drawer" data-drawer aria-labelledby="drawer-title">
+      <div class="p-drawer__stack">
+        <span class="u-visually-hidden" id="drawer-title">ナビゲーションメニュー</span>
+        <nav class="p-drawer__nav" aria-label="ドロワーナビゲーション">
+          <ul class="p-drawer__nav-list">
+            <li>
+              <a class="p-drawer__nav-link" href="/#features">特徴</a>
+            </li>
+            <li>
+              <a class="p-drawer__nav-link" href="/#voice">お客様の声</a>
+            </li>
+            <li>
+              <a class="p-drawer__nav-link" href="/#faq">よくある質問</a>
+            </li>
+            <li>
+              <a class="p-drawer__nav-link" href="/#contact">ご予約</a>
+            </li>
+          </ul>
+        </nav>
+        <a class="c-button p-drawer__cta" href="/#contact">初回体験を予約する</a>
+      </div>
+    </dialog>
+
+    <main id="main" tabindex="-1" data-drawer-inert>
+      <section class="l-section p-404" aria-labelledby="not-found-heading">
+        <div class="l-inner p-404__inner">
+          <div class="p-404__stack">
+            <hgroup class="c-section-heading p-404__heading">
+              <p class="c-section-heading__eyebrow">404</p>
+              <h1 class="c-section-heading__title" id="not-found-heading">ページが見つかりません</h1>
+            </hgroup>
+            <p class="p-404__lead">
+              お探しのページは移動または削除された可能性があります。<br />
+              お手数ですが、トップページから目的のページをお探しください。
+            </p>
+            <div class="p-404__actions">
+              <a class="c-button -large p-404__cta" href="/">トップページへ戻る</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="l-footer p-footer" data-drawer-inert>
+      <div class="l-inner p-footer__inner">
+        <div class="p-footer__stack">
+          <nav class="p-footer__nav" aria-label="フッターナビゲーション">
+            <ul class="p-footer__nav-list">
+              <li><a class="p-footer__nav-link" href="/#features">特徴</a></li>
+              <li><a class="p-footer__nav-link" href="/#voice">お客様の声</a></li>
+              <li><a class="p-footer__nav-link" href="/#faq">よくある質問</a></li>
+              <li><a class="p-footer__nav-link" href="/#contact">ご予約</a></li>
+              <li>
+                <a class="p-footer__nav-link" href="/privacy/">プライバシーポリシー</a>
+              </li>
+            </ul>
+          </nav>
+          <!-- CUSTOMIZE: 住所・電話番号・営業時間を差し替え -->
+          <address class="p-footer__address">
+            〒xxx-xxxx 東京都渋谷区○○ x-x-x ○○ビル 3F<br />
+            <a class="p-footer__tel" href="tel:03-xxxx-xxxx" translate="no">03-xxxx-xxxx</a><br />
+            営業時間: 10:00〜20:00（最終受付 19:00）<br />
+            定休日: 毎週水曜日
+          </address>
+          <p class="p-footer__copyright">
+            <small><span translate="no">© 2026 iluha</span></small>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a class="c-back-to-top" data-back-to-top data-drawer-inert href="#top" aria-label="ページの先頭に戻る">
+      <svg class="c-back-to-top__icon" width="20" height="20" aria-hidden="true">
+        <use href="/assets/images/icons/chevron-up.svg#icon" />
+      </svg>
+    </a>
+  </body>
+</html>

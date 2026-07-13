@@ -1,0 +1,58 @@
+.p-footer {
+  padding-block: var(--space-3xl);
+  background-color: var(--color-bg-secondary);
+  border-block-start: var(--border-width) solid var(--color-border);
+}
+
+.p-footer__inner {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-footer__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  align-items: center;
+  text-align: center;
+}
+
+.p-footer__nav {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-footer__nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+  justify-content: center;
+}
+
+.p-footer__nav-link {
+  --link-color: var(--color-text-light);
+
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--size-tap-target);
+  font-size: var(--font-size-caption);
+  text-decoration: none;
+}
+
+.p-footer__address {
+  --_line-height: 2;
+
+  font-size: var(--font-size-caption);
+  line-height: var(--_line-height);
+  color: var(--color-text-light);
+}
+
+.p-footer__tel {
+  --link-color: inherit;
+
+  display: block;
+  margin-block-start: var(--space-xs);
+  text-decoration: none;
+}
+
+.p-footer__copyright {
+  color: var(--color-text-light);
+}

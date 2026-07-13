@@ -1,0 +1,76 @@
+:where(body) {
+  container-name: page;
+  container-type: inline-size;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-body);
+  line-height: var(--line-height-text);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  font-weight: var(--font-weight-heading);
+  line-height: var(--line-height-title);
+  color: var(--color-heading);
+}
+
+:where(h1) {
+  font-size: var(--font-size-h1);
+}
+
+:where(h2) {
+  font-size: var(--font-size-h2);
+}
+
+:where(h3) {
+  font-size: var(--font-size-h3);
+}
+
+:where(small) {
+  font-size: var(--font-size-caption);
+}
+
+/* 公開 API:
+     --link-color        (default: var(--color-link)、Project 層から非 hover 時の色を上書き)
+     --link-hover-color  (default: var(--color-main)、Project 層から hover 時の色を上書き) */
+:where(a) {
+  --_color: var(--link-color, var(--color-link));
+  --_hover-color: var(--link-hover-color, var(--color-main));
+
+  color: var(--_color);
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: color var(--duration-fast) var(--ease-out-cubic);
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      color: var(--_hover-color);
+    }
+  }
+}
+
+::selection {
+  color: var(--color-surface);
+  background-color: var(--color-main);
+}
+
+:where(:focus-visible) {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+:where(:root) {
+  scroll-padding-block-start: var(--header-size);
+
+  &:has(:modal) {
+    overflow: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :where(:root) {
+    scroll-behavior: smooth;
+  }
+}

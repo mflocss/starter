@@ -1,101 +1,91 @@
-# mflocss/starter
+# mFLOCSS Starter
 
-Zenn 技術書「そのFLOCSS、なぜそこに書いた？ —— mFLOCSS で迷わない CSS 設計の判断基準」付属のリファレンス実装。
+mFLOCSS のリファレンス実装。**実装者 / Web 制作者 / AI agent** がモダンで高品質な CSS 設計を学び、テンプレートとしてそのまま案件に投入できます。架空の美容サロン「iluha」の LP をサンプルとして、テキストや画像を差し替えるだけで使い始められます。
 
-mFLOCSS × Vite × モダン CSS で作る、崩れない CSS 設計のリファレンス実装です。
+使うときの運用ガイド: [CODING_GUIDE.md](./CODING_GUIDE.md) / 貢献・コード規約: [CONTRIBUTING.md](./CONTRIBUTING.md) / 設計判断の詳細: [mFLOCSS 書籍](https://zenn.dev/shunei/books/mflocss-design)
 
-## 必要環境
+## クイックスタート
 
-- Node.js 20 以上
-- pnpm 9 以上（npm / yarn でも動きます）
+> **前提**: 実行には Node.js が必要です（v24 で動作確認）。未導入なら [nodejs.org](https://nodejs.org/) から LTS 版を入れてください（パッケージ管理コマンドの `npm` も同梱されます）。
 
-## 5分で始める
+1. GitHub の「**Use this template**」ボタンから新しいリポジトリを作成
+2. 作成したリポジトリをクローン:
+   ```bash
+   git clone https://github.com/<your-name>/<your-repo>.git
+   cd <your-repo>
+   npm install
+   npm run dev
+   ```
+   pnpm でも可（推奨: `pnpm install` で同梱 `pnpm-lock.yaml` による再現ビルド。詳細は [CODING_GUIDE.md](./CODING_GUIDE.md#パッケージマネージャー) 参照）。
+3. ターミナルに表示された URL をブラウザで開き、LP が表示されることを確認
 
-### 1. リポジトリをテンプレートとして使用
+## ファイル構成
 
-GitHub の [Use this template] ボタンから新しいリポジトリを作成してください。
-
-### 2. クローン
-
-```bash
-git clone https://github.com/あなたのユーザー名/あなたのリポジトリ名.git
-cd あなたのリポジトリ名
+```
+src/
+├── assets/
+│   ├── css/
+│   │   ├── style.css          # エントリポイント
+│   │   ├── layer-order.css    # @layer 先制宣言
+│   │   ├── token/             # デザイントークン（カラー・タイポグラフィ・余白等）
+│   │   ├── reset/             # ブラウザリセット
+│   │   ├── foundation/        # 要素の基本スタイル（base + form）
+│   │   ├── layout/            # レイアウトプリミティブ
+│   │   ├── component/         # 再利用可能な UI パーツ
+│   │   ├── project/           # ページ固有のスタイル
+│   │   ├── animation/         # 装飾的アニメーション
+│   │   └── utility/           # ユーティリティ
+│   ├── images/                # コンテンツ画像（ビルドでハッシュ付与）
+│   └── scripts/
+│       └── main.js            # ドロワー・アニメーション・Back to Top
+├── index.html             # トップページ（Hero〜Contact セクション統合）
+├── privacy/index.html     # プライバシーポリシー
+└── 404.html               # 404 ページ（カスタマイズして使う）
+public/                    # ルートパス固定のファイル
+├── assets/
+│   └── scripts/
+│       └── viewport.js    # ビューポート幅制御（--viewport-min 未満の端末向け）
+├── favicon.svg
+├── favicon.ico
+├── apple-touch-icon.png
+└── ogp.png
 ```
 
-### 3. 依存パッケージをインストール
+## リファレンス
 
-```bash
-pnpm install
-```
-
-### 4. 開発サーバーを起動
-
-```bash
-pnpm dev
-```
-
-ブラウザで http://localhost:5173 が開きます。
-ファイルを編集すると自動でリロードされます。
-
-## コマンド一覧
+### コマンド一覧
 
 | コマンド | 説明 |
 |---------|------|
-| `pnpm dev` | 開発サーバー起動（HMR 有効） |
-| `pnpm build` | 本番ビルド（dist/ に出力） |
-| `pnpm preview` | ビルド結果のプレビュー |
-| `pnpm lint:css` | Stylelint でスタイルを検査 |
-| `pnpm lint:js` | ESLint でスクリプトを検査 |
-| `pnpm format` | Prettier でコードを整形 |
+| `npm run dev` | 開発サーバー起動（HMR 有効） |
+| `npm run build` | 本番ビルド（dist/ に出力） |
+| `npm run preview` | ビルド結果のプレビュー |
+| `npm run check` | format + lint を一括実行 |
+| `npm run format` | Prettier でコードを整形 |
+| `npm run lint:css` | Stylelint でスタイルを検査 |
+| `npm run lint:js` | ESLint でスクリプトを検査 |
+| `npm run lint:html` | markuplint で HTML を検査 |
 
-## mFLOCSS の 8 層アーキテクチャ
+### 対象ブラウザ
 
-FLOCSS の 3 層（Foundation / Layout / Object）を、モダン CSS に対応させた 8 層構成です。
-CSS `@layer` で優先順位をブラウザが明示的に制御するため、詳細度の事故が起きません。
+Baseline Newly Available（全モダンブラウザの最新安定版でサポート済みの機能を使用）
 
-```
-src/css/
-├── tokens/       デザイントークン（色・フォント・余白等の設計変数）
-├── theme/        セマンティックカラー・ダークモード
-├── foundation/   リセット・ベーススタイル
-├── layout/       セクション・サイトレイアウト
-├── component/    汎用パーツ（ボタン・見出し等）
-├── project/      ページ固有パーツ
-├── animation/    アニメーション（reduced-motion 対応）
-└── utility/      補助クラス
-```
+使用しているモダン CSS: `@layer`, `@container`, CSS Nesting, `:has()`, `:where()`, `oklch()`, `light-dark()`, 論理プロパティ, `clamp()`
 
-| 層 | プレフィックス | @layer | 役割 |
-|----|-------------|--------|------|
-| Tokens | — | tokens | デザイントークン（色・フォント・余白等の設計変数） |
-| Theme | — | theme | セマンティックカラー・ダークモード |
-| Foundation | — | foundation | カスタムリセット + ベーススタイル |
-| Layout | `l-` | layout | セクション・サイトレイアウト |
-| Component | `c-` | component | 複数ページで使い回す汎用パーツ |
-| Project | `p-` | project | 特定のページ・機能に使うパーツ |
-| Animation | `a-` | animation | スクロールアニメーション等 |
-| Utility | `u-` | utility | 補助クラス（常に最優先で適用） |
+## 関連リンク
 
-## スタイルを追加する
+リポ内ドキュメント:
 
-「どのレイヤーに書くか迷う」という場合は、本の第3章を参照してください。
+- [CODING_GUIDE.md](./CODING_GUIDE.md) — starter を使うときの運用ガイド（ビルド / カスタマイズ / メンテ / デプロイ）
+- [CONTRIBUTING.md](./CONTRIBUTING.md) — starter 本体への貢献フローとコード規約
+- [CHANGELOG.md](./CHANGELOG.md) — 変更履歴（Keep a Changelog 準拠）
 
-### 新しい Component を追加する場合
+mFLOCSS エコシステム:
 
-1. `src/css/component/c-card.css` を作成
-2. `@layer component { }` で囲んで記述
-3. `src/css/style.css` に `@import './component/c-card.css';` を追加
-
-### 新しいページを追加する場合
-
-1. `src/pages/新ページ名/index.html` を作成
-2. `vite.config.ts` の `build.rollupOptions.input` に追加
-
-## この本について
-
-[そのFLOCSS、なぜそこに書いた？ —— mFLOCSS で迷わない CSS 設計の判断基準](https://zenn.dev/shunei/books/mflocss-design)
-
-公式サイト: [mflocss.dev](https://mflocss.dev)
+- [mFLOCSS 公式サイト](https://mflocss.dev/) — 認知 → 理解 → 書籍購入のファネル中枢、エコシステム全体ナビ
+- [デモサイト](https://starter.mflocss.dev) — starter のライブプレビュー
+- [そのFLOCSS、なぜそこに書いた？ —— mFLOCSS で迷わない CSS 設計の判断基準](https://zenn.dev/shunei/books/mflocss-design)
+- [mFLOCSS 仕様書](https://github.com/mflocss/spec)
 
 ## ライセンス
 

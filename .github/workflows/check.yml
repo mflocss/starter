@@ -1,0 +1,42 @@
+# CUSTOMIZE: Fork / Clone 先のリポジトリでは `jobs.check.if` の条件で発動を停止します。
+# 自分のプロジェクトで CI を有効化したい場合は、この if 行を削除してください。
+
+name: check
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - 'v*'
+
+jobs:
+  check:
+    if: github.repository == 'mflocss/starter'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Security audit
+        run: pnpm audit --audit-level high
+
+      - name: Run check (format + lint)
+        run: pnpm run check
+
+      - name: Build
+        run: pnpm run build

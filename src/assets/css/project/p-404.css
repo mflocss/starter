@@ -1,0 +1,30 @@
+.p-404 {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
+.p-404__inner {
+  max-inline-size: 40rem;
+}
+
+.p-404__stack {
+  display: grid;
+  gap: var(--space-xl);
+  justify-items: center;
+}
+
+.p-404__lead {
+  line-height: var(--line-height-text);
+  color: var(--color-text-light);
+  text-align: center;
+}
+
+.p-404__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  justify-content: center;
+}
+
+.p-404__cta {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}

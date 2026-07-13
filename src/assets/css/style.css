@@ -1,0 +1,69 @@
+@import './layer-order.css';
+
+/* Token: デザイン値の定義 + 単位付与（上位層のデザイン値の参照元） */
+@import './token/helpers.css' layer(token);
+@import './token/color.css' layer(token);
+@import './token/typography.css' layer(token);
+@import './token/structure.css' layer(token);
+@import './token/space.css' layer(token);
+@import './token/radius.css' layer(token);
+@import './token/shadow.css' layer(token);
+@import './token/z-index.css' layer(token);
+@import './token/motion.css' layer(token);
+
+/* Reset: ブラウザ環境の初期化 */
+@import './reset/reset.css' layer(reset);
+
+/* Foundation: 要素の基本スタイル */
+@import './foundation/base.css' layer(foundation);
+@import './foundation/form.css' layer(foundation);
+
+/* Layout: ページの大枠を構成するブロック（l- プレフィックス） */
+@import './layout/l-page.css' layer(layout);
+@import './layout/l-header.css' layer(layout);
+@import './layout/l-footer.css' layer(layout);
+@import './layout/l-section.css' layer(layout);
+@import './layout/l-inner.css' layer(layout);
+
+/* Component: 再利用可能な UI 部品（c- プレフィックス） */
+@import './component/c-button.css' layer(component);
+@import './component/c-form.css' layer(component);
+@import './component/c-accordion.css' layer(component);
+@import './component/c-hamburger.css' layer(component);
+@import './component/c-card.css' layer(component);
+@import './component/c-media-card.css' layer(component);
+@import './component/c-concern-card.css' layer(component);
+@import './component/c-step-card.css' layer(component);
+@import './component/c-testimonial-card.css' layer(component);
+@import './component/c-prose.css' layer(component);
+@import './component/c-section-heading.css' layer(component);
+@import './component/c-badge.css' layer(component);
+@import './component/c-stat.css' layer(component);
+@import './component/c-table.css' layer(component);
+@import './component/c-back-to-top.css' layer(component);
+@import './component/c-overlay.css' layer(component);
+@import './component/c-skip-link.css' layer(component);
+
+/* Project: ページ / プロジェクト固有のブロック（p- プレフィックス） */
+@import './project/p-header.css' layer(project);
+@import './project/p-drawer.css' layer(project);
+@import './project/p-hero.css' layer(project);
+@import './project/p-problem.css' layer(project);
+@import './project/p-features.css' layer(project);
+@import './project/p-flow.css' layer(project);
+@import './project/p-pricing.css' layer(project);
+@import './project/p-numbers.css' layer(project);
+@import './project/p-voice.css' layer(project);
+@import './project/p-cta.css' layer(project);
+@import './project/p-faq.css' layer(project);
+@import './project/p-contact.css' layer(project);
+@import './project/p-footer.css' layer(project);
+@import './project/p-privacy.css' layer(project);
+@import './project/p-404.css' layer(project);
+
+/* Animation: アニメーション・トランジション定義 */
+@import './animation/fade-in-slide-up.css' layer(animation);
+@import './animation/scale-in.css' layer(animation);
+
+/* Utility: 単一プロパティの汎用上書き（u- プレフィックス） */
+@import './utility/u-hidden.css' layer(utility);
