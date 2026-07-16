@@ -1,3 +1,9 @@
+/*
+ * Portions of this reset are based on kiso.css
+ * https://github.com/tak-dcxi/kiso.css
+ * Copyright (c) 2025 Takahiro Arai — Licensed under the MIT License.
+ */
+
 *,
 ::before,
 ::after {
@@ -53,12 +59,37 @@
   }
 }
 
+:where(hr) {
+  block-size: 0;
+  overflow: visible;
+  color: inherit;
+  border-style: solid;
+  border-block-start-width: 1px;
+  border-inline-width: 0;
+  border-block-end-width: 0;
+}
+
 :where(em:lang(ja)) {
   font-weight: bolder;
 }
 
 :where(:is(i, cite, em, dfn, address):lang(ja)) {
   font-style: unset;
+}
+
+:where(sub, sup) {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+:where(sup) {
+  inset-block-start: -0.5em;
+}
+
+:where(sub) {
+  inset-block-end: -0.25em;
 }
 
 :where(a) {
@@ -69,10 +100,14 @@
   text-decoration-line: unset;
 }
 
-:where(img, svg, video, canvas, iframe) {
+:where(img, svg, video, canvas, iframe, audio) {
   max-inline-size: 100%;
-  block-size: auto;
   vertical-align: bottom;
+}
+
+:where(img, svg, video, canvas, iframe) {
+  /* audio は block-size: auto で消えるため除外（kiso.css issue #5） */
+  block-size: auto;
 }
 
 :where(table) {
@@ -123,6 +158,16 @@
 
 :where(:disabled, [aria-disabled='true' i]) {
   cursor: default;
+}
+
+:where(:focus-visible) {
+  outline-offset: 3px;
+}
+
+/* プログラム的フォーカス（tabindex="-1"）はキーボード操作ではないため outline を確実に抑制する。
+   :where() で包まず特異性を持たせ、著者スタイルの :focus 指定に上書きされないようにする。 */
+[tabindex='-1']:focus {
+  outline: none !important;
 }
 
 :where([hidden]:not([hidden='until-found' i])) {
