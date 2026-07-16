@@ -164,7 +164,6 @@
   outline-offset: 3px;
 }
 
-/* プログラム的フォーカスのみ outline 抑制。:focus-visible（キーボード）のリングは残す（WCAG 2.4.7） */
 [tabindex='-1']:focus:not(:focus-visible) {
   outline: none;
 }
