@@ -164,10 +164,10 @@
   outline-offset: 3px;
 }
 
-/* プログラム的フォーカス（tabindex="-1"）はキーボード操作ではないため outline を確実に抑制する。
-   :where() で包まず特異性を持たせ、著者スタイルの :focus 指定に上書きされないようにする。 */
-[tabindex='-1']:focus {
-  outline: none !important;
+/* プログラム的フォーカス（tabindex="-1" への .focus()）の outline を抑制する。
+   :not(:focus-visible) でキーボード起点のフォーカスは除外し、:focus-visible のリングを残す（WCAG 2.4.7）。 */
+[tabindex='-1']:focus:not(:focus-visible) {
+  outline: none;
 }
 
 :where([hidden]:not([hidden='until-found' i])) {

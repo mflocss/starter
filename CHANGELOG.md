@@ -9,7 +9,7 @@ CHANGELOG はリリース（version-up）直前に差分をまとめて追記し
 ### Added
 
 - reset に確定的なブラウザ差異（確定罠）の予防を追加:
-  - `hr`: Firefox の罫線色を `color: inherit` で是正（UA 既定の border-color 依存を解消）。`block-size: 0` / `overflow: visible` で UA 既定サイズを是正
+  - `hr`: UA 既定の罫線色（`color`/`border-color` 依存）を `color: inherit` で是正。`block-size: 0` / `overflow: visible` で UA 既定サイズを是正
   - `sub` / `sup`: `line-height: 0` で行の高さ汚染を是正（位置は論理プロパティ `inset-block-start` / `inset-block-end` で指定）
   - `audio`: `max-inline-size: 100%` / `vertical-align: bottom` を付与（`block-size: auto` は要素が消えるため除外）
   - `:focus-visible`: `outline-offset: 3px` を付与し、`[tabindex="-1"]:focus` の `outline` を抑制（プログラム的フォーカスのリング抑制）
