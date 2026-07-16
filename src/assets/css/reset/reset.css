@@ -106,7 +106,6 @@
 }
 
 :where(img, svg, video, canvas, iframe) {
-  /* audio は block-size: auto で消失するため除外 */
   block-size: auto;
 }
 
