@@ -33,7 +33,12 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Security audit
-        run: pnpm audit --audit-level high
+        # pnpm v10 系の `pnpm audit` は npm レジストリが廃止した legacy audit endpoint
+        # （/-/npm/v1/security/audits[/quick]、2026-07-15 廃止）を呼ぶため 410 で失敗する
+        # （pnpm/pnpm#13033、公式トリアージ済み: pnpm v11 で新 bulk advisory endpoint に移行済み）。
+        # インストール/ビルドの主系統は pnpm v10 のまま維持し、audit だけ `pnpm dlx` で
+        # pnpm v11 を一時的に呼び出す（公式ワークアラウンド `pnx pnpm@latest-11 audit` に準拠）。
+        run: pnpm dlx pnpm@11 audit --audit-level high
 
       - name: Run check (format + lint)
         run: pnpm run check
