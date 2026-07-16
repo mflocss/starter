@@ -4,6 +4,12 @@ mFLOCSS starter の変更履歴。[Keep a Changelog](https://keepachangelog.com/
 
 CHANGELOG はリリース（version-up）直前に差分をまとめて追記します（運用方針は [CONTRIBUTING.md「リリース時の手順」](./CONTRIBUTING.md#リリース時の手順) 参照）。
 
+## [1.0.1] - 2026-07-17
+
+### Fixed
+
+- CI: `pnpm audit` が npm レジストリの legacy audit endpoint 廃止（2026-07-15）により 410 で失敗する問題を修正。Security audit ステップのみ `pnpm dlx pnpm@11 audit` に切り替え、pnpm v11 の新 bulk advisory endpoint を利用するよう変更
+
 ## [1.0.0] - 2026-07-13
 
 初回正式リリース。
@@ -16,4 +22,5 @@ CHANGELOG はリリース（version-up）直前に差分をまとめて追記し
 - WCAG 2.2 AA 準拠 + Core Web Vitals 配慮 + Dark mode 対応（`prefers-color-scheme`）
 - Community health files + GitHub Actions CI + Issue テンプレート
 
+[1.0.1]: https://github.com/mflocss/starter/releases/tag/v1.0.1
 [1.0.0]: https://github.com/mflocss/starter/releases/tag/v1.0.0
