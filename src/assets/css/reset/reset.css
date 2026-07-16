@@ -106,7 +106,7 @@
 }
 
 :where(img, svg, video, canvas, iframe) {
-  /* audio は block-size: auto で消えるため除外（kiso.css issue #5） */
+  /* audio は block-size: auto で消失するため除外 */
   block-size: auto;
 }
 
@@ -164,8 +164,7 @@
   outline-offset: 3px;
 }
 
-/* プログラム的フォーカス（tabindex="-1" への .focus()）の outline を抑制する。
-   :not(:focus-visible) でキーボード起点のフォーカスは除外し、:focus-visible のリングを残す（WCAG 2.4.7）。 */
+/* プログラム的フォーカスのみ outline 抑制。:focus-visible（キーボード）のリングは残す（WCAG 2.4.7） */
 [tabindex='-1']:focus:not(:focus-visible) {
   outline: none;
 }
