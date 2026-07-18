@@ -12,6 +12,10 @@
   justify-items: center;
 }
 
+.p-404__heading {
+  /* スタイルなし（HTML クラスとの対応を維持） */
+}
+
 .p-404__lead {
   line-height: var(--line-height-text);
   color: var(--color-text-light);
