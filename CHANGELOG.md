@@ -4,6 +4,16 @@ mFLOCSS starter の変更履歴。[Keep a Changelog](https://keepachangelog.com/
 
 CHANGELOG はリリース（version-up）直前に差分をまとめて追記します（運用方針は [CONTRIBUTING.md「リリース時の手順」](./CONTRIBUTING.md#リリース時の手順) 参照）。
 
+## [1.0.3] - 2026-08-04
+
+### Added
+
+- `.p-404__heading` の空ルールセットを追加（HTML のクラスと CSS の 1:1 対応を維持するため）
+
+### Changed
+
+- 依存の override を引き上げ: `brace-expansion` >=5.0.9 / `js-yaml` >=5.2.2 / `fast-uri` >=3.1.5 / `postcss` >=8.5.18 を追加（新規 advisory 対応、pnpm audit 全解消）
+
 ## [1.0.2] - 2026-07-17
 
 ### Added
@@ -33,6 +43,7 @@ CHANGELOG はリリース（version-up）直前に差分をまとめて追記し
 - WCAG 2.2 AA 準拠 + Core Web Vitals 配慮 + Dark mode 対応（`prefers-color-scheme`）
 - Community health files + GitHub Actions CI + Issue テンプレート
 
+[1.0.3]: https://github.com/mflocss/starter/releases/tag/v1.0.3
 [1.0.2]: https://github.com/mflocss/starter/releases/tag/v1.0.2
 [1.0.1]: https://github.com/mflocss/starter/releases/tag/v1.0.1
 [1.0.0]: https://github.com/mflocss/starter/releases/tag/v1.0.0
