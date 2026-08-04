@@ -247,7 +247,6 @@ function initFormValidation(options = {}) {
      * aria-describedby は複数 ID（ヒント文＋エラー文など）を空白区切りで持てるため、
      * 各 ID を順に引いて `data-form-error` を持つ要素をエラー表示先として採用する。
      * 先頭 ID 決め打ちだとヒント文が先に来た場合にフィールド検証が黙って無効化される。
-     * JS フックは class ではなく data-* 属性で判定する（CODING_GUIDE.md 規約）。
      */
     function getErrorElement(field) {
       const describedby = field.getAttribute('aria-describedby');

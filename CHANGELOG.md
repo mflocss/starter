@@ -12,7 +12,6 @@ CHANGELOG はリリース（version-up）直前に差分をまとめて追記し
 
 ### Changed
 
-- `main.js` の `getErrorElement` の JSDoc に「JS フックは class ではなく data-* 属性で判定する（CODING_GUIDE.md 規約）」の注記を追加
 - 依存の override を引き上げ: `brace-expansion` >=5.0.9 / `js-yaml` >=5.2.2 / `fast-uri` >=3.1.5 / `postcss` >=8.5.18 を追加（新規 advisory 対応、pnpm audit 全解消）
 
 ## [1.0.2] - 2026-07-17
