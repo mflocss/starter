@@ -57,11 +57,7 @@ export default defineConfig({
           server.middlewares.use((req, res, next) => {
             const distDir = resolve(__dirname, 'dist');
 
-            // 日本語ディレクトリ名など percent-encoded のまま渡る URL を実ファイル名へ戻すために復号する。
-            // 不正な % エスケープは 404 扱いとする。
-            // クエリ / フラグメントの除去は Vite 本体と同形にする。new URL() の正規化を使うと
-            // `//` や `\` の解釈が、生の req.url を見る下流の middleware とずれ、
-            // 404.html を返すべき URL が本文なしの 404 に落ちる
+            // percent-encoded なパス（日本語ディレクトリ名等）を実ファイル名へ戻す。正規化は下流の middleware に合わせる
             let pathname: string | null = null;
             try {
               pathname = decodeURIComponent((req.url || '/').replace(/[?#].*$/s, ''));
@@ -69,8 +65,7 @@ export default defineConfig({
               pathname = null;
             }
 
-            // 復号によって %2F が区切りに戻り、`..` で dist の外を指せる。
-            // 参照先が dist の内側に収まることを確かめてから存在を見る
+            // 復号で %2F が区切りに戻るため、`..` で dist の外を指し得る
             const isInsideDist = (candidate: string) => candidate === distDir || candidate.startsWith(distDir + sep);
 
             // 既存ファイル / ディレクトリが存在する場合は Vite に処理を委譲する

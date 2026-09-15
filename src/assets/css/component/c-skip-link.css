@@ -11,10 +11,9 @@
   background-color: var(--color-main);
   border-radius: var(--radius-sm);
 
-  /* u-visually-hidden 相当の視覚的非表示を内部統合（Component 単体で機能完結、display: none / visibility: hidden を使わず SR からは常に読み上げ可）。
-     否定するのは :focus ではなく、下の可視化条件と同じ :focus-visible。両者がずれると、
-     ポインタ経由のフォーカス（:focus は当たるが :focus-visible は当たらない）でどちらの規則も適用されず、
-     position: static のまま文書先頭にインフローで現れる。 */
+  /* u-visually-hidden 相当の視覚的非表示を内部統合（Component 単体で機能完結、display: none / visibility: hidden を使わず SR からは常に読み上げ可） */
+
+  /* 否定するのは :focus ではなく可視化条件と同じ :focus-visible。ずれると両方の規則が外れ、インフローで現れる */
   &:not(:focus-visible) {
     position: absolute;
     inline-size: 1px;
