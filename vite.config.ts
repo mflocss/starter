@@ -57,10 +57,14 @@ export default defineConfig({
           server.middlewares.use((req, res, next) => {
             const distDir = resolve(__dirname, 'dist');
 
-            // %20 を含む URL を実ファイル名へ戻すために復号する。不正な % エスケープは 404 扱いとする
+            // 日本語ディレクトリ名など percent-encoded のまま渡る URL を実ファイル名へ戻すために復号する。
+            // 不正な % エスケープは 404 扱いとする。
+            // クエリ / フラグメントの除去は Vite 本体と同形にする。new URL() の正規化を使うと
+            // `//` や `\` の解釈が、生の req.url を見る下流の middleware とずれ、
+            // 404.html を返すべき URL が本文なしの 404 に落ちる
             let pathname: string | null = null;
             try {
-              pathname = decodeURIComponent(new URL(req.url || '/', 'http://localhost').pathname);
+              pathname = decodeURIComponent((req.url || '/').replace(/[?#].*$/s, ''));
             } catch {
               pathname = null;
             }
