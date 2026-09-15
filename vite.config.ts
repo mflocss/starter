@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import { resolve } from 'path';
+import { resolve, sep } from 'path';
 import fs from 'fs';
 
 export default defineConfig({
@@ -55,15 +55,28 @@ export default defineConfig({
         // 本番（Cloudflare Pages / Netlify / Vercel 等）は 404.html を root に置くだけで自動配信される
         return () => {
           server.middlewares.use((req, res, next) => {
-            const url = (req.url || '/').split('?')[0];
             const distDir = resolve(__dirname, 'dist');
 
-            // 既存ファイル / ディレクトリが存在する場合は Vite に処理を委譲する
-            const candidates = [resolve(distDir, url.slice(1)), resolve(distDir, url.slice(1), 'index.html')];
+            // percent-encoded なパス（日本語ディレクトリ名等）を実ファイル名へ戻す。正規化は下流の middleware に合わせる
+            let pathname: string | null = null;
+            try {
+              pathname = decodeURIComponent((req.url || '/').replace(/[?#].*$/s, ''));
+            } catch {
+              pathname = null;
+            }
 
-            for (const candidate of candidates) {
-              if (fs.existsSync(candidate)) {
-                return next();
+            // 復号で %2F が区切りに戻るため、`..` で dist の外を指し得る
+            const isInsideDist = (candidate: string) => candidate === distDir || candidate.startsWith(distDir + sep);
+
+            // 既存ファイル / ディレクトリが存在する場合は Vite に処理を委譲する
+            if (pathname !== null) {
+              const base = resolve(distDir, '.' + pathname);
+              const candidates = [base, resolve(base, 'index.html')];
+
+              for (const candidate of candidates) {
+                if (isInsideDist(candidate) && fs.existsSync(candidate)) {
+                  return next();
+                }
               }
             }
 

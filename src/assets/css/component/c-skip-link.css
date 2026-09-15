@@ -12,7 +12,9 @@
   border-radius: var(--radius-sm);
 
   /* u-visually-hidden 相当の視覚的非表示を内部統合（Component 単体で機能完結、display: none / visibility: hidden を使わず SR からは常に読み上げ可） */
-  &:not(:focus, :active, :focus-within) {
+
+  /* 否定するのは :focus ではなく可視化条件と同じ :focus-visible。ずれると両方の規則が外れ、インフローで現れる */
+  &:not(:focus-visible) {
     position: absolute;
     inline-size: 1px;
     block-size: 1px;
