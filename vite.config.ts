@@ -6,6 +6,7 @@ export default defineConfig({
   appType: 'mpa',
   root: 'src',
   // CUSTOMIZE: サブディレクトリにデプロイする場合はパスを変更（例: '/my-site/'）
+  // `<a href>` は base の書き換え対象外。base を変えたらルート絶対パスのリンクを手で直す
   base: '/',
 
   css: {

@@ -116,8 +116,21 @@ function initDrawer(options = {}) {
 
   drawerLinks.forEach((link) => {
     link.addEventListener('click', () => {
+      // Why not `href.startsWith('#')`: ナビは `/#id` 形式なので前方一致では同一文書判定にならない
       const href = link.getAttribute('href');
-      if (href && href.startsWith('#')) {
+      if (!href || !href.includes('#')) return;
+
+      let target;
+      try {
+        target = new URL(href, location.href);
+      } catch {
+        return;
+      }
+
+      const isSameDocument =
+        target.origin === location.origin && target.pathname === location.pathname && target.search === location.search;
+
+      if (isSameDocument) {
         closeDrawer();
         hamburgers[0]?.focus({ preventScroll: true });
       }
