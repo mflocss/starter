@@ -6,6 +6,25 @@ CHANGELOG はリリース（version-up）直前に差分をまとめて追記し
 
 ## [Unreleased]
 
+## [1.0.5] - 2026-09-16
+
+### Changed
+
+- **BREAKING**: 実行環境の下限を `package.json` の `engines` で宣言。**Node.js v24 以降**（markuplint 5 の要求）と **pnpm 10.5.1 以降**（pnpm 側の設定の移動先である `pnpm-workspace.yaml` を読むのがこのバージョン以降のため）が必須。pnpm 10.4.1 以前 / pnpm 9 では `pnpm install` が止まります（npm / yarn 利用者は影響なし）
+- pnpm 側の `overrides` と `minimum-release-age` の除外リストを、`package.json` の `pnpm` フィールドと `.npmrc` から **`pnpm-workspace.yaml`** へ移動。pnpm 11 が前者を読まなくなり、そのままでは override が黙って外れて対策済みの advisory が戻るため
+- 依存を更新: markuplint 4.18.1 → 5.0.0 / vite 8.0.16 → 8.3.0 / eslint 10.2.1 → 10.10.0 / stylelint 17.9.0 → 17.15.0 / prettier 3.8.3 → 3.9.6 / globals 17.5.0 → 17.12.0 / stylelint-config-recess-order 7.7.0 → 7.8.0 / @types/node 25.6.0 → 24.13.4（`.nvmrc` の Node 24 と系列を揃えるためのダウングレード）
+- `markuplint.config.cjs` を markuplint 5 に追従: `required-attr` → `require-attr` の改名、新規規則 `performance/head-element-order`（meta 同士の並び順チェックのみ無効化）と `a11y/wai-aria/presentational-children`（`[aria-hidden="true"]` を免除）への対応
+- `vite.config.ts` の `__dirname` を `import.meta.dirname` に置換（vite 8.3 が `configLoader: 'native'` で `__dirname` を未対応として警告するため）
+- ドキュメント: CODING_GUIDE に pnpm 設定・markuplint 設定のメンテナンス手順と、override 剪定 dry-run の環境依存に関する注意を追記。CONTRIBUTING のリリース手順に剪定 dry-run を追加
+
+### Security
+
+- `image-size` の override を追加（`>=2.0.3 <3`）。markuplint 5 が推移的に持ち込む 2.0.2 に高深刻度の advisory が 2 件（[GHSA-w3rx-r6r6-pgpr](https://github.com/advisories/GHSA-w3rx-r6r6-pgpr) / [GHSA-5p2g-fcmc-qvqq](https://github.com/advisories/GHSA-5p2g-fcmc-qvqq)）あるため
+
+### Removed
+
+- 冗長になった override を削除: `uuid` / `js-yaml` / `brace-expansion` / `fast-uri` / `postcss`。いずれも registry の latest-satisfying が修正版を満たすため（override を外した dry-run で `pnpm audit` 全レベル 0 件を確認）
+
 ## [1.0.4] - 2026-09-16
 
 ### Fixed
@@ -53,7 +72,8 @@ CHANGELOG はリリース（version-up）直前に差分をまとめて追記し
 - WCAG 2.2 AA 準拠 + Core Web Vitals 配慮 + Dark mode 対応（`prefers-color-scheme`）
 - Community health files + GitHub Actions CI + Issue テンプレート
 
-[Unreleased]: https://github.com/mflocss/starter/compare/v1.0.4...HEAD
+[Unreleased]: https://github.com/mflocss/starter/compare/v1.0.5...HEAD
+[1.0.5]: https://github.com/mflocss/starter/releases/tag/v1.0.5
 [1.0.4]: https://github.com/mflocss/starter/releases/tag/v1.0.4
 [1.0.3]: https://github.com/mflocss/starter/releases/tag/v1.0.3
 [1.0.2]: https://github.com/mflocss/starter/releases/tag/v1.0.2
