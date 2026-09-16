@@ -12,7 +12,9 @@ module.exports = {
         // キー空文字として全 name 付き meta より前に要求され、`description` より前へ寄る。
         // twitter:* は `name` を持つので color-scheme / format-detection と混ざって散る。
         // 結果として「基本 meta → OGP → Twitter」というまとまりが崩れ、テンプレートとしての
-        // 可読性を失う。並び順による性能差は無いため、まとまりを優先した。
+        // 可読性を失う。meta 同士の並び順に性能差は無く（この規則は performance preset に
+        // 同梱されているが、規則自身の meta は category: 'structure' を宣言している）、
+        // まとまりを優先した。
         // charset → viewport → title → meta → link → style → script の保証は維持している。
         'head-element-order': [
           'meta[charset]',

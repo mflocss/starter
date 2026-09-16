@@ -43,10 +43,8 @@ pnpm 側の override の置き場は **`pnpm-workspace.yaml`** です。pnpm 10.
 
 ```bash
 # pnpm の場合（本 starter の lock を汚さないために /tmp 等で実施）
-# 0. 実行環境を固定（グローバル ~/.npmrc の minimum-release-age を無効化）
-pnpm install --lockfile-only --config.minimum-release-age=0
 # 1. 一時コピーで pnpm-workspace.yaml の overrides を空に or 個別エントリ削除
-# 2. lock のみ再解決（上と同じく --config.minimum-release-age=0 を付ける）
+# 2. lock のみ再解決（--config.minimum-release-age=0 で環境差を打ち消す）
 pnpm install --lockfile-only --config.minimum-release-age=0
 # 3. 脆弱性確認
 pnpm audit
@@ -74,6 +72,19 @@ chore(deps): 冗長 override を剪定 — fast-uri / brace-expansion を削除�
 
 参考: 本 starter の [PR #234](https://github.com/mflocss/starter/pull/234)（pnpm 側 override の dry-run 検証 + npm overrides 同期実例）/ [PR #241](https://github.com/mflocss/starter/pull/241)（冗長 override 剪定の実例）。
 
+## pnpm 設定のメンテナンス
+
+`pnpm-workspace.yaml` の `minimumReleaseAgeExclude` は rolldown（vite の依存）の閉包を列挙したものです。rolldown は対象を `dependencies` と `optionalDependencies` の**両方**に持つので、手で突き合わせると取りこぼします。
+
+🔴 **rolldown を更新したら、リストを手で直さずこのコマンドで再生成して貼り替えてください。**
+
+```bash
+npm view rolldown@<version> dependencies optionalDependencies --json \
+  | node -e 'const o = JSON.parse(require("fs").readFileSync(0, "utf8"));
+      const names = ["rolldown", ...Object.keys(o.dependencies ?? {}), ...Object.keys(o.optionalDependencies ?? {})];
+      [...new Set(names)].sort().forEach((n) => console.log("  - \x27" + n + "\x27"));'
+```
+
 ## markuplint 設定のメンテナンス
 
 `markuplint.config.cjs` の `performance/head-element-order` は、markuplint 内部の既定値（セレクタ配列 8 要素）を書き写したうえで 1 要素だけ変えたものです。API 上「1 要素だけ差し替える」書き方はできず、配列の全置換しかありません。
@@ -81,9 +92,12 @@ chore(deps): 冗長 override を剪定 — fast-uri / brace-expansion を削除�
 🔴 **markuplint を更新したら、既定値が変わっていないか突き合わせてください。**既定値に要素が追加されても、この設定は古い順序を保持し続け、警告も差分も出ません（CI も `npm run check` も検出しません）。
 
 ```bash
-# 既定値の確認（パスは markuplint のバージョンで変わる）
-node -p "require('@markuplint/rules/lib/head-element-order/index.js')"
+# pnpm の場合。npm でインストールしたなら node_modules/@markuplint/rules/lib/... を直接見る
+sed -n '/^const DEFAULT_VALUE/,/^];/p' \
+  node_modules/.pnpm/@markuplint+rules@*/node_modules/@markuplint/rules/lib/head-element-order/index.js
 ```
+
+上流のソースは [markuplint/markuplint の `packages/@markuplint/rules/src/head-element-order/index.ts`](https://github.com/markuplint/markuplint/blob/main/packages/%40markuplint/rules/src/head-element-order/index.ts)。
 
 ## GitHub Actions CI
 

@@ -25,10 +25,12 @@ overrides:
 # rolldown（vite 8 の依存）は週次リリースで 3 日以内の版が入るため、更新のたびに引っかかります。
 # 2026-04-23 追加。rolldown のリリース間隔が延びるか vite が rolldown 依存をやめたら削除できます
 # （2026-09-16 の vite 8.0→8.3 更新の時点では 1.2.5〜1.2.8 が 7 日間隔のため継続）。
-# 🔴 rolldown を更新したら、このリストを rolldown の optionalDependencies と突き合わせること。
+# 🔴 rolldown を更新したら、このリストを手で直さず再生成して貼り替えること
+#    （生成コマンドは CODING_GUIDE「pnpm 設定のメンテナンス」）。
+#    rolldown は dependencies と optionalDependencies の両方に対象を持ち、
+#    手作業だと取りこぼします。
 minimumReleaseAgeExclude:
-  - 'rolldown'
-  - '@rolldown/pluginutils'
+  - '@oxc-project/types'
   - '@rolldown/binding-android-arm-eabi'
   - '@rolldown/binding-android-arm64'
   - '@rolldown/binding-darwin-arm64'
@@ -44,3 +46,5 @@ minimumReleaseAgeExclude:
   - '@rolldown/binding-openharmony-arm64'
   - '@rolldown/binding-win32-arm64-msvc'
   - '@rolldown/binding-win32-x64-msvc'
+  - '@rolldown/pluginutils'
+  - 'rolldown'
