@@ -1,4 +1,5 @@
-.u-visually-hidden:not(:focus, :active, :focus-within) {
+/* Why not :not(:focus, :active, :focus-within): フォーカスで可視化する要素は Component 側で実装する（例: c-skip-link） */
+.u-visually-hidden {
   position: absolute !important;
   inline-size: 1px !important;
   block-size: 1px !important;
