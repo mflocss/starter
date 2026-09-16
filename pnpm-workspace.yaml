@@ -1,29 +1,21 @@
-# pnpm の設定ファイル。
+# pnpm の設定ファイル（npm / yarn は読みません）。要 pnpm 10.5.1 以降。
 #
-# 🔴 要 pnpm 10.5.1 以降。pnpm 10.4.1 以前 / pnpm 9 は、このファイルに `packages:` が無いため
+# 🔴 pnpm 10.4.1 以前 / pnpm 9 は `packages:` が無いため
 #    `ERROR packages field missing or empty` で止まります。
-#    **`packages:` を足して回避しないでください** — 旧 pnpm では install が通るようになる代わりに、
-#    下の overrides が黙って外れ、対策済みの advisory が戻ります。
-#    古い pnpm を使う必要がある場合は pnpm 自体を 10.5.1 以降へ上げてください。
-#
-# pnpm 10.5.1 以降がこのファイルを読み、pnpm 11 以降は `package.json` の `pnpm` フィールドと
-# `.npmrc` の pnpm 専用キーを読みません。npm / yarn はこのファイルを読みません。
+#    **`packages:` を足して回避しないでください** — install は通るようになりますが、
+#    下の overrides が黙って外れ、対策済みの advisory が戻ります。pnpm 自体を上げてください。
 
-# 推移的依存の advisory 対応。npm 利用者向けの `package.json` の `overrides` と同一内容に保つこと
-# （CODING_GUIDE「脆弱性 pin」参照）。上流が修正版を直接依存するようになったら剪定する。
+# 推移的依存の advisory 対応。npm 利用者向けの package.json `overrides` と同一内容に保つこと
+# （追加・剪定の手順は CODING_GUIDE「脆弱性 pin」）。
 overrides:
+  # floor 版が直接依存より新しいため、dry-run が「冗長」と出ても残す（CODING_GUIDE「剪定 policy」の例外）
   image-size: '>=2.0.3 <3'
 
-# minimum-release-age（公開直後のパッケージを避ける安全機能）の除外リスト。
-# ⚠️ この機能を有効にしている環境でのみ効きます。本リポは有効化していないので、
-#    有効にしていない利用者にとってこのリストは無害な no-op です。
-# rolldown（vite 8 の依存）は週次リリースで 3 日以内の版が入るため、更新のたびに引っかかります。
-# 2026-04-23 追加。rolldown のリリース間隔が延びるか vite が rolldown 依存をやめたら削除できます
-# （2026-09-16 の vite 8.0→8.3 更新の時点では 1.2.5〜1.2.8 が 7 日間隔のため継続）。
-# 🔴 rolldown を更新したら、このリストを手で直さず再生成して貼り替えること
-#    （生成コマンドは CODING_GUIDE「pnpm 設定のメンテナンス」）。
-#    rolldown は dependencies と optionalDependencies の両方に対象を持ち、
-#    手作業だと取りこぼします。
+# minimumReleaseAge（公開直後のパッケージを避ける安全機能）の除外リスト。
+# rolldown（vite の依存）が高頻度リリースのため、有効にしている環境で毎回引っかかる。
+# 有効にしていない環境では no-op。リリース間隔が延びるか vite が rolldown 依存をやめたら削除できる。
+# 🔴 rolldown を更新したらこのリストを手で直さず再生成して貼り替えること
+#    （コマンドは CODING_GUIDE「pnpm 設定のメンテナンス」）。
 minimumReleaseAgeExclude:
   - '@oxc-project/types'
   - '@rolldown/binding-android-arm-eabi'

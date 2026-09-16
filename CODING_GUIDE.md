@@ -11,7 +11,7 @@
 本 starter は pnpm で開発されており、`pnpm-lock.yaml` が commit されています。エンドユーザーは **npm / pnpm / yarn** のいずれでも動作します:
 
 - 本 README の手順は **npm** で記述（Node.js 同梱ツールのため追加インストール不要）
-- `pnpm install` でも動作（付属の `pnpm-lock.yaml` で高速・再現可能インストール）。**pnpm は 10.5.1 以降が必要**です（`pnpm-workspace.yaml` を読むのがこのバージョン以降のため。詳細は同ファイル冒頭）
+- `pnpm install` でも動作（付属の `pnpm-lock.yaml` で高速・再現可能インストール）。**pnpm は 10.5.1 以降が必要**です（詳細は下記「[脆弱性 pin](#脆弱性-pinnpm--pnpm-両系統の同期)」）
 - `npm install` でも動作（`pnpm-lock.yaml` は無視され、独自に `package-lock.json` がローカル生成される）
 - **yarn では脆弱性 pin が効きません** — yarn は `overrides` も `pnpm-workspace.yaml` も読まず、推移的依存の強制には `resolutions` を使います。yarn を使う場合は下記の pin 内容を `resolutions` に書き写してください
 
@@ -60,9 +60,7 @@ npm audit
 
 🔴 **例外: advisory の floor 版（`patched` 版）が、リポの直接依存のうち最も新しいものより後に公開されている場合は、dry-run が「冗長」と出ても override を残します。**
 
-`minimum-release-age` を有効にした環境では、その floor だけが弾かれて一段下の脆弱版に解決する窓が実在するためです。逆に floor 版のほうが古ければ、その窓に入るほどの遅延は先に直接依存自身を弾いて install を止めるので（`ERR_PNPM_NO_MATURE_MATCHING_VERSION`）、窓は開きません。
-
-2026-09-16 時点でこれに当たるのは `image-size` のみです（floor 2.0.3 = 2026-09-14 > 直接依存で最新の markuplint 5.0.0 = 2026-09-11）。⚠️ `minimumReleaseAgeExclude` に直接依存を入れると、この保護は外れます。
+`minimum-release-age` を有効にした環境では、その floor だけが弾かれて一段下の脆弱版に解決する窓が実在するためです。逆に floor 版のほうが古ければ、その窓に入るほどの遅延は先に直接依存自身を弾いて install を止めるので（`ERR_PNPM_NO_MATURE_MATCHING_VERSION`）、窓は開きません。⚠️ `minimumReleaseAgeExclude` に直接依存を入れると、この保護は外れます。
 
 ⚠️ **この保護の形は「安全版に解決する」ではなく「install を止める」です。**遅延環境では floor 版も弾かれるため、`ERR_PNPM_NO_MATURE_MATCHING_VERSION` で install がハードエラーになります（脆弱版に落ちる前に止まる = 意図した挙動）。floor 版の公開から遅延日数が経てば解消します。
 
