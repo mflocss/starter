@@ -78,6 +78,8 @@ chore(deps): 冗長 override を剪定 — fast-uri / brace-expansion を削除�
 
 🔴 **rolldown を更新したら、リストを手で直さずこのコマンドで再生成して貼り替えてください。**
 
+rolldown の依存は現状いずれも自分の依存を持たないため、この 1 階層の列挙で閉包と一致します。将来これが変わったら列挙の深さを見直してください。
+
 ```bash
 npm view rolldown@<version> dependencies optionalDependencies --json \
   | node -e 'const o = JSON.parse(require("fs").readFileSync(0, "utf8"));
