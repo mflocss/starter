@@ -4,6 +4,16 @@ mFLOCSS starter の変更履歴。[Keep a Changelog](https://keepachangelog.com/
 
 CHANGELOG はリリース（version-up）直前に差分をまとめて追記します（運用方針は [CONTRIBUTING.md「リリース時の手順」](./CONTRIBUTING.md#リリース時の手順) 参照）。
 
+## [Unreleased]
+
+## [1.0.4] - 2026-09-16
+
+### Fixed
+
+- `.c-skip-link`: ポインタ経由のフォーカスで非表示・可視化のどちらの規則も適用されず、インフローで現れていた問題を修正（非表示条件を `:not(:focus-visible)` に統一）
+- `preview-404-fallback`（`pnpm preview` のみ）: `..` を含む URL が dist の外を参照していた問題と、percent-encoded な URL を復号せず実在するページに 404.html を返していた問題を修正
+- CI: `fast-uri` の override を `>=3.1.6 <4` へ引き上げ（新規 advisory で `pnpm audit --audit-level high` が失敗していた）
+
 ## [1.0.3] - 2026-08-04
 
 ### Added
@@ -43,6 +53,8 @@ CHANGELOG はリリース（version-up）直前に差分をまとめて追記し
 - WCAG 2.2 AA 準拠 + Core Web Vitals 配慮 + Dark mode 対応（`prefers-color-scheme`）
 - Community health files + GitHub Actions CI + Issue テンプレート
 
+[Unreleased]: https://github.com/mflocss/starter/compare/v1.0.4...HEAD
+[1.0.4]: https://github.com/mflocss/starter/releases/tag/v1.0.4
 [1.0.3]: https://github.com/mflocss/starter/releases/tag/v1.0.3
 [1.0.2]: https://github.com/mflocss/starter/releases/tag/v1.0.2
 [1.0.1]: https://github.com/mflocss/starter/releases/tag/v1.0.1
