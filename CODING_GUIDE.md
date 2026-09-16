@@ -11,8 +11,11 @@
 本 starter は pnpm で開発されており、`pnpm-lock.yaml` が commit されています。エンドユーザーは **npm / pnpm / yarn** のいずれでも動作します:
 
 - 本 README の手順は **npm** で記述（Node.js 同梱ツールのため追加インストール不要）
-- `pnpm install` でも動作（付属の `pnpm-lock.yaml` で高速・再現可能インストール）
+- `pnpm install` でも動作（付属の `pnpm-lock.yaml` で高速・再現可能インストール）。**pnpm は 10.5.1 以降が必要**です（`pnpm-workspace.yaml` を読むのがこのバージョン以降のため。詳細は同ファイル冒頭）
 - `npm install` でも動作（`pnpm-lock.yaml` は無視され、独自に `package-lock.json` がローカル生成される）
+- **yarn では脆弱性 pin が効きません** — yarn は `overrides` も `pnpm-workspace.yaml` も読まず、推移的依存の強制には `resolutions` を使います。yarn を使う場合は下記の pin 内容を `resolutions` に書き写してください
+
+Node.js は **v24 以降**が必要です（`package.json` の `engines` で宣言）。
 
 ### 生成された lockfile の扱い
 
@@ -24,7 +27,7 @@ Starter 開発（Contribute）の場合は pnpm 推奨。詳細は [CONTRIBUTING
 
 `package.json` の **npm `overrides`** と `pnpm-workspace.yaml` の **`overrides`** は同一内容に保ちます（npm は `pnpm-workspace.yaml` を読まないため、npm 利用者にも pin を効かせるためのミラー）。
 
-pnpm v11 以降は `package.json` の `pnpm` フィールドを読まなくなりました。そこに override を書いたままだと**警告だけ出て黙って無効化**され、対策済みの advisory が戻ります。pnpm 系の override は `pnpm-workspace.yaml` に置いてください。
+pnpm 側の override の置き場は **`pnpm-workspace.yaml`** です。pnpm 10.5.1 以降がこのファイルを読み、pnpm 11 以降は `package.json` の `pnpm` フィールドと `.npmrc` の pnpm 専用キーを読みません。そこに override を書いたままだと、`--frozen-lockfile` では `ERR_PNPM_LOCKFILE_CONFIG_MISMATCH` で落ち、**frozen でない通常の `pnpm install` では警告 1 行だけ出て黙って無効化**され、対策済みの advisory が戻ります。
 
 - 脆弱性 pin の **追加・剪定時は両方を同時に更新**してください。片方だけの変更は禁止。
 - 純粋なバージョン制約（`">=x.y.z"` 等）は npm / pnpm で同形式互換のため、そのままミラーすれば動作します。
@@ -36,11 +39,15 @@ pnpm v11 以降は `package.json` の `pnpm` フィールドを読まなくな�
 
 剪定の機械判定（dry-run 検証）:
 
+🔴 **dry-run は実行環境を固定してから回してください。**`minimum-release-age`（公開直後のパッケージを避ける設定）が有効な環境と無効な環境とで、同じ手順が**逆の結論**を返します。修正版が公開直後だと、遅延が有効な環境では安全版に解決できず「実効」、無効な環境では「冗長」と出ます。判定は**遅延を無効にした状態**を基準にし、遅延を使う環境向けの評価は別に行ってください。
+
 ```bash
 # pnpm の場合（本 starter の lock を汚さないために /tmp 等で実施）
+# 0. 実行環境を固定（グローバル ~/.npmrc の minimum-release-age を無効化）
+pnpm install --lockfile-only --config.minimum-release-age=0
 # 1. 一時コピーで pnpm-workspace.yaml の overrides を空に or 個別エントリ削除
-# 2. lock のみ再解決
-pnpm install --lockfile-only
+# 2. lock のみ再解決（上と同じく --config.minimum-release-age=0 を付ける）
+pnpm install --lockfile-only --config.minimum-release-age=0
 # 3. 脆弱性確認
 pnpm audit
 # 脆弱性 0 → その override は冗長（latest-satisfying で安全版に解決されている = 剪定可）
@@ -55,7 +62,7 @@ npm audit
 
 剪定タイミング:
 
-- 依存更新の節目（vite / stylelint / eslint 等の major bump 時）
+- 依存更新の節目（vite / stylelint / eslint / markuplint 等の major bump 時）
 - 月次など定期 cadence
 - Dependabot alert を消化したとき
 
@@ -66,6 +73,17 @@ chore(deps): 冗長 override を剪定 — fast-uri / brace-expansion を削除�
 ```
 
 参考: 本 starter の [PR #234](https://github.com/mflocss/starter/pull/234)（pnpm 側 override の dry-run 検証 + npm overrides 同期実例）/ [PR #241](https://github.com/mflocss/starter/pull/241)（冗長 override 剪定の実例）。
+
+## markuplint 設定のメンテナンス
+
+`markuplint.config.cjs` の `performance/head-element-order` は、markuplint 内部の既定値（セレクタ配列 8 要素）を書き写したうえで 1 要素だけ変えたものです。API 上「1 要素だけ差し替える」書き方はできず、配列の全置換しかありません。
+
+🔴 **markuplint を更新したら、既定値が変わっていないか突き合わせてください。**既定値に要素が追加されても、この設定は古い順序を保持し続け、警告も差分も出ません（CI も `npm run check` も検出しません）。
+
+```bash
+# 既定値の確認（パスは markuplint のバージョンで変わる）
+node -p "require('@markuplint/rules/lib/head-element-order/index.js')"
+```
 
 ## GitHub Actions CI
 

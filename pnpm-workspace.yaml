@@ -1,18 +1,35 @@
-# pnpm の設定ファイル。pnpm v11 以降は package.json の `pnpm` フィールドを読まないため、
-# override はこちらが正本（npm 利用者向けの package.json の `overrides` と同じ内容を保つ）。
-# いずれも推移的依存の advisory 対応。上流が修正版を直接依存するようになったら削除できる。
+# pnpm の設定ファイル。
+#
+# 🔴 要 pnpm 10.5.1 以降。pnpm 10.4.1 以前 / pnpm 9 は、このファイルに `packages:` が無いため
+#    `ERROR packages field missing or empty` で止まります。
+#    **`packages:` を足して回避しないでください** — 旧 pnpm では install が通るようになる代わりに、
+#    下の overrides が黙って外れ、対策済みの advisory が戻ります。
+#    古い pnpm を使う必要がある場合は pnpm 自体を 10.5.1 以降へ上げてください。
+#
+# pnpm 10.5.1 以降がこのファイルを読み、pnpm 11 以降は `package.json` の `pnpm` フィールドと
+# `.npmrc` の pnpm 専用キーを読みません。npm / yarn はこのファイルを読みません。
+
+# 推移的依存の advisory 対応。npm 利用者向けの `package.json` の `overrides` と同一内容に保つこと
+# （CODING_GUIDE「脆弱性 pin」参照）。上流が修正版を直接依存するようになったら剪定する。
 overrides:
   uuid: '>=14.0.0'
   js-yaml: '>=5.2.2'
   brace-expansion: '>=5.0.9'
   fast-uri: '>=3.1.6 <4'
   postcss: '>=8.5.18'
-  image-size: '>=2.0.3'
+  image-size: '>=2.0.3 <3'
 
-# minimum-release-age の除外。rolldown (vite 8 の依存) は週次リリースで 3 日以内の版が
-# 入るため、更新のたびに安全機能に引っかかる。rolldown 安定化まで一時的にバイパス。
+# minimum-release-age（公開直後のパッケージを避ける安全機能）の除外リスト。
+# ⚠️ この機能を有効にしている環境でのみ効きます。本リポは有効化していないので、
+#    有効にしていない利用者にとってこのリストは無害な no-op です。
+# rolldown（vite 8 の依存）は週次リリースで 3 日以内の版が入るため、更新のたびに引っかかります。
+# 2026-04-23 追加。rolldown のリリース間隔が延びるか vite が rolldown 依存をやめたら削除できます
+# （2026-09-16 の vite 8.0→8.3 更新の時点では 1.2.5〜1.2.8 が 7 日間隔のため継続）。
+# 🔴 rolldown を更新したら、このリストを rolldown の optionalDependencies と突き合わせること。
 minimumReleaseAgeExclude:
   - 'rolldown'
+  - '@rolldown/pluginutils'
+  - '@rolldown/binding-android-arm-eabi'
   - '@rolldown/binding-android-arm64'
   - '@rolldown/binding-darwin-arm64'
   - '@rolldown/binding-darwin-x64'
@@ -25,7 +42,5 @@ minimumReleaseAgeExclude:
   - '@rolldown/binding-linux-x64-gnu'
   - '@rolldown/binding-linux-x64-musl'
   - '@rolldown/binding-openharmony-arm64'
-  - '@rolldown/binding-wasm32-wasi'
   - '@rolldown/binding-win32-arm64-msvc'
   - '@rolldown/binding-win32-x64-msvc'
-  - '@rolldown/pluginutils'
