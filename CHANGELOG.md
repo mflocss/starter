@@ -10,11 +10,9 @@ CHANGELOG はリリース（version-up）直前に差分をまとめて追記し
 
 ### Fixed
 
-- `.c-skip-link` の非表示条件と可視化条件のずれを修正。非表示が `:not(:focus, :active, :focus-within)`、可視化が `:focus-visible` で一致しておらず、`:focus` は当たるが `:focus-visible` は当たらないフォーカス（ポインタ経由）ではどちらの規則も適用されず、`position: static` のまま文書先頭にインフローで現れていた。非表示条件を `:not(:focus-visible)` に揃えた
-- `vite.config.ts` の `preview-404-fallback` が URL を解決していなかった問題を修正（`pnpm preview` のみに影響し、本番ホスティングの挙動は変わらない）:
-  - `..` を含む URL が dist の外を指し、404 フォールバックの判定が dist 外のファイルの有無で変わっていた。参照先が dist の内側に収まる場合だけ存在を見るよう変更
-  - percent-encoded な URL を復号していなかったため、日本語ディレクトリ名などのページに対して実在するのに 404.html を返していた
-- CI: 新規 advisory により `pnpm audit --audit-level high` が失敗する問題を修正。`fast-uri` の override を `>=3.1.6 <4` へ引き上げ（`nanoid` は override 無しで解消するため追加しない）
+- `.c-skip-link`: ポインタ経由のフォーカスで非表示・可視化のどちらの規則も適用されず、インフローで現れていた問題を修正（非表示条件を `:not(:focus-visible)` に統一）
+- `preview-404-fallback`（`pnpm preview` のみ）: `..` を含む URL が dist の外を参照していた問題と、percent-encoded な URL を復号せず実在するページに 404.html を返していた問題を修正
+- CI: `fast-uri` の override を `>=3.1.6 <4` へ引き上げ（新規 advisory で `pnpm audit --audit-level high` が失敗していた）
 
 ## [1.0.3] - 2026-08-04
 
