@@ -16,7 +16,7 @@ mFLOCSS のリファレンス実装。**実装者 / Web 制作者 / AI agent** �
    npm install
    npm run dev
    ```
-   pnpm でも可（推奨: `pnpm install` で同梱 `pnpm-lock.yaml` による再現ビルド。**pnpm は 10.5.1 以降**。詳細は [CODING_GUIDE.md](./CODING_GUIDE.md#パッケージマネージャー) 参照）。
+   pnpm 派は `npm install` の代わりに `pnpm install`（同梱の `pnpm-lock.yaml` で再現ビルド。要 pnpm 10.5.1 以降。詳細は [CODING_GUIDE.md](./CODING_GUIDE.md#パッケージマネージャー)）。
 3. ターミナルに表示された URL をブラウザで開き、LP が表示されることを確認
 
 ## ファイル構成
