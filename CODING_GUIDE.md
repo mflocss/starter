@@ -11,8 +11,11 @@
 本 starter は pnpm で開発されており、`pnpm-lock.yaml` が commit されています。エンドユーザーは **npm / pnpm / yarn** のいずれでも動作します:
 
 - 本 README の手順は **npm** で記述（Node.js 同梱ツールのため追加インストール不要）
-- `pnpm install` でも動作（付属の `pnpm-lock.yaml` で高速・再現可能インストール）
+- `pnpm install` でも動作（付属の `pnpm-lock.yaml` で高速・再現可能インストール）。**pnpm は 10.5.1 以降が必要**です（`pnpm-workspace.yaml` を読むのがこのバージョン以降のため。詳細は同ファイル冒頭）
 - `npm install` でも動作（`pnpm-lock.yaml` は無視され、独自に `package-lock.json` がローカル生成される）
+- **yarn では脆弱性 pin が効きません** — yarn は `overrides` も `pnpm-workspace.yaml` も読まず、推移的依存の強制には `resolutions` を使います。yarn を使う場合は下記の pin 内容を `resolutions` に書き写してください
+
+Node.js は **v24 以降**が必要です（`package.json` の `engines` で宣言）。
 
 ### 生成された lockfile の扱い
 
@@ -22,7 +25,9 @@ Starter 開発（Contribute）の場合は pnpm 推奨。詳細は [CONTRIBUTING
 
 ### 脆弱性 pin（npm / pnpm 両系統の同期）
 
-`package.json` の **npm `overrides`** と **`pnpm.overrides`** は同一内容に保ちます（npm は `pnpm.overrides` を読まないため、npm 利用者にも pin を効かせるためのミラー）。
+`package.json` の **npm `overrides`** と `pnpm-workspace.yaml` の **`overrides`** は同一内容に保ちます（npm は `pnpm-workspace.yaml` を読まないため、npm 利用者にも pin を効かせるためのミラー）。
+
+pnpm 側の override の置き場は **`pnpm-workspace.yaml`** です。pnpm 10.5.1 以降がこのファイルを読み、pnpm 11 以降は `package.json` の `pnpm` フィールドと `.npmrc` の pnpm 専用キーを読みません。そこに override を書いたままだと、`--frozen-lockfile` では `ERR_PNPM_LOCKFILE_CONFIG_MISMATCH` で落ち、**frozen でない通常の `pnpm install` では警告 1 行だけ出て黙って無効化**され、対策済みの advisory が戻ります。
 
 - 脆弱性 pin の **追加・剪定時は両方を同時に更新**してください。片方だけの変更は禁止。
 - 純粋なバージョン制約（`">=x.y.z"` 等）は npm / pnpm で同形式互換のため、そのままミラーすれば動作します。
@@ -34,11 +39,13 @@ Starter 開発（Contribute）の場合は pnpm 推奨。詳細は [CONTRIBUTING
 
 剪定の機械判定（dry-run 検証）:
 
+🔴 **dry-run は実行環境を固定してから回してください。**`minimum-release-age`（公開直後のパッケージを避ける設定）が有効な環境と無効な環境とで、同じ手順が**逆の結論**を返します。修正版が公開直後だと、遅延が有効な環境では安全版に解決できず「実効」、無効な環境では「冗長」と出ます。判定は**遅延を無効にした状態**を基準にし、遅延を使う環境向けの評価は別に行ってください。
+
 ```bash
 # pnpm の場合（本 starter の lock を汚さないために /tmp 等で実施）
-# 1. 一時コピーで pnpm.overrides を空に or 個別エントリ削除
-# 2. lock のみ再解決
-pnpm install --lockfile-only
+# 1. 一時コピーで pnpm-workspace.yaml の overrides を空に or 個別エントリ削除
+# 2. lock のみ再解決（--config.minimum-release-age=0 で環境差を打ち消す）
+pnpm install --lockfile-only --config.minimum-release-age=0
 # 3. 脆弱性確認
 pnpm audit
 # 脆弱性 0 → その override は冗長（latest-satisfying で安全版に解決されている = 剪定可）
@@ -53,7 +60,7 @@ npm audit
 
 剪定タイミング:
 
-- 依存更新の節目（vite / stylelint / eslint 等の major bump 時）
+- 依存更新の節目（vite / stylelint / eslint / markuplint 等の major bump 時）
 - 月次など定期 cadence
 - Dependabot alert を消化したとき
 
@@ -63,7 +70,36 @@ npm audit
 chore(deps): 冗長 override を剪定 — fast-uri / brace-expansion を削除（registry latest が修正版を満たし冗長化、uuid のみ実効維持）
 ```
 
-参考: 本 starter の [PR #234](https://github.com/mflocss/starter/pull/234)（pnpm.overrides の dry-run 検証 + npm overrides 同期実例）/ [PR #241](https://github.com/mflocss/starter/pull/241)（冗長 override 剪定の実例）。
+参考: 本 starter の [PR #234](https://github.com/mflocss/starter/pull/234)（pnpm 側 override の dry-run 検証 + npm overrides 同期実例）/ [PR #241](https://github.com/mflocss/starter/pull/241)（冗長 override 剪定の実例）。
+
+## pnpm 設定のメンテナンス
+
+`pnpm-workspace.yaml` の `minimumReleaseAgeExclude` は rolldown（vite の依存）の閉包を列挙したものです。rolldown は対象を `dependencies` と `optionalDependencies` の**両方**に持つので、手で突き合わせると取りこぼします。
+
+🔴 **rolldown を更新したら、リストを手で直さずこのコマンドで再生成して貼り替えてください。**
+
+rolldown の依存は現状いずれも自分の依存を持たないため、この 1 階層の列挙で閉包と一致します。将来これが変わったら列挙の深さを見直してください。
+
+```bash
+npm view rolldown@<version> dependencies optionalDependencies --json \
+  | node -e 'const o = JSON.parse(require("fs").readFileSync(0, "utf8"));
+      const names = ["rolldown", ...Object.keys(o.dependencies ?? {}), ...Object.keys(o.optionalDependencies ?? {})];
+      [...new Set(names)].sort().forEach((n) => console.log("  - \x27" + n + "\x27"));'
+```
+
+## markuplint 設定のメンテナンス
+
+`markuplint.config.cjs` の `performance/head-element-order` は、markuplint 内部の既定値（セレクタ配列 8 要素）を書き写したうえで 1 要素だけ変えたものです。API 上「1 要素だけ差し替える」書き方はできず、配列の全置換しかありません。
+
+🔴 **markuplint を更新したら、既定値が変わっていないか突き合わせてください。**既定値に要素が追加されても、この設定は古い順序を保持し続け、警告も差分も出ません（CI も `npm run check` も検出しません）。
+
+```bash
+# pnpm の場合。npm でインストールしたなら node_modules/@markuplint/rules/lib/... を直接見る
+sed -n '/^const DEFAULT_VALUE/,/^];/p' \
+  node_modules/.pnpm/@markuplint+rules@*/node_modules/@markuplint/rules/lib/head-element-order/index.js
+```
+
+上流のソースは [markuplint/markuplint の `packages/@markuplint/rules/src/head-element-order/index.ts`](https://github.com/markuplint/markuplint/blob/main/packages/%40markuplint/rules/src/head-element-order/index.ts)。
 
 ## GitHub Actions CI
 

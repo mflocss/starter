@@ -6,7 +6,7 @@ mFLOCSS のリファレンス実装。**実装者 / Web 制作者 / AI agent** �
 
 ## クイックスタート
 
-> **前提**: 実行には Node.js が必要です（v24 で動作確認）。未導入なら [nodejs.org](https://nodejs.org/) から LTS 版を入れてください（パッケージ管理コマンドの `npm` も同梱されます）。
+> **前提**: 実行には **Node.js v24 以降**が必要です。未導入なら [nodejs.org](https://nodejs.org/) から LTS 版を入れてください（パッケージ管理コマンドの `npm` も同梱されます）。
 
 1. GitHub の「**Use this template**」ボタンから新しいリポジトリを作成
 2. 作成したリポジトリをクローン:
@@ -16,7 +16,7 @@ mFLOCSS のリファレンス実装。**実装者 / Web 制作者 / AI agent** �
    npm install
    npm run dev
    ```
-   pnpm でも可（推奨: `pnpm install` で同梱 `pnpm-lock.yaml` による再現ビルド。詳細は [CODING_GUIDE.md](./CODING_GUIDE.md#パッケージマネージャー) 参照）。
+   pnpm でも可（推奨: `pnpm install` で同梱 `pnpm-lock.yaml` による再現ビルド。**pnpm は 10.5.1 以降**。詳細は [CODING_GUIDE.md](./CODING_GUIDE.md#パッケージマネージャー) 参照）。
 3. ターミナルに表示された URL をブラウザで開き、LP が表示されることを確認
 
 ## ファイル構成
