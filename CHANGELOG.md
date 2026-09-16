@@ -10,7 +10,7 @@ CHANGELOG はリリース（version-up）直前に差分をまとめて追記し
 
 ### Changed
 
-- **BREAKING**: 実行環境の下限を `package.json` の `engines` で宣言。**Node.js v24 以降**（markuplint 5 の要求）と **pnpm 10.5.1 以降**（pnpm 側の設定の移動先である `pnpm-workspace.yaml` を読むのがこのバージョン以降のため）が必須。pnpm 10.4.1 以前 / pnpm 9 では `pnpm install` が止まります（npm / yarn 利用者は影響なし）
+- **BREAKING**: 実行環境の下限を `package.json` の `engines` で宣言。**Node.js v24 以降**（markuplint 5 の要求）と **pnpm 10.5.1 以降**（pnpm 側の設定の移動先である `pnpm-workspace.yaml` を読むのがこのバージョン以降のため）が必須。pnpm 10.4.1 以前 / pnpm 9 は `pnpm-workspace.yaml` を解釈できず `ERROR packages field missing or empty` で止まります（npm / yarn 利用者は影響なし）
 - pnpm 側の `overrides` と `minimum-release-age` の除外リストを、`package.json` の `pnpm` フィールドと `.npmrc` から **`pnpm-workspace.yaml`** へ移動。pnpm 11 が前者を読まなくなり、そのままでは override が黙って外れて対策済みの advisory が戻るため
 - 依存を更新: markuplint 4.18.1 → 5.0.0 / vite 8.0.16 → 8.3.0 / eslint 10.2.1 → 10.10.0 / stylelint 17.9.0 → 17.15.0 / prettier 3.8.3 → 3.9.6 / globals 17.5.0 → 17.12.0 / stylelint-config-recess-order 7.7.0 → 7.8.0 / @types/node 25.6.0 → 24.13.4（`.nvmrc` の Node 24 と系列を揃えるためのダウングレード）
 - `markuplint.config.cjs` を markuplint 5 に追従: `required-attr` → `require-attr` の改名、新規規則 `performance/head-element-order`（meta 同士の並び順チェックのみ無効化）と `a11y/wai-aria/presentational-children`（`[aria-hidden="true"]` を免除）への対応
