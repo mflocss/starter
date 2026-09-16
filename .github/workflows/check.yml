@@ -45,3 +45,20 @@ jobs:
 
       - name: Build
         run: pnpm run build
+
+      - name: Build (サブディレクトリ配信)
+        # base-anchor-href plugin は既定の base では何もしないため、既定ビルドだけでは
+        # `<a href>` を書き換える経路が一度も実行されない。base を変えたビルドをここで通す。
+        # 出力先を分けるのは、既定ビルドの dist を上書きしないため。
+        run: |
+          # `--` は pnpm がそのまま vite へ渡し、vite の CLI パーサが以降を解釈しないので付けない
+          pnpm run build --base=/sub/ --outDir ../dist-sub
+          grep -q 'href="/sub/#features"' dist-sub/index.html
+          grep -q 'href="/sub/privacy/"' dist-sub/index.html
+          grep -q 'href="/sub/#features"' dist-sub/404.html
+          # 相対 base ではルート絶対パスの href を解決できないので、意図した理由で止まることを確かめる
+          if pnpm run build --base=./ --outDir ../dist-rel > rel.log 2>&1; then
+            echo '相対 base のビルドが止まらなかった' >&2
+            exit 1
+          fi
+          grep -q 'ルート絶対パスの href は解決できません' rel.log
