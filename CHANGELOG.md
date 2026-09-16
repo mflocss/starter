@@ -2,8 +2,6 @@
 
 mFLOCSS starter の変更履歴。[Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) 形式に準拠し、[Semantic Versioning](https://semver.org/lang/ja/) に従う。
 
-テンプレート配布物のため、SemVer は**利用者のコードに対する互換性**を基準に適用します。開発環境の要件（Node.js / パッケージマネージャーの下限）の引き上げは patch に含めることがあります。
-
 CHANGELOG はリリース（version-up）直前に差分をまとめて追記します（運用方針は [CONTRIBUTING.md「リリース時の手順」](./CONTRIBUTING.md#リリース時の手順) 参照）。
 
 ## [Unreleased]
