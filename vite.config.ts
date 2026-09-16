@@ -17,9 +17,9 @@ export default defineConfig({
     rolldownOptions: {
       // CUSTOMIZE: ページの追加・削除時にエントリを更新
       input: {
-        index: resolve(__dirname, 'src/index.html'),
-        privacy: resolve(__dirname, 'src/privacy/index.html'),
-        notFound: resolve(__dirname, 'src/404.html'),
+        index: resolve(import.meta.dirname, 'src/index.html'),
+        privacy: resolve(import.meta.dirname, 'src/privacy/index.html'),
+        notFound: resolve(import.meta.dirname, 'src/404.html'),
       },
       output: {
         assetFileNames: (assetInfo) => {
@@ -32,15 +32,15 @@ export default defineConfig({
         chunkFileNames: 'assets/scripts/[name].js',
       },
     },
-    outDir: resolve(__dirname, 'dist'),
+    outDir: resolve(import.meta.dirname, 'dist'),
     emptyOutDir: true,
   },
 
-  publicDir: resolve(__dirname, 'public'),
+  publicDir: resolve(import.meta.dirname, 'public'),
 
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src'),
+      '@': resolve(import.meta.dirname, 'src'),
     },
   },
 
@@ -55,7 +55,7 @@ export default defineConfig({
         // 本番（Cloudflare Pages / Netlify / Vercel 等）は 404.html を root に置くだけで自動配信される
         return () => {
           server.middlewares.use((req, res, next) => {
-            const distDir = resolve(__dirname, 'dist');
+            const distDir = resolve(import.meta.dirname, 'dist');
 
             // percent-encoded なパス（日本語ディレクトリ名等）を実ファイル名へ戻す。正規化は下流の middleware に合わせる
             let pathname: string | null = null;
