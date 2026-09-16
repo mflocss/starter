@@ -117,6 +117,41 @@ sed -n '/^const DEFAULT_VALUE/,/^];/p' \
 
 差し替えポイントはコード全体で `CUSTOMIZE` コメントを検索すると発見できます。
 
+### ページを増減する
+
+エントリの自動検出は行っていないため、`vite.config.ts` の `build.rolldownOptions.input` を手で更新します。列挙から漏れたページはビルド出力に含まれず、エラーにもなりません。
+
+ヘッダー・ドロワー・フッターを複製する場合、トップページのセクションを指すナビは `/#features` の形（トップページの絶対パス）で書きます。`#features` の形にすると、そのセクションを持たない下層ページでは該当 id が無く、クリックしても無反応になります。
+
+この形式には引き換えがあります。トップページをクエリ付き（`https://example.com/?utm_source=...`）や `/index.html` で開いている訪問者がナビを押すと、同一ページ内のスクロールではなくページ遷移になり、クエリは引き継がれません。そのページ内だけで完結する本文リンク（hero の CTA 等）は `#contact` のままで構いません。
+
+### セクションを増減する
+
+CSS 側で触るのは project 層（`src/assets/css/project/p-*.css`）と `src/assets/css/style.css` の該当 `@import` 行だけです。`.p-*` セレクタは project 層の外に現れないため、project 層のファイルを外しても残りの層は自己完結します。`layer-order.css` の層宣言は空層になっても無害なので、層ごと使わなくなっても削除は不要です。
+
+CSS だけでは終わりません。HTML 本体と、そのセクションを指すヘッダー・ドロワー・フッターのナビ（`/#features` 等）も合わせて直します。ナビが `/#...` 形式のとき、指し先の id が消えても markuplint の `a11y/no-broken-fragment-link` は検出しません。
+
+### 視覚的非表示（`u-visually-hidden`）
+
+`.u-visually-hidden` は画面から隠して支援技術には読ませるだけのユーティリティで、フォーカスを受けても可視化されません。フォーカスで可視化したい要素は Component 側で実装します（例: `c-skip-link`）。
+
+### head の要素順
+
+`markuplint.config.cjs` が `head-element-order` の順序を上書き宣言しています。規則が見ているのは `meta[charset]` → `meta[http-equiv]` → `meta[name="viewport"]` → `title` → その他の `meta` → `link` → `style` → `script` という**セレクタの並び順だけ**です（`meta` 同士のアルファベット順チェックは無効化しています）。この規則の severity は warning なので、崩しても `npm run check` は通ります。
+
+`title` が一般の `meta` より前に来る並びのため、全ページ共通の要素とページ固有の要素は交互に置くことになります。3 枚の HTML は次の順に収まっています（該当する要素が無いページはその位置を飛ばします。例えば `src/404.html` に OGP・canonical・JSON-LD はありません）:
+
+| 位置 | 内容 | 共通 / 固有 |
+| --- | --- | --- |
+| 1 | `meta[charset]` / `meta[name="viewport"]` | 共通 |
+| 2 | `title` / `meta[name="description"]` | 固有 |
+| 3 | `meta[name="format-detection"]` / `meta[name="color-scheme"]` | 共通 |
+| 4 | OGP / Twitter / `meta[name="robots"]` / `link[rel="canonical"]` | 固有 |
+| 5 | `link`（stylesheet / favicon）・`script` ※ `preload` はページごと | 共通 |
+| 6 | JSON-LD（`script[type="application/ld+json"]`） | 固有 |
+
+この 6 分割は規則が強制するものではなく、本 starter の書き方です。共通部を 1 ブロックにまとめると並び順から外れます。末尾へまとめる場合は `<meta charset>` が先頭 1024 バイトを越えて `npm run check` が落ちることがあります。
+
 ## コメント方針
 
 基本方針は「コードには How / テストコードには What / コミットログには Why / コードコメントには Why not」です。
@@ -147,6 +182,8 @@ npm run build
 ```ts
 base: '/my-site/',
 ```
+
+`base` は `<a href>` を書き換えません。ルート絶対パス（`/` 始まり）で書いた `<a href>` は、3 枚の HTML すべてで手で直してください（ヘッダー・ドロワー・フッターのナビ、ロゴ、`/privacy/`、本文中の `/#contact` など）。`/#features` → `/my-site/#features` のように `base` の値を前置します。
 
 納品前にプロジェクト全体で `CUSTOMIZE` を検索し、差し替え忘れがないことを確認してください。
 
