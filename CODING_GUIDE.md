@@ -22,7 +22,9 @@ Starter 開発（Contribute）の場合は pnpm 推奨。詳細は [CONTRIBUTING
 
 ### 脆弱性 pin（npm / pnpm 両系統の同期）
 
-`package.json` の **npm `overrides`** と **`pnpm.overrides`** は同一内容に保ちます（npm は `pnpm.overrides` を読まないため、npm 利用者にも pin を効かせるためのミラー）。
+`package.json` の **npm `overrides`** と `pnpm-workspace.yaml` の **`overrides`** は同一内容に保ちます（npm は `pnpm-workspace.yaml` を読まないため、npm 利用者にも pin を効かせるためのミラー）。
+
+pnpm v11 以降は `package.json` の `pnpm` フィールドを読まなくなりました。そこに override を書いたままだと**警告だけ出て黙って無効化**され、対策済みの advisory が戻ります。pnpm 系の override は `pnpm-workspace.yaml` に置いてください。
 
 - 脆弱性 pin の **追加・剪定時は両方を同時に更新**してください。片方だけの変更は禁止。
 - 純粋なバージョン制約（`">=x.y.z"` 等）は npm / pnpm で同形式互換のため、そのままミラーすれば動作します。
@@ -36,7 +38,7 @@ Starter 開発（Contribute）の場合は pnpm 推奨。詳細は [CONTRIBUTING
 
 ```bash
 # pnpm の場合（本 starter の lock を汚さないために /tmp 等で実施）
-# 1. 一時コピーで pnpm.overrides を空に or 個別エントリ削除
+# 1. 一時コピーで pnpm-workspace.yaml の overrides を空に or 個別エントリ削除
 # 2. lock のみ再解決
 pnpm install --lockfile-only
 # 3. 脆弱性確認
@@ -63,7 +65,7 @@ npm audit
 chore(deps): 冗長 override を剪定 — fast-uri / brace-expansion を削除（registry latest が修正版を満たし冗長化、uuid のみ実効維持）
 ```
 
-参考: 本 starter の [PR #234](https://github.com/mflocss/starter/pull/234)（pnpm.overrides の dry-run 検証 + npm overrides 同期実例）/ [PR #241](https://github.com/mflocss/starter/pull/241)（冗長 override 剪定の実例）。
+参考: 本 starter の [PR #234](https://github.com/mflocss/starter/pull/234)（pnpm 側 override の dry-run 検証 + npm overrides 同期実例）/ [PR #241](https://github.com/mflocss/starter/pull/241)（冗長 override 剪定の実例）。
 
 ## GitHub Actions CI
 

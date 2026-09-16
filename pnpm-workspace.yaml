@@ -1,0 +1,31 @@
+# pnpm の設定ファイル。pnpm v11 以降は package.json の `pnpm` フィールドを読まないため、
+# override はこちらが正本（npm 利用者向けの package.json の `overrides` と同じ内容を保つ）。
+# いずれも推移的依存の advisory 対応。上流が修正版を直接依存するようになったら削除できる。
+overrides:
+  uuid: '>=14.0.0'
+  js-yaml: '>=5.2.2'
+  brace-expansion: '>=5.0.9'
+  fast-uri: '>=3.1.6 <4'
+  postcss: '>=8.5.18'
+  image-size: '>=2.0.3'
+
+# minimum-release-age の除外。rolldown (vite 8 の依存) は週次リリースで 3 日以内の版が
+# 入るため、更新のたびに安全機能に引っかかる。rolldown 安定化まで一時的にバイパス。
+minimumReleaseAgeExclude:
+  - 'rolldown'
+  - '@rolldown/binding-android-arm64'
+  - '@rolldown/binding-darwin-arm64'
+  - '@rolldown/binding-darwin-x64'
+  - '@rolldown/binding-freebsd-x64'
+  - '@rolldown/binding-linux-arm-gnueabihf'
+  - '@rolldown/binding-linux-arm64-gnu'
+  - '@rolldown/binding-linux-arm64-musl'
+  - '@rolldown/binding-linux-ppc64-gnu'
+  - '@rolldown/binding-linux-s390x-gnu'
+  - '@rolldown/binding-linux-x64-gnu'
+  - '@rolldown/binding-linux-x64-musl'
+  - '@rolldown/binding-openharmony-arm64'
+  - '@rolldown/binding-wasm32-wasi'
+  - '@rolldown/binding-win32-arm64-msvc'
+  - '@rolldown/binding-win32-x64-msvc'
+  - '@rolldown/pluginutils'
