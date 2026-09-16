@@ -130,10 +130,9 @@ function initDrawer(options = {}) {
       const isSameDocument =
         target.origin === location.origin && target.pathname === location.pathname && target.search === location.search;
 
-      if (isSameDocument) {
-        closeDrawer();
-        hamburgers[0]?.focus({ preventScroll: true });
-      }
+      // Why not `hamburgers[0].focus()`: 他の閉じ方と違い、フラグメント先が存在するとブラウザが
+      // フォーカスを解除し、連続フォーカスの起点だけを移動先に設定するため、戻しても残らない
+      if (isSameDocument) closeDrawer();
     });
   });
 
