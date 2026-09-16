@@ -119,7 +119,9 @@ sed -n '/^const DEFAULT_VALUE/,/^];/p' \
 
 ### ページを増減する
 
-エントリの自動検出は行っていないため、`vite.config.ts` の `build.rolldownOptions.input` を手で更新します。列挙から漏れたページはビルド出力に含まれず、エラーにもなりません。
+`src` 配下に置いた HTML は自動でビルド対象になります（`vite.config.ts` 側の追加作業はありません。ドットで始まるディレクトリの中だけは対象外です）。逆に、部分テンプレートのような「単体では配信しない HTML」を `src` の下に置くと、それも `dist` に出力されて公開されます。
+
+設定以外の手作業は残ります。`public/sitemap.xml` の URL 一覧と、ヘッダー・ドロワー・フッターのナビは手で直してください。
 
 ヘッダー・ドロワー・フッターを複製する場合、トップページのセクションを指すナビは `/#features` の形（トップページの絶対パス）で書きます。`#features` の形にすると、そのセクションを持たない下層ページでは該当 id が無く、クリックしても無反応になります。
 
@@ -133,24 +135,13 @@ CSS だけでは終わりません。HTML 本体と、そのセクションを�
 
 ### 視覚的非表示（`u-visually-hidden`）
 
-`.u-visually-hidden` は画面から隠して支援技術には読ませるだけのユーティリティで、フォーカスを受けても可視化されません。フォーカスで可視化したい要素は Component 側で実装します（例: `c-skip-link`）。
+`.u-visually-hidden` は画面から隠して支援技術には読ませるユーティリティで、フォーカスを受けても可視化されません。
 
 ### head の要素順
 
 `markuplint.config.cjs` が `head-element-order` の順序を上書き宣言しています。規則が見ているのは `meta[charset]` → `meta[http-equiv]` → `meta[name="viewport"]` → `title` → その他の `meta` → `link` → `style` → `script` という**セレクタの並び順だけ**です（`meta` 同士のアルファベット順チェックは無効化しています）。この規則の severity は warning なので、崩しても `npm run check` は通ります。
 
-`title` が一般の `meta` より前に来る並びのため、全ページ共通の要素とページ固有の要素は交互に置くことになります。3 枚の HTML は次の順に収まっています（該当する要素が無いページはその位置を飛ばします。例えば `src/404.html` に OGP・canonical・JSON-LD はありません）:
-
-| 位置 | 内容 | 共通 / 固有 |
-| --- | --- | --- |
-| 1 | `meta[charset]` / `meta[name="viewport"]` | 共通 |
-| 2 | `title` / `meta[name="description"]` | 固有 |
-| 3 | `meta[name="format-detection"]` / `meta[name="color-scheme"]` | 共通 |
-| 4 | OGP / Twitter / `meta[name="robots"]` / `link[rel="canonical"]` | 固有 |
-| 5 | `link`（stylesheet / favicon）・`script` ※ `preload` はページごと | 共通 |
-| 6 | JSON-LD（`script[type="application/ld+json"]`） | 固有 |
-
-この 6 分割は規則が強制するものではなく、本 starter の書き方です。共通部を 1 ブロックにまとめると並び順から外れます。末尾へまとめる場合は `<meta charset>` が先頭 1024 バイトを越えて `npm run check` が落ちることがあります。
+`title` が一般の `meta` より前に来る並びのため、全ページ共通の要素とページ固有の要素は交互に置くことになります。この並べ方は規則が強制するものではなく本 starter の書き方ですが、共通部を 1 ブロックにまとめて head の末尾へ寄せると `<meta charset>` が先頭 1024 バイトを越え、`html-standard/meta-charset-position`（error）で `npm run check` が落ちることがあります。
 
 ## コメント方針
 
@@ -183,7 +174,15 @@ npm run build
 base: '/my-site/',
 ```
 
-`base` は `<a href>` を書き換えません。ルート絶対パス（`/` 始まり）で書いた `<a href>` は、3 枚の HTML すべてで手で直してください（ヘッダー・ドロワー・フッターのナビ、ロゴ、`/privacy/`、本文中の `/#contact` など）。`/#features` → `/my-site/#features` のように `base` の値を前置します。
+ルート絶対パス（`/` 始まり）で書いた `<a href>` には、`vite.config.ts` の `base-anchor-href` plugin が `base` を前置します（`/#features` → `/my-site/#features`）。開発サーバーとビルドの両方で効きます。
+
+この plugin が書き換えるのは `<a href="/...">` だけです。`<form action="/api/contact">` のような他の属性は対象外なので、必要なら手で直してください。`<a href>` は `base` を含めずに書いてください（`/my-site/about/` と書くと `/my-site/my-site/about/` になります）。
+
+書き換えられないルート絶対パスが残っているとビルドが止まり、該当の href が表示されます（`<area>` やカスタム要素の `href` がこれに当たります）。⚠️ **文字参照で書いた `href`（`&#47;#features`）だけはこの検査にかかりません。**書き換えも検出もされずそのまま出力されるので、使わないでください。
+
+`base` に絶対 URL（CDN 配信）を指定した場合は、そのパス部分だけを前置します（`https://cdn.example.com/sub/` なら `/sub/`）。ルート絶対パスのリンクは表示中のページを基準に解決されるので、パス部分だけで届きます。
+
+`base` を `./` にした場合はビルドが止まります。ルート絶対パスの配信先が決まらないためです。パス形式の `base` にするか、リンクを相対パスに書き換えてください。
 
 納品前にプロジェクト全体で `CUSTOMIZE` を検索し、差し替え忘れがないことを確認してください。
 
