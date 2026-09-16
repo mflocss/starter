@@ -58,6 +58,14 @@ npm install --package-lock-only
 npm audit
 ```
 
+🔴 **例外: advisory の floor 版（`patched` 版）が、リポの直接依存のうち最も新しいものより後に公開されている場合は、dry-run が「冗長」と出ても override を残します。**
+
+`minimum-release-age` を有効にした環境では、その floor だけが弾かれて一段下の脆弱版に解決する窓が実在するためです。逆に floor 版のほうが古ければ、その窓に入るほどの遅延は先に直接依存自身を弾いて install を止めるので（`ERR_PNPM_NO_MATURE_MATCHING_VERSION`）、窓は開きません。
+
+2026-09-16 時点でこれに当たるのは `image-size` のみです（floor 2.0.3 = 2026-09-14 > 直接依存で最新の markuplint 5.0.0 = 2026-09-11）。⚠️ `minimumReleaseAgeExclude` に直接依存を入れると、この保護は外れます。
+
+⚠️ **この保護の形は「安全版に解決する」ではなく「install を止める」です。**遅延環境では floor 版も弾かれるため、`ERR_PNPM_NO_MATURE_MATCHING_VERSION` で install がハードエラーになります（脆弱版に落ちる前に止まる = 意図した挙動）。floor 版の公開から遅延日数が経てば解消します。
+
 剪定タイミング:
 
 - 依存更新の節目（vite / stylelint / eslint / markuplint 等の major bump 時）
