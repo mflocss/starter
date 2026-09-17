@@ -1,6 +1,82 @@
-import { defineConfig } from 'vite';
-import { resolve, sep } from 'path';
-import fs from 'fs';
+import { defineConfig, type Plugin } from 'vite';
+import { join, relative, resolve, sep } from 'path';
+import fs, { globSync } from 'fs';
+
+const srcDir = resolve(import.meta.dirname, 'src');
+// src 配下の HTML をビルド対象にする（ページを増減しても設定の更新は不要）。
+// キーは拡張子を落とした相対パスなので、`about.html` と `about/index.html` が同じキーになって
+// 片方が黙って消えることがない
+const htmlEntries = Object.fromEntries(
+  globSync('**/*.html', { cwd: srcDir, withFileTypes: true })
+    .filter((entry) => entry.isFile())
+    .map((entry) => {
+      const file = relative(srcDir, join(entry.parentPath, entry.name));
+      const name = file
+        .split(sep)
+        .join('/')
+        .replace(/\.html$/, '');
+      return [name, resolve(srcDir, file)];
+    }),
+);
+
+// Vite が base を前置するのは img / link / script 等の asset 属性だけで、`<a href>` は対象外。
+// Why not `%BASE_URL%`: HTML の環境変数展開でも前置されるが、markuplint の URL 妥当性検査が error になる。
+function baseAnchorHref(): Plugin {
+  let base = '/';
+  // 対象は `<a>` だけ。`<a-widget>` のようなカスタム要素を巻き込まないよう後続の 1 文字を見る
+  const anchorRootHref = /(<a(?=[\s>])[^>]*\shref=")\/(?!\/)/g;
+  // 前置されずに残ったルート絶対パスの検出用。`<a href>` の取りこぼし（属性値の中に `>` がある、
+  // 単一引用符、大文字の HREF、`=` の前後の空白）を拾うため、上の式より緩く書く
+  const anyRootHref = /(?<=\s)href\s*=\s*["']\/(?!\/)[^"']*/gi;
+  const hrefValue = (match: string) => match.replace(/^href\s*=\s*["']/i, '');
+  const absoluteUrlBase = /^([a-z][a-z0-9+.-]*:)?\/\//i;
+
+  return {
+    name: 'base-anchor-href',
+    configResolved(config) {
+      base = config.base;
+    },
+    transformIndexHtml: {
+      order: 'post',
+      handler(html, ctx) {
+        // 絶対 URL の base はアセットの配信先を指す。ルート絶対パスの `<a href>` は表示中のページの
+        // オリジンを基準に解決されるので、ページ側に前置するのはパス部分だけでよい
+        // （HTML が CDN 側にあっても自オリジンにあっても、同じ書き方で正しく解決される）
+        const basePath = absoluteUrlBase.test(base) ? new URL(base, 'http://vite.dev').pathname : base;
+        if (basePath === '/') return html;
+
+        // 相対 base（`./`）ではルート絶対パスの配信先が決まらない。前置しても直らないので、
+        // 壊れたリンクを配信せずビルドを止める
+        if (!basePath.startsWith('/')) {
+          const unresolvable = html.match(anyRootHref) ?? [];
+          if (unresolvable.length > 0) {
+            throw new Error(
+              `base-anchor-href: base が "${base}" のとき、ルート絶対パスの href は解決できません` +
+                `（${ctx.filename}）: ${unresolvable.join(', ')}\n` +
+                'パス形式の base（例: "/my-site/"）にするか、リンクを相対パスに書き換えてください。',
+            );
+          }
+          return html;
+        }
+
+        const transformed = html.replace(anchorRootHref, (_match, tagAndAttr: string) => tagAndAttr + basePath);
+
+        // 取りこぼしを黙って通さない。壊れたリンクを配信するよりビルドを止める。
+        // Why not CI で守る: この throw 自体は CI では検証していない（CI が確かめるのは前置が
+        // 効いていることだけ）。この行を消しても CI は緑のまま通る
+        const stray = (transformed.match(anyRootHref) ?? []).filter((match) => !hrefValue(match).startsWith(basePath));
+        if (stray.length > 0) {
+          throw new Error(
+            `base-anchor-href: base を前置できない href があります（${ctx.filename}）: ${stray.join(', ')}\n` +
+              '対象は `<a href="/...">` です。<area> やカスタム要素の href は手で直してください。\n' +
+              '文字参照（`&#47;`）で書いた href はこの検査にかからないので使わないでください。',
+          );
+        }
+        return transformed;
+      },
+    },
+  };
+}
 
 export default defineConfig({
   appType: 'mpa',
@@ -15,12 +91,7 @@ export default defineConfig({
   build: {
     cssMinify: 'lightningcss',
     rolldownOptions: {
-      // CUSTOMIZE: ページの追加・削除時にエントリを更新
-      input: {
-        index: resolve(import.meta.dirname, 'src/index.html'),
-        privacy: resolve(import.meta.dirname, 'src/privacy/index.html'),
-        notFound: resolve(import.meta.dirname, 'src/404.html'),
-      },
+      input: htmlEntries,
       output: {
         assetFileNames: (assetInfo) => {
           if (assetInfo.names?.some((n) => n.endsWith('.css'))) {
@@ -45,6 +116,8 @@ export default defineConfig({
   },
 
   plugins: [
+    baseAnchorHref(),
+
     // 本番ホスティング（Cloudflare Pages / Netlify / Vercel 等）は dist/404.html を
     // 404 Not Found 時に自動配信する標準仕様。本 plugin はローカル `pnpm preview` で
     // 同じ動作を再現するため。

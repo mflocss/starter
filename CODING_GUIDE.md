@@ -117,6 +117,32 @@ sed -n '/^const DEFAULT_VALUE/,/^];/p' \
 
 差し替えポイントはコード全体で `CUSTOMIZE` コメントを検索すると発見できます。
 
+### ページを増減する
+
+`src` 配下に置いた HTML は自動でビルド対象になります（`vite.config.ts` 側の追加作業はありません。ドットで始まるディレクトリの中だけは対象外です）。逆に、部分テンプレートのような「単体では配信しない HTML」を `src` の下に置くと、それも `dist` に出力されて公開されます。
+
+設定以外の手作業は残ります。`public/sitemap.xml` の URL 一覧と、ヘッダー・ドロワー・フッターのナビは手で直してください。
+
+ヘッダー・ドロワー・フッターを複製する場合、トップページのセクションを指すナビは `/#features` の形（トップページの絶対パス）で書きます。`#features` の形にすると、そのセクションを持たない下層ページでは該当 id が無く、クリックしても無反応になります。
+
+この形式には引き換えがあります。トップページをクエリ付き（`https://example.com/?utm_source=...`）や `/index.html` で開いている訪問者がナビを押すと、同一ページ内のスクロールではなくページ遷移になり、クエリは引き継がれません。そのページ内だけで完結する本文リンク（hero の CTA 等）は `#contact` のままで構いません。
+
+### セクションを増減する
+
+CSS 側で触るのは project 層（`src/assets/css/project/p-*.css`）と `src/assets/css/style.css` の該当 `@import` 行だけです。`.p-*` セレクタは project 層の外に現れないため、project 層のファイルを外しても残りの層は自己完結します。`layer-order.css` の層宣言は空層になっても無害なので、層ごと使わなくなっても削除は不要です。
+
+CSS だけでは終わりません。HTML 本体と、そのセクションを指すヘッダー・ドロワー・フッターのナビ（`/#features` 等）も合わせて直します。ナビが `/#...` 形式のとき、指し先の id が消えても markuplint の `a11y/no-broken-fragment-link` は検出しません。
+
+### 視覚的非表示（`u-visually-hidden`）
+
+`.u-visually-hidden` は画面から隠して支援技術には読ませるユーティリティで、フォーカスを受けても可視化されません。
+
+### head の要素順
+
+`markuplint.config.cjs` が `head-element-order` の順序を上書き宣言しています。規則が見ているのは `meta[charset]` → `meta[http-equiv]` → `meta[name="viewport"]` → `title` → その他の `meta` → `link` → `style` → `script` という**セレクタの並び順だけ**です（`meta` 同士のアルファベット順チェックは無効化しています）。この規則の severity は warning なので、崩しても `npm run check` は通ります。
+
+`title` が一般の `meta` より前に来る並びのため、全ページ共通の要素とページ固有の要素は交互に置くことになります。この並べ方は規則が強制するものではなく本 starter の書き方ですが、共通部を 1 ブロックにまとめて head の末尾へ寄せると `<meta charset>` が先頭 1024 バイトを越え、`html-standard/meta-charset-position`（error）で `npm run check` が落ちることがあります。
+
 ## コメント方針
 
 基本方針は「コードには How / テストコードには What / コミットログには Why / コードコメントには Why not」です。
@@ -147,6 +173,16 @@ npm run build
 ```ts
 base: '/my-site/',
 ```
+
+ルート絶対パス（`/` 始まり）で書いた `<a href>` には、`vite.config.ts` の `base-anchor-href` plugin が `base` を前置します（`/#features` → `/my-site/#features`）。開発サーバーとビルドの両方で効きます。
+
+この plugin が書き換えるのは `<a href="/...">` だけです。`<form action="/api/contact">` のような他の属性は対象外なので、必要なら手で直してください。`<a href>` は `base` を含めずに書いてください（`/my-site/about/` と書くと `/my-site/my-site/about/` になります）。
+
+書き換えられないルート絶対パスが残っているとビルドが止まり、該当の href が表示されます（`<area>` やカスタム要素の `href` がこれに当たります）。⚠️ **文字参照で書いた `href`（`&#47;#features`）だけはこの検査にかかりません。**書き換えも検出もされずそのまま出力されるので、使わないでください。
+
+`base` に絶対 URL（CDN 配信）を指定した場合は、そのパス部分だけを前置します（`https://cdn.example.com/sub/` なら `/sub/`）。ルート絶対パスのリンクは表示中のページを基準に解決されるので、パス部分だけで届きます。
+
+`base` を `./` にした場合はビルドが止まります。ルート絶対パスの配信先が決まらないためです。パス形式の `base` にするか、リンクを相対パスに書き換えてください。
 
 納品前にプロジェクト全体で `CUSTOMIZE` を検索し、差し替え忘れがないことを確認してください。
 

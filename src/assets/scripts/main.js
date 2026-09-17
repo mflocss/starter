@@ -116,11 +116,23 @@ function initDrawer(options = {}) {
 
   drawerLinks.forEach((link) => {
     link.addEventListener('click', () => {
+      // Why not `href.startsWith('#')`: ナビは `/#id` 形式なので前方一致では同一文書判定にならない
       const href = link.getAttribute('href');
-      if (href && href.startsWith('#')) {
-        closeDrawer();
-        hamburgers[0]?.focus({ preventScroll: true });
+      if (!href || !href.includes('#')) return;
+
+      let target;
+      try {
+        target = new URL(href, location.href);
+      } catch {
+        return;
       }
+
+      const isSameDocument =
+        target.origin === location.origin && target.pathname === location.pathname && target.search === location.search;
+
+      // Why not `hamburgers[0].focus()`: 他の閉じ方と違い、フラグメント先が存在するとブラウザが
+      // フォーカスを解除し、連続フォーカスの起点だけを移動先に設定するため、戻しても残らない
+      if (isSameDocument) closeDrawer();
     });
   });
 
