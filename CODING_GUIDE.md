@@ -31,7 +31,7 @@ pnpm 側の override の置き場は **`pnpm-workspace.yaml`** です。pnpm 10.
 
 - 脆弱性 pin の **追加・剪定時は両方を同時に更新**してください。片方だけの変更は禁止。
 - 純粋なバージョン制約（`">=x.y.z"` 等）は npm / pnpm で同形式互換のため、そのままミラーすれば動作します。
-- 同期確認: `npm install --package-lock-only` 後 `npm ls <pkg>` で pin 版に解決されることを検証。
+- 同期確認: `npm install --package-lock-only` 後 `npm ls --package-lock-only <pkg>` で pin 版に解決されることを検証（`--package-lock-only` を付けない `npm ls` は `node_modules` の中身を見るため、lockfile だけ更新した状態では検証になりません）。
 
 ### 剪定 policy（追加と剪定の両輪で運用）
 
@@ -44,19 +44,24 @@ pnpm 側の override の置き場は **`pnpm-workspace.yaml`** です。pnpm 10.
 ```bash
 # pnpm の場合（本 starter の lock を汚さないために /tmp 等で実施）
 # 1. 一時コピーで pnpm-workspace.yaml の overrides を空に or 個別エントリ削除
-# 2. lock のみ再解決（--config.minimum-release-age=0 で環境差を打ち消す）
+# 2. 一時コピーの lock を捨てる（既存 lock があると override 時代の版が据え置かれ、再解決されない）
+rm pnpm-lock.yaml
+# 3. lock のみ再解決（--config.minimum-release-age=0 で環境差を打ち消す）
 pnpm install --lockfile-only --config.minimum-release-age=0
-# 3. 脆弱性確認
+# 4. 脆弱性確認
 pnpm audit
 # 脆弱性 0 → その override は冗長（latest-satisfying で安全版に解決されている = 剪定可）
 # 脆弱性あり → 実効（残す）
 ```
 
 ```bash
-# npm の場合
+# npm の場合（同じく一時コピーで、lock を捨ててから）
+rm -f package-lock.json
 npm install --package-lock-only
 npm audit
 ```
+
+⚠️ lock を捨てると、その override と無関係な依存も再解決されます。「脆弱性あり」と出たら、`overrides` を戻した同じ手順で対照を取り、その override 由来かを確かめてください。
 
 🔴 **例外: advisory の floor 版（`patched` 版）が、リポの直接依存のうち最も新しいものより後に公開されている場合は、dry-run が「冗長」と出ても override を残します。**
 
@@ -76,7 +81,7 @@ npm audit
 chore(deps): 冗長 override を剪定 — fast-uri / brace-expansion を削除（registry latest が修正版を満たし冗長化、uuid のみ実効維持）
 ```
 
-参考: 本 starter の [PR #234](https://github.com/mflocss/starter/pull/234)（pnpm 側 override の dry-run 検証 + npm overrides 同期実例）/ [PR #241](https://github.com/mflocss/starter/pull/241)（冗長 override 剪定の実例）。
+参考: 本 starter の [PR #240](https://github.com/mflocss/starter/pull/240)（pnpm 側 override の dry-run 検証 + npm overrides 同期実例）/ [PR #241](https://github.com/mflocss/starter/pull/241)（冗長 override 剪定の実例）。
 
 ## pnpm 設定のメンテナンス
 
@@ -119,7 +124,7 @@ sed -n '/^const DEFAULT_VALUE/,/^];/p' \
 
 ### ページを増減する
 
-`src` 配下に置いた HTML は自動でビルド対象になります（`vite.config.ts` 側の追加作業はありません。ドットで始まるディレクトリの中だけは対象外です）。逆に、部分テンプレートのような「単体では配信しない HTML」を `src` の下に置くと、それも `dist` に出力されて公開されます。
+`src` 配下に置いた HTML は自動でビルド対象になります（`vite.config.ts` 側の追加作業はありません。ドットで始まるファイル、ドットで始まるディレクトリの中、シンボリックリンクは対象外です）。逆に、部分テンプレートのような「単体では配信しない HTML」を `src` の下に置くと、それも `dist` に出力されて公開されます。
 
 設定以外の手作業は残ります。`public/sitemap.xml` の URL 一覧と、ヘッダー・ドロワー・フッターのナビは手で直してください。
 
@@ -178,7 +183,7 @@ base: '/my-site/',
 
 この plugin が書き換えるのは `<a href="/...">` だけです。`<form action="/api/contact">` のような他の属性は対象外なので、必要なら手で直してください。`<a href>` は `base` を含めずに書いてください（`/my-site/about/` と書くと `/my-site/my-site/about/` になります）。
 
-書き換えられないルート絶対パスが残っているとビルドが止まり、該当の href が表示されます（`<area>` やカスタム要素の `href` がこれに当たります）。⚠️ **文字参照で書いた `href`（`&#47;#features`）だけはこの検査にかかりません。**書き換えも検出もされずそのまま出力されるので、使わないでください。
+書き換えられないルート絶対パスが残っているとビルドが止まり、該当の href が表示されます（`<area>` やカスタム要素の `href` がこれに当たります）。⚠️ **この検査が見るのは引用符で囲んだ `href` です。**文字参照で書いた `href`（`&#47;#features`）と、引用符を省いた `href`（`href=/#features`）は、書き換えも検出もされずそのまま出力されます。どちらも使わないでください。
 
 `base` に絶対 URL（CDN 配信）を指定した場合は、そのパス部分だけを前置します（`https://cdn.example.com/sub/` なら `/sub/`）。ルート絶対パスのリンクは表示中のページを基準に解決されるので、パス部分だけで届きます。
 
@@ -259,7 +264,7 @@ starter 固有の設計判断: `--z-header` を `--z-drawer` より前面に置�
 ドロワー open 状態でのチェックリスト:
 
 - [ ] `[data-drawer-inert]` を付与した全要素が SR 読み上げ対象から除外される
-- [ ] Tab で drawer 内のフォーカス可能要素のみを巡回する（drawer 外に脱出しない）
+- [ ] Tab が drawer 内のフォーカス可能要素とハンバーガーボタンの間を巡回する（それ以外へ脱出しない）
 - [ ] ハンバーガーボタン（trigger）は inert ではないので Tab で到達して閉じられる
 - [ ] Escape キーで close される（JS 実装）
 - [ ] `<dialog>` の暗黙 role="dialog" により SR が「ダイアログ」として announce する
@@ -269,7 +274,7 @@ starter 固有の設計判断: `--z-header` を `--z-drawer` より前面に置�
 
 ### data-drawer-inert — focus trap 対象マーカー
 
-Drawer open 時に **Drawer 外の全てのフォーカス可能要素を `inert` 化**する必要があります（`dialog.show()` は `showModal()` と異なり自動で inert 化しないため、JS から `setAttribute('inert', '')` で制御）。`data-drawer-inert` は「Drawer open 時に inert 化すべき要素」を明示するマーカー属性です。
+Drawer open 時に **Drawer 外のフォーカス可能要素を（ハンバーガーボタンを除いて）`inert` 化**する必要があります（`dialog.show()` は `showModal()` と異なり自動で inert 化しないため、JS から `setAttribute('inert', '')` で制御）。`data-drawer-inert` は「Drawer open 時に inert 化すべき要素」を明示するマーカー属性です。
 
 #### 付与対象
 
@@ -284,4 +289,4 @@ Drawer と Hamburger トリガー**以外**の、フォーカス可能（= Tab �
 
 #### JS 側
 
-`querySelectorAll('[data-drawer-inert]')` で全対象要素を取得 → `openDrawer` で `inert` 属性付与、`closeDrawer` で削除するだけ。新規対象を追加しても JS 側の変更は不要です。
+`querySelectorAll('[data-drawer-inert]')` で全対象要素を取得 → `openDrawer` で `inert` 属性付与、`closeDrawer` で削除するだけ。HTML に静的に書いた要素なら、新規対象を追加しても JS 側の変更は不要です。⚠️ 取得は初期化時の 1 回だけで、結果は静的な NodeList です。初期化後に JS で差し込んだ要素はマーカーを付けても `inert` 化されないので、その場合は取得をやり直す実装が要ります。

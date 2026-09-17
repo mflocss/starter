@@ -69,7 +69,7 @@ function baseAnchorHref(): Plugin {
           throw new Error(
             `base-anchor-href: base を前置できない href があります（${ctx.filename}）: ${stray.join(', ')}\n` +
               '対象は `<a href="/...">` です。<area> やカスタム要素の href は手で直してください。\n' +
-              '文字参照（`&#47;`）で書いた href はこの検査にかからないので使わないでください。',
+              '文字参照（`&#47;`）や引用符を省いた href（`href=/...`）はこの検査にかからないので使わないでください。',
           );
         }
         return transformed;
