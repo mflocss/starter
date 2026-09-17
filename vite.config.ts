@@ -120,16 +120,17 @@ export default defineConfig({
 
     // Cloudflare Pages / Netlify / Vercel / GitHub Pages は、出力先の直下に置いた 404.html を
     // 404 Not Found 時に自動配信する。これは規格ではなく各社が共通して実装している慣行。
-    // 本 plugin が `pnpm preview` で再現するのはこの 1 点だけで、本番の挙動全体ではない
-    // （末尾スラッシュ無しのディレクトリ要求など、再現しない経路は CODING_GUIDE に書いてある）。
+    // 本 plugin が `npm run preview` で再現するのはこの 1 点だけで、本番の挙動全体ではない
+    // （再現しない経路の例は CODING_GUIDE の「404 ページの動作確認」を参照）。
     {
       name: 'preview-404-fallback',
       configurePreviewServer(server) {
-        // build.outDir から算出する。ハードコードすると outDir を変えたときに 404.html が
-        // 見つからず、フォールバックが黙って効かなくなる。
+        // vite の preview 自身が配信先に使うのと同じ environments.client.build.outDir から算出する。
+        // ハードコードすると outDir を変えたときに 404.html が見つからず、フォールバックが黙って
+        // 効かなくなる（トップレベルの build.outDir を読むと、環境ごとに上書きされた場合にずれる）。
         // resolve の第 2 引数が絶対パスならそれが採られるので、相対・絶対のどちらでも通る
         // （vite は相対 outDir を root 基準で解決するが、解決後の config には生の値が残る）
-        const distDir = resolve(server.config.root, server.config.build.outDir);
+        const distDir = resolve(server.config.root, server.config.environments.client.build.outDir);
 
         return () => {
           server.middlewares.use((req, res, next) => {
