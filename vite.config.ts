@@ -40,8 +40,10 @@ function baseAnchorHref(): Plugin {
       order: 'post',
       handler(html, ctx) {
         // 絶対 URL の base はアセットの配信先を指す。ルート絶対パスの `<a href>` は表示中のページの
-        // オリジンを基準に解決されるので、ページ側に前置するのはパス部分だけでよい
-        // （HTML が CDN 側にあっても自オリジンにあっても、同じ書き方で正しく解決される）
+        // オリジンを基準に解決されるので、ページ側に前置するのはパス部分だけ。
+        // Why not 絶対 URL ごと前置する: HTML も同じ URL で配信する構成を前提にしている。
+        // HTML を自オリジンに置いてアセットだけ CDN へ出す構成は想定外で、そのときナビは
+        // 自オリジンのパス部分を指す
         const basePath = absoluteUrlBase.test(base) ? new URL(base, 'http://vite.dev').pathname : base;
         if (basePath === '/') return html;
 

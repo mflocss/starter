@@ -148,7 +148,7 @@ CSS だけでは終わりません。HTML 本体と、そのセクションを�
 
 ### head の要素順
 
-`markuplint.config.cjs` が `head-element-order` の順序を上書き宣言しています。規則が見ているのは `meta[charset]` → `meta[http-equiv]` → `meta[name="viewport"]` → `title` → その他の `meta` → `link` → `style` → `script` という**セレクタの並び順だけ**です（`meta` 同士のアルファベット順チェックは無効化しています）。この規則の severity は warning なので、崩しても `npm run check` は通ります。
+`markuplint.config.cjs` が `head-element-order` の順序を上書き宣言しています。規則が見ているのは `meta[charset]` → `meta[http-equiv]` → `meta[name="viewport"]` → `title` → その他の `meta` → `link` → `style` → `script` という**セレクタの並び順だけ**です（`meta` 同士のアルファベット順チェックは無効化しています）。この規則の severity は warning なので、**この規則だけでは** `npm run check` は止まりません。ただし並べ替えた結果 `<meta charset>` が先頭 1024 バイトを越えると、別の規則（`html-standard/meta-charset-position`、error）で落ちます（次の段落）。
 
 `title` が一般の `meta` より前に来る並びのため、全ページ共通の要素とページ固有の要素は交互に置くことになります。この並べ方は規則が強制するものではなく本 starter の書き方ですが、共通部を 1 ブロックにまとめて head の末尾へ寄せると `<meta charset>` が先頭 1024 バイトを越え、`html-standard/meta-charset-position`（error）で `npm run check` が落ちることがあります。
 
@@ -185,15 +185,15 @@ base: '/my-site/',
 
 ルート絶対パス（`/` 始まり）で書いた `<a href>` には、`vite.config.ts` の `base-anchor-href` plugin が `base` を前置します（`/#features` → `/my-site/#features`）。開発サーバーとビルドの両方で効きます。
 
-この plugin が書き換えるのは `<a href="/...">` だけです。`<form action="/api/contact">` のような他の属性は対象外なので、必要なら手で直してください。`<a href>` は `base` を含めずに書いてください（`/my-site/about/` と書くと `/my-site/my-site/about/` になります）。
+この plugin が書き換えるのは `<a href="/...">` だけです。ただし `<link href>` / `<script src>` / `<img src>` / `<use href>` などのアセット属性は **Vite 本体が `base` を前置する**ので、手を入れないでください。手で前置すると Vite のアセット処理から外れ、`src/assets/` 配下を指す参照は出力先とずれます（ビルドが止まる場合と、止まらずに死にリンクが残る場合があります）。Vite も本 plugin も触らないのは `<form action="/api/contact">` のような非アセット属性で、必要ならこちらだけを手で直してください。`<a href>` は `base` を含めずに書いてください（`/my-site/about/` と書くと `/my-site/my-site/about/` になります）。
 
 書き換えられないルート絶対パスが残っているとビルドが止まり、該当の href が表示されます（`<area>` やカスタム要素の `href` がこれに当たります）。⚠️ **この検査が見るのは引用符で囲んだ `href` です。**文字参照で書いた `href`（`&#47;#features`）と、引用符を省いた `href`（`href=/#features`）は、書き換えも検出もされずそのまま出力されます。どちらも使わないでください。
 
-`base` に絶対 URL（CDN 配信）を指定した場合は、そのパス部分だけを前置します（`https://cdn.example.com/sub/` なら `/sub/`）。ルート絶対パスのリンクは表示中のページを基準に解決されるので、パス部分だけで届きます。
+`base` に絶対 URL（CDN 配信）を指定した場合、アセットはその絶対 URL を、`<a href>` は**パス部分だけ**を前置します（`https://cdn.example.com/sub/` なら `/sub/`）。⚠️ **`<a href>` の前置はページを配信するオリジン側で解決されます。**HTML も同じ URL（`https://cdn.example.com/sub/`）で配信する構成を想定していて、**HTML を自オリジンに置いてアセットだけ CDN へ出す構成には対応していません**（その構成ではナビが自オリジンの `/sub/` を指し、そこにトップページが無ければ届きません）。
 
-`base` を `./` にした場合はビルドが止まります。ルート絶対パスの配信先が決まらないためです。パス形式の `base` にするか、リンクを相対パスに書き換えてください。
+`base` を `./` にした場合、ルート絶対パスの `href` が残っているとビルドが止まります。配信先が決まらないためです。パス形式の `base` にするか、リンクを相対パスに書き換えてください（書き換えればビルドは通ります）。
 
-ナビの `/#...` 形式は、**`base` の直下でトップページが開けること**を前提にしています。ディレクトリのインデックスを解決しない配信先（トップページが `/index.html` でしか開けない構成）では、全ページのヘッダー・ドロワー・フッターのナビが届かなくなります。`base-anchor-href` が見るのは `href` の文字列だけで配信先の挙動は検査しないため、**この前提が破れていてもビルドは通ります**。同じ前提には `href="/privacy/"` 形のページ間リンクと、`canonical` / `og:url` / `public/sitemap.xml` の URL も依存します。
+ナビの `/#...` 形式は、**HTML を配信するオリジンで、`base` のパス部分（`/sub/` など）の直下にトップページが開けること**を前提にしています。ディレクトリのインデックスを解決しない配信先（トップページが `/index.html` でしか開けない構成）では、全ページのヘッダー・ドロワー・フッターのナビが届かなくなります。`base-anchor-href` が見るのは `href` の文字列だけで配信先の挙動は検査しないため、**この前提が破れていてもビルドは通ります**。同じ前提には `href="/privacy/"` 形のページ間リンクと、`canonical` / `og:url` / `public/sitemap.xml` の URL も依存します。
 
 納品前にプロジェクト全体で `CUSTOMIZE` を検索し、差し替え忘れがないことを確認してください。
 
