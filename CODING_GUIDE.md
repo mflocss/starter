@@ -55,9 +55,13 @@ pnpm audit
 ```
 
 ```bash
-# npm の場合（同じく一時コピーで、lock を捨ててから）
+# npm の場合（同じく一時コピーで）
+# 1. package.json の overrides を空に or 個別エントリ削除（npm が読むのはこちら）
+# 2. 一時コピーの lock を捨てる
 rm -f package-lock.json
+# 3. lock のみ再解決
 npm install --package-lock-only
+# 4. 脆弱性確認
 npm audit
 ```
 
@@ -124,7 +128,7 @@ sed -n '/^const DEFAULT_VALUE/,/^];/p' \
 
 ### ページを増減する
 
-`src` 配下に置いた HTML は自動でビルド対象になります（`vite.config.ts` 側の追加作業はありません。ドットで始まるファイル、ドットで始まるディレクトリの中、シンボリックリンクは対象外です）。逆に、部分テンプレートのような「単体では配信しない HTML」を `src` の下に置くと、それも `dist` に出力されて公開されます。
+`src` 配下に置いた拡張子 `.html` のファイルは自動でビルド対象になります（`vite.config.ts` 側の追加作業はありません。ドットで始まるファイル、ドットで始まるディレクトリの中、シンボリックリンクは対象外です）。逆に、部分テンプレートのような「単体では配信しない HTML」を `src` の下に置くと、それも `dist` に出力されて公開されます。
 
 設定以外の手作業は残ります。`public/sitemap.xml` の URL 一覧と、ヘッダー・ドロワー・フッターのナビは手で直してください。
 
@@ -257,9 +261,9 @@ starter 固有の設計判断: `--z-header` を `--z-drawer` より前面に置�
 
 | 環境 | 検証項目 |
 |------|---------|
-| NVDA + Firefox / Chrome | Browse mode で Tab / 矢印キーが drawer 外に脱出しないこと |
-| JAWS + Chrome | Virtual cursor（PC Cursor）で drawer 外要素が読み上げられないこと |
-| VoiceOver + Safari (macOS / iOS) | VO + 矢印 / Rotor で drawer 外が読み上げられないこと |
+| NVDA + Firefox / Chrome | Browse mode で Tab / 矢印キーが `inert` 化した領域へ入らないこと（ハンバーガーボタンには到達する） |
+| JAWS + Chrome | Virtual cursor（PC Cursor）で `inert` 化した要素が読み上げられないこと |
+| VoiceOver + Safari (macOS / iOS) | VO + 矢印 / Rotor で `inert` 化した要素が読み上げられないこと |
 
 ドロワー open 状態でのチェックリスト:
 
@@ -289,4 +293,4 @@ Drawer と Hamburger トリガー**以外**の、フォーカス可能（= Tab �
 
 #### JS 側
 
-`querySelectorAll('[data-drawer-inert]')` で全対象要素を取得 → `openDrawer` で `inert` 属性付与、`closeDrawer` で削除するだけ。HTML に静的に書いた要素なら、新規対象を追加しても JS 側の変更は不要です。⚠️ 取得は初期化時の 1 回だけで、結果は静的な NodeList です。初期化後に JS で差し込んだ要素はマーカーを付けても `inert` 化されないので、その場合は取得をやり直す実装が要ります。
+`querySelectorAll('[data-drawer-inert]')` で全対象要素を取得 → `openDrawer` で `inert` 属性付与、`closeDrawer` で削除するだけ。HTML に静的に書いた要素なら、新規対象を追加しても JS 側の変更は不要です。⚠️ 取得は初期化時の 1 回だけで、結果は静的な NodeList です。初期化後に JS で差し込んだ要素には `inert` 属性が付きません。`[data-drawer-inert]` を付けた要素の**中**へ差し込んだ場合は祖先の `inert` が及ぶのでそのままで構いませんが、その**外**へ差し込む場合（body 直下の chat widget・cookie banner 等）はマーカーを付けても効かないので、取得をやり直す実装が要ります。

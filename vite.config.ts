@@ -3,7 +3,7 @@ import { join, relative, resolve, sep } from 'path';
 import fs, { globSync } from 'fs';
 
 const srcDir = resolve(import.meta.dirname, 'src');
-// src 配下の HTML をビルド対象にする（ページを増減しても設定の更新は不要）。
+// src 配下の拡張子 .html のファイルをビルド対象にする（ページを増減しても設定の更新は不要）。
 // キーは拡張子を落とした相対パスなので、`about.html` と `about/index.html` が同じキーになって
 // 片方が黙って消えることがない
 const htmlEntries = Object.fromEntries(
