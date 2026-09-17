@@ -10,7 +10,7 @@
 
 本 starter は pnpm で開発されており、`pnpm-lock.yaml` が commit されています。エンドユーザーは **npm / pnpm / yarn** のいずれでも動作します:
 
-- 本 README の手順は **npm** で記述（Node.js 同梱ツールのため追加インストール不要）
+- [README.md](./README.md) の手順は **npm** で記述（Node.js 同梱ツールのため追加インストール不要）
 - `pnpm install` でも動作（付属の `pnpm-lock.yaml` で高速・再現可能インストール）。**pnpm は 10.5.1 以降が必要**です（詳細は下記「[脆弱性 pin](#脆弱性-pinnpm--pnpm-両系統の同期)」）
 - `npm install` でも動作（`pnpm-lock.yaml` は無視され、独自に `package-lock.json` がローカル生成される）
 - **yarn では脆弱性 pin が効きません** — yarn は `overrides` も `pnpm-workspace.yaml` も読まず、推移的依存の強制には `resolutions` を使います。yarn を使う場合は下記の pin 内容を `resolutions` に書き写してください
@@ -184,6 +184,8 @@ base: '/my-site/',
 
 `base` を `./` にした場合はビルドが止まります。ルート絶対パスの配信先が決まらないためです。パス形式の `base` にするか、リンクを相対パスに書き換えてください。
 
+ナビの `/#...` 形式は、**`base` の直下でトップページが開けること**を前提にしています。ディレクトリのインデックスを解決しない配信先（トップページが `/index.html` でしか開けない構成）では、全ページのヘッダー・ドロワー・フッターのナビが届かなくなります。この形は `base-anchor-href` の書き換え対象でも検査対象でもないので、**ビルドは通ります**。
+
 納品前にプロジェクト全体で `CUSTOMIZE` を検索し、差し替え忘れがないことを確認してください。
 
 ### 404 ページの動作確認
@@ -204,7 +206,9 @@ npm run preview
 # 別タブで http://localhost:4173/nonexistent にアクセス
 ```
 
-本番側は **Cloudflare Pages / Netlify / Vercel / GitHub Pages のいずれも `dist/404.html` を root に配置するだけで自動配信**します（追加設定ファイル不要）。ローカル `npm run preview` でも同じ動作を再現するため `vite.config.ts` に `preview-404-fallback` plugin を含めています。
+本番側は **Cloudflare Pages / Netlify / Vercel / GitHub Pages のいずれも `dist/404.html` を root に配置するだけで自動配信**します（追加設定ファイル不要）。ローカル `npm run preview` では、`vite.config.ts` の `preview-404-fallback` plugin が**この 404.html の配信だけ**を再現します。
+
+⚠️ **preview は本番の挙動全体を再現するものではありません。**末尾スラッシュ無しの `/privacy` は、preview では本文なしの 404 になります（`/privacy/` は 200、存在しないパスは 404.html）。この形をホスティング側がどう扱うかは配信先ごとに異なるので、末尾スラッシュの扱いは本番で確かめてください。
 
 ## アセット配置規約
 
