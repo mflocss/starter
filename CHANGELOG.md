@@ -1,10 +1,29 @@
 # Changelog
 
-mFLOCSS starter の変更履歴。[Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) 形式に準拠し、[Semantic Versioning](https://semver.org/lang/ja/) に従う。
+mFLOCSS starter の変更履歴。[Keep a Changelog](https://keepachangelog.com/ja/1.1.0/) 形式に準拠し、[Semantic Versioning](https://semver.org/lang/ja/) に従う（メジャーバージョンの扱いにだけ例外があります。[CONTRIBUTING.md「版番号の付け方」](./CONTRIBUTING.md#版番号の付け方) 参照）。
 
 CHANGELOG はリリース（version-up）直前に差分をまとめて追記します（運用方針は [CONTRIBUTING.md「リリース時の手順」](./CONTRIBUTING.md#リリース時の手順) 参照）。
 
 ## [Unreleased]
+
+## [1.1.0] - 2026-09-17
+
+### Added
+
+- `vite.config.ts` に `base-anchor-href` plugin を追加。ルート絶対パスで書いた `<a href>` に `base` を前置します（`/#features` → `/my-site/#features`）。開発サーバーとビルドの両方で効き、書き換えられなかったルート絶対パス（`<area>` やカスタム要素の `href` のほか、単一引用符・大文字 `HREF`・`=` の前後に空白を入れた `<a href>` も含みます）が残っているとビルドを止めます。⚠️ **この plugin が見るのは引用符で囲んだ `href` だけです。**文字参照で書いた `href`（`&#47;...`）と引用符を省いた `href`（`href=/...`）は、書き換えも検出もされずそのまま出力されます。`<form action="/...">` にも `base` は付かないので、サブディレクトリへ配信するなら手で直してください（本テンプレートでは `src/index.html` の `action="/api/contact"` が該当します）
+- CI にサブディレクトリ配信の検査を追加（`vite build --base=/sub/` で前置を確認し、相対 `base` では意図した文言で停止することも確認）
+
+### Changed
+
+- **BREAKING**: **`u-visually-hidden` がフォーカスを受けても可視化されなくなりました**（`:not(:focus, :active, :focus-within)` を削除）。1 つのクラスに「隠す」と「フォーカス時に隠すのをやめる」の 2 目的を持たせていたのをやめ、フォーカスで可視化する要素は Component 側で実装します（同梱の `c-skip-link` が先例）。⚠️ **自作のスキップリンクなど、フォーカス可能な要素にこのクラスを付けている場合は、フォーカスしても見えなくなります。**警告もビルドエラーも出ません。`c-skip-link.css` と同じく Component 側で可視化を実装してください（メジャーを上げていない理由は [CONTRIBUTING.md「版番号の付け方」](./CONTRIBUTING.md#版番号の付け方) を参照）
+- `src` 配下の拡張子 `.html` のファイルを自動でビルド対象にするようにしました。ページを増減しても `vite.config.ts` の更新は不要です（ドットで始まるファイル・ドットで始まるディレクトリの中・シンボリックリンクは対象外）。⚠️ **裏を返すと、部分テンプレートのような「単体では配信しない HTML」を `src` の下に置くと、それも `dist` に出力されて公開されます**
+- `.gitignore` の `dist/` を `dist*/` に変更（CI がサブディレクトリ配信の検査で使う出力先を除外するため）。⚠️ 名前が `dist` で始まるディレクトリは**どの階層でも**除外されます（`src/district/` など）
+- ヘッダー・ドロワー・フッターのナビを 3 枚とも `/#...` 形式に揃えました（下層ページからもトップページのセクションへ届くようにするため）。ドロワー内リンクの同一文書判定もこの形式に合わせています。⚠️ トップページを `/index.html` やクエリ付きの URL で開いている訪問者がナビを押すと、ページ内スクロールではなくページ遷移になり、クエリは引き継がれません
+- ドキュメント: `CODING_GUIDE.md` を通しで読み直し、誤っていた記述の修正と、書かれていなかった前提の追記を行いました。主なもの — ①`overrides` の剪定 dry-run が、謳っている「latest-satisfying に解決される」どおりに動いていなかった（既存 lock の削除と、npm 側の `overrides` 解除を手順に追加）②同期確認を `npm ls --package-lock-only <pkg>` に修正（`--package-lock-only` を付けない `npm ls` は `node_modules` を見るため検証にならない）③ドロワー open 時の `inert` の射程を修正（「Drawer 外の**全て**のフォーカス可能要素」→ ハンバーガーボタンを除く）と、`[data-drawer-inert]` の取得が初期化時 1 回の静的 NodeList である旨を追記（初期化後に JS で差し込んだ要素には `inert` が付きません）④ホスティング各社の 404 の扱いを「配信先のドキュメントで確認」に変更
+
+### Fixed
+
+- `preview-404-fallback` が `build.outDir` に追従するようにしました。出力先を変えると `404.html` が見つからず、警告もエラーも無いままフォールバックが効かなくなっていました
 
 ## [1.0.5] - 2026-09-16
 
@@ -72,7 +91,8 @@ CHANGELOG はリリース（version-up）直前に差分をまとめて追記し
 - WCAG 2.2 AA 準拠 + Core Web Vitals 配慮 + Dark mode 対応（`prefers-color-scheme`）
 - Community health files + GitHub Actions CI + Issue テンプレート
 
-[Unreleased]: https://github.com/mflocss/starter/compare/v1.0.5...HEAD
+[Unreleased]: https://github.com/mflocss/starter/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/mflocss/starter/releases/tag/v1.1.0
 [1.0.5]: https://github.com/mflocss/starter/releases/tag/v1.0.5
 [1.0.4]: https://github.com/mflocss/starter/releases/tag/v1.0.4
 [1.0.3]: https://github.com/mflocss/starter/releases/tag/v1.0.3
