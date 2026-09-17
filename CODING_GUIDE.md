@@ -185,11 +185,11 @@ base: '/my-site/',
 
 ルート絶対パス（`/` 始まり）で書いた `<a href>` には、`vite.config.ts` の `base-anchor-href` plugin が `base` を前置します（`/#features` → `/my-site/#features`）。開発サーバーとビルドの両方で効きます。
 
-この plugin が書き換えるのは `<a href="/...">` だけです。アセットの参照（`<link href>` / `<script src>` / `<img src>` など）は Vite 本体の扱いに従うので、手を入れる前に [Public Base Path](https://vite.dev/guide/build.html#public-base-path) を確認してください。`<a href>` は `base` を含めずに書いてください（`/my-site/about/` と書くと `/my-site/my-site/about/` になります）。
+この plugin が書き換えるのは `<a href="/...">` だけです。アセットの参照（`<link href>` / `<script src>` / `<img src>` など）は Vite 本体の扱いに従うので、手を入れる前に [Public Base Path](https://vite.dev/guide/build.html#public-base-path) を確認してください。**アセットの参照に手で `base` を書き足さないでください。**書き足した参照は出力されたファイル名と結びつかないことがあり、その場合はビルドも `npm run check` も通ったまま、リンク切れが納品されます（`--base=/sub/` にしたうえで `<link rel="preload" href="/sub/assets/images/hero-main.webp">` と書いた場合に起きます）。`<form action="/...">` には `base` が付かないので、サブディレクトリへ配信するなら手で直してください（本テンプレートでは `src/index.html` の `action="/api/contact"` が該当します）。`<a href>` は `base` を含めずに書いてください（`/my-site/about/` と書くと `/my-site/my-site/about/` になります）。
 
 書き換えられないルート絶対パスが残っているとビルドが止まり、該当の href が表示されます（`<area>` やカスタム要素の `href` がこれに当たります）。⚠️ **この検査が見るのは引用符で囲んだ `href` です。**文字参照で書いた `href`（`&#47;#features`）と、引用符を省いた `href`（`href=/#features`）は、書き換えも検出もされずそのまま出力されます。どちらも使わないでください。
 
-`base` に絶対 URL（CDN 配信）を指定した場合、アセットはその絶対 URL を、`<a href>` は**パス部分だけ**を前置します（`https://cdn.example.com/sub/` なら `/sub/`）。`<a href>` はページを配信するオリジンで解決されるので、成立の条件は次の段落の前提と同じです。
+`base` に絶対 URL（CDN 配信）を指定した場合、**Vite が処理するアセットには**その絶対 URL が、`<a href>` には**パス部分だけ**が入ります（`https://cdn.example.com/sub/` なら `/sub/`）。`<a href>` はページを配信するオリジンで解決されるので、成立の条件は後述の「ナビの `/#...` 形式」の段落に書いた前提と同じです。
 
 `base` を `./` にした場合、ルート絶対パスの `href` が残っているとビルドが止まります。配信先が決まらないためです。パス形式の `base` にするか、リンクを相対パスに書き換えてください（書き換えればビルドは通ります）。
 
