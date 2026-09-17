@@ -118,18 +118,21 @@ export default defineConfig({
   plugins: [
     baseAnchorHref(),
 
-    // 本番ホスティング（Cloudflare Pages / Netlify / Vercel 等）は dist/404.html を
-    // 404 Not Found 時に自動配信する標準仕様。本 plugin はローカル `pnpm preview` で
-    // 同じ動作を再現するため。
+    // Cloudflare Pages / Netlify / Vercel / GitHub Pages は、出力先の直下に置いた 404.html を
+    // 404 Not Found 時に自動配信する。これは規格ではなく各社が共通して実装している慣行。
+    // 本 plugin が `pnpm preview` で再現するのはこの 1 点だけで、本番の挙動全体ではない
+    // （末尾スラッシュ無しのディレクトリ要求など、再現しない経路は CODING_GUIDE に書いてある）。
     {
       name: 'preview-404-fallback',
       configurePreviewServer(server) {
-        // pnpm preview で存在しない URL にアクセスした際に dist/404.html を 404 ステータスで返す
-        // 本番（Cloudflare Pages / Netlify / Vercel 等）は 404.html を root に置くだけで自動配信される
+        // build.outDir から算出する。ハードコードすると outDir を変えたときに 404.html が
+        // 見つからず、フォールバックが黙って効かなくなる。
+        // resolve の第 2 引数が絶対パスならそれが採られるので、相対・絶対のどちらでも通る
+        // （vite は相対 outDir を root 基準で解決するが、解決後の config には生の値が残る）
+        const distDir = resolve(server.config.root, server.config.build.outDir);
+
         return () => {
           server.middlewares.use((req, res, next) => {
-            const distDir = resolve(import.meta.dirname, 'dist');
-
             // percent-encoded なパス（日本語ディレクトリ名等）を実ファイル名へ戻す。正規化は下流の middleware に合わせる
             let pathname: string | null = null;
             try {
