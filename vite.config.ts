@@ -19,7 +19,7 @@ const htmlEntries = Object.fromEntries(
     }),
 );
 
-// Vite が base を前置するのは img / link / script 等の asset 属性だけで、`<a href>` は対象外。
+// `<a href>` は Vite の base 前置の対象外なので、この plugin で補う。
 // Why not `%BASE_URL%`: HTML の環境変数展開でも前置されるが、markuplint の URL 妥当性検査が error になる。
 function baseAnchorHref(): Plugin {
   let base = '/';
@@ -40,10 +40,8 @@ function baseAnchorHref(): Plugin {
       order: 'post',
       handler(html, ctx) {
         // 絶対 URL の base はアセットの配信先を指す。ルート絶対パスの `<a href>` は表示中のページの
-        // オリジンを基準に解決されるので、ページ側に前置するのはパス部分だけ。
-        // Why not 絶対 URL ごと前置する: HTML も同じ URL で配信する構成を前提にしている。
-        // HTML を自オリジンに置いてアセットだけ CDN へ出す構成は想定外で、そのときナビは
-        // 自オリジンのパス部分を指す
+        // オリジンを基準に解決されるので、前置するのはパス部分だけ。
+        // Why not 絶対 URL ごと前置する: ページ間のリンクは HTML を配信するオリジンで完結させる
         const basePath = absoluteUrlBase.test(base) ? new URL(base, 'http://vite.dev').pathname : base;
         if (basePath === '/') return html;
 
@@ -120,9 +118,9 @@ export default defineConfig({
   plugins: [
     baseAnchorHref(),
 
-    // Cloudflare Pages / Netlify / Vercel / GitHub Pages は、出力先の直下に置いた 404.html を
-    // 404 Not Found 時に自動配信する。これは規格ではなく各社が共通して実装している慣行。
-    // 本 plugin が `npm run preview` で再現するのはこの 1 点だけで、本番の挙動全体ではない
+    // 出力先の直下に置いた 404.html を 404 Not Found 時に配信するホスティングがある（規格ではなく
+    // 各社の実装。条件は配信先のドキュメントを参照）。本 plugin が `npm run preview` で再現するのは
+    // この 1 点だけで、本番の挙動全体ではない
     // （再現しない経路の例は CODING_GUIDE の「404 ページの動作確認」を参照）。
     {
       name: 'preview-404-fallback',

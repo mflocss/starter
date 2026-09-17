@@ -185,11 +185,11 @@ base: '/my-site/',
 
 ルート絶対パス（`/` 始まり）で書いた `<a href>` には、`vite.config.ts` の `base-anchor-href` plugin が `base` を前置します（`/#features` → `/my-site/#features`）。開発サーバーとビルドの両方で効きます。
 
-この plugin が書き換えるのは `<a href="/...">` だけです。ただし `<link href>` / `<script src>` / `<img src>` / `<use href>` などのアセット属性は **Vite 本体が `base` を前置する**ので、手を入れないでください。手で前置すると Vite のアセット処理から外れ、`src/assets/` 配下を指す参照は出力先とずれます（ビルドが止まる場合と、止まらずに死にリンクが残る場合があります）。Vite も本 plugin も触らないのは `<form action="/api/contact">` のような非アセット属性で、必要ならこちらだけを手で直してください。`<a href>` は `base` を含めずに書いてください（`/my-site/about/` と書くと `/my-site/my-site/about/` になります）。
+この plugin が書き換えるのは `<a href="/...">` だけです。アセットの参照（`<link href>` / `<script src>` / `<img src>` など）は Vite 本体の扱いに従うので、手を入れる前に [Public Base Path](https://vite.dev/guide/build.html#public-base-path) を確認してください。`<a href>` は `base` を含めずに書いてください（`/my-site/about/` と書くと `/my-site/my-site/about/` になります）。
 
 書き換えられないルート絶対パスが残っているとビルドが止まり、該当の href が表示されます（`<area>` やカスタム要素の `href` がこれに当たります）。⚠️ **この検査が見るのは引用符で囲んだ `href` です。**文字参照で書いた `href`（`&#47;#features`）と、引用符を省いた `href`（`href=/#features`）は、書き換えも検出もされずそのまま出力されます。どちらも使わないでください。
 
-`base` に絶対 URL（CDN 配信）を指定した場合、アセットはその絶対 URL を、`<a href>` は**パス部分だけ**を前置します（`https://cdn.example.com/sub/` なら `/sub/`）。⚠️ **`<a href>` の前置はページを配信するオリジン側で解決されます。**HTML も同じ URL（`https://cdn.example.com/sub/`）で配信する構成を想定していて、**HTML を自オリジンに置いてアセットだけ CDN へ出す構成には対応していません**（その構成ではナビが自オリジンの `/sub/` を指し、そこにトップページが無ければ届きません）。
+`base` に絶対 URL（CDN 配信）を指定した場合、アセットはその絶対 URL を、`<a href>` は**パス部分だけ**を前置します（`https://cdn.example.com/sub/` なら `/sub/`）。`<a href>` はページを配信するオリジンで解決されるので、成立の条件は次の段落の前提と同じです。
 
 `base` を `./` にした場合、ルート絶対パスの `href` が残っているとビルドが止まります。配信先が決まらないためです。パス形式の `base` にするか、リンクを相対パスに書き換えてください（書き換えればビルドは通ります）。
 
@@ -215,7 +215,7 @@ npm run preview
 # 別タブで http://localhost:4173/nonexistent にアクセス
 ```
 
-本番側は **Cloudflare Pages / Netlify / Vercel / GitHub Pages のいずれも `dist/404.html` を root に配置するだけで自動配信**します（追加設定ファイル不要）。ローカル `npm run preview` では、`vite.config.ts` の `preview-404-fallback` plugin が**この 404.html の配信だけ**を再現します。
+本番側の 404 の扱いは配信先ごとに決まります（`dist/404.html` をそのまま使えるか、設定が要るかを配信先のドキュメントで確認してください）。ローカル `npm run preview` では、`vite.config.ts` の `preview-404-fallback` plugin が**この 404.html の配信だけ**を再現します。
 
 ⚠️ **preview は本番の挙動全体を再現するものではありません。**末尾スラッシュ無しの `/privacy` は、preview では本文なしの 404 になります（`/privacy/` は 200、出力先に無いパスは 404.html）。この形をホスティング側がどう扱うかは配信先ごとに異なるので、末尾スラッシュの扱いは本番で確かめてください。
 
