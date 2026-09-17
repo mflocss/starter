@@ -10,7 +10,7 @@
 
 本 starter は pnpm で開発されており、`pnpm-lock.yaml` が commit されています。エンドユーザーは **npm / pnpm / yarn** のいずれでも動作します:
 
-- 本 README の手順は **npm** で記述（Node.js 同梱ツールのため追加インストール不要）
+- [README.md](./README.md) の手順は **npm** で記述（Node.js 同梱ツールのため追加インストール不要）
 - `pnpm install` でも動作（付属の `pnpm-lock.yaml` で高速・再現可能インストール）。**pnpm は 10.5.1 以降が必要**です（詳細は下記「[脆弱性 pin](#脆弱性-pinnpm--pnpm-両系統の同期)」）
 - `npm install` でも動作（`pnpm-lock.yaml` は無視され、独自に `package-lock.json` がローカル生成される）
 - **yarn では脆弱性 pin が効きません** — yarn は `overrides` も `pnpm-workspace.yaml` も読まず、推移的依存の強制には `resolutions` を使います。yarn を使う場合は下記の pin 内容を `resolutions` に書き写してください
@@ -31,7 +31,7 @@ pnpm 側の override の置き場は **`pnpm-workspace.yaml`** です。pnpm 10.
 
 - 脆弱性 pin の **追加・剪定時は両方を同時に更新**してください。片方だけの変更は禁止。
 - 純粋なバージョン制約（`">=x.y.z"` 等）は npm / pnpm で同形式互換のため、そのままミラーすれば動作します。
-- 同期確認: `npm install --package-lock-only` 後 `npm ls <pkg>` で pin 版に解決されることを検証。
+- 同期確認: `npm install --package-lock-only` 後 `npm ls --package-lock-only <pkg>` で pin 版に解決されることを検証（`--package-lock-only` を付けない `npm ls` は `node_modules` の中身を見るため、lockfile だけ更新した状態では検証になりません）。
 
 ### 剪定 policy（追加と剪定の両輪で運用）
 
@@ -44,19 +44,28 @@ pnpm 側の override の置き場は **`pnpm-workspace.yaml`** です。pnpm 10.
 ```bash
 # pnpm の場合（本 starter の lock を汚さないために /tmp 等で実施）
 # 1. 一時コピーで pnpm-workspace.yaml の overrides を空に or 個別エントリ削除
-# 2. lock のみ再解決（--config.minimum-release-age=0 で環境差を打ち消す）
+# 2. 一時コピーの lock を捨てる（既存 lock があると override 時代の版が据え置かれ、再解決されない）
+rm pnpm-lock.yaml
+# 3. lock のみ再解決（--config.minimum-release-age=0 で環境差を打ち消す）
 pnpm install --lockfile-only --config.minimum-release-age=0
-# 3. 脆弱性確認
+# 4. 脆弱性確認
 pnpm audit
 # 脆弱性 0 → その override は冗長（latest-satisfying で安全版に解決されている = 剪定可）
 # 脆弱性あり → 実効（残す）
 ```
 
 ```bash
-# npm の場合
+# npm の場合（同じく一時コピーで）
+# 1. package.json の overrides を空に or 個別エントリ削除（npm が読むのはこちら）
+# 2. 一時コピーの lock を捨てる
+rm -f package-lock.json
+# 3. lock のみ再解決
 npm install --package-lock-only
+# 4. 脆弱性確認
 npm audit
 ```
+
+⚠️ lock を捨てると、その override と無関係な依存も再解決されます。「脆弱性あり」と出たら、`overrides` を戻した同じ手順で対照を取り、その override 由来かを確かめてください。
 
 🔴 **例外: advisory の floor 版（`patched` 版）が、リポの直接依存のうち最も新しいものより後に公開されている場合は、dry-run が「冗長」と出ても override を残します。**
 
@@ -76,7 +85,7 @@ npm audit
 chore(deps): 冗長 override を剪定 — fast-uri / brace-expansion を削除（registry latest が修正版を満たし冗長化、uuid のみ実効維持）
 ```
 
-参考: 本 starter の [PR #234](https://github.com/mflocss/starter/pull/234)（pnpm 側 override の dry-run 検証 + npm overrides 同期実例）/ [PR #241](https://github.com/mflocss/starter/pull/241)（冗長 override 剪定の実例）。
+参考: 本 starter の [PR #240](https://github.com/mflocss/starter/pull/240)（pnpm 側 override の dry-run 検証 + npm overrides 同期実例）/ [PR #241](https://github.com/mflocss/starter/pull/241)（冗長 override 剪定の実例）。
 
 ## pnpm 設定のメンテナンス
 
@@ -119,7 +128,7 @@ sed -n '/^const DEFAULT_VALUE/,/^];/p' \
 
 ### ページを増減する
 
-`src` 配下に置いた HTML は自動でビルド対象になります（`vite.config.ts` 側の追加作業はありません。ドットで始まるディレクトリの中だけは対象外です）。逆に、部分テンプレートのような「単体では配信しない HTML」を `src` の下に置くと、それも `dist` に出力されて公開されます。
+`src` 配下に置いた拡張子 `.html` のファイルは自動でビルド対象になります（`vite.config.ts` 側の追加作業はありません。ドットで始まるファイル、ドットで始まるディレクトリの中、シンボリックリンクは対象外です）。逆に、部分テンプレートのような「単体では配信しない HTML」を `src` の下に置くと、それも `dist` に出力されて公開されます。
 
 設定以外の手作業は残ります。`public/sitemap.xml` の URL 一覧と、ヘッダー・ドロワー・フッターのナビは手で直してください。
 
@@ -139,7 +148,7 @@ CSS だけでは終わりません。HTML 本体と、そのセクションを�
 
 ### head の要素順
 
-`markuplint.config.cjs` が `head-element-order` の順序を上書き宣言しています。規則が見ているのは `meta[charset]` → `meta[http-equiv]` → `meta[name="viewport"]` → `title` → その他の `meta` → `link` → `style` → `script` という**セレクタの並び順だけ**です（`meta` 同士のアルファベット順チェックは無効化しています）。この規則の severity は warning なので、崩しても `npm run check` は通ります。
+`markuplint.config.cjs` が `head-element-order` の順序を上書き宣言しています。規則が見ているのは `meta[charset]` → `meta[http-equiv]` → `meta[name="viewport"]` → `title` → その他の `meta` → `link` → `style` → `script` という**セレクタの並び順だけ**です（`meta` 同士のアルファベット順チェックは無効化しています）。この規則の severity は warning なので、**この規則だけでは** `npm run check` は止まりません。ただし並べ替えた結果 `<meta charset>` が先頭 1024 バイトを越えると、別の規則（`html-standard/meta-charset-position`、error）で落ちます（次の段落）。
 
 `title` が一般の `meta` より前に来る並びのため、全ページ共通の要素とページ固有の要素は交互に置くことになります。この並べ方は規則が強制するものではなく本 starter の書き方ですが、共通部を 1 ブロックにまとめて head の末尾へ寄せると `<meta charset>` が先頭 1024 バイトを越え、`html-standard/meta-charset-position`（error）で `npm run check` が落ちることがあります。
 
@@ -176,13 +185,15 @@ base: '/my-site/',
 
 ルート絶対パス（`/` 始まり）で書いた `<a href>` には、`vite.config.ts` の `base-anchor-href` plugin が `base` を前置します（`/#features` → `/my-site/#features`）。開発サーバーとビルドの両方で効きます。
 
-この plugin が書き換えるのは `<a href="/...">` だけです。`<form action="/api/contact">` のような他の属性は対象外なので、必要なら手で直してください。`<a href>` は `base` を含めずに書いてください（`/my-site/about/` と書くと `/my-site/my-site/about/` になります）。
+この plugin が書き換えるのは `<a href="/...">` だけです。アセットの参照（`<link href>` / `<script src>` / `<img src>` など）は Vite 本体の扱いに従うので、手を入れる前に [Public Base Path](https://vite.dev/guide/build.html#public-base-path) を確認してください。**アセットの参照に手で `base` を書き足さないでください。**書き足した参照は出力されたファイル名と結びつかないことがあり、その場合はビルドも `npm run check` も通ったまま、リンク切れが納品されます（`--base=/sub/` にしたうえで `<link rel="preload" href="/sub/assets/images/hero-main.webp">` と書いた場合に起きます）。`<form action="/...">` には `base` が付かないので、サブディレクトリへ配信するなら手で直してください（本テンプレートでは `src/index.html` の `action="/api/contact"` が該当します）。`<a href>` は `base` を含めずに書いてください（`/my-site/about/` と書くと `/my-site/my-site/about/` になります）。
 
-書き換えられないルート絶対パスが残っているとビルドが止まり、該当の href が表示されます（`<area>` やカスタム要素の `href` がこれに当たります）。⚠️ **文字参照で書いた `href`（`&#47;#features`）だけはこの検査にかかりません。**書き換えも検出もされずそのまま出力されるので、使わないでください。
+書き換えられないルート絶対パスが残っているとビルドが止まり、該当の href が表示されます（`<area>` やカスタム要素の `href` がこれに当たります）。⚠️ **この検査が見るのは引用符で囲んだ `href` です。**文字参照で書いた `href`（`&#47;#features`）と、引用符を省いた `href`（`href=/#features`）は、書き換えも検出もされずそのまま出力されます。どちらも使わないでください。
 
-`base` に絶対 URL（CDN 配信）を指定した場合は、そのパス部分だけを前置します（`https://cdn.example.com/sub/` なら `/sub/`）。ルート絶対パスのリンクは表示中のページを基準に解決されるので、パス部分だけで届きます。
+`base` に絶対 URL（CDN 配信）を指定した場合、**Vite が処理するアセットには**その絶対 URL が、`<a href>` には**パス部分だけ**が入ります（`https://cdn.example.com/sub/` なら `/sub/`）。`<a href>` はページを配信するオリジンで解決されるので、成立の条件は後述の「ナビの `/#...` 形式」の段落に書いた前提と同じです。
 
-`base` を `./` にした場合はビルドが止まります。ルート絶対パスの配信先が決まらないためです。パス形式の `base` にするか、リンクを相対パスに書き換えてください。
+`base` を `./` にした場合、ルート絶対パスの `href` が残っているとビルドが止まります。配信先が決まらないためです。パス形式の `base` にするか、リンクを相対パスに書き換えてください（書き換えればビルドは通ります）。
+
+ナビの `/#...` 形式は、**HTML を配信するオリジンで、`base` のパス部分（`/sub/` など）の直下にトップページが開けること**を前提にしています。ディレクトリのインデックスを解決しない配信先（トップページが `/index.html` でしか開けない構成）では、全ページのヘッダー・ドロワー・フッターのナビが届かなくなります。`base-anchor-href` が見るのは `href` の文字列だけで配信先の挙動は検査しないため、**この前提が破れていてもビルドは通ります**。同じ前提には `href="/privacy/"` 形のページ間リンクと、`canonical` / `og:url` / `public/sitemap.xml` の URL も依存します。
 
 納品前にプロジェクト全体で `CUSTOMIZE` を検索し、差し替え忘れがないことを確認してください。
 
@@ -204,7 +215,9 @@ npm run preview
 # 別タブで http://localhost:4173/nonexistent にアクセス
 ```
 
-本番側は **Cloudflare Pages / Netlify / Vercel / GitHub Pages のいずれも `dist/404.html` を root に配置するだけで自動配信**します（追加設定ファイル不要）。ローカル `npm run preview` でも同じ動作を再現するため `vite.config.ts` に `preview-404-fallback` plugin を含めています。
+本番側の 404 の扱いは配信先ごとに決まります（`dist/404.html` をそのまま使えるか、設定が要るかを配信先のドキュメントで確認してください）。ローカル `npm run preview` では、`vite.config.ts` の `preview-404-fallback` plugin が**この 404.html の配信だけ**を再現します。
+
+⚠️ **preview は本番の挙動全体を再現するものではありません。**末尾スラッシュ無しの `/privacy` は、preview では本文なしの 404 になります（`/privacy/` は 200、出力先に無いパスは 404.html）。この形をホスティング側がどう扱うかは配信先ごとに異なるので、末尾スラッシュの扱いは本番で確かめてください。
 
 ## アセット配置規約
 
@@ -248,14 +261,14 @@ starter 固有の設計判断: `--z-header` を `--z-drawer` より前面に置�
 
 | 環境 | 検証項目 |
 |------|---------|
-| NVDA + Firefox / Chrome | Browse mode で Tab / 矢印キーが drawer 外に脱出しないこと |
-| JAWS + Chrome | Virtual cursor（PC Cursor）で drawer 外要素が読み上げられないこと |
-| VoiceOver + Safari (macOS / iOS) | VO + 矢印 / Rotor で drawer 外が読み上げられないこと |
+| NVDA + Firefox / Chrome | Browse mode で Tab / 矢印キーが `inert` 化した領域へ入らないこと（ハンバーガーボタンには到達する） |
+| JAWS + Chrome | Virtual cursor（PC Cursor）で `inert` 化した要素が読み上げられないこと |
+| VoiceOver + Safari (macOS / iOS) | VO + 矢印 / Rotor で `inert` 化した要素が読み上げられないこと |
 
 ドロワー open 状態でのチェックリスト:
 
 - [ ] `[data-drawer-inert]` を付与した全要素が SR 読み上げ対象から除外される
-- [ ] Tab で drawer 内のフォーカス可能要素のみを巡回する（drawer 外に脱出しない）
+- [ ] Tab が drawer 内のフォーカス可能要素とハンバーガーボタンの間を巡回する（それ以外へ脱出しない）
 - [ ] ハンバーガーボタン（trigger）は inert ではないので Tab で到達して閉じられる
 - [ ] Escape キーで close される（JS 実装）
 - [ ] `<dialog>` の暗黙 role="dialog" により SR が「ダイアログ」として announce する
@@ -265,7 +278,7 @@ starter 固有の設計判断: `--z-header` を `--z-drawer` より前面に置�
 
 ### data-drawer-inert — focus trap 対象マーカー
 
-Drawer open 時に **Drawer 外の全てのフォーカス可能要素を `inert` 化**する必要があります（`dialog.show()` は `showModal()` と異なり自動で inert 化しないため、JS から `setAttribute('inert', '')` で制御）。`data-drawer-inert` は「Drawer open 時に inert 化すべき要素」を明示するマーカー属性です。
+Drawer open 時に **Drawer 外のフォーカス可能要素を（ハンバーガーボタンを除いて）`inert` 化**する必要があります（`dialog.show()` は `showModal()` と異なり自動で inert 化しないため、JS から `setAttribute('inert', '')` で制御）。`data-drawer-inert` は「Drawer open 時に inert 化すべき要素」を明示するマーカー属性です。
 
 #### 付与対象
 
@@ -280,4 +293,4 @@ Drawer と Hamburger トリガー**以外**の、フォーカス可能（= Tab �
 
 #### JS 側
 
-`querySelectorAll('[data-drawer-inert]')` で全対象要素を取得 → `openDrawer` で `inert` 属性付与、`closeDrawer` で削除するだけ。新規対象を追加しても JS 側の変更は不要です。
+`querySelectorAll('[data-drawer-inert]')` で全対象要素を取得 → `openDrawer` で `inert` 属性付与、`closeDrawer` で削除するだけ。HTML に静的に書いた要素なら、新規対象を追加しても JS 側の変更は不要です。⚠️ 取得は初期化時の 1 回だけで、結果は静的な NodeList です。初期化後に JS で差し込んだ要素には `inert` 属性が付きません。`[data-drawer-inert]` を付けた要素の**中**へ差し込んだ場合は祖先の `inert` が及ぶのでそのままで構いませんが、その**外**へ差し込む場合（body 直下の chat widget・cookie banner 等）はマーカーを付けても効かないので、取得をやり直す実装が要ります。

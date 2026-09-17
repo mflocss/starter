@@ -3,7 +3,7 @@ import { join, relative, resolve, sep } from 'path';
 import fs, { globSync } from 'fs';
 
 const srcDir = resolve(import.meta.dirname, 'src');
-// src 配下の HTML をビルド対象にする（ページを増減しても設定の更新は不要）。
+// src 配下の拡張子 .html のファイルをビルド対象にする（ページを増減しても設定の更新は不要）。
 // キーは拡張子を落とした相対パスなので、`about.html` と `about/index.html` が同じキーになって
 // 片方が黙って消えることがない
 const htmlEntries = Object.fromEntries(
@@ -19,7 +19,7 @@ const htmlEntries = Object.fromEntries(
     }),
 );
 
-// Vite が base を前置するのは img / link / script 等の asset 属性だけで、`<a href>` は対象外。
+// `<a href>` は Vite の base 前置の対象外なので、この plugin で補う。
 // Why not `%BASE_URL%`: HTML の環境変数展開でも前置されるが、markuplint の URL 妥当性検査が error になる。
 function baseAnchorHref(): Plugin {
   let base = '/';
@@ -40,8 +40,8 @@ function baseAnchorHref(): Plugin {
       order: 'post',
       handler(html, ctx) {
         // 絶対 URL の base はアセットの配信先を指す。ルート絶対パスの `<a href>` は表示中のページの
-        // オリジンを基準に解決されるので、ページ側に前置するのはパス部分だけでよい
-        // （HTML が CDN 側にあっても自オリジンにあっても、同じ書き方で正しく解決される）
+        // オリジンを基準に解決されるので、前置するのはパス部分だけ。
+        // Why not 絶対 URL ごと前置する: ページ間のリンクは HTML を配信するオリジンで完結させる
         const basePath = absoluteUrlBase.test(base) ? new URL(base, 'http://vite.dev').pathname : base;
         if (basePath === '/') return html;
 
@@ -69,7 +69,7 @@ function baseAnchorHref(): Plugin {
           throw new Error(
             `base-anchor-href: base を前置できない href があります（${ctx.filename}）: ${stray.join(', ')}\n` +
               '対象は `<a href="/...">` です。<area> やカスタム要素の href は手で直してください。\n' +
-              '文字参照（`&#47;`）で書いた href はこの検査にかからないので使わないでください。',
+              '文字参照（`&#47;`）や引用符を省いた href（`href=/...`）はこの検査にかからないので使わないでください。',
           );
         }
         return transformed;
@@ -118,18 +118,22 @@ export default defineConfig({
   plugins: [
     baseAnchorHref(),
 
-    // 本番ホスティング（Cloudflare Pages / Netlify / Vercel 等）は dist/404.html を
-    // 404 Not Found 時に自動配信する標準仕様。本 plugin はローカル `pnpm preview` で
-    // 同じ動作を再現するため。
+    // 出力先の直下に置いた 404.html を 404 Not Found 時に配信するホスティングがある（規格ではなく
+    // 各社の実装。条件は配信先のドキュメントを参照）。本 plugin が `npm run preview` で再現するのは
+    // この 1 点だけで、本番の挙動全体ではない
+    // （再現しない経路の例は CODING_GUIDE の「404 ページの動作確認」を参照）。
     {
       name: 'preview-404-fallback',
       configurePreviewServer(server) {
-        // pnpm preview で存在しない URL にアクセスした際に dist/404.html を 404 ステータスで返す
-        // 本番（Cloudflare Pages / Netlify / Vercel 等）は 404.html を root に置くだけで自動配信される
+        // vite の preview 自身が配信先に使うのと同じ environments.client.build.outDir から算出する。
+        // ハードコードすると outDir を変えたときに 404.html が見つからず、フォールバックが黙って
+        // 効かなくなる（トップレベルの build.outDir を読むと、環境ごとに上書きされた場合にずれる）。
+        // resolve の第 2 引数が絶対パスならそれが採られるので、相対・絶対のどちらでも通る
+        // （vite は相対 outDir を root 基準で解決するが、解決後の config には生の値が残る）
+        const distDir = resolve(server.config.root, server.config.environments.client.build.outDir);
+
         return () => {
           server.middlewares.use((req, res, next) => {
-            const distDir = resolve(import.meta.dirname, 'dist');
-
             // percent-encoded なパス（日本語ディレクトリ名等）を実ファイル名へ戻す。正規化は下流の middleware に合わせる
             let pathname: string | null = null;
             try {
